@@ -193,7 +193,7 @@ class SohokariApp {
           <div class="bot-avatar-inner">${icons.shieldCheck}</div>
         </div>
         <div class="bubble bot-bubble">
-          <p><strong>নতুন চ্যাট শুরু হয়েছে</strong></p>
+          <p><strong>সহকারী</strong>-তে স্বাগতম</p>
           <p style="margin-top: 4px; font-size: 0.95rem; color: #1e293b;">
             কী সেবা সম্পর্কে জানতে চান? নিচে লিখুন অথবা সাজেশনে ট্যাপ করুন।
           </p>
@@ -202,7 +202,6 @@ class SohokariApp {
     `;
     this.queryInput.value = '';
     this.queryInput.focus();
-    showToast('নতুন চ্যাট শুরু হয়েছে');
   }
 
   private registerServiceWorker(): void {
