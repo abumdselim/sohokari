@@ -2,849 +2,108 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>সহকারী (Sohokari) - বাংলাদেশ নাগরিক সেবা এআই সহায়ক</title>
+  
   <meta name="description" content="বাংলাদেশ সরকারের সকল নাগরিক সেবার নির্ভুল সরকারি ফি, প্রয়োজনীয় কাগজপত্র ও আবেদনের সম্পূর্ণ নিয়ম জানুন সরাসরি চ্যাট করে।">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20width=%22100%22%20height=%22100%22><text y=%22.9em%22 font-size=%2290%22>🤝</text></svg>">
-
-  <style>
-    :root {
-      --primary: #059669;
-      --primary-dark: #047857;
-      --primary-light: #ecfdf5;
-      --primary-focus: #10b981;
-      --user-bubble: #059669;
-      --user-text: #ffffff;
-      --bot-bubble: #ffffff;
-      --bot-text: #1e293b;
-      --bg: #f8fafc;
-      --border: #e2e8f0;
-      --border-subtle: #f1f5f9;
-      --text-muted: #64748b;
-      --warning-bg: #fffbeb;
-      --warning-border: #fde68a;
-      --warning-text: #92400e;
-      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "SolaimanLipi", "Kalpurush", "Hind Siliguri", sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: var(--font-family);
-      background-color: var(--bg);
-      color: var(--bot-text);
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      height: 100vh;
-      height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    /* Top Navigation Header */
-    header {
-      background: #ffffff;
-      border-bottom: 1px solid var(--border);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-      z-index: 10;
-      flex-shrink: 0;
-    }
-
-    .brand-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .avatar-icon {
-      width: 42px;
-      height: 42px;
-      background: linear-gradient(135deg, #059669, #0284c7);
-      color: #ffffff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      box-shadow: 0 2px 5px rgba(5, 150, 105, 0.25);
-      position: relative;
-    }
-
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      background: #22c55e;
-      border: 2px solid #ffffff;
-      border-radius: 50%;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-    }
-
-    .brand-info h1 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #0f172a;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .verified-tag {
-      font-size: 0.72rem;
-      background: #dcfce7;
-      color: #15803d;
-      padding: 2px 7px;
-      border-radius: 12px;
-      font-weight: 600;
-    }
-
-    .brand-info p {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .btn-reset {
-      background: #f1f5f9;
-      border: 1px solid var(--border);
-      color: #475569;
-      font-size: 0.82rem;
-      font-weight: 600;
-      padding: 7px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: all 0.2s;
-    }
-
-    .btn-reset:hover {
-      background: #e2e8f0;
-      color: #0f172a;
-    }
-
-    /* Chat Stream Area */
-    #chat-stream {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px 16px 120px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      scroll-behavior: smooth;
-      max-width: 860px;
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    /* Message Bubbles */
-    .message-row {
-      display: flex;
-      gap: 10px;
-      width: 100%;
-      animation: messageIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes messageIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .message-row.user {
-      justify-content: flex-end;
-    }
-
-    .message-row.bot {
-      justify-content: flex-start;
-    }
-
-    .bot-avatar-small {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #059669;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .bubble {
-      max-width: 85%;
-      border-radius: 16px;
-      padding: 12px 16px;
-      font-size: 0.95rem;
-      word-break: break-word;
-    }
-
-    .message-row.user .bubble {
-      background: var(--user-bubble);
-      color: var(--user-text);
-      border-bottom-right-radius: 4px;
-      box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2);
-    }
-
-    .message-row.bot .bubble {
-      background: var(--bot-bubble);
-      color: var(--bot-text);
-      border-bottom-left-radius: 4px;
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.05);
-      width: 100%;
-    }
-
-    /* Structured Response Cards inside Bot Bubble */
-    .card-header-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 8px;
-      padding-bottom: 6px;
-      border-bottom: 2px solid var(--primary-light);
-    }
-
-    .service-meta-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .meta-tag {
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-size: 0.78rem;
-      color: #475569;
-    }
-
-    .meta-tag a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .fee-highlight-card {
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin: 12px 0;
-    }
-
-    .fee-highlight-card h4 {
-      font-size: 0.98rem;
-      color: #065f46;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .itemized-list {
-      list-style-type: none;
-      padding-left: 0;
-      font-size: 0.9rem;
-    }
-
-    .itemized-list li {
-      padding: 3px 0;
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px dashed #d1fae5;
-    }
-
-    .itemized-list li:last-child {
-      border-bottom: none;
-    }
-
-    .section-title {
-      font-size: 0.94rem;
-      font-weight: 700;
-      color: #1e293b;
-      margin: 14px 0 6px 0;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .checklist-items, .step-items {
-      padding-left: 18px;
-      font-size: 0.9rem;
-      margin-bottom: 12px;
-    }
-
-    .checklist-items li, .step-items li {
-      margin-bottom: 6px;
-    }
-
-    .checklist-badge {
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 1px 6px;
-      border-radius: 4px;
-      margin-left: 4px;
-    }
-
-    .badge-mandatory {
-      background: #fee2e2;
-      color: #b91c1c;
-    }
-
-    .badge-optional {
-      background: #f1f5f9;
-      color: #64748b;
-    }
-
-    .warning-banner {
-      background: var(--warning-bg);
-      border: 1px solid var(--warning-border);
-      border-left: 4px solid #f59e0b;
-      border-radius: 8px;
-      padding: 10px 12px;
-      color: var(--warning-text);
-      font-size: 0.88rem;
-      margin: 12px 0;
-    }
-
-    .decision-trace-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid var(--border);
-      padding-top: 8px;
-      margin-top: 12px;
-      font-size: 0.74rem;
-      color: var(--text-muted);
-    }
-
-    /* Clarifying Chips inside Bubble */
-    .clarify-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .clarify-chip-btn {
-      background: #f8fafc;
-      border: 1.5px solid var(--primary);
-      color: var(--primary-dark);
-      font-weight: 600;
-      font-size: 0.88rem;
-      padding: 6px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s;
-    }
-
-    .clarify-chip-btn:hover {
-      background: var(--primary);
-      color: #ffffff;
-    }
-
-    /* Typing Loader */
-    .typing-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 10px 14px;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-    }
-
-    .typing-dot {
-      width: 7px;
-      height: 7px;
-      background: #059669;
-      border-radius: 50%;
-      animation: bounce 1.2s infinite ease-in-out both;
-    }
-
-    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-
-    @keyframes bounce {
-      0%, 80%, 100% { transform: scale(0); }
-      40% { transform: scale(1); }
-    }
-
-    /* Fixed Bottom Chat Controls */
-    .bottom-chat-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #ffffff;
-      border-top: 1px solid var(--border);
-      padding: 8px 16px 12px 16px;
-      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.04);
-      z-index: 100;
-    }
-
-    .bottom-bar-inner {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    /* Horizontal Suggestions Slider */
-    .suggestions-slider {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .suggestions-slider::-webkit-scrollbar {
-      display: none;
-    }
-
-    .suggestion-pill {
-      background: #f1f5f9;
-      color: #334155;
-      font-size: 0.8rem;
-      padding: 5px 12px;
-      border-radius: 16px;
-      border: 1px solid #cbd5e1;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .suggestion-pill:hover {
-      background: var(--primary-light);
-      color: var(--primary-dark);
-      border-color: #86efac;
-    }
-
-    /* Chat Input Form */
-    .input-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #f8fafc;
-      border: 2px solid var(--border);
-      border-radius: 24px;
-      padding: 4px 6px 4px 16px;
-      transition: border-color 0.2s;
-    }
-
-    .input-row:focus-within {
-      border-color: var(--primary);
-      background: #ffffff;
-    }
-
-    #query-input {
-      flex: 1;
-      border: none;
-      background: transparent;
-      outline: none;
-      font-size: 0.98rem;
-      font-family: inherit;
-      color: var(--bot-text);
-      padding: 8px 0;
-    }
-
-    .btn-send {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: #ffffff;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      flex-shrink: 0;
-    }
-
-    .btn-send:hover {
-      background: var(--primary-dark);
-    }
-
-    .btn-send:active {
-      transform: scale(0.95);
-    }
-
-    .btn-send svg {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
-      margin-left: 2px;
-    }
-
-    .disclaimer-text {
-      text-align: center;
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      margin-top: 6px;
-    }
-  </style>
+  <meta name="theme-color" content="#059669">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="সহকারী">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤝</text></svg>">
+  <link rel="stylesheet" href="/app.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="brand-wrap">
-      <div class="avatar-icon">
-        🤝
-        <span class="status-dot"></span>
-      </div>
-      <div class="brand-info">
-        <h1>সহকারী (Sohokari) <span class="verified-tag">যাচাইকৃত গাইড</span></h1>
-        <p>বাংলাদেশ নাগরিক সেবা এআই সহায়ক • কোনো দালাল নয়</p>
-      </div>
-    </div>
-    <button class="btn-reset" id="btn-clear-chat" title="নতুন চ্যাট শুরু করুন">
-      🔄 নতুন চ্যাট
-    </button>
-  </header>
-
-  <!-- Chat Messages Stream -->
-  <main id="chat-stream">
+  <div class="app-viewport">
     
-    <!-- Welcome Greeting Bubble -->
-    <div class="message-row bot">
-      <div class="bot-avatar-small">🤝</div>
-      <div class="bubble">
-        <p><strong>আসসালামু আলাইকুম!</strong> আমি আপনার <strong>সহকারী (Sohokari)</strong>।</p>
-        <p style="margin-top: 6px;">
-          বাংলাদেশ সরকারের যেকোনো নাগরিক সেবার (যেমন: পাসপোর্ট, ভোটার আইডি/এনআইডি, জমির নামজারি/খারিজ) 
-          <strong>সঠিক সরকারি ফি, প্রয়োজনীয় কাগজপত্র ও আবেদনের সরাসরি নিয়ম</strong> জানতে আমাকে প্রশ্ন করুন।
-        </p>
-        
-        <p style="margin-top: 10px; font-weight: 600; font-size: 0.88rem; color: #475569;">
-          নিচের যেকোনো একটি বিষয়ে ট্যাপ করে শুরু করতে পারেন:
-        </p>
-        <div class="clarify-chips" style="margin-top: 8px;">
-          <button class="clarify-chip-btn" data-query="জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?">🪪 এনআইডি সংশোধন ফি</button>
-          <button class="clarify-chip-btn" data-query="১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?">🛂 পাসপোর্ট নবায়ন ফি</button>
-          <button class="clarify-chip-btn" data-query="জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?">📜 ই-নামজারি সরকারি ফি</button>
-          <button class="clarify-chip-btn" data-query="পাসপোর্ট রিনিউ করতে কি কি কাগজপত্র লাগে?">📑 পাসপোর্ট ডকুমেন্টস</button>
-          <button class="clarify-chip-btn" data-query="নামজারি করতে কি কি দলিল লাগে?">📑 নামজারি ডকুমেন্টস</button>
+    <!-- Native Header -->
+    <header class="native-header">
+      <div class="brand-section">
+        <div class="brand-avatar">
+          🤝
+          <span class="online-pulse"></span>
+        </div>
+        <div class="brand-title-wrap">
+          <h1>সহকারী (Sohokari) <span class="verified-pill">যাচাইকৃত</span></h1>
+          <p>বাংলাদেশ নাগরিক সেবা এআই সহায়ক</p>
         </div>
       </div>
-    </div>
+      <button class="btn-header-action" id="btn-clear-chat" title="নতুন চ্যাট শুরু করুন">
+        🔄 নতুন চ্যাট
+      </button>
+    </header>
 
-  </main>
-
-  <!-- Fixed Bottom Input Bar -->
-  <footer class="bottom-chat-bar">
-    <div class="bottom-bar-inner">
+    <!-- Chat Messages Stream -->
+    <main class="chat-scroll-stream" id="chat-stream">
       
-      <!-- Quick Prompt Suggestion Slider -->
-      <div class="suggestions-slider">
-        <span class="suggestion-pill" data-query="এনআইডি সংশোধন করতে কত টাকা লাগে">🪪 এনআইডি ফি</span>
-        <span class="suggestion-pill" data-query="পাসপোর্টের মেয়াদ শেষ নবায়ন করব কিভাবে">🛂 পাসপোর্ট নবায়ন</span>
-        <span class="suggestion-pill" data-query="জরুরি ভিত্তিতে ই-পাসপোর্ট নবায়ন ফি কত">⚡ জরুরি পাসপোর্ট</span>
-        <span class="suggestion-pill" data-query="ই-নামজারি করতে সরকারি ফি মোট কত টাকা">📜 নামজারি ১,১৭০ টাকা</span>
-        <span class="suggestion-pill" data-query="খারিজ খতিয়ানের জন্য অনলাইনে কিভাবে আবেদন করব">📝 খারিজ আবেদন</span>
-      </div>
-
-      <!-- Input Form -->
-      <form id="chat-form">
-        <div class="input-row">
-          <input 
-            type="text" 
-            id="query-input" 
-            placeholder="আপনার প্রশ্নটি বাংলায় বা বাংলিশে লিখুন..." 
-            autocomplete="off"
-            required
-          />
-          <button type="submit" class="btn-send" aria-label="পাঠান">
-            <svg viewBox="0 0 24 24">
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-            </svg>
-          </button>
+      <!-- Welcome Greeting Bubble -->
+      <div class="message-row bot">
+        <div class="bot-avatar-wrap">
+          <div class="bot-avatar-inner">🤝</div>
         </div>
-      </form>
-      
-      <p class="disclaimer-text">
-        🔒 ১০০% যাচাইকৃত সরকারি তথ্য • কোনো দালাল বা মধ্যস্বত্বভোগীকে বাড়তি টাকা দেবেন না।
-      </p>
-    </div>
-  </footer>
-
-  <script>
-    const chatStream = document.getElementById('chat-stream');
-    const chatForm = document.getElementById('chat-form');
-    const queryInput = document.getElementById('query-input');
-    const btnClearChat = document.getElementById('btn-clear-chat');
-
-    // Auto-scroll to bottom
-    function scrollToBottom() {
-      window.scrollTo(0, document.body.scrollHeight);
-      chatStream.scrollTop = chatStream.scrollHeight;
-    }
-
-    // Bind Quick Chips & Suggestions
-    document.addEventListener('click', (e) => {
-      const chip = e.target.closest('[data-query]');
-      if (chip) {
-        const query = chip.getAttribute('data-query');
-        queryInput.value = query;
-        submitQuery(query);
-      }
-    });
-
-    // Clear Chat
-    btnClearChat.addEventListener('click', () => {
-      chatStream.innerHTML = `
-        <div class="message-row bot">
-          <div class="bot-avatar-small">🤝</div>
-          <div class="bubble">
-            <p><strong>নতুন চ্যাট শুরু হয়েছে!</strong></p>
-            <p style="margin-top: 4px;">কী সেবা সম্পর্কে জানতে চান? নিচে লিখুন অথবা সাজেশনে ট্যাপ করুন।</p>
-          </div>
-        </div>
-      `;
-      queryInput.value = '';
-      queryInput.focus();
-    });
-
-    // Form Submit
-    chatForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const query = queryInput.value.trim();
-      if (!query) return;
-      submitQuery(query);
-    });
-
-    async function submitQuery(query) {
-      queryInput.value = '';
-
-      // 1. Append User Bubble
-      appendUserMessage(query);
-
-      // 2. Append Typing Indicator
-      const loaderId = appendTypingIndicator();
-      scrollToBottom();
-
-      try {
-        const res = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query })
-        });
-
-        removeTypingIndicator(loaderId);
-
-        if (!res.ok) {
-          throw new Error('Server error');
-        }
-
-        const data = await res.json();
-        appendBotResponse(data);
-      } catch (err) {
-        removeTypingIndicator(loaderId);
-        appendErrorMessage();
-      }
-
-      scrollToBottom();
-    }
-
-    function appendUserMessage(text) {
-      const div = document.createElement('div');
-      div.className = 'message-row user';
-      div.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
-      chatStream.appendChild(div);
-    }
-
-    function appendTypingIndicator() {
-      const id = 'loader-' + Date.now();
-      const div = document.createElement('div');
-      div.className = 'message-row bot';
-      div.id = id;
-      div.innerHTML = `
-        <div class="bot-avatar-small">🤝</div>
-        <div class="typing-indicator">
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
-        </div>
-      `;
-      chatStream.appendChild(div);
-      return id;
-    }
-
-    function removeTypingIndicator(id) {
-      const el = document.getElementById(id);
-      if (el) el.remove();
-    }
-
-    function appendErrorMessage() {
-      const div = document.createElement('div');
-      div.className = 'message-row bot';
-      div.innerHTML = `
-        <div class="bot-avatar-small">⚠️</div>
-        <div class="bubble" style="border-left: 4px solid #ef4444;">
-          <p><strong>দুঃখিত!</strong> সার্ভারের সাথে যোগাযোগ করা যায়নি। অনুগ্রহ করে ইন্টারনেট সংযোগ চেক করে আবার চেষ্টা করুন।</p>
-        </div>
-      `;
-      chatStream.appendChild(div);
-    }
-
-    function appendBotResponse(data) {
-      const div = document.createElement('div');
-      div.className = 'message-row bot';
-
-      // Case 1: Out of scope
-      if (data.action === 'SAFE_REFUSAL') {
-        div.innerHTML = `
-          <div class="bot-avatar-small">⚠️</div>
-          <div class="bubble" style="border-left: 4px solid #f59e0b;">
-            <p style="font-weight: 600; margin-bottom: 6px;">তালিকায় পাওয়া যায়নি</p>
-            <p style="white-space: pre-line;">${data.reply_bn}</p>
-            <div class="decision-trace-footer">
-              <span>⏱️ ${data.trace.execution_time_ms}ms</span>
-              <span>🔒 নিরাপদ ফিল্টার</span>
-            </div>
-          </div>
-        `;
-        chatStream.appendChild(div);
-        return;
-      }
-
-      // Case 2: Disambiguation
-      if (data.action === 'DISAMBIGUATE') {
-        const chipsHtml = (data.candidate_services || []).map(c => 
-          `<button class="clarify-chip-btn" data-query="${escapeHtml(c.name_bn)}">${escapeHtml(c.name_bn)}</button>`
-        ).join('');
-
-        div.innerHTML = `
-          <div class="bot-avatar-small">🔍</div>
-          <div class="bubble">
-            <p><strong>আপনি কি নিচের কোনো সেবা সম্পর্কে জানতে চাচ্ছেন?</strong></p>
-            <p style="font-size: 0.88rem; color: #475569; margin-top: 4px;">সঠিক তথ্য পেতে অনুগ্রহ করে নির্দিষ্ট সেবাটি বেছে নিন:</p>
-            <div class="clarify-chips">${chipsHtml}</div>
-            <div class="decision-trace-footer">
-              <span>⏱️ ${data.trace.execution_time_ms}ms</span>
-            </div>
-          </div>
-        `;
-        chatStream.appendChild(div);
-        return;
-      }
-
-      // Case 3: Clarify
-      if (data.action === 'CLARIFY' && data.clarifying_question) {
-        const q = data.clarifying_question;
-        const chipsHtml = (q.options || []).map(opt => 
-          `<button class="clarify-chip-btn" data-query="${escapeHtml(opt.label_bn)}">${escapeHtml(opt.label_bn)}</button>`
-        ).join('');
-
-        div.innerHTML = `
-          <div class="bot-avatar-small">❓</div>
-          <div class="bubble">
-            <p><strong>${escapeHtml(q.question_bn)}</strong></p>
-            <div class="clarify-chips">${chipsHtml}</div>
-          </div>
-        `;
-        chatStream.appendChild(div);
-        return;
-      }
-
-      // Case 4: DIRECT_ANSWER
-      const s = data.service || {};
-      const v = data.variant || {};
-      const totalFee = (v.fees || []).reduce((acc, f) => acc + f.amount_bdt, 0);
-
-      const feeItems = (v.fees || []).map(f => `
-        <li>
-          <span>${escapeHtml(f.fee_type_bn)}</span>
-          <strong>${f.amount_bdt} টাকা</strong>
-        </li>
-      `).join('');
-
-      const docItems = (v.documents || []).map(d => `
-        <li>
-          ${escapeHtml(d.document_name_bn)}
-          <span class="checklist-badge ${d.is_mandatory ? 'badge-mandatory' : 'badge-optional'}">
-            ${d.is_mandatory ? 'বাধ্যতামূলক' : 'প্রযোজ্য ক্ষেত্রে'}
-          </span>
-          <span style="font-size: 0.78rem; color: #64748b;">(${d.format_requirement === 'original' ? 'মূল কপি' : 'ডিজিটাল স্ক্যান'})</span>
-        </li>
-      `).join('');
-
-      const stepItems = (v.steps || []).map(step => `
-        <li>
-          <strong>${escapeHtml(step.title_bn)}:</strong> ${escapeHtml(step.instruction_bn)}
-        </li>
-      `).join('');
-
-      div.innerHTML = `
-        <div class="bot-avatar-small">🤝</div>
-        <div class="bubble">
-          <div class="card-header-title">📌 ${escapeHtml(s.name_bn)}</div>
+        <div class="bubble bot-bubble">
+          <p><strong>আসসালামু আলাইকুম!</strong> আমি আপনার <strong>সহকারী (Sohokari)</strong>।</p>
+          <p style="margin-top: 6px; font-size: 0.9rem;">
+            বাংলাদেশ সরকারের যেকোনো নাগরিক সেবার (যেমন: পাসপোর্ট, ভোটার আইডি/এনআইডি, জমির নামজারি/খারিজ) 
+            <strong>সঠিক সরকারি ফি, প্রয়োজনীয় কাগজপত্র ও আবেদনের নিয়ম</strong> জানতে প্রশ্ন করুন।
+          </p>
           
-          <div class="service-meta-tags">
-            <span class="meta-tag">🏢 ${escapeHtml(s.agency_bn)}</span>
-            <span class="meta-tag">🏛️ ${escapeHtml(s.ministry_bn)}</span>
-            <span class="meta-tag">🌐 <a href="${escapeHtml(s.official_portal_url)}" target="_blank" rel="noopener">অফিসিয়াল পোর্টাল</a></span>
-            <span class="meta-tag">📞 <a href="tel:${escapeHtml(s.helpline_number)}">হটলাইন: ${escapeHtml(s.helpline_number)}</a></span>
-          </div>
-
-          <div class="fee-highlight-card">
-            <h4>💰 সরকারি মোট ফি: ${totalFee} টাকা</h4>
-            <p style="font-size: 0.8rem; color: #047857; margin-bottom: 8px;">ধরণ: ${escapeHtml(v.variant_name_bn)} • SLA: ${v.processing_days_sla} কার্যদিবস</p>
-            <ul class="itemized-list">
-              ${feeItems}
-            </ul>
-          </div>
-
-          <div class="section-title">📑 প্রয়োজনীয় কাগজপত্র (চেকলিস্ট):</div>
-          <ul class="checklist-items">
-            ${docItems}
-          </ul>
-
-          <div class="section-title">📝 আবেদন করার সরাসরি ধাপসমূহ:</div>
-          <ol class="step-items">
-            ${stepItems}
-          </ol>
-
-          <div class="warning-banner">
-            <strong>⚠️ দালাল ও প্রতারণা প্রতিরোধ:</strong> সরকারি ফি সুনির্দিষ্ট ও রসিদযুক্ত। কাউকে ১ টাকাও অতিরিক্ত দেবেন না। দালাল টাকা চাইলে সরাসরি হটলাইন <strong>${escapeHtml(s.helpline_number)}</strong> অথবা দুদকের <strong>১০৬</strong> নম্বরে জানান।
-          </div>
-
-          <div class="decision-trace-footer">
-            <span>সর্বশেষ গেজেট যাচাই: ${s.last_verified_at.split('T')[0]}</span>
-            <span>⚡ ${data.trace.execution_time_ms}ms • ১০০% যাচাইকৃত</span>
+          <div class="chips-container" style="margin-top: 10px;">
+            <button class="native-chip-btn" data-query="জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?">🪪 এনআইডি সংশোধন ফি</button>
+            <button class="native-chip-btn" data-query="১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?">🛂 পাসপোর্ট নবায়ন ফি</button>
+            <button class="native-chip-btn" data-query="জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?">📜 ই-নামজারি সরকারি ফি</button>
+            <button class="native-chip-btn" data-query="পাসপোর্ট রিনিউ করতে কি কি কাগজপত্র লাগে?">📑 পাসপোর্ট ডকুমেন্টস</button>
+            <button class="native-chip-btn" data-query="নামজারি করতে কি কি দলিল লাগে?">📑 নামজারি ডকুমেন্টস</button>
           </div>
         </div>
-      `;
+      </div>
 
-      chatStream.appendChild(div);
-    }
+    </main>
 
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-    }
-  </script>
+    <!-- Native Bottom Chat Controls -->
+    <footer class="native-bottom-bar" id="bottom-bar">
+      <div class="bottom-container">
+        
+        <!-- Quick Prompt Suggestion Slider -->
+        <div class="prompt-chips-scroll">
+          <span class="prompt-pill" data-query="এনআইডি সংশোধন করতে কত টাকা লাগে">🪪 এনআইডি ফি</span>
+          <span class="prompt-pill" data-query="পাসপোর্টের মেয়াদ শেষ নবায়ন করব কিভাবে">🛂 পাসপোর্ট নবায়ন</span>
+          <span class="prompt-pill" data-query="জরুরি ভিত্তিতে ই-পাসপোর্ট নবায়ন ফি কত">⚡ জরুরি পাসপোর্ট</span>
+          <span class="prompt-pill" data-query="ই-নামজারি করতে সরকারি ফি মোট কত টাকা">📜 নামজারি ১,১৭০ ৳</span>
+          <span class="prompt-pill" data-query="খারিজ খতিয়ানের জন্য অনলাইনে কিভাবে আবেদন করব">📝 খারিজ আবেদন</span>
+        </div>
+
+        <!-- Chat Input Form -->
+        <form id="chat-form">
+          <div class="input-capsule">
+            <input 
+              type="text" 
+              id="query-input" 
+              class="native-input"
+              placeholder="কী সেবা সম্পর্কে জানতে চান বলুন..." 
+              autocomplete="off"
+              enterkeyhint="send"
+              required
+            />
+            <button type="submit" class="btn-send-native" aria-label="পাঠান">
+              <svg viewBox="0 0 24 24">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+        
+        <p class="disclaimer-caption">
+          🔒 ১০০% যাচাইকৃত সরকারি তথ্য • কোনো দালাল বা মধ্যস্বত্বভোগীকে বাড়তি টাকা দেবেন না।
+        </p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="module" src="/app.js" defer></script>
 </body>
 </html>
