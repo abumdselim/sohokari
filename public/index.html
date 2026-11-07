@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>শেয়াল (Sheyal) - বাংলাদেশ নাগরিক সেবা সহায়ক</title>
+  <meta name="description" content="বাংলাদেশ সরকারের সকল নাগরিক সেবার নির্ভুল সরকারি ফি, প্রয়োজনীয় কাগজপত্র ও আবেদনের সম্পূর্ণ নিয়ম জানুন ১০০% যাচাইকৃত তথ্যের ভিত্তিতে।">
+  
+  <style>
+    :root {
+      --primary: #047857;
+      --primary-dark: #065f46;
+      --primary-light: #ecfdf5;
+      --secondary: #0284c7;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --border: #e2e8f0;
+      --warning-bg: #fffbeb;
+      --warning-border: #fef3c7;
+      --warning-text: #92400e;
+      --danger-bg: #fef2f2;
+      --danger-text: #991b1b;
+      --card-bg: #ffffff;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "SolaimanLipi", "Kalpurush", "Hind Siliguri", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: #f1f5f9;
+      color: var(--dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .brand-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+      border: 1px solid #a7f3d0;
+    }
+
+    .subtitle {
+      color: #64748b;
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+
+    /* Search Area */
+    .search-box-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .input-wrapper {
+      display: flex;
+      gap: 8px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 14px 18px;
+      font-size: 1.05rem;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--primary);
+    }
+
+    button.btn-search {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      padding: 0 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+
+    button.btn-search:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Quick Chips */
+    .quick-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      background: #f1f5f9;
+      color: #334155;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: 1px solid #cbd5e1;
+      transition: all 0.2s;
+    }
+
+    .chip:hover {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border-color: #86efac;
+    }
+
+    /* Results */
+    #results-area {
+      flex: 1;
+    }
+
+    .result-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06);
+      margin-bottom: 20px;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-card h3 {
+      font-size: 1.25rem;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 8px;
+    }
+
+    .meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .meta-pill {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #475569;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+    }
+
+    .highlight-box {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      color: #064e3b;
+    }
+
+    .highlight-box h4 {
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .warning-box {
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      border-left: 4px solid #f59e0b;
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--warning-text);
+      font-size: 0.92rem;
+      margin: 16px 0;
+    }
+
+    .checklist-list, .step-list {
+      margin-left: 20px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+
+    .checklist-list li, .step-list li {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .execution-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 14px;
+      padding: 4px 8px;
+      background: #f8fafc;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 24px 10px;
+      color: #64748b;
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand-title">
+        <span>🦊 শেয়াল (Sheyal)</span>
+        <span class="brand-badge">নাগরিক সেবা গাইড</span>
+      </div>
+      <p class="subtitle">বাংলাদেশ সরকারের সকল সেবা, সঠিক সরকারি ফি এবং আবেদনের সরাসরি নিয়ম জানুন বাংলায়</p>
+    </header>
+
+    <div class="search-box-card">
+      <form id="search-form">
+        <div class="input-wrapper">
+          <input 
+            type="text" 
+            id="query-input" 
+            placeholder="কি করতে চান বলুন (যেমন: 'এনআইডি সংশোধন', 'passport renew fee', 'নামজারি')..." 
+            autocomplete="off"
+            required
+          />
+          <button type="submit" class="btn-search">খুঁজুন</button>
+        </div>
+      </form>
+      <div class="quick-chips">
+        <span class="chip" data-query="এনআইডি সংশোধন করতে কত টাকা লাগে">এনআইডি সংশোধন ফি</span>
+        <span class="chip" data-query="পাসপোর্টের মেয়াদ শেষ নবায়ন করব কিভাবে">পাসপোর্ট নবায়ন নিয়ম</span>
+        <span class="chip" data-query="জরুরি ভিত্তিতে ১০ বছর মেয়াদী ৪৮ পৃষ্ঠা পাসপোর্ট ফি কত">জরুরি পাসপোর্ট ফি</span>
+        <span class="chip" data-query="জমি নামজারি বা খারিজ করতে মোট কত টাকা লাগে">নামজারি সরকারি ফি</span>
+        <span class="chip" data-query="খারিজ করতে কি কি কাগজপত্র লাগে">নামজারি ডকুমেন্টস</span>
+      </div>
+    </div>
+
+    <div id="results-area">
+      <!-- Dynamic result appears here -->
+      <div class="result-card" style="text-align: center; color: #64748b; padding: 40px 20px;">
+        <p style="font-size: 1.1rem; margin-bottom: 8px;">🔍 আপনার প্রয়োজনীয় সেবাটি উপরে লিখুন অথবা কুইক চিপসে ক্লিক করুন।</p>
+        <p style="font-size: 0.88rem;">বাংলা, ইংরেজি কিংবা বাংলিশ — যেভাবেই লিখুন না কেন Sheyal আপনাকে সঠিক তথ্য জানাবে।</p>
+      </div>
+    </div>
+
+    <footer>
+      <p><strong>Sheyal (sheyal.com)</strong> — নিরপেক্ষ ও স্বাধীন নাগরিক প্রযুক্তি উদ্যোগ।</p>
+      <p style="margin-top: 4px;">সরকারি সকল তথ্যের সূত্র: সরকারি সিটিজেন চার্টার ও বাংলাদেশ গেজেট। কোনো দালালের প্ররোচনায় পা দেবেন না।</p>
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById('search-form');
+    const input = document.getElementById('query-input');
+    const resultsArea = document.getElementById('results-area');
+    const chips = document.querySelectorAll('.chip');
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        input.value = chip.getAttribute('data-query');
+        executeSearch(input.value);
+      });
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      executeSearch(input.value);
+    });
+
+    async function executeSearch(query) {
+      if (!query.trim()) return;
+
+      resultsArea.innerHTML = `
+        <div class="result-card" style="text-align: center; padding: 30px;">
+          <p>⏳ সঠিক সরকারি তথ্য বিশ্লেষণ করা হচ্ছে...</p>
+        </div>
+      `;
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: query.trim() })
+        });
+
+        const data = await res.json();
+        renderResult(data);
+      } catch (err) {
+        resultsArea.innerHTML = `
+          <div class="result-card" style="border-left: 4px solid #ef4444;">
+            <h3>ত্রুটি</h3>
+            <p>সার্ভারের সাথে সংযোগ স্থাপন করা সম্ভব হয়নি। অনুগ্রহ করে পুনরায় চেষ্টা করুন।</p>
+          </div>
+        `;
+      }
+    }
+
+    function renderResult(data) {
+      if (data.action === 'SAFE_REFUSAL') {
+        resultsArea.innerHTML = `
+          <div class="result-card" style="border-left: 4px solid #f59e0b;">
+            <h3>⚠️ তথ্য তালিকায় নেই</h3>
+            <p style="margin-top: 10px; font-size: 1rem;">${data.reply_bn.replace(/\n/g, '<br>')}</p>
+            <div class="execution-badge">⏱️ রেসপন্স প্রস্তুত: ${data.trace.execution_time_ms}ms | ১০০% নিরাপদ ফিল্টার</div>
+          </div>
+        `;
+        return;
+      }
+
+      if (data.action === 'DISAMBIGUATE') {
+        const candidates = (data.candidate_services || []).map(c => 
+          `<button class="chip" onclick="executeSearch('${c.name_bn}')" style="margin: 4px; padding: 8px 14px; font-size: 0.95rem;">${c.name_bn}</button>`
+        ).join('');
+
+        resultsArea.innerHTML = `
+          <div class="result-card">
+            <h3>🔍 কোন সেবাটি জানতে চাচ্ছেন?</h3>
+            <p style="margin-bottom: 14px;">আপনার প্রশ্নের সাথে একাধিক সরকারি সেবার মিল পাওয়া গেছে। সঠিকটি নির্বাচন করুন:</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">${candidates}</div>
+            <div class="execution-badge">⏱️ রেসপন্স প্রস্তুত: ${data.trace.execution_time_ms}ms</div>
+          </div>
+        `;
+        return;
+      }
+
+      // DIRECT_ANSWER
+      const s = data.service || {};
+      const v = data.variant || {};
+      const totalFee = (v.fees || []).reduce((acc, f) => acc + f.amount_bdt, 0);
+
+      const feeItems = (v.fees || []).map(f => 
+        `<li><strong>${f.fee_type_bn}:</strong> ${f.amount_bdt} টাকা ${f.notes_bn ? `<em>(${f.notes_bn})</em>` : ''}</li>`
+      ).join('');
+
+      const docItems = (v.documents || []).map(d => 
+        `<li>${d.document_name_bn} [<strong>${d.format_requirement === 'original' ? 'মূল কপি' : 'ডিজিটাল স্ক্যান'}</strong>] ${d.is_mandatory ? '<span style="color:#dc2626;">(বাধ্যতামূলক)</span>' : '<span style="color:#64748b;">(প্রযোজ্য ক্ষেত্রে)</span>'}</li>`
+      ).join('');
+
+      const stepItems = (v.steps || []).map(step => 
+        `<li><strong>${step.title_bn}:</strong> ${step.instruction_bn}</li>`
+      ).join('');
+
+      resultsArea.innerHTML = `
+        <div class="result-card">
+          <h3>📌 সেবা: ${s.name_bn}</h3>
+          
+          <div class="meta-pills">
+            <span class="meta-pill">🏢 কর্তৃপক্ষ: ${s.agency_bn}</span>
+            <span class="meta-pill">🏛️ মন্ত্রণালয়: ${s.ministry_bn}</span>
+            <span class="meta-pill">🌐 পোর্টাল: <a href="${s.official_portal_url}" target="_blank" rel="noopener">${s.official_portal_url.replace('https://', '')}</a></span>
+            <span class="meta-pill">📞 হটলাইন: <a href="tel:${s.helpline_number}">${s.helpline_number}</a></span>
+          </div>
+
+          <div class="highlight-box">
+            <h4>💰 সরকারি মোট ফি: ${totalFee} টাকা (${v.variant_name_bn})</h4>
+            <ul class="checklist-list" style="margin-bottom: 0;">
+              ${feeItems}
+            </ul>
+            <p style="margin-top: 8px; font-size: 0.85rem; color: #047857;">⏱️ প্রসেসিং সময়: সরকারি SLA অনুযায়ী ${v.processing_days_sla} কার্যদিবস</p>
+          </div>
+
+          <h4 style="margin-top: 16px; color: #1e293b;">📑 প্রয়োজনীয় কাগজপত্র (চেকলিস্ট):</h4>
+          <ul class="checklist-list">
+            ${docItems}
+          </ul>
+
+          <h4 style="margin-top: 16px; color: #1e293b;">📝 আবেদন করার সরাসরি ধাপসমূহ:</h4>
+          <ol class="step-list">
+            ${stepItems}
+          </ol>
+
+          <div class="warning-box">
+            <strong>⚠️ দালাল ও প্রতারণা সতর্কতা:</strong> সরকারি ফি সুনির্দিষ্ট ও রসিদযুক্ত। কোনো দালাল বা মধ্যস্বত্বভোগীকে বাড়তি টাকা দিবেন না। অবৈধ দাবি উঠলে সরকারি হটলাইনে সরাসরি অভিযোগ জানান।
+          </div>
+
+          <div style="font-size: 0.82rem; color: #64748b; margin-top: 12px; border-top: 1px solid var(--border); padding-top: 8px;">
+            <span>সর্বশেষ সরকারি গেজেট ও পরিপত্র যাচাই: ${s.last_verified_at.split('T')[0]}</span>
+          </div>
+
+          <div class="execution-badge">
+            ⚡ প্রস্তুত হয়েছে ${data.trace.execution_time_ms} মিলি-সেকেন্ডে | 🔒 ১০০% যাচাইকৃত সিদ্ধান্ত ইঞ্জিন
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
