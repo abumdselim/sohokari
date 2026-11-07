@@ -72,7 +72,7 @@ const GOLDEN_50_DATASET: GoldenTestCase[] = [
   { id: 50, query: 'what is the weather today in chittagong', language: 'en', expected_action: 'SAFE_REFUSAL' }
 ];
 
-describe('Sheyal Decision Engine - 50 Golden Test Set Evaluation', () => {
+describe('Sohokari Decision Engine - 50 Golden Test Set Evaluation', () => {
   it('evaluates all 50 golden queries and satisfies performance & accuracy thresholds', () => {
     let inScopeCount = 0;
     let correctClassificationCount = 0;

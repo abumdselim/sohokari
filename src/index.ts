@@ -26,7 +26,7 @@ export default {
       return new Response(
         JSON.stringify({
           status: 'healthy',
-          project: 'Sheyal (শেয়াল)',
+          project: 'Sohokari (সহকারী)',
           version: '0.1.0-poc',
           verified_services_count: VERIFIED_SERVICES.length,
           timestamp: new Date().toISOString()
@@ -114,7 +114,7 @@ export default {
       return env.ASSETS.fetch(request);
     }
 
-    return new Response('Sheyal Edge Worker Active. Visit /api/services or /api/health.', {
+    return new Response('Sohokari Edge Worker Active. Visit /api/services or /api/health.', {
       headers: { 'Content-Type': 'text/plain; charset=utf-8' }
     });
   }

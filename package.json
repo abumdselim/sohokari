@@ -1,8 +1,8 @@
 {
-  "name": "sheyal",
+  "name": "sohokari",
   "version": "0.1.0",
   "private": true,
-  "description": "Sheyal (শেয়াল) - Bangla-First Zero-LLM AI Assistant for Bangladesh Citizen Services",
+  "description": "Sohokari (সহকারী) - Bangla-First Zero-LLM AI Assistant for Bangladesh Citizen Services",
   "main": "src/index.ts",
   "scripts": {
     "dev": "wrangler dev",

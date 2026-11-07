@@ -1,13 +1,13 @@
-# Sheyal (শেয়াল) - Bangladesh Citizen Services AI Guide
+# সহকারী (Sohokari) - Bangladesh Citizen Services AI Guide
 
-> **Domain:** `sheyal.com`  
+> **Brand:** `সহকারী (Sohokari)`  
 > **Architecture:** Cloudflare Workers (Edge Engine + Static PWA) + D1 SQLite  
 > **Engine:** 100% In-House Deterministic Decision Engine (Zero External AI / LLM)
 
 ---
 
-## 🦊 Overview
-**Sheyal** is a Bangla-first, high-precision citizen services assistant for Bangladesh. It eliminates reliance on corrupt brokers (*dalals*) by providing direct, receipt-backed official government fees, exact document checklists, and step-by-step procedures for all citizen services.
+## 🤝 Overview
+**সহকারী (Sohokari)** is a Bangla-first, high-precision citizen services assistant for Bangladesh. It eliminates reliance on corrupt brokers (*dalals*) by providing direct, receipt-backed official government fees, exact document checklists, and step-by-step procedures for all citizen services.
 
 ### Pilot Services (Proof of Concept)
 1. **National ID Information Correction (`nid-correction`):** 1st time 230 BDT, 2nd time 345 BDT; NID Wing portal & Upazila hearing.
