@@ -1,5 +1,6 @@
 import { ChatResponse } from '../types/engine';
 import { copyToClipboard } from './toast';
+import { icons } from './icons';
 
 export function escapeHtml(str: string): string {
   if (!str) return '';
@@ -33,7 +34,7 @@ export function renderTypingIndicator(): HTMLElement {
 
   row.innerHTML = `
     <div class="bot-avatar-wrap">
-      <div class="bot-avatar-inner">🤝</div>
+      <div class="bot-avatar-inner">${icons.shieldCheck}</div>
     </div>
     <div class="typing-bubble">
       <div class="typing-dot"></div>
@@ -50,7 +51,7 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
 
   const avatar = `
     <div class="bot-avatar-wrap">
-      <div class="bot-avatar-inner">🤝</div>
+      <div class="bot-avatar-inner">${icons.shieldCheck}</div>
     </div>
   `;
 
@@ -59,11 +60,14 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
     row.innerHTML = `
       ${avatar}
       <div class="bubble bot-bubble refusal-bubble">
-        <div class="card-badge warning-badge">⚠️ তথ্য পাওয়া যায়নি</div>
+        <div class="card-badge warning-badge">
+          ${icons.alertTriangle}
+          <span>তথ্য তালিকায় নেই</span>
+        </div>
         <p class="refusal-text">${escapeHtml(data.reply_bn).replace(/\n/g, '<br>')}</p>
         <div class="bubble-meta">
-          <span>⚡ ${data.trace.execution_time_ms}ms</span>
-          <span>🔒 নিরাপদ ফিল্টার</span>
+          <span>${icons.clock} ${data.trace.execution_time_ms}ms</span>
+          <span>সুরক্ষিত ফিল্টার</span>
         </div>
       </div>
     `;
@@ -81,11 +85,11 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
     row.innerHTML = `
       ${avatar}
       <div class="bubble bot-bubble">
-        <p class="bubble-prompt"><strong>🔍 আপনি কি নিচের কোনো সেবা খুঁজছেন?</strong></p>
-        <p class="bubble-subtext">নির্দিষ্ট সেবাটির ওপর ট্যাপ করুন:</p>
+        <p class="bubble-prompt"><strong>নির্দিষ্ট সেবা নির্বাচন করুন</strong></p>
+        <p class="bubble-subtext">আপনার অনুসন্ধানের সাথে সংশ্লিষ্ট সেবাগুলোর মধ্যে বেছে নিন:</p>
         <div class="chips-container">${chipsHtml}</div>
         <div class="bubble-meta">
-          <span>⚡ ${data.trace.execution_time_ms}ms</span>
+          <span>${icons.clock} ${data.trace.execution_time_ms}ms</span>
         </div>
       </div>
     `;
@@ -104,7 +108,7 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
     row.innerHTML = `
       ${avatar}
       <div class="bubble bot-bubble">
-        <p class="bubble-prompt"><strong>❓ ${escapeHtml(q.question_bn)}</strong></p>
+        <p class="bubble-prompt"><strong>${escapeHtml(q.question_bn)}</strong></p>
         <div class="chips-container">${chipsHtml}</div>
       </div>
     `;
@@ -133,7 +137,7 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
   const feeItems = (v.fees || []).map(f => `
     <div class="fee-row">
       <span class="fee-name">${escapeHtml(f.fee_type_bn)}</span>
-      <span class="fee-amount">${f.amount_bdt} ৳</span>
+      <span class="fee-amount">${f.amount_bdt} টাকা</span>
     </div>
   `).join('');
 
@@ -164,32 +168,39 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
       
       <!-- Card Title & Copy Action -->
       <div class="card-top-bar">
-        <div class="service-title-text">📌 ${escapeHtml(s.name_bn)}</div>
+        <div class="service-title-text">${escapeHtml(s.name_bn)}</div>
         <button class="btn-copy-card" data-copy="${escapeHtml(copyPayload)}" title="তথ্য কপি করুন">
-          📋 কপি
+          ${icons.copy}
+          <span>কপি</span>
         </button>
       </div>
 
-      <!-- Quick Agency Tags -->
+      <!-- Agency Tags -->
       <div class="agency-tags-wrap">
-        <span class="agency-tag">🏢 ${escapeHtml(s.agency_bn)}</span>
-        <span class="agency-tag">🏛️ ${escapeHtml(s.ministry_bn)}</span>
+        <span class="agency-tag">${icons.building} ${escapeHtml(s.agency_bn)}</span>
+        <span class="agency-tag">${icons.building} ${escapeHtml(s.ministry_bn)}</span>
       </div>
 
-      <!-- Quick Contact Pills -->
+      <!-- Contact Actions -->
       <div class="contact-pills-wrap">
         <a href="${escapeHtml(s.official_portal_url)}" target="_blank" rel="noopener" class="contact-pill portal-pill">
-          🌐 অফিসিয়াল পোর্টাল ↗
+          ${icons.globe}
+          <span>অফিসিয়াল পোর্টাল</span>
+          ${icons.externalLink}
         </a>
         <a href="tel:${escapeHtml(s.helpline_number)}" class="contact-pill call-pill">
-          📞 কল করুন: ${escapeHtml(s.helpline_number)}
+          ${icons.phone}
+          <span>হটলাইন: ${escapeHtml(s.helpline_number)}</span>
         </a>
       </div>
 
       <!-- Official Fee Card -->
       <div class="fee-box">
         <div class="fee-box-header">
-          <div class="fee-title-label">💰 সরকারি মোট ফি</div>
+          <div class="fee-title-label">
+            ${icons.receipt}
+            <span>সরকারি নির্ধারিত মোট ফি</span>
+          </div>
           <div class="fee-total-highlight">${totalFee} টাকা</div>
         </div>
         <div class="fee-variant-subtext">${escapeHtml(v.variant_name_bn)} • প্রসেসিং সময়: ${v.processing_days_sla} কার্যদিবস</div>
@@ -199,26 +210,36 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
       </div>
 
       <!-- Required Documents -->
-      <div class="section-heading">📑 প্রয়োজনীয় কাগজপত্র (চেকলিস্ট)</div>
+      <div class="section-heading">
+        ${icons.fileText}
+        <span>প্রয়োজনীয় কাগজপত্র (চেকলিস্ট)</span>
+      </div>
       <ul class="native-checklist">
         ${docItems}
       </ul>
 
       <!-- Application Steps -->
-      <div class="section-heading">📝 আবেদনের সরাসরি ধাপসমূহ</div>
+      <div class="section-heading">
+        ${icons.listOrdered}
+        <span>আবেদনের সরাসরি ধাপসমূহ</span>
+      </div>
       <ol class="native-steps-list">
         ${stepItems}
       </ol>
 
       <!-- Anti-Broker Alert -->
       <div class="dalal-alert-banner">
-        <strong>⚠️ দালাল ও প্রতারণা প্রতিরোধ:</strong> সরকারি ফি সুনির্দিষ্ট ও রসিদযুক্ত। কাউকে কোনো অতিরিক্ত টাকা দেবেন না। কেউ অবৈধ টাকা দাবি করলে সরাসরি হটলাইন <strong>${escapeHtml(s.helpline_number)}</strong> অথবা দুদকের <strong>১০৬</strong> নম্বরে জানান।
+        <div class="alert-banner-header">
+          ${icons.alertTriangle}
+          <strong>দালাল ও প্রতারণা প্রতিরোধ:</strong>
+        </div>
+        <p>সরকারি ফি সুনির্দিষ্ট ও রসিদযুক্ত। কাউকে কোনো অতিরিক্ত অর্থ প্রদান করবেন না। কেউ অবৈধ টাকা দাবি করলে সরাসরি হটলাইন <strong>${escapeHtml(s.helpline_number)}</strong> অথবা দুদকের <strong>১০৬</strong> নম্বরে অভিযোগ জানান।</p>
       </div>
 
       <!-- Decision Trace Footer -->
       <div class="bubble-meta">
         <span>গেজেট যাচাই: ${s.last_verified_at.split('T')[0]}</span>
-        <span>⚡ ${data.trace.execution_time_ms}ms • ১০০% যাচাইকৃত</span>
+        <span>${icons.clock} ${data.trace.execution_time_ms}ms • ১০০% যাচাইকৃত</span>
       </div>
 
     </div>

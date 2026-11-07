@@ -39,63 +39,63 @@ export function composeDirectAnswer(
   const rejectionReason = service.guidance.find(g => g.guidance_type === 'rejection_reason');
 
   // Compose Bangla text
-  const reply_bn = `### 📌 সেবা: ${service.name_bn}
+  const reply_bn = `### সেবা: ${service.name_bn}
 **ধরণ/ভ্যারিয়েন্ট:** ${variant.variant_name_bn}
 **দায়িত্বশীল কর্তৃপক্ষ:** ${service.responsible_agency_bn}, ${service.responsible_ministry_bn}
 **যে অফিসে যেতে হবে:** ${service.visiting_office_level === 'none' ? 'কোথাও যেতে হবে না (১০০% অনলাইন)' : `উপজেলা / জেলা কার্যালয় (${service.visiting_office_level})`}
-**অফিসিয়াল পোর্টাল:** ${service.official_portal_url} | **হটলাইন:** 📞 ${service.helpline_number}
+**অফিসিয়াল পোর্টাল:** ${service.official_portal_url} | **হটলাইন:** ${service.helpline_number}
 
 ---
 
-### 💰 সরকারি ফি তালিকা (মোট: ${totalFee} টাকা)
+### সরকারি ফি তালিকা (মোট: ${totalFee} টাকা)
 ${feeRowsBn}
 *প্রসেসিং সময়: সরকারি SLA অনুযায়ী ${variant.processing_days_sla} কার্যদিবস।*
 
 ---
 
-### 📑 প্রয়োজনীয় কাগজপত্র (চেকলিস্ট)
+### প্রয়োজনীয় কাগজপত্র (চেকলিস্ট)
 ${docRowsBn}
 
 ---
 
-### 📝 আবেদন করার ধাপসমূহ
+### আবেদন করার ধাপসমূহ
 ${stepRowsBn}
 
 ---
 
-### ⚠️ দালাল ও প্রতারণা প্রতিরোধে সতর্কতা
+### দালাল ও প্রতারণা প্রতিরোধে সতর্কতা
 ${brokerWarning ? brokerWarning.content_bn : 'সরকারি ফি নির্দিষ্ট ও রসিদযুক্ত। কোনো দালাল বা মধ্যস্বত্বভোগীকে বাড়তি টাকা দিবেন না।'}
-${rejectionReason ? `\n\n💡 **সাধারণ ভুল ও বাতিলের কারণ:** ${rejectionReason.content_bn}` : ''}
+${rejectionReason ? `\n\n**সাধারণ ভুল ও বাতিলের কারণ:** ${rejectionReason.content_bn}` : ''}
 
 ---
 *উৎস: ${service.sources[0]?.source_title || 'সরকারি গেজেট ও সিটিজেন চার্টার'} (সর্বশেষ যাচাই: ${service.last_verified_at.split('T')[0]})*`;
 
   // Compose English text
-  const reply_en = `### 📌 Service: ${service.name_en}
+  const reply_en = `### Service: ${service.name_en}
 **Variant:** ${variant.variant_name_en}
 **Responsible Authority:** ${service.responsible_agency_en}, ${service.responsible_ministry_en}
 **Visiting Office:** ${service.visiting_office_level} level office
-**Official Portal:** ${service.official_portal_url} | **Helpline:** 📞 ${service.helpline_number}
+**Official Portal:** ${service.official_portal_url} | **Helpline:** ${service.helpline_number}
 
 ---
 
-### 💰 Official Fee Schedule (Total: ${totalFee} BDT)
+### Official Fee Schedule (Total: ${totalFee} BDT)
 ${feeRowsEn}
 *Processing SLA: ${variant.processing_days_sla} working days.*
 
 ---
 
-### 📑 Required Documents Checklist
+### Required Documents Checklist
 ${docRowsEn}
 
 ---
 
-### 📝 Step-by-Step Application Procedure
+### Step-by-Step Application Procedure
 ${stepRowsEn}
 
 ---
 
-### ⚠️ Anti-Fraud & Broker Warning
+### Anti-Fraud & Broker Warning
 ${brokerWarning ? brokerWarning.content_en : 'Official fees are fixed and receipt-backed. Never pay brokers.'}
 
 ---

@@ -2,6 +2,7 @@ import { triggerHaptic } from './haptics';
 import { showToast } from './toast';
 import { initViewportManager } from './viewport';
 import { renderUserBubble, renderBotBubble, renderTypingIndicator } from './ui';
+import { icons } from './icons';
 import { ChatResponse } from '../types/engine';
 
 class SohokariApp {
@@ -113,7 +114,7 @@ class SohokariApp {
     row.className = 'message-row bot';
     row.innerHTML = `
       <div class="bot-avatar-wrap">
-        <div class="bot-avatar-inner" style="background: #ef4444;">⚠️</div>
+        <div class="bot-avatar-inner" style="background: #ef4444;">${icons.alertTriangle}</div>
       </div>
       <div class="bubble bot-bubble" style="border-left: 4px solid #ef4444;">
         <p><strong>সংযোগ বিঘ্নিত হয়েছে</strong></p>
@@ -123,17 +124,17 @@ class SohokariApp {
       </div>
     `;
     this.chatStream.appendChild(row);
-    showToast('⚠️ ইন্টারনেট সংযোগ চেক করুন');
+    showToast('ইন্টারনেট সংযোগ চেক করুন');
   }
 
   private resetChat(): void {
     this.chatStream.innerHTML = `
       <div class="message-row bot">
         <div class="bot-avatar-wrap">
-          <div class="bot-avatar-inner">🤝</div>
+          <div class="bot-avatar-inner">${icons.shieldCheck}</div>
         </div>
         <div class="bubble bot-bubble">
-          <p><strong>নতুন চ্যাট শুরু হয়েছে!</strong></p>
+          <p><strong>নতুন চ্যাট শুরু হয়েছে</strong></p>
           <p style="margin-top: 4px; font-size: 0.9rem;">
             কী সেবা সম্পর্কে জানতে চান? নিচে লিখুন অথবা সাজেশনে ট্যাপ করুন।
           </p>
