@@ -109,10 +109,10 @@ export function composeSafeRefusal(
   language: 'bn' | 'en' | 'banglish'
 ): { reply_bn: string; reply_en: string } {
   return {
-    reply_bn: `দুঃখিত, আপনার অনুসন্ধানটি ("${query}") বর্তমানে Sheyal-এর যাচাইকৃত সরকারি সেবার তালিকার অন্তর্ভুক্ত নয়।
+    reply_bn: `দুঃখিত, আপনার অনুসন্ধানটি ("${query}") বর্তমানে Sohokari-এর যাচাইকৃত সরকারি সেবার তালিকার অন্তর্ভুক্ত নয়।
 
 নিরাপদ তথ্যের জন্য অনুগ্রহ করে জাতীয় কল সেন্টার **৩৩৩ (333)** অথবা সরকারি জাতীয় পোর্টাল (bangladesh.gov.bd)-এ যোগাযোগ করুন।`,
-    reply_en: `We apologize, but your query ("${query}") is not currently part of Sheyal's verified government service catalog.
+    reply_en: `We apologize, but your query ("${query}") is not currently part of Sohokari's verified government service catalog.
 
 For verified official assistance, please contact National Call Center **333** or visit the Bangladesh National Portal (bangladesh.gov.bd).`
   };

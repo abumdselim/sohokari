@@ -18,7 +18,7 @@ export const passportRenewalService: ServiceRecord = {
   status: 'verified',
   confidence_score: 1.0,
   last_verified_at: '2026-11-01T00:00:00Z',
-  verified_by: 'Sheyal Official Legal & Gazette Verification Desk',
+  verified_by: 'Sohokari Official Legal & Gazette Verification Desk',
   aliases: [
     { alias: 'passport renewal', language: 'en', weight: 1.0 },
     { alias: 'epassport renew', language: 'en', weight: 1.0 },
