@@ -31,7 +31,7 @@ export function showToast(message: string, durationMs = 2200): void {
 export function copyToClipboard(text: string, label: string): void {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(() => {
-      showToast(`📋 ${label} কপি করা হয়েছে`);
+      showToast(`${label} সফলভাবে কপি করা হয়েছে`);
       triggerHaptic('success');
     }).catch(() => {
       showToast('কপি করতে ব্যর্থ হয়েছে');

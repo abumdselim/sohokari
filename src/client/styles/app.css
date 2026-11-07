@@ -47,6 +47,15 @@ html, body {
   background-color: var(--app-bg);
 }
 
+/* Universal SVG Icon Style */
+.svg-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: -2px;
+  flex-shrink: 0;
+}
+
 /* Header */
 .native-header {
   height: 56px;
@@ -76,10 +85,15 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
   color: #ffffff;
   position: relative;
   box-shadow: 0 2px 5px rgba(5, 150, 105, 0.25);
+}
+
+.brand-svg {
+  width: 20px;
+  height: 20px;
+  stroke: #ffffff;
 }
 
 .online-pulse {
@@ -127,8 +141,13 @@ html, body {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   transition: all 0.15s;
+}
+
+.btn-icon {
+  width: 14px;
+  height: 14px;
 }
 
 .btn-header-action:active {
@@ -190,7 +209,12 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
+}
+
+.bot-svg {
+  width: 16px;
+  height: 16px;
+  stroke: #ffffff;
 }
 
 .bubble {
@@ -243,7 +267,7 @@ html, body {
 }
 
 .service-title-text {
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 700;
   color: var(--primary-dark);
 }
@@ -257,6 +281,9 @@ html, body {
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   transition: all 0.15s;
 }
 
@@ -268,7 +295,7 @@ html, body {
 .agency-tags-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
   margin-bottom: 10px;
 }
 
@@ -277,8 +304,11 @@ html, body {
   border: 1px solid #e2e8f0;
   font-size: 0.75rem;
   color: #475569;
-  padding: 2px 8px;
+  padding: 3px 8px;
   border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .contact-pills-wrap {
@@ -296,7 +326,7 @@ html, body {
   border-radius: 20px;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   transition: opacity 0.15s, transform 0.1s;
 }
 
@@ -335,6 +365,9 @@ html, body {
   font-size: 0.95rem;
   font-weight: 700;
   color: #065f46;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .fee-total-highlight {
@@ -370,7 +403,10 @@ html, body {
   font-size: 0.92rem;
   font-weight: 700;
   color: #1e293b;
-  margin: 12px 0 6px 0;
+  margin: 14px 0 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .native-checklist {
@@ -385,12 +421,12 @@ html, body {
 .doc-item {
   font-size: 0.88rem;
   line-height: 1.4;
-  padding-left: 12px;
+  padding-left: 14px;
   position: relative;
 }
 
 .doc-item::before {
-  content: "•";
+  content: "—";
   position: absolute;
   left: 0;
   color: var(--primary);
@@ -467,14 +503,28 @@ html, body {
   margin: 12px 0 8px 0;
 }
 
+.alert-banner-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
 .bubble-meta {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-top: 1px solid var(--border);
   padding-top: 8px;
   margin-top: 10px;
   font-size: 0.72rem;
   color: var(--text-muted);
+}
+
+.bubble-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* Interactive Chips */
@@ -502,6 +552,23 @@ html, body {
   background: var(--primary);
   color: #ffffff;
   transform: scale(0.96);
+}
+
+/* Warning Badge for Refusal */
+.card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.warning-badge {
+  background: #fef3c7;
+  color: #92400e;
 }
 
 /* Typing Indicator */
@@ -638,11 +705,11 @@ html, body {
   background: var(--primary-dark);
 }
 
-.btn-send-native svg {
+.send-svg {
   width: 17px;
   height: 17px;
-  fill: currentColor;
-  margin-left: 2px;
+  stroke: #ffffff;
+  margin-left: 1px;
 }
 
 .disclaimer-caption {
