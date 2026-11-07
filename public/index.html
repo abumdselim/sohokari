@@ -23,19 +23,121 @@
 </head>
 <body>
 
+  <!-- Slide-out Sidebar Drawer (ChatGPT-style) -->
+  <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+  <aside id="app-sidebar" class="app-sidebar">
+    <div class="sidebar-header">
+      <h2 class="sidebar-brand">সহকারী</h2>
+      <button class="btn-sidebar-close" id="btn-close-sidebar" aria-label="বন্ধ করুন">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- New Chat in Sidebar -->
+    <button class="sidebar-new-chat-btn" id="btn-sidebar-new-chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+        <line x1="12" y1="5" x2="12" y2="19"/>
+        <line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+      <span>নতুন চ্যাট শুরু করুন</span>
+    </button>
+
+    <!-- Services Quick Menu -->
+    <div class="sidebar-nav-section">
+      <div class="sidebar-section-title">নাগরিক সেবা বিভাগ</div>
+      <div class="sidebar-menu-list">
+        <button class="sidebar-menu-item" data-query="জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+            <rect width="20" height="14" x="2" y="5" rx="2"/>
+            <line x1="2" y1="10" x2="22" y2="10"/>
+          </svg>
+          <span>জাতীয় পরিচয়পত্র (এনআইডি)</span>
+        </button>
+
+        <button class="sidebar-menu-item" data-query="১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span>ই-পাসপোর্ট সেবা ও নবায়ন</span>
+        </button>
+
+        <button class="sidebar-menu-item" data-query="জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+          <span>ই-নামজারি ও জমি খারিজ</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Official Emergency Helplines -->
+    <div class="sidebar-nav-section" style="margin-top: 18px;">
+      <div class="sidebar-section-title">জরুরি সরকারি হটলাইন</div>
+      <div class="sidebar-helpline-list">
+        <a href="tel:333" class="sidebar-helpline-item">
+          <span>জাতীয় কল সেন্টার</span>
+          <strong>৩৩৩</strong>
+        </a>
+        <a href="tel:105" class="sidebar-helpline-item">
+          <span>নির্বাচন কমিশন (এনআইডি)</span>
+          <strong>১০৫</strong>
+        </a>
+        <a href="tel:16122" class="sidebar-helpline-item">
+          <span>ভূমি সেবা হটলাইন</span>
+          <strong>১৬১২২</strong>
+        </a>
+        <a href="tel:16445" class="sidebar-helpline-item">
+          <span>পাসপোর্ট কল সেন্টার</span>
+          <strong>১৬৪৪৫</strong>
+        </a>
+        <a href="tel:106" class="sidebar-helpline-item">
+          <span>দুর্নীতি দমন কমিশন (দুদক)</span>
+          <strong>১০৬</strong>
+        </a>
+      </div>
+    </div>
+
+    <!-- Sidebar Bottom Status -->
+    <div class="sidebar-footer">
+      <div class="sidebar-verified-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+        <span>১০০% যাচাইকৃত সরকারি তথ্য</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Viewport -->
   <div class="app-viewport">
     
-    <!-- Native Header: শুধু "সহকারী" থাকবে -->
+    <!-- Native Header (ChatGPT Mobile Style: Hamburger + Title + New Chat) -->
     <header class="native-header">
+      <button class="btn-menu-toggle" id="btn-toggle-sidebar" aria-label="মেনু খুলুন">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="header-svg">
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+
       <div class="brand-section">
         <h1 class="brand-title">সহকারী</h1>
       </div>
+
       <button class="btn-header-action" id="btn-clear-chat" title="নতুন চ্যাট শুরু করুন">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
-          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
-          <path d="M21 3v5h-5"/>
-          <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
-          <path d="M8 16H3v5"/>
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
         </svg>
         <span>নতুন চ্যাট</span>
       </button>
@@ -107,8 +209,9 @@
           </div>
         </form>
         
+        <!-- শুধু "১০০% যাচাইকৃত সরকারি তথ্য" -->
         <p class="disclaimer-caption">
-          ১০০% যাচাইকৃত সরকারি তথ্য • কোনো দালাল বা মধ্যস্বত্বভোগীকে বাড়তি টাকা দেবেন না।
+          ১০০% যাচাইকৃত সরকারি তথ্য
         </p>
       </div>
     </footer>
