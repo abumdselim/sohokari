@@ -1,6 +1,7 @@
 import { ChatResponse } from '../types/engine';
 import { copyToClipboard } from './toast';
 import { icons } from './icons';
+import { toBengaliNumber, amountInBengaliWords } from '../engine/bengaliWords';
 
 export function escapeHtml(str: string): string {
   if (!str) return '';
@@ -133,11 +134,13 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
   };
 
   const totalFee = (v.fees || []).reduce((acc, f) => acc + f.amount_bdt, 0);
+  const totalFeeBn = toBengaliNumber(totalFee);
+  const totalFeeInWords = amountInBengaliWords(totalFee);
 
   const feeItems = (v.fees || []).map(f => `
     <div class="fee-row">
       <span class="fee-name">${escapeHtml(f.fee_type_bn)}</span>
-      <span class="fee-amount">${f.amount_bdt} টাকা</span>
+      <span class="fee-amount">${toBengaliNumber(f.amount_bdt)} টাকা</span>
     </div>
   `).join('');
 
@@ -153,14 +156,14 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
 
   const stepItems = (v.steps || []).map(step => `
     <li class="step-item">
-      <div class="step-num">${step.step_number}</div>
+      <div class="step-num">${toBengaliNumber(step.step_number)}</div>
       <div class="step-content">
         <strong>${escapeHtml(step.title_bn)}:</strong> ${escapeHtml(step.instruction_bn)}
       </div>
     </li>
   `).join('');
 
-  const copyPayload = `${s.name_bn}\nসরকারি ফি: ${totalFee} টাকা\nহটলাইন: ${s.helpline_number}\nপোর্টাল: ${s.official_portal_url}`;
+  const copyPayload = `${s.name_bn}\nসরকারি ফি: ${totalFeeBn} টাকা (${totalFeeInWords})\nহটলাইন: ${s.helpline_number}\nপোর্টাল: ${s.official_portal_url}`;
 
   row.innerHTML = `
     ${avatar}
@@ -199,11 +202,12 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
         <div class="fee-box-header">
           <div class="fee-title-label">
             ${icons.receipt}
-            <span>সরকারি নির্ধারিত মোট ফি</span>
+            <span>সরকারি মোট ফি</span>
           </div>
-          <div class="fee-total-highlight">${totalFee} টাকা</div>
+          <div class="fee-total-highlight">${totalFeeBn} টাকা</div>
         </div>
-        <div class="fee-variant-subtext">${escapeHtml(v.variant_name_bn)} • প্রসেসিং সময়: ${v.processing_days_sla} কার্যদিবস</div>
+        <div class="fee-in-words-row">কথায়: <strong>${totalFeeInWords}</strong></div>
+        <div class="fee-variant-subtext">${escapeHtml(v.variant_name_bn)} • প্রসেসিং সময়: ${toBengaliNumber(v.processing_days_sla)} কার্যদিবস</div>
         <div class="fee-breakdown-list">
           ${feeItems}
         </div>

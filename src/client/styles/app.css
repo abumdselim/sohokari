@@ -359,6 +359,18 @@ html, body {
   color: var(--primary-dark);
 }
 
+.fee-in-words-row {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--primary-deep);
+  margin-top: 4px;
+  margin-bottom: 6px;
+  background: #dcfce7;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
 .fee-variant-subtext {
   font-size: 0.86rem;
   font-weight: 600;
