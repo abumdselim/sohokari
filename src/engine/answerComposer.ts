@@ -1,5 +1,6 @@
 import { ServiceRecord, ServiceVariant } from '../types/service';
 import { ExtractedSlots } from '../types/engine';
+import { toBengaliNumber, amountInBengaliWords } from './bengaliWords';
 
 export function composeDirectAnswer(
   service: ServiceRecord,
@@ -11,11 +12,14 @@ export function composeDirectAnswer(
 
   // Fee calculation
   const totalFee = variant.fees.reduce((acc, f) => acc + f.amount_bdt, 0);
+  const totalFeeBn = toBengaliNumber(totalFee);
+  const totalFeeInWords = amountInBengaliWords(totalFee);
+
   const feeRowsBn = variant.fees
-    .map(f => `• ${f.fee_type_bn}: ${f.amount_bdt} টাকা ${f.notes_bn ? `(${f.notes_bn})` : ''}`)
+    .map(f => `• ${f.fee_type_bn}: ${toBengaliNumber(f.amount_bdt)} টাকা ${f.notes_bn ? `(${f.notes_bn})` : ''}`)
     .join('\n');
   const feeRowsEn = variant.fees
-    .map(f => `• ${f.fee_type_en}: ${f.amount_bdt} BDT`)
+    .map(f => `• ${f.fee_type_en}: ${f.amount_bdt} Taka`)
     .join('\n');
 
   // Documents
@@ -47,7 +51,7 @@ export function composeDirectAnswer(
 
 ---
 
-### সরকারি ফি তালিকা (মোট: ${totalFee} টাকা)
+### সরকারি ফি তালিকা (মোট: ${totalFeeBn} টাকা — কথায়: ${totalFeeInWords})
 ${feeRowsBn}
 *প্রসেসিং সময়: সরকারি SLA অনুযায়ী ${variant.processing_days_sla} কার্যদিবস।*
 
@@ -79,7 +83,7 @@ ${rejectionReason ? `\n\n**সাধারণ ভুল ও বাতিলে�
 
 ---
 
-### Official Fee Schedule (Total: ${totalFee} BDT)
+### Official Fee Schedule (Total: ${totalFee} Taka)
 ${feeRowsEn}
 *Processing SLA: ${variant.processing_days_sla} working days.*
 
