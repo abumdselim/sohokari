@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>সহকারী (Sohokari) - বাংলাদেশ নাগরিক সেবা সহায়ক</title>
+  <title>সহকারী - বাংলাদেশ নাগরিক সেবা সহায়ক</title>
   
   <meta name="description" content="বাংলাদেশ সরকারের সকল নাগরিক সেবার নির্ভুল সরকারি ফি, প্রয়োজনীয় কাগজপত্র ও আবেদনের সম্পূর্ণ নিয়ম জানুন সরাসরি চ্যাট করে।">
   <meta name="theme-color" content="#059669">
@@ -13,26 +13,22 @@
   <meta name="apple-mobile-web-app-title" content="সহকারী">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23059669%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z%22/><path d=%22m9 12 2 2 4-4%22/></svg>">
+  
+  <!-- Professional Bangla Google Font: Hind Siliguri -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="/app.css">
 </head>
 <body>
 
   <div class="app-viewport">
     
-    <!-- Native Header -->
+    <!-- Native Header: শুধু "সহকারী" থাকবে -->
     <header class="native-header">
       <div class="brand-section">
-        <div class="brand-avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="brand-svg">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            <path d="m9 12 2 2 4-4"/>
-          </svg>
-          <span class="online-pulse"></span>
-        </div>
-        <div class="brand-title-wrap">
-          <h1>সহকারী (Sohokari) <span class="verified-pill">যাচাইকৃত গাইড</span></h1>
-          <p>বাংলাদেশ নাগরিক সেবা এআই সহায়ক</p>
-        </div>
+        <h1 class="brand-title">সহকারী</h1>
       </div>
       <button class="btn-header-action" id="btn-clear-chat" title="নতুন চ্যাট শুরু করুন">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
@@ -59,13 +55,13 @@
           </div>
         </div>
         <div class="bubble bot-bubble">
-          <p><strong>আসসালামু আলাইকুম!</strong> আমি আপনার <strong>সহকারী (Sohokari)</strong>।</p>
-          <p style="margin-top: 6px; font-size: 0.9rem;">
+          <p class="welcome-heading">আসসালামু আলাইকুম! আমি আপনার <strong>সহকারী</strong>।</p>
+          <p class="welcome-text">
             বাংলাদেশ সরকারের যেকোনো নাগরিক সেবার (যেমন: পাসপোর্ট, ভোটার আইডি/এনআইডি, জমির নামজারি/খারিজ) 
-            <strong>সঠিক সরকারি ফি, প্রয়োজনীয় কাগজপত্র ও আবেদনের নিয়ম</strong> জানতে প্রশ্ন করুন।
+            <strong>সঠিক সরকারি ফি, প্রয়োজনীয় কাগজপত্র ও আবেদনের সরাসরি নিয়ম</strong> জানতে নিচে প্রশ্ন করুন।
           </p>
           
-          <div class="chips-container" style="margin-top: 10px;">
+          <div class="chips-container">
             <button class="native-chip-btn" data-query="জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?">এনআইডি সংশোধন ফি</button>
             <button class="native-chip-btn" data-query="১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?">পাসপোর্ট নবায়ন ফি</button>
             <button class="native-chip-btn" data-query="জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?">ই-নামজারি সরকারি ফি</button>
@@ -83,11 +79,11 @@
         
         <!-- Quick Prompt Suggestion Slider -->
         <div class="prompt-chips-scroll">
-          <span class="prompt-pill" data-query="এনআইডি সংশোধন করতে কত টাকা লাগে">এনআইডি সংশোধন ফি</span>
-          <span class="prompt-pill" data-query="পাসপোর্টের মেয়াদ শেষ নবায়ন করব কিভাবে">পাসপোর্ট নবায়ন নিয়ম</span>
-          <span class="prompt-pill" data-query="জরুরি ভিত্তিতে ই-পাসপোর্ট নবায়ন ফি কত">জরুরি পাসপোর্ট ফি</span>
-          <span class="prompt-pill" data-query="ই-নামজারি করতে সরকারি ফি মোট কত টাকা">নামজারি ১,১৭০ টাকা</span>
-          <span class="prompt-pill" data-query="খারিজ খতিয়ানের জন্য অনলাইনে কিভাবে আবেদন করব">খারিজ অনলাইন আবেদন</span>
+          <button class="prompt-pill" data-query="এনআইডি সংশোধন করতে কত টাকা লাগে">এনআইডি সংশোধন ফি</button>
+          <button class="prompt-pill" data-query="পাসপোর্টের মেয়াদ শেষ নবায়ন করব কিভাবে">পাসপোর্ট নবায়ন নিয়ম</button>
+          <button class="prompt-pill" data-query="জরুরি ভিত্তিতে ই-পাসপোর্ট নবায়ন ফি কত">জরুরি পাসপোর্ট ফি</button>
+          <button class="prompt-pill" data-query="ই-নামজারি করতে সরকারি ফি মোট কত টাকা">নামজারি ১,১৭০ টাকা</button>
+          <button class="prompt-pill" data-query="খারিজ খতিয়ানের জন্য অনলাইনে কিভাবে আবেদন করব">খারিজ অনলাইন আবেদন</button>
         </div>
 
         <!-- Chat Input Form -->
@@ -97,7 +93,7 @@
               type="text" 
               id="query-input" 
               class="native-input"
-              placeholder="কী সেবা সম্পর্কে জানতে চান বলুন..." 
+              placeholder="কী সেবা সম্পর্কে জানতে চান লিখুন..." 
               autocomplete="off"
               enterkeyhint="send"
               required
