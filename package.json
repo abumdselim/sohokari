@@ -6,13 +6,16 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
+    "build:client": "esbuild src/client/main.ts --bundle --minify --outfile=public/app.js && esbuild src/client/styles/app.css --minify --outfile=public/app.css",
+    "build": "npm run build:client && tsc --noEmit",
+    "deploy": "npm run build && wrangler deploy",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241106.0",
+    "esbuild": "^0.21.5",
     "typescript": "^5.6.3",
     "vitest": "^2.1.4",
     "wrangler": "^3.86.0"
