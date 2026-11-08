@@ -30,3 +30,15 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+// Metadata for objects stored in Cloudflare R2 (bucket: sohokari-assets).
+// R2 ListObjectsV2 does not expose custom metadata, so we track the
+// original filename and content type here.
+model StoredFile {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  name        String
+  contentType String   @default("application/octet-stream")
+  size        Int
+  createdAt   DateTime @default(now())
+}
