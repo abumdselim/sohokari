@@ -1,4 +1,4 @@
-name = "app"
+name = "sohokari"
 main = "src/index.ts"
 compatibility_date = "2024-11-01"
 compatibility_flags = ["nodejs_compat"]
@@ -7,8 +7,22 @@ compatibility_flags = ["nodejs_compat"]
 directory = "./public"
 binding = "ASSETS"
 
-# D1 Database binding (configured once provisioned)
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "sheyal-db"
-# database_id = "..."
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "sohokari-db"
+database_id = "f335655f-8553-42b0-86f0-e708ef5385d2"
+
+# Cloudflare Vectorize binding
+[[vectorize]]
+binding = "VECTORIZE"
+index_name = "sohokari-citizen-services"
+
+# Cloudflare R2 bucket binding
+[[r2_buckets]]
+binding = "R2_ASSETS"
+bucket_name = "sohokari-assets"
+
+# Workers AI binding (for on-edge embedding generation)
+[ai]
+binding = "AI"
