@@ -4036,4 +4036,8 @@ def get_authoritative_citizen_services() -> List[CitizenService]:
     from scrapers.additional_services import get_additional_citizen_services
     services.extend(get_additional_citizen_services())
 
+    # Load 28 Expanded Authoritative Services (Total: 104 Services)
+    from scrapers.expanded_services import get_expanded_citizen_services
+    services.extend(get_expanded_citizen_services())
+
     return services
