@@ -31,7 +31,7 @@ export function renderTypingIndicator(): HTMLElement {
 
   row.innerHTML = `
     <div class="bot-avatar-wrap">
-      <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="Kaaz AI" class="bot-avatar-img" /></div>
+      <div class="bot-avatar-inner"><img src="/assets/icon-black.svg?v=1" alt="Kaaz AI" class="bot-avatar-img" /></div>
     </div>
     <div class="typing-bubble">
       <div class="typing-dot"></div>
@@ -149,7 +149,7 @@ export function renderBotBubble(data: any): HTMLElement {
 
   const avatar = `
     <div class="bot-avatar-wrap">
-      <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="Kaaz AI" class="bot-avatar-img" /></div>
+      <div class="bot-avatar-inner"><img src="/assets/icon-black.svg?v=1" alt="Kaaz AI" class="bot-avatar-img" /></div>
     </div>
   `;
 

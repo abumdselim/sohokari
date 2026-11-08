@@ -1,12 +1,14 @@
-const CACHE_NAME = 'kaaz-ai-v2';
+const CACHE_NAME = 'kaaz-ai-v3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/app.css?v=2',
-  '/app.js?v=2',
+  '/app.css?v=3',
+  '/app.js?v=3',
   '/manifest.json',
-  '/assets/icon-teal.svg',
-  '/assets/kaaz-logo-header.svg?v=3'
+  '/assets/icon-black.svg?v=1',
+  '/assets/kaaz-logo-header.svg?v=4',
+  '/assets/kaazai-logo.png',
+  '/assets/kaazai-icon.png'
 ];
 
 self.addEventListener('install', (event) => {

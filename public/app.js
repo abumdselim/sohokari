@@ -109,7 +109,7 @@
     </div>
   `,s}function M(){let t=document.createElement("div");return t.className="message-row bot typing-row",t.id="bot-typing-indicator",t.innerHTML=`
     <div class="bot-avatar-wrap">
-      <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="Kaaz AI" class="bot-avatar-img" /></div>
+      <div class="bot-avatar-inner"><img src="/assets/icon-black.svg?v=1" alt="Kaaz AI" class="bot-avatar-img" /></div>
     </div>
     <div class="typing-bubble">
       <div class="typing-dot"></div>
@@ -119,9 +119,9 @@
   `,t}function j(t){if(!t)return"";let i=t.replace(/\r\n/g,`
 `).split(`
 `),e=[],n=!1,o=!1;for(let u=0;u<i.length;u++){let h=i[u].trim();if(!h){n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1);continue}if(/^(\-{3,}|\*{3,}|_{3,})$/.test(h)){n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1),e.push('<hr class="rag-hr">');continue}let l=a(h);if(l=l.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>"),l=l.replace(/`([^`]+)`/g,'<code class="rag-code">$1</code>'),l=l.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener" class="rag-link">$1</a>'),l.startsWith("#### "))n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1),e.push(`<h4 class="rag-h4">${l.substring(5)}</h4>`);else if(l.startsWith("### "))n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1),e.push(`<h3 class="rag-h3">${l.substring(4)}</h3>`);else if(l.startsWith("## "))n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1),e.push(`<h2 class="rag-h2">${l.substring(3)}</h2>`);else if(l.startsWith("&gt; ")||l.startsWith("> ")){n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1);let v=l.replace(/^(&gt;|>)\s*/,"");e.push(`<blockquote class="rag-blockquote">${v}</blockquote>`)}else if(/^[•\-\*]\s+/.test(l)){o&&(e.push("</ol>"),o=!1),n||(e.push('<ul class="rag-ul">'),n=!0);let v=l.replace(/^[•\-\*]\s+/,"");e.push(`<li class="rag-li">${v}</li>`)}else if(/^([0-9]+|[০-৯]+)\.\s+/.test(l)){n&&(e.push("</ul>"),n=!1),o||(e.push('<ol class="rag-ol">'),o=!0);let v=l.replace(/^([0-9]+|[০-৯]+)\.\s+/,"");e.push(`<li class="rag-oli">${v}</li>`)}else n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1),e.push(`<p class="rag-p">${l}</p>`)}return n&&e.push("</ul>"),o&&e.push("</ol>"),e.join(`
-`)}function x(t,s,i){let e=t.querySelector(".btn-copy-action");e&&e.addEventListener("click",()=>{B(s,i);let n=e.querySelector(".action-label"),o=n?n.textContent:"\u0995\u09AA\u09BF \u0995\u09B0\u09C1\u09A8";e.classList.add("copied"),n&&(n.textContent="\u0995\u09AA\u09BF \u09B9\u09DF\u09C7\u099B\u09C7!"),setTimeout(()=>{e.classList.remove("copied"),n&&(n.textContent=o)},2e3)})}function E(t){let s=document.createElement("div");s.className="message-row bot";let i=`
+`)}function k(t,s,i){let e=t.querySelector(".btn-copy-action");e&&e.addEventListener("click",()=>{B(s,i);let n=e.querySelector(".action-label"),o=n?n.textContent:"\u0995\u09AA\u09BF \u0995\u09B0\u09C1\u09A8";e.classList.add("copied"),n&&(n.textContent="\u0995\u09AA\u09BF \u09B9\u09DF\u09C7\u099B\u09C7!"),setTimeout(()=>{e.classList.remove("copied"),n&&(n.textContent=o)},2e3)})}function E(t){let s=document.createElement("div");s.className="message-row bot";let i=`
     <div class="bot-avatar-wrap">
-      <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="Kaaz AI" class="bot-avatar-img" /></div>
+      <div class="bot-avatar-inner"><img src="/assets/icon-black.svg?v=1" alt="Kaaz AI" class="bot-avatar-img" /></div>
     </div>
   `;if(t.action==="SAFE_REFUSAL"){let r=t.reply_bn||"\u09A6\u09C1\u0983\u0996\u09BF\u09A4, \u098F\u0987 \u09A4\u09A5\u09CD\u09AF\u09C7\u09B0 \u09AA\u09CD\u09B0\u09BE\u09AE\u09BE\u09A3\u09CD\u09AF \u09B0\u09C7\u0995\u09B0\u09CD\u09A1 \u09AA\u09BE\u0993\u09DF\u09BE \u09AF\u09BE\u09DF\u09A8\u09BF\u0964";return s.innerHTML=`
       ${i}
@@ -138,7 +138,7 @@
           </button>
         </div>
       </div>
-    `,x(s,r,"\u09A4\u09A5\u09CD\u09AF"),s}if(t.action==="DISAMBIGUATE"){let r=(t.candidate_services||[]).map(p=>`
+    `,k(s,r,"\u09A4\u09A5\u09CD\u09AF"),s}if(t.action==="DISAMBIGUATE"){let r=(t.candidate_services||[]).map(p=>`
       <button class="native-chip-btn" data-query="${a(p.name_bn||p.title_bn||"")}">
         ${a(p.name_bn||p.title_bn||"")}
       </button>
@@ -181,7 +181,7 @@
           </a>`:""}
         </div>
       </div>
-    `,x(s,T,g),s}let n=t.service||{name_bn:"",agency_bn:"",ministry_bn:"",official_portal_url:"",helpline_number:"",last_verified_at:new Date().toISOString()},o=t.variant||{variant_name_bn:"",processing_days_sla:0,fees:[],documents:[],steps:[]},u=(o.fees||[]).reduce((r,p)=>r+(p.amount_bdt||0),0),h=b(u),l=y(u),v=(o.fees||[]).map(r=>`
+    `,k(s,T,g),s}let n=t.service||{name_bn:"",agency_bn:"",ministry_bn:"",official_portal_url:"",helpline_number:"",last_verified_at:new Date().toISOString()},o=t.variant||{variant_name_bn:"",processing_days_sla:0,fees:[],documents:[],steps:[]},u=(o.fees||[]).reduce((r,p)=>r+(p.amount_bdt||0),0),h=b(u),l=y(u),v=(o.fees||[]).map(r=>`
     <div class="fee-row">
       <span class="fee-name">${a(r.fee_type_bn||r.category_name||"")}</span>
       <span class="fee-amount">${b(r.amount_bdt||0)} \u099F\u09BE\u0995\u09BE</span>
@@ -280,15 +280,15 @@
       </div>
 
     </div>
-  `,x(s,$,n.name_bn),s}function k(){let t=new Date().getHours();return t>=5&&t<12?"\u09B6\u09C1\u09AD \u09B8\u0995\u09BE\u09B2!":t>=12&&t<15?"\u09B6\u09C1\u09AD \u09A6\u09C1\u09AA\u09C1\u09B0!":t>=15&&t<18?"\u09B6\u09C1\u09AD \u0985\u09AA\u09B0\u09BE\u09B9\u09CD\u09A8!":t>=18&&t<22?"\u09B6\u09C1\u09AD \u09B8\u09A8\u09CD\u09A7\u09CD\u09AF\u09BE!":"\u09B6\u09C1\u09AD \u09B0\u09BE\u09A4!"}function H(){return`
+  `,k(s,$,n.name_bn),s}function x(){let t=new Date().getHours();return t>=5&&t<12?"\u09B6\u09C1\u09AD \u09B8\u0995\u09BE\u09B2!":t>=12&&t<15?"\u09B6\u09C1\u09AD \u09A6\u09C1\u09AA\u09C1\u09B0!":t>=15&&t<18?"\u09B6\u09C1\u09AD \u0985\u09AA\u09B0\u09BE\u09B9\u09CD\u09A8!":t>=18&&t<22?"\u09B6\u09C1\u09AD \u09B8\u09A8\u09CD\u09A7\u09CD\u09AF\u09BE!":"\u09B6\u09C1\u09AD \u09B0\u09BE\u09A4!"}function H(){return`
     <div class="welcome-hero" id="welcome-hero">
       <div class="welcome-badge-wrap">
         <div class="welcome-badge-circle">
-          <img src="/assets/icon-teal.svg" alt="Kaaz AI" class="welcome-badge-icon" />
+          <img src="/assets/icon-black.svg?v=1" alt="Kaaz AI" class="welcome-badge-icon" />
         </div>
       </div>
       
-      <h1 class="welcome-greeting-title">${k()}</h1>
+      <h1 class="welcome-greeting-title">${x()}</h1>
       <p class="welcome-tagline">\u0986\u099C \u0986\u09AA\u09A8\u09BE\u0995\u09C7 \u0995\u09C0\u09AD\u09BE\u09AC\u09C7 \u09B8\u09B9\u09AF\u09CB\u0997\u09BF\u09A4\u09BE \u0995\u09B0\u09A4\u09C7 \u09AA\u09BE\u09B0\u09BF?</p>
       
       <p class="welcome-subtext">
@@ -329,7 +329,7 @@
         </button>
       </div>
     </div>
-  `}var w=class{chatStream;chatForm;queryInput;btnClearChat;bottomBar;appSidebar;sidebarBackdrop;btnToggleSidebar;btnCloseSidebar;btnSidebarNewChat;isProcessing=!1;constructor(){this.chatStream=document.getElementById("chat-stream"),this.chatForm=document.getElementById("chat-form"),this.queryInput=document.getElementById("query-input"),this.btnClearChat=document.getElementById("btn-clear-chat"),this.bottomBar=document.getElementById("bottom-bar"),this.appSidebar=document.getElementById("app-sidebar"),this.sidebarBackdrop=document.getElementById("sidebar-backdrop"),this.btnToggleSidebar=document.getElementById("btn-toggle-sidebar"),this.btnCloseSidebar=document.getElementById("btn-close-sidebar"),this.btnSidebarNewChat=document.getElementById("btn-sidebar-new-chat"),this.init()}init(){let s=document.getElementById("greeting-title");s&&(s.textContent=k()),L(this.chatStream,this.bottomBar),this.registerServiceWorker(),this.chatForm.addEventListener("submit",i=>{i.preventDefault();let e=this.queryInput.value.trim();!e||this.isProcessing||this.sendQuery(e)}),this.btnClearChat.addEventListener("click",()=>{d("light"),this.resetChat()}),this.btnToggleSidebar&&this.btnToggleSidebar.addEventListener("click",()=>{d("light"),this.openSidebar()}),this.btnCloseSidebar&&this.btnCloseSidebar.addEventListener("click",()=>{d("light"),this.closeSidebar()}),this.sidebarBackdrop&&this.sidebarBackdrop.addEventListener("click",()=>{this.closeSidebar()}),this.btnSidebarNewChat&&this.btnSidebarNewChat.addEventListener("click",()=>{d("light"),this.resetChat(),this.closeSidebar()}),document.addEventListener("click",i=>{let e=i.target.closest("[data-query]");if(e){let n=e.getAttribute("data-query");n&&!this.isProcessing&&(d("light"),this.closeSidebar(),this.sendQuery(n))}}),this.scrollToBottom()}openSidebar(){this.appSidebar&&this.sidebarBackdrop&&(this.appSidebar.classList.add("open"),this.sidebarBackdrop.classList.add("open"))}closeSidebar(){this.appSidebar&&this.sidebarBackdrop&&(this.appSidebar.classList.remove("open"),this.sidebarBackdrop.classList.remove("open"))}scrollToBottom(){requestAnimationFrame(()=>{this.chatStream.scrollTop=this.chatStream.scrollHeight})}async sendQuery(s){this.isProcessing=!0,this.queryInput.value="",d("medium");let i=document.getElementById("welcome-hero");i&&i.remove();let e=_(s);this.chatStream.appendChild(e),this.scrollToBottom();let n=M();this.chatStream.appendChild(n),this.scrollToBottom();try{let o=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({query:s})});if(n.remove(),!o.ok)throw new Error(`HTTP error ${o.status}`);let u=await o.json(),h=E(u);this.chatStream.appendChild(h),d("success")}catch{n.remove(),this.renderNetworkError(),d("error")}finally{this.isProcessing=!1,this.scrollToBottom(),this.queryInput.focus()}}renderNetworkError(){let s=document.createElement("div");s.className="message-row bot",s.innerHTML=`
+  `}var w=class{chatStream;chatForm;queryInput;btnClearChat;bottomBar;appSidebar;sidebarBackdrop;btnToggleSidebar;btnCloseSidebar;btnSidebarNewChat;isProcessing=!1;constructor(){this.chatStream=document.getElementById("chat-stream"),this.chatForm=document.getElementById("chat-form"),this.queryInput=document.getElementById("query-input"),this.btnClearChat=document.getElementById("btn-clear-chat"),this.bottomBar=document.getElementById("bottom-bar"),this.appSidebar=document.getElementById("app-sidebar"),this.sidebarBackdrop=document.getElementById("sidebar-backdrop"),this.btnToggleSidebar=document.getElementById("btn-toggle-sidebar"),this.btnCloseSidebar=document.getElementById("btn-close-sidebar"),this.btnSidebarNewChat=document.getElementById("btn-sidebar-new-chat"),this.init()}init(){let s=document.getElementById("greeting-title");s&&(s.textContent=x()),L(this.chatStream,this.bottomBar),this.registerServiceWorker(),this.chatForm.addEventListener("submit",i=>{i.preventDefault();let e=this.queryInput.value.trim();!e||this.isProcessing||this.sendQuery(e)}),this.btnClearChat.addEventListener("click",()=>{d("light"),this.resetChat()}),this.btnToggleSidebar&&this.btnToggleSidebar.addEventListener("click",()=>{d("light"),this.openSidebar()}),this.btnCloseSidebar&&this.btnCloseSidebar.addEventListener("click",()=>{d("light"),this.closeSidebar()}),this.sidebarBackdrop&&this.sidebarBackdrop.addEventListener("click",()=>{this.closeSidebar()}),this.btnSidebarNewChat&&this.btnSidebarNewChat.addEventListener("click",()=>{d("light"),this.resetChat(),this.closeSidebar()}),document.addEventListener("click",i=>{let e=i.target.closest("[data-query]");if(e){let n=e.getAttribute("data-query");n&&!this.isProcessing&&(d("light"),this.closeSidebar(),this.sendQuery(n))}}),this.scrollToBottom()}openSidebar(){this.appSidebar&&this.sidebarBackdrop&&(this.appSidebar.classList.add("open"),this.sidebarBackdrop.classList.add("open"))}closeSidebar(){this.appSidebar&&this.sidebarBackdrop&&(this.appSidebar.classList.remove("open"),this.sidebarBackdrop.classList.remove("open"))}scrollToBottom(){requestAnimationFrame(()=>{this.chatStream.scrollTop=this.chatStream.scrollHeight})}async sendQuery(s){this.isProcessing=!0,this.queryInput.value="",d("medium");let i=document.getElementById("welcome-hero");i&&i.remove();let e=_(s);this.chatStream.appendChild(e),this.scrollToBottom();let n=M();this.chatStream.appendChild(n),this.scrollToBottom();try{let o=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({query:s})});if(n.remove(),!o.ok)throw new Error(`HTTP error ${o.status}`);let u=await o.json(),h=E(u);this.chatStream.appendChild(h),d("success")}catch{n.remove(),this.renderNetworkError(),d("error")}finally{this.isProcessing=!1,this.scrollToBottom(),this.queryInput.focus()}}renderNetworkError(){let s=document.createElement("div");s.className="message-row bot",s.innerHTML=`
       <div class="bot-avatar-wrap">
         <div class="bot-avatar-inner" style="background: #ef4444; border-color: #ef4444; color: #fff;">${c.alertTriangle}</div>
       </div>

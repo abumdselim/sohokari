@@ -23,7 +23,7 @@ export function renderWelcomeHeroHtml(): string {
     <div class="welcome-hero" id="welcome-hero">
       <div class="welcome-badge-wrap">
         <div class="welcome-badge-circle">
-          <img src="/assets/icon-teal.svg" alt="Kaaz AI" class="welcome-badge-icon" />
+          <img src="/assets/icon-black.svg?v=1" alt="Kaaz AI" class="welcome-badge-icon" />
         </div>
       </div>
       
