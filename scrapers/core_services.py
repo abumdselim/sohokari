@@ -4032,4 +4032,8 @@ def get_authoritative_citizen_services() -> List[CitizenService]:
         anti_broker_warning="সতর্কতা: বিশেষ শিশুদের উপবৃত্তি পাওয়া তাদের নাগরিক অধিকার। কোনো শিক্ষক বা অফিস সহকারী উপবৃত্তি মঞ্জুরের জন্য টাকা দাবি করলে অবিলম্বে উপজেলা নির্বাহী কর্মকর্তা বা জাতীয় হেল্পলাইন ১০৯৮-এ অভিযোগ দায়ের করুন।"
     ))
 
+    # Load 28 Additional Authoritative Services (Total: 76 Services)
+    from scrapers.additional_services import get_additional_citizen_services
+    services.extend(get_additional_citizen_services())
+
     return services
