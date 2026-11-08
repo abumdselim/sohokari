@@ -170,6 +170,10 @@ html, body {
   flex-shrink: 0;
 }
 
+#btn-clear-chat {
+  display: none; /* Hidden on mobile screens - new chat is located in sidebar drawer */
+}
+
 .btn-header-icon:hover {
   background: var(--slate-100);
   color: var(--slate-900);
@@ -2001,6 +2005,10 @@ html, body {
   .native-header {
     height: 56px;
     padding: 0 20px;
+  }
+
+  #btn-clear-chat {
+    display: flex;
   }
 
   .brand-section {
