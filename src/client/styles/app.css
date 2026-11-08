@@ -32,8 +32,11 @@
 html, body {
   height: 100%;
   height: 100dvh;
+  height: var(--vvh, 100dvh);
   width: 100%;
   overflow: hidden;
+  position: fixed;
+  inset: 0;
   background-color: var(--app-bg);
   font-family: var(--font-family);
   color: var(--slate-900);
@@ -48,7 +51,10 @@ html, body {
   flex-direction: column;
   height: 100%;
   height: 100dvh;
+  height: var(--vvh, 100dvh);
+  width: 100%;
   position: relative;
+  overflow: hidden;
   background-color: var(--app-bg);
 }
 
@@ -1084,16 +1090,213 @@ html, body {
    RESPONSIVE OVERHAUL (Mobile First / High Precision)
    ======================================================== */
 
-/* Small Devices (Phones, max-width: 520px) */
-@media (max-width: 520px) {
+/* Standard Smartphones (max-width: 640px) */
+@media (max-width: 640px) {
   .native-header {
-    height: 48px;
-    padding: 0 8px;
+    height: calc(48px + var(--safe-top));
+    padding: var(--safe-top) 8px 0 8px;
   }
 
   .header-logo-img {
     height: 24px;
-    max-width: 120px;
+    max-width: 125px;
+  }
+
+  .btn-header-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .header-svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .chat-scroll-stream {
+    padding: 12px 10px 18px 10px;
+    gap: 14px;
+  }
+
+  /* Welcome Hero on Mobile */
+  .welcome-hero {
+    padding: 14px 4px 10px 4px;
+    max-width: 100%;
+  }
+
+  .welcome-badge-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .welcome-badge-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .welcome-greeting-title {
+    font-size: 1.45rem;
+    line-height: 1.35;
+    margin-bottom: 2px;
+  }
+
+  .welcome-tagline {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+
+  .welcome-subtext {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin-bottom: 14px;
+    max-width: 96%;
+  }
+
+  /* 1-Column Responsive Card Grid on Mobile */
+  .hero-chips-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-card-chip {
+    padding: 11px 13px;
+    border-radius: 12px;
+    min-height: 48px;
+    gap: 12px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .hero-card-chip:active {
+    background: var(--slate-100);
+    transform: scale(0.98);
+  }
+
+  .chip-emoji {
+    font-size: 1.3rem;
+  }
+
+  .chip-title {
+    font-size: 0.88rem;
+    line-height: 1.35;
+  }
+
+  .chip-desc {
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+
+  /* Bot Messages on Mobile */
+  .message-row.bot {
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .bot-avatar-inner {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+  }
+
+  .bot-avatar-img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .bot-bubble {
+    padding: 12px 14px;
+    border-radius: 4px 16px 16px 16px;
+    font-size: 0.92rem;
+    line-height: 1.68;
+    max-width: calc(100% - 36px);
+  }
+
+  /* User Message Bubble on Mobile */
+  .user-bubble {
+    padding: 9px 14px;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    max-width: 86%;
+    border-radius: 16px 16px 4px 16px;
+  }
+
+  /* Action Bar on Mobile */
+  .msg-actions-bar {
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .btn-action-pill {
+    padding: 5px 11px;
+    font-size: 0.78rem;
+    min-height: 32px;
+  }
+
+  /* Bottom Floating Controls on Mobile */
+  .native-bottom-bar {
+    padding: 6px 8px calc(8px + var(--safe-bottom)) 8px;
+  }
+
+  .input-capsule {
+    min-height: 44px;
+    padding: 4px 5px 4px 14px;
+    border-radius: 24px;
+  }
+
+  .native-input {
+    font-size: 16px !important; /* Critical: Prevents auto-zoom on iOS Safari! */
+    line-height: 1.35;
+  }
+
+  .btn-send-native {
+    width: 34px;
+    height: 34px;
+    touch-action: manipulation;
+  }
+
+  .send-svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .prompt-pill {
+    padding: 5px 11px;
+    font-size: 0.8rem;
+    min-height: 30px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .prompt-pill:active {
+    background: var(--slate-200);
+    transform: scale(0.96);
+  }
+
+  .disclaimer-caption {
+    font-size: 0.68rem;
+    margin-top: 2px;
+  }
+
+  /* Fee Box on Mobile */
+  .fee-box {
+    padding: 10px 12px;
+  }
+
+  .fee-total-highlight {
+    font-size: 1.22rem;
+  }
+}
+
+/* Extra Compact Phones (iPhone SE, Galaxy Mini, width <= 380px) */
+@media (max-width: 380px) {
+  .header-logo-img {
+    height: 22px;
+    max-width: 110px;
   }
 
   .btn-header-icon {
@@ -1101,125 +1304,68 @@ html, body {
     height: 34px;
   }
 
-  .header-svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .chat-scroll-stream {
-    padding: 14px 10px 22px 10px;
-    gap: 14px;
-  }
-
-  /* Welcome Hero on Mobile */
   .welcome-hero {
-    padding: 16px 6px 12px 6px;
+    padding: 10px 2px 8px 2px;
   }
 
   .welcome-badge-circle {
-    width: 46px;
-    height: 46px;
+    width: 42px;
+    height: 42px;
   }
 
   .welcome-badge-icon {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
   }
 
   .welcome-greeting-title {
-    font-size: 1.45rem;
+    font-size: 1.32rem;
   }
 
   .welcome-tagline {
-    font-size: 0.98rem;
+    font-size: 0.88rem;
   }
 
   .welcome-subtext {
-    font-size: 0.88rem;
-    margin-bottom: 16px;
-  }
-
-  /* 2-Column Responsive Card Grid on Mobile */
-  .hero-chips-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    max-width: 100%;
+    font-size: 0.82rem;
+    margin-bottom: 12px;
   }
 
   .hero-card-chip {
-    padding: 10px 12px;
-    border-radius: 12px;
-  }
-
-  .chip-emoji {
-    font-size: 1.25rem;
-  }
-
-  .chip-title {
-    font-size: 0.88rem;
-  }
-
-  .chip-desc {
-    font-size: 0.74rem;
-  }
-
-  /* Bot Messages on Mobile */
-  .message-row.bot {
-    gap: 8px;
-  }
-
-  .bot-avatar-inner {
-    width: 28px;
-    height: 28px;
-  }
-
-  .bot-avatar-img {
-    width: 16px;
-    height: 16px;
+    padding: 9px 11px;
   }
 
   .bot-bubble {
-    padding: 12px 14px;
-    border-radius: 4px 15px 15px 15px;
-    font-size: 0.92rem;
-    line-height: 1.7;
-    max-width: calc(100% - 36px);
+    font-size: 0.88rem;
+    padding: 10px 12px;
+    line-height: 1.62;
   }
 
-  /* User Message Bubble on Mobile */
   .user-bubble {
-    padding: 8px 13px;
-    font-size: 0.92rem;
-    max-width: 86%;
-    border-radius: 16px 16px 4px 16px;
+    font-size: 0.88rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Short Screens (Landscape or short height <= 680px) */
+@media (max-height: 680px) {
+  .welcome-hero {
+    padding: 8px 4px 6px 4px;
   }
 
-  /* Bottom Controls on Mobile */
-  .native-bottom-bar {
-    padding: 6px 8px calc(8px + var(--safe-bottom)) 8px;
+  .welcome-badge-wrap {
+    margin-bottom: 6px;
   }
 
-  .input-capsule {
-    min-height: 42px;
-    padding: 3px 4px 3px 12px;
+  .welcome-subtext {
+    margin-bottom: 10px;
   }
 
-  .native-input {
-    font-size: 16px; /* Prevents auto-zoom on iOS Safari! */
+  .hero-chips-grid {
+    gap: 6px;
   }
 
-  .btn-send-native {
-    width: 32px;
-    height: 32px;
-  }
-
-  .send-svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  .prompt-pill {
-    padding: 4px 10px;
-    font-size: 0.78rem;
+  .hero-card-chip {
+    padding: 8px 12px;
   }
 }

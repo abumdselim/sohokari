@@ -1,38 +1,48 @@
 /**
  * Mobile Virtual Keyboard & Viewport Synchronization
- * Ensures the bottom chat bar adheres to iOS/Android virtual keyboard boundaries
- * and prevents viewport resizing stutter.
+ * Dynamically binds viewport height to window.visualViewport
+ * to guarantee glitch-free keyboard scrolling and prevent layout jumps on iOS and Android.
  */
 export function initViewportManager(
   scrollContainer: HTMLElement,
   bottomBar: HTMLElement
 ): void {
-  const updateLayout = () => {
-    if (!window.visualViewport) return;
+  const setViewportHeight = () => {
+    const vv = window.visualViewport;
+    const height = vv ? vv.height : window.innerHeight;
+    document.documentElement.style.setProperty('--vvh', `${height}px`);
 
-    const viewportHeight = window.visualViewport.height;
-    const windowHeight = window.innerHeight;
-    const keyboardOffset = Math.max(0, windowHeight - viewportHeight - window.visualViewport.offsetTop);
-
-    // If keyboard is open on iOS / Android
-    if (keyboardOffset > 50) {
-      bottomBar.style.transform = `translateY(-${keyboardOffset}px)`;
-      scrollContainer.style.paddingBottom = `${keyboardOffset + 120}px`;
-    } else {
-      bottomBar.style.transform = 'translateY(0px)';
-      scrollContainer.style.paddingBottom = '120px';
-    }
-
-    // Smooth scroll to latest message when keyboard pops up
-    scrollContainer.scrollTop = scrollContainer.scrollHeight;
+    // Ensure smooth scroll to bottom
+    requestAnimationFrame(() => {
+      scrollContainer.scrollTop = scrollContainer.scrollHeight;
+    });
   };
 
   if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', updateLayout);
-    window.visualViewport.addEventListener('scroll', updateLayout);
+    window.visualViewport.addEventListener('resize', setViewportHeight);
+    window.visualViewport.addEventListener('scroll', setViewportHeight);
   }
 
-  // Prevent rubberband overscroll on mobile
+  window.addEventListener('resize', setViewportHeight);
+  window.addEventListener('orientationchange', () => {
+    setTimeout(setViewportHeight, 200);
+  });
+
+  // Initial calculation
+  setViewportHeight();
+
+  // Scroll to bottom when user taps input on mobile
+  const inputEl = document.getElementById('query-input');
+  if (inputEl) {
+    inputEl.addEventListener('focus', () => {
+      setTimeout(() => {
+        setViewportHeight();
+        scrollContainer.scrollTop = scrollContainer.scrollHeight;
+      }, 250);
+    });
+  }
+
+  // Prevent rubberband overscroll on mobile outer body
   document.body.addEventListener('touchmove', (e) => {
     if (e.target === document.body) {
       e.preventDefault();
