@@ -45,7 +45,13 @@ export function renderTypingIndicator(): HTMLElement {
 export function parseMarkdownToHtml(markdown: string): string {
   if (!markdown) return '';
 
-  const text = markdown.replace(/\r\n/g, '\n');
+  // Clean any stray emojis and duplicate warning prefixes
+  const sanitized = markdown
+    .replace(/[⚠️🚨📌🌐💰📄]/g, '')
+    .replace(/(\*\*সতর্কতা:\*\*)\s*সতর্কতা[:ঃ]?/gi, '$1')
+    .replace(/সতর্কতা:\s*সতর্কতা[:ঃ]?/gi, 'সতর্কতা:');
+
+  const text = sanitized.replace(/\r\n/g, '\n');
   const lines = text.split('\n');
   const result: string[] = [];
   let inUl = false;

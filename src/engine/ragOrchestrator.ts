@@ -160,12 +160,12 @@ export async function handleCitizenRagQuery(
 
       if (emergRow) {
         const replyMarkdown =
-          `### 🚨 ${emergRow.organization_name_bn} (${emergRow.organization_name_en || ''})\n\n` +
+          `### ${emergRow.organization_name_bn} (${emergRow.organization_name_en || ''})\n\n` +
           `**বিভাগ ও জেলা:** ${emergRow.division_bn} বিভাগ, ${emergRow.district_bn}${
             emergRow.upazila_thana_bn ? ` (থানা/উপজেলা: ${emergRow.upazila_thana_bn})` : ''
           }\n` +
           `**সেবার আওতা:** ${emergRow.service_scope}\n\n` +
-          `#### 📞 সরাসরি যোগাযোগ ও হেল্পলাইন:\n` +
+          `#### সরাসরি যোগাযোগ ও হেল্পলাইন:\n` +
           (emergRow.short_code
             ? `• **হটলাইন / শর্টকোড:** \`${emergRow.short_code}\` (${
                 emergRow.is_toll_free ? 'টোল-ফ্রি / সম্পূর্ণ বিনামূল্যে' : 'সাধারণ চার্জ'
@@ -180,12 +180,12 @@ export async function handleCitizenRagQuery(
             : '') +
           `• **অফিসের সময়:** ${emergRow.operating_hours}\n` +
           (emergRow.office_address ? `• **অফিস ঠিকানা:** ${emergRow.office_address}\n` : '') +
-          `\n#### 📌 জরুরি সহায়তা ও অভিযোগ প্রক্রিয়া:\n` +
+          `\n#### জরুরি সহায়তা ও অভিযোগ প্রক্রিয়া:\n` +
           `${emergRow.complaint_process_bn || 'জরুরি ঘটনায় অবিলম্বে ডিউটি অফিসারকে ফোন দিন।'}\n\n` +
           (emergRow.website_url
-            ? `🌐 **অফিসিয়াল ওয়েবসাইট:** [${emergRow.website_url}](${emergRow.website_url})\n\n`
+            ? `**অফিসিয়াল ওয়েবসাইট:** [${emergRow.website_url}](${emergRow.website_url})\n\n`
             : '') +
-          `> ⚠️ **নাগরিক সতর্কতা:** থানা জিডি বা বিদ্যুৎ-গ্যাস-পানি সরবরাহ সংক্রান্ত জরুরি সেবায় কোনো কর্মকর্তাকে অতিরিক্ত টাকা বা ঘুষ দেবেন না। দালালদের খপ্পর থেকে সাবধান থাকুন।`;
+          `> **নাগরিক সতর্কতা:** থানা জিডি বা বিদ্যুৎ-গ্যাস-পানি সরবরাহ সংক্রান্ত জরুরি সেবায় কোনো কর্মকর্তাকে অতিরিক্ত টাকা বা ঘুষ দেবেন না। দালালদের খপ্পর থেকে সাবধান থাকুন।`;
 
         return {
           source: 'rag_vector_d1',
@@ -304,12 +304,14 @@ ${serviceRow.anti_broker_warning || 'কোনো দালাল বা মধ�
         messages: [
           {
             role: 'system',
-            content: `You are 'Kaaz AI' (কাজ এআই), an honest, authoritative AI assistant protecting Bangladeshi citizens from broker corruption and exploitation in public services.
+            content: `You are 'Kaaz AI' (কাজ এআই), an authoritative, objective citizen assistant for Bangladesh government public services.
 Guidelines:
-1. Always reply in clear, helpful, natural Bengali (বাংলা).
+1. Always reply in clear, professional Bengali (বাংলা).
 2. Strictly cite the EXACT official fee numbers, SLA processing days, and steps provided in the context. Never hallucinate or guess fees.
-3. Strongly warn the citizen against paying any extra bribes or entertaining middlemen/dalals.
-4. Format your response cleanly with bullet points and bold highlights.`
+3. Strongly advise the citizen against giving any extra money to brokers/middlemen.
+4. Format your response cleanly with clear markdown headings, bullet points, and bold text.
+5. NEVER include any emojis (such as ⚠️, 💰, 📄, 📌, 🌐, 🚨). Keep styling strictly corporate and minimalist.
+6. For warning sections, write '> **সতর্কতা:** ' only once without duplicating the word.`
           },
           {
             role: 'user',
@@ -323,8 +325,26 @@ Guidelines:
       generatedAnswer = llmRes?.response?.trim() || '';
     } catch (llmErr) {
       // In case of LLM failure, fall back to rich template response
-      generatedAnswer = `### ${serviceRow.title_bn}\n\n**দপ্তর/মন্ত্রণালয়:** ${serviceRow.department_agency}\n**সরকারি সময়সীমা:** ${serviceRow.processing_time_sla}\n\n#### 💰 নির্ধারিত সরকারি ফি:\n${feeLines}\n\n#### 📄 প্রয়োজনীয় কাগজপত্র:\n${docLines}\n\n#### 📌 আবেদন প্রক্রিয়া:\n${stepLines}\n\n> ⚠️ **সতর্কতা:** ${serviceRow.anti_broker_warning}\n\n🌐 **অফিশিয়াল পোর্টাল:** [${serviceRow.official_portal_url}](${serviceRow.official_portal_url})`;
+      const cleanedWarning = (serviceRow.anti_broker_warning || '')
+        .replace(/^(⚠️|🚨|📌|সতর্কতা|warning|alert|নোট)\s*[:ঃ\-]?\s*/gi, '')
+        .trim();
+
+      generatedAnswer = `### ${serviceRow.title_bn}\n\n` +
+        `**দপ্তর/মন্ত্রণালয়:** ${serviceRow.department_agency}\n` +
+        `**সরকারি সময়সীমা:** ${serviceRow.processing_time_sla}\n\n` +
+        `#### সরকারি নির্ধারিত ফি তালিকা:\n${feeLines}\n\n` +
+        `#### প্রয়োজনীয় কাগজপত্র:\n${docLines}\n\n` +
+        `#### সরাসরি আবেদন প্রক্রিয়া:\n${stepLines}\n\n` +
+        (cleanedWarning ? `> **সতর্কতা:** ${cleanedWarning}\n\n` : '') +
+        `**অফিসিয়াল পোর্টাল:** [${serviceRow.official_portal_url}](${serviceRow.official_portal_url})`;
     }
+
+    // Post-process to remove any stray emojis or duplicate warning labels
+    generatedAnswer = generatedAnswer
+      .replace(/[⚠️🚨📌🌐💰📄]/g, '')
+      .replace(/(\*\*সতর্কতা:\*\*)\s*সতর্কতা[:ঃ]?/gi, '$1')
+      .replace(/সতর্কতা:\s*সতর্কতা[:ঃ]?/gi, 'সতর্কতা:')
+      .trim();
 
     const execution_time_ms = Number((performance.now() - startTime).toFixed(2));
 

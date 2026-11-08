@@ -51,6 +51,7 @@ export function matchServices(
     ...normalized.stemmed_tokens,
     ...normalized.bengali_transliterated_tokens
   ]);
+  const allTokensList = Array.from(allTokens);
 
   const results: MatchResult[] = [];
 
@@ -82,20 +83,47 @@ export function matchServices(
         }
       }
 
-      // Token overlap check (ignoring generic intent stopwords)
-      const aliasTokens = aliasClean.split(/[\s,?.!\-_/()]+/);
-      for (const t of aliasTokens) {
-        if (!INTENT_STOPWORDS.has(t) && allTokens.has(t) && t.length > 2) {
-          matchedTokens.push(t);
-        }
-      }
-    }
+      // Token overlap check against this alias (with Bengali suffix tolerance e.g. -র, -ের, -ে)
+      const aliasTokens = aliasClean
+        .split(/[\s,?.!\-_/()]+/)
+        .filter(t => !INTENT_STOPWORDS.has(t) && t.length > 2);
 
-    // 2. Token overlap bonus (only for non-stopword domain tokens)
-    if (matchedTokens.length > 0) {
-      const tokenScore = Math.min(0.95, 0.5 + matchedTokens.length * 0.25);
-      if (tokenScore > bestScore) {
-        bestScore = tokenScore;
+      if (aliasTokens.length > 0) {
+        const matchedInThisAlias = aliasTokens.filter(t => 
+          allTokens.has(t) || allTokensList.some(q => q.length > 2 && (q.startsWith(t) || t.startsWith(q)))
+        );
+        matchedInThisAlias.forEach(t => matchedTokens.push(t));
+
+        const coverage = matchedInThisAlias.length / aliasTokens.length;
+        if (coverage === 1.0) {
+          // All distinctive tokens of alias present
+          const score = item.weight * 0.95;
+          if (score > bestScore) {
+            bestScore = score;
+            bestAlias = item.alias;
+          }
+        } else if (matchedInThisAlias.length >= 2) {
+          // At least 2 domain tokens matched from this alias
+          const score = item.weight * Math.min(0.95, 0.65 + matchedInThisAlias.length * 0.10);
+          if (score > bestScore) {
+            bestScore = score;
+            bestAlias = item.alias;
+          }
+        } else if (matchedInThisAlias.length === 1 && aliasTokens.length === 1) {
+          // Single-word alias exact match
+          const score = item.weight * 0.90;
+          if (score > bestScore) {
+            bestScore = score;
+            bestAlias = item.alias;
+          }
+        } else if (matchedInThisAlias.length === 1 && aliasTokens.length > 1) {
+          // Only 1 token matched out of a multi-word alias (e.g. only 'police' from 'police clearance')
+          const score = item.weight * 0.35;
+          if (score > bestScore) {
+            bestScore = score;
+            bestAlias = item.alias;
+          }
+        }
       }
     }
 
