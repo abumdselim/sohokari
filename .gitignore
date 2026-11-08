@@ -48,4 +48,8 @@ logs/
 .vscode/
 .idea/
 *.swp
+
+# Temp & External
+temp_pdfingpro/
+
 *.swo

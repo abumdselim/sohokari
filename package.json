@@ -9,7 +9,7 @@
     "build:client": "esbuild src/client/main.ts --bundle --minify --outfile=public/app.js && esbuild src/client/styles/app.css --minify --outfile=public/app.css && esbuild src/client/styles/landing.css --minify --outfile=public/landing.css",
     "build": "npm run build:client && tsc --noEmit",
     "deploy": "npm run build && wrangler deploy",
-    "test": "vitest run",
+    "test": "vitest run tests/",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
   },

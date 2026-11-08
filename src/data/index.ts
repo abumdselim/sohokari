@@ -15,6 +15,16 @@ import { subornoNagorikDisabilityCardService } from './services/subornoNagorikDi
 import { aChallanTreasuryPaymentService } from './services/aChallanTreasuryPayment';
 import { citizenshipCharacterCertificateService } from './services/citizenshipCharacterCertificate';
 import { vehicleFitnessRenewalService } from './services/vehicleFitnessRenewal';
+import { freelancerIdCardService } from './services/freelancerIdCard';
+import { noVisaRequiredNvrService } from './services/noVisaRequiredNvr';
+import { duplicateAcademicCertificateService } from './services/duplicateAcademicCertificate';
+import { nationalUniversityCertificateService } from './services/nationalUniversityCertificate';
+import { landMutationAppealMissCaseService } from './services/landMutationAppealMissCase';
+import { landAcquisitionCompensationService } from './services/landAcquisitionCompensation';
+import { courtAffidavitNotaryPublicService } from './services/courtAffidavitNotaryPublic';
+import { etinCancellationDeregistrationService } from './services/etinCancellationDeregistration';
+import { pmReliefFundMedicalGrantService } from './services/pmReliefFundMedicalGrant';
+import { oneStopCrisisCenterOccService } from './services/oneStopCrisisCenterOcc';
 
 export const VERIFIED_SERVICES: ServiceRecord[] = [
   nidCorrectionService,
@@ -32,7 +42,17 @@ export const VERIFIED_SERVICES: ServiceRecord[] = [
   subornoNagorikDisabilityCardService,
   aChallanTreasuryPaymentService,
   citizenshipCharacterCertificateService,
-  vehicleFitnessRenewalService
+  vehicleFitnessRenewalService,
+  freelancerIdCardService,
+  noVisaRequiredNvrService,
+  duplicateAcademicCertificateService,
+  nationalUniversityCertificateService,
+  landMutationAppealMissCaseService,
+  landAcquisitionCompensationService,
+  courtAffidavitNotaryPublicService,
+  etinCancellationDeregistrationService,
+  pmReliefFundMedicalGrantService,
+  oneStopCrisisCenterOccService
 ];
 
 export const SERVICE_REGISTRY = new Map<string, ServiceRecord>(
