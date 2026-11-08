@@ -1,6 +1,14 @@
-# Environment variables
+# Node / TypeScript / Wrangler
+node_modules/
+dist/
+.wrangler/
+.dev.vars
+cloudflare.txt
+*.log
+
+# Environment variables (Crucial: never commit secrets)
 .env
-.env.local
+.env.*
 *.env
 
 # Python
@@ -29,9 +37,8 @@ venv/
 .venv/
 ENV/
 
-# Output & Cache
-data/
-downloads/
+# Local Output & Database Cache
+data/raw/
 logs/
 *.sqlite3
 *.db

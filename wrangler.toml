@@ -1,0 +1,14 @@
+name = "app"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# D1 Database binding (configured once provisioned)
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "sheyal-db"
+# database_id = "..."
