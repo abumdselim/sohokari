@@ -25,13 +25,13 @@
 <body>
 
   <!-- Sticky Minimalist Navigation Bar -->
-  <header class="landing-nav">
+  <header class="landing-nav" id="landing-nav">
     <div class="nav-container">
       <a href="/" class="nav-brand" title="Kaaz AI - কাজ এআই">
         <img src="/assets/kaaz-logo-header.svg?v=4" alt="Kaaz AI Logo" class="nav-logo-img" />
       </a>
 
-      <nav>
+      <nav class="nav-desktop">
         <ul class="nav-links">
           <li><a href="#features" class="nav-link">ফিচারসমূহ</a></li>
           <li><a href="#how-it-works" class="nav-link">কীভাবে কাজ করে</a></li>
@@ -45,12 +45,44 @@
         <a href="/chat?auth=login" class="btn-nav-login" title="আপনার অ্যাকাউন্টে লগইন করুন">লগইন</a>
         <a href="/chat?auth=signup" class="btn-nav-signup" title="নতুন অ্যাকাউন্ট তৈরি করুন">অ্যাকাউন্ট তৈরি</a>
         <a href="/chat" class="btn-nav-chat" title="সরাসরি চ্যাট করুন">
-          <span>এআই চ্যাট শুরু করুন</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+          <span class="btn-chat-text">এআই চ্যাট</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 15px; height: 15px;">
             <line x1="5" y1="12" x2="19" y2="12"/>
             <polyline points="12 5 19 12 12 19"/>
           </svg>
         </a>
+        <button class="btn-mobile-menu" id="btn-mobile-menu" aria-label="মেনু খুলুন" title="মেনু">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-icon-svg" id="menu-icon-svg">
+            <line x1="3" y1="12" x2="21" y2="12" class="line-mid"/>
+            <line x1="3" y1="6" x2="21" y2="6" class="line-top"/>
+            <line x1="3" y1="18" x2="21" y2="18" class="line-bot"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer Overlay (Ultra-responsive on all phones) -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+      <div class="mobile-drawer-content">
+        <ul class="mobile-nav-links">
+          <li><a href="#features" class="mobile-nav-link">প্ল্যাটফর্ম ফিচারসমূহ</a></li>
+          <li><a href="#how-it-works" class="mobile-nav-link">কীভাবে কাজ করে</a></li>
+          <li><a href="#anti-corruption" class="mobile-nav-link">দালাল ও প্রতারণা প্রতিরোধ</a></li>
+          <li><a href="#preview" class="mobile-nav-link">লাইভ এআই প্রিভিউ</a></li>
+          <li><a href="#faq" class="mobile-nav-link">সচরাচর প্রশ্নাবলি</a></li>
+        </ul>
+        <div class="mobile-drawer-actions">
+          <a href="/chat" class="mobile-drawer-btn-chat">
+            <span>সরাসরি এআই চ্যাট শুরু করুন</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+          <div class="mobile-drawer-auth-row">
+            <a href="/chat?auth=login" class="mobile-drawer-btn-login">লগইন</a>
+            <a href="/chat?auth=signup" class="mobile-drawer-btn-signup">নতুন অ্যাকাউন্ট</a>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -70,7 +102,7 @@
       </div>
 
       <h1 class="hero-title">
-        দালালমুক্ত নাগরিক অধিকার ও <br>
+        দালালমুক্ত নাগরিক অধিকার ও <br class="hide-mobile">
         <span class="hero-title-gradient">স্বচ্ছ সরকারি সেবার</span> ডিজিটাল নির্দেশিকা
       </h1>
 
@@ -364,7 +396,7 @@
               </div>
 
               <!-- Action Bar Mockup -->
-              <div style="display: flex; gap: 8px; margin-top: 14px; padding-top: 10px; border-top: 1px solid #f4f4f5;">
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding-top: 10px; border-top: 1px solid #f4f4f5;">
                 <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: #09090b; color: #ffffff; border-radius: 14px; font-size: 0.78rem; font-weight: 600;">
                   কপি করুন
                 </span>
@@ -647,6 +679,37 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      var btn = document.getElementById('btn-mobile-menu');
+      var drawer = document.getElementById('mobile-nav-drawer');
+      var icon = document.getElementById('menu-icon-svg');
+      if (btn && drawer) {
+        btn.addEventListener('click', function() {
+          var isOpen = drawer.classList.toggle('open');
+          btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          if (icon) {
+            if (isOpen) {
+              icon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>';
+            } else {
+              icon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+            }
+          }
+        });
+
+        var links = drawer.querySelectorAll('a');
+        for (var i = 0; i < links.length; i++) {
+          links[i].addEventListener('click', function() {
+            drawer.classList.remove('open');
+            if (icon) {
+              icon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+            }
+          });
+        }
+      }
+    })();
+  </script>
 
 </body>
 </html>
