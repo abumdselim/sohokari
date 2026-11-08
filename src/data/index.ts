@@ -7,6 +7,14 @@ import { birthRegistrationService } from './services/birthRegistration';
 import { policeClearanceService } from './services/policeClearance';
 import { tradeLicenseService } from './services/tradeLicense';
 import { etinTaxReturnService } from './services/etinTaxReturn';
+import { deathRegistrationService } from './services/deathRegistration';
+import { kaziMarriageRegistrationService } from './services/kaziMarriageRegistration';
+import { newVoterRegistrationService } from './services/newVoterRegistration';
+import { nationalSavingsCertificatesService } from './services/nationalSavingsCertificates';
+import { subornoNagorikDisabilityCardService } from './services/subornoNagorikDisabilityCard';
+import { aChallanTreasuryPaymentService } from './services/aChallanTreasuryPayment';
+import { citizenshipCharacterCertificateService } from './services/citizenshipCharacterCertificate';
+import { vehicleFitnessRenewalService } from './services/vehicleFitnessRenewal';
 
 export const VERIFIED_SERVICES: ServiceRecord[] = [
   nidCorrectionService,
@@ -16,7 +24,15 @@ export const VERIFIED_SERVICES: ServiceRecord[] = [
   birthRegistrationService,
   policeClearanceService,
   tradeLicenseService,
-  etinTaxReturnService
+  etinTaxReturnService,
+  deathRegistrationService,
+  kaziMarriageRegistrationService,
+  newVoterRegistrationService,
+  nationalSavingsCertificatesService,
+  subornoNagorikDisabilityCardService,
+  aChallanTreasuryPaymentService,
+  citizenshipCharacterCertificateService,
+  vehicleFitnessRenewalService
 ];
 
 export const SERVICE_REGISTRY = new Map<string, ServiceRecord>(
