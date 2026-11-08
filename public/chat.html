@@ -55,6 +55,12 @@
       <span>নতুন চ্যাট শুরু করুন</span>
     </button>
 
+    <!-- Chat History Section (Persisted to Cloudflare D1) -->
+    <div class="sidebar-nav-section" id="sidebar-history-section">
+      <div class="sidebar-section-title">পূর্ববর্তী চ্যাট হিস্ট্রি</div>
+      <div class="chat-history-list" id="chat-history-list"></div>
+    </div>
+
     <!-- Services Quick Menu -->
     <div class="sidebar-nav-section">
       <div class="sidebar-section-title">জনপ্রিয় সেবা বিভাগ</div>
@@ -124,6 +130,9 @@
       </div>
     </div>
 
+    <!-- Sidebar User Profile & Auth Section -->
+    <div id="sidebar-user-section" class="sidebar-user-section"></div>
+
     <!-- Sidebar Bottom Status -->
     <div class="sidebar-footer">
       <div class="sidebar-verified-badge">
@@ -141,23 +150,28 @@
     
     <!-- Minimalist Frosted Header (ChatGPT / Claude Style) -->
     <header class="native-header">
-      <button class="btn-header-icon" id="btn-toggle-sidebar" aria-label="মেনু খুলুন" title="মেনু">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-svg">
-          <line x1="3" y1="12" x2="21" y2="12"/>
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <line x1="3" y1="18" x2="21" y2="18"/>
-        </svg>
-      </button>
+      <div class="header-left">
+        <button class="btn-header-icon" id="btn-toggle-sidebar" aria-label="মেনু খুলুন" title="মেনু">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-svg">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
 
       <a href="/" class="brand-section" title="Kaaz AI প্ল্যাটফর্ম হোম ও ফিচার">
         <img src="/assets/kaaz-logo-header.svg?v=4" alt="Kaaz AI" class="header-logo-img" />
       </a>
 
-      <button class="btn-header-icon" id="btn-clear-chat" title="নতুন চ্যাট শুরু করুন" aria-label="নতুন চ্যাট">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-svg">
-          <path d="M12 5v14M5 12h14"/>
-        </svg>
-      </button>
+      <div class="header-right">
+        <button class="btn-header-icon" id="btn-clear-chat" title="নতুন চ্যাট শুরু করুন" aria-label="নতুন চ্যাট">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-svg">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+        <div id="header-user-status" class="header-user-status"></div>
+      </div>
     </header>
 
     <!-- Chat Messages Stream -->

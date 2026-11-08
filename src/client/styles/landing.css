@@ -168,7 +168,40 @@ body {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+}
+
+.btn-nav-login {
+  color: var(--slate-700);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 7px 12px;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.btn-nav-login:hover {
+  color: var(--slate-900);
+  background: var(--slate-100);
+}
+
+.btn-nav-signup {
+  color: var(--slate-900);
+  border: 1px solid var(--slate-300);
+  background: #ffffff;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-nav-signup:hover {
+  border-color: var(--slate-900);
+  background: var(--slate-50);
 }
 
 .btn-nav-chat {
@@ -184,6 +217,7 @@ body {
   font-weight: 600;
   transition: all 0.15s ease;
   border: 1px solid var(--slate-900);
+  white-space: nowrap;
 }
 
 .btn-nav-chat:hover {

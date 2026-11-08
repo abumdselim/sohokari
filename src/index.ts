@@ -1,6 +1,7 @@
 import { processChatQuery } from './engine/dialogManager';
 import { handleCitizenRagQuery, RagEnv } from './engine/ragOrchestrator';
 import { VERIFIED_SERVICES } from './data';
+import { hashPassword, verifyPassword, generateToken, getAuthenticatedUser } from './auth';
 
 export interface Env extends RagEnv {
   ASSETS?: Fetcher;
@@ -46,6 +47,318 @@ export default {
           }
         }
       );
+    }
+
+    // ==========================================
+    // Auth: Sign Up (/api/auth/signup)
+    // ==========================================
+    if (url.pathname === '/api/auth/signup' && request.method === 'POST') {
+      if (!env.DB) {
+        return new Response(JSON.stringify({ error: 'Database service unavailable' }), { 
+          status: 503,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+      try {
+        const body = (await request.json()) as { email?: string; password?: string; name?: string };
+        const email = body.email?.trim().toLowerCase();
+        const password = body.password?.trim();
+        const name = body.name?.trim();
+
+        if (!email || !password || !name) {
+          return new Response(JSON.stringify({ error: 'নাম, ইমেইল ও পাসওয়ার্ড প্রদান করুন' }), { 
+            status: 400,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+          });
+        }
+        if (password.length < 6) {
+          return new Response(JSON.stringify({ error: 'পাসওয়ার্ড ন্যূনতম ৬ অক্ষরের হতে হবে' }), { 
+            status: 400,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+          });
+        }
+
+        // Check if user exists
+        const existing = await env.DB.prepare('SELECT id FROM users WHERE email = ?').bind(email).first();
+        if (existing) {
+          return new Response(JSON.stringify({ error: 'এই ইমেইল দিয়ে ইতোমধ্যে একটি অ্যাকাউন্ট রয়েছে' }), { 
+            status: 409,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+          });
+        }
+
+        const id = crypto.randomUUID();
+        const passwordHash = await hashPassword(password);
+        const now = new Date().toISOString();
+
+        await env.DB.prepare(
+          'INSERT INTO users (id, email, name, password_hash, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)'
+        ).bind(id, email, name, passwordHash, now, now).run();
+
+        const token = await generateToken({ id, email, name });
+        return new Response(JSON.stringify({ token, user: { id, email, name } }), {
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err?.message || 'সাইন আপ ব্যর্থ হয়েছে' }), { 
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+    }
+
+    // ==========================================
+    // Auth: Login (/api/auth/login)
+    // ==========================================
+    if (url.pathname === '/api/auth/login' && request.method === 'POST') {
+      if (!env.DB) {
+        return new Response(JSON.stringify({ error: 'Database service unavailable' }), { 
+          status: 503,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+      try {
+        const body = (await request.json()) as { email?: string; password?: string };
+        const email = body.email?.trim().toLowerCase();
+        const password = body.password?.trim();
+
+        if (!email || !password) {
+          return new Response(JSON.stringify({ error: 'ইমেইল ও পাসওয়ার্ড দিন' }), { 
+            status: 400,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+          });
+        }
+
+        const userRow = await env.DB.prepare(
+          'SELECT id, email, name, password_hash FROM users WHERE email = ?'
+        ).bind(email).first<{ id: string; email: string; name: string; password_hash: string }>();
+
+        if (!userRow) {
+          return new Response(JSON.stringify({ error: 'ভুল ইমেইল বা পাসওয়ার্ড' }), { 
+            status: 401,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+          });
+        }
+
+        const isValid = await verifyPassword(password, userRow.password_hash);
+        if (!isValid) {
+          return new Response(JSON.stringify({ error: 'ভুল ইমেইল বা পাসওয়ার্ড' }), { 
+            status: 401,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+          });
+        }
+
+        const token = await generateToken({ id: userRow.id, email: userRow.email, name: userRow.name });
+        return new Response(JSON.stringify({ token, user: { id: userRow.id, email: userRow.email, name: userRow.name } }), {
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err?.message || 'লগইন ব্যর্থ হয়েছে' }), { 
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+    }
+
+    // ==========================================
+    // Auth: Current User (/api/auth/me)
+    // ==========================================
+    if (url.pathname === '/api/auth/me' && request.method === 'GET') {
+      const authUser = await getAuthenticatedUser(request);
+      if (!authUser) {
+        return new Response(JSON.stringify({ error: 'Unauthorized' }), { 
+          status: 401,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+      return new Response(JSON.stringify({ user: authUser }), {
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+      });
+    }
+
+    // ==========================================
+    // Chat History: List Sessions (/api/chats)
+    // ==========================================
+    if (url.pathname === '/api/chats' && request.method === 'GET') {
+      if (!env.DB) {
+        return new Response(JSON.stringify({ error: 'DB unavailable' }), { 
+          status: 503,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+      const authUser = await getAuthenticatedUser(request);
+      if (!authUser) {
+        return new Response(JSON.stringify({ error: 'লগইন আবশ্যক' }), { 
+          status: 401,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+
+      try {
+        const rows = await env.DB.prepare(
+          'SELECT id, title, created_at, updated_at FROM chat_sessions WHERE user_id = ? ORDER BY updated_at DESC LIMIT 50'
+        ).bind(authUser.id).all();
+
+        return new Response(JSON.stringify({ sessions: rows.results || [] }), {
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err?.message }), { 
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+    }
+
+    // ==========================================
+    // Chat History: Load Messages (/api/chats/:id)
+    // ==========================================
+    if (url.pathname.startsWith('/api/chats/') && request.method === 'GET') {
+      if (!env.DB) {
+        return new Response(JSON.stringify({ error: 'DB unavailable' }), { 
+          status: 503,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+      const authUser = await getAuthenticatedUser(request);
+      if (!authUser) {
+        return new Response(JSON.stringify({ error: 'লগইন আবশ্যক' }), { 
+          status: 401,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+
+      const sessionId = url.pathname.replace('/api/chats/', '').trim();
+      try {
+        const session = await env.DB.prepare(
+          'SELECT id, title, created_at, updated_at FROM chat_sessions WHERE id = ? AND user_id = ?'
+        ).bind(sessionId, authUser.id).first();
+
+        if (!session) {
+          return new Response(JSON.stringify({ error: 'চ্যাট সেশন পাওয়া যায়নি' }), { 
+            status: 404,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+          });
+        }
+
+        const messages = await env.DB.prepare(
+          'SELECT id, role, content, payload_json, created_at FROM chat_messages WHERE session_id = ? ORDER BY created_at ASC'
+        ).bind(sessionId).all();
+
+        return new Response(JSON.stringify({ session, messages: messages.results || [] }), {
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err?.message }), { 
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+    }
+
+    // ==========================================
+    // Chat History: Save Message (/api/chats)
+    // ==========================================
+    if (url.pathname === '/api/chats' && request.method === 'POST') {
+      if (!env.DB) {
+        return new Response(JSON.stringify({ error: 'DB unavailable' }), { 
+          status: 503,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+      const authUser = await getAuthenticatedUser(request);
+      if (!authUser) {
+        return new Response(JSON.stringify({ error: 'লগইন আবশ্যক' }), { 
+          status: 401,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+
+      try {
+        const body = (await request.json()) as {
+          session_id?: string;
+          title?: string;
+          user_message: string;
+          bot_response: any;
+        };
+
+        let sessionId = body.session_id;
+        const now = new Date().toISOString();
+
+        if (!sessionId) {
+          sessionId = crypto.randomUUID();
+          let title = body.title?.trim();
+          if (!title) {
+            title = body.user_message.length > 32 
+              ? body.user_message.substring(0, 32) + '...'
+              : body.user_message;
+          }
+
+          await env.DB.prepare(
+            'INSERT INTO chat_sessions (id, user_id, title, created_at, updated_at) VALUES (?, ?, ?, ?, ?)'
+          ).bind(sessionId, authUser.id, title, now, now).run();
+        } else {
+          await env.DB.prepare(
+            'UPDATE chat_sessions SET updated_at = ? WHERE id = ? AND user_id = ?'
+          ).bind(now, sessionId, authUser.id).run();
+        }
+
+        // Insert user message
+        const userMsgId = crypto.randomUUID();
+        await env.DB.prepare(
+          'INSERT INTO chat_messages (id, session_id, user_id, role, content, payload_json, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)'
+        ).bind(userMsgId, sessionId, authUser.id, 'user', body.user_message, null, now).run();
+
+        // Insert bot response
+        const botMsgId = crypto.randomUUID();
+        const botPayload = JSON.stringify(body.bot_response);
+        const botText = body.bot_response.reply_bn || body.bot_response.service?.name_bn || 'সরকারি সেবা তথ্য';
+        await env.DB.prepare(
+          'INSERT INTO chat_messages (id, session_id, user_id, role, content, payload_json, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)'
+        ).bind(botMsgId, sessionId, authUser.id, 'bot', botText, botPayload, now).run();
+
+        return new Response(JSON.stringify({ session_id: sessionId }), {
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err?.message }), { 
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+    }
+
+    // ==========================================
+    // Chat History: Delete Session (/api/chats/:id)
+    // ==========================================
+    if (url.pathname.startsWith('/api/chats/') && request.method === 'DELETE') {
+      if (!env.DB) {
+        return new Response(JSON.stringify({ error: 'DB unavailable' }), { 
+          status: 503,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+      const authUser = await getAuthenticatedUser(request);
+      if (!authUser) {
+        return new Response(JSON.stringify({ error: 'লগইন আবশ্যক' }), { 
+          status: 401,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+
+      const sessionId = url.pathname.replace('/api/chats/', '').trim();
+      try {
+        await env.DB.prepare('DELETE FROM chat_messages WHERE session_id = ? AND user_id = ?').bind(sessionId, authUser.id).run();
+        await env.DB.prepare('DELETE FROM chat_sessions WHERE id = ? AND user_id = ?').bind(sessionId, authUser.id).run();
+        return new Response(JSON.stringify({ success: true }), {
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err?.message }), { 
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
     }
 
     // Services Catalog API (In-Memory Fast Catalog)
