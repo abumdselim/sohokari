@@ -28,7 +28,7 @@
   <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
   <aside id="app-sidebar" class="app-sidebar">
     <div class="sidebar-header">
-      <img src="/assets/kaaz-logo-header.svg?v=2" alt="Kaaz AI" class="sidebar-logo-img" />
+      <img src="/assets/kaaz-logo-header.svg?v=3" alt="Kaaz AI" class="sidebar-logo-img" />
       <button class="btn-sidebar-close" id="btn-close-sidebar" aria-label="বন্ধ করুন">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
           <line x1="18" y1="6" x2="6" y2="18"/>
@@ -141,7 +141,7 @@
       </button>
 
       <div class="brand-section">
-        <img src="/assets/kaaz-logo-header.svg?v=2" alt="Kaaz AI" class="header-logo-img" />
+        <img src="/assets/kaaz-logo-header.svg?v=3" alt="Kaaz AI" class="header-logo-img" />
       </div>
 
       <button class="btn-header-icon" id="btn-clear-chat" title="নতুন চ্যাট শুরু করুন" aria-label="নতুন চ্যাট">
@@ -154,26 +154,53 @@
     <!-- Chat Messages Stream -->
     <main class="chat-scroll-stream" id="chat-stream">
       
-      <!-- Welcome Greeting Bubble (Claude / ChatGPT style) -->
-      <div class="message-row bot welcome-row">
-        <div class="bot-avatar-wrap">
-          <div class="bot-avatar-inner">
-            <img src="/assets/icon-teal.svg" alt="Kaaz AI" class="bot-avatar-img" />
+      <!-- Welcome Hero Section (Dynamic Time-based Greeting) -->
+      <div class="welcome-hero" id="welcome-hero">
+        <div class="welcome-badge-wrap">
+          <div class="welcome-badge-circle">
+            <img src="/assets/icon-teal.svg" alt="Kaaz AI" class="welcome-badge-icon" />
           </div>
         </div>
-        <div class="bubble bot-bubble welcome-bubble">
-          <h2 class="welcome-heading">আসসালামু আলাইকুম!</h2>
-          <p class="welcome-subtext">
-            আমি <strong>Kaaz AI</strong> — বাংলাদেশ সরকারের যেকোনো নাগরিক সেবার সঠিক সরকারি ফি, প্রয়োজনীয় কাগজপত্র ও দালালমুক্ত নিয়মের ডিজিটাল গাইড। নিচে প্রশ্ন করুন বা যেকোনো বিষয় নির্বাচন করুন:
-          </p>
-          
-          <div class="chips-container">
-            <button class="native-chip-btn" data-query="জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?">এনআইডি সংশোধন ফি</button>
-            <button class="native-chip-btn" data-query="১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?">পাসপোর্ট নবায়ন ফি</button>
-            <button class="native-chip-btn" data-query="জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?">ই-নামজারি সরকারি ফি</button>
-            <button class="native-chip-btn" data-query="পাসপোর্ট রিনিউ করতে কি কি কাগজপত্র লাগে?">পাসপোর্ট ডকুমেন্টস</button>
-            <button class="native-chip-btn" data-query="উত্তরা পশ্চিম থানার ওসির নাম্বার কত?">থানার ওসির নাম্বার</button>
-          </div>
+        
+        <h1 class="welcome-greeting-title" id="greeting-title">স্বাগতম!</h1>
+        <p class="welcome-tagline">আজ আপনাকে কীভাবে সহযোগিতা করতে পারি?</p>
+        
+        <p class="welcome-subtext">
+          বাংলাদেশ সরকারের যেকোনো নাগরিক সেবার অফিশিয়াল ফি, প্রয়োজনীয় কাগজপত্র ও দালালমুক্ত সঠিক নিয়ম জানতে নিচে প্রশ্ন করুন:
+        </p>
+
+        <div class="hero-chips-grid">
+          <button class="hero-card-chip" data-query="জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?">
+            <span class="chip-emoji">🪪</span>
+            <div class="chip-content">
+              <span class="chip-title">এনআইডি সংশোধন ফি</span>
+              <span class="chip-desc">সঠিক ফি ও আবেদনের নিয়ম</span>
+            </div>
+          </button>
+
+          <button class="hero-card-chip" data-query="১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?">
+            <span class="chip-emoji">🛂</span>
+            <div class="chip-content">
+              <span class="chip-title">পাসপোর্ট নবায়ন ফি</span>
+              <span class="chip-desc">জরুরি ও সাধারণ চার্জ</span>
+            </div>
+          </button>
+
+          <button class="hero-card-chip" data-query="জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?">
+            <span class="chip-emoji">🏛️</span>
+            <div class="chip-content">
+              <span class="chip-title">ই-নামজারি ও খারিজ</span>
+              <span class="chip-desc">মোট সরকারি ফি ১,১৭০ টাকা</span>
+            </div>
+          </button>
+
+          <button class="hero-card-chip" data-query="উত্তরা পশ্চিম থানার ওসির নাম্বার কত?">
+            <span class="chip-emoji">🚨</span>
+            <div class="chip-content">
+              <span class="chip-title">জরুরি থানা ও হটলাইন</span>
+              <span class="chip-desc">পুলিশ, বিদ্যুৎ ও গ্যাস সেবা</span>
+            </div>
+          </button>
         </div>
       </div>
 

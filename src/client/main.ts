@@ -2,6 +2,7 @@ import { triggerHaptic } from './haptics';
 import { showToast } from './toast';
 import { initViewportManager } from './viewport';
 import { renderUserBubble, renderBotBubble, renderTypingIndicator } from './ui';
+import { getTimeBasedGreeting, renderWelcomeHeroHtml } from './greeting';
 import { icons } from './icons';
 import { ChatResponse } from '../types/engine';
 
@@ -39,6 +40,12 @@ class KaazAIApp {
   }
 
   private init(): void {
+    // 0. Update time-based dynamic greeting
+    const titleEl = document.getElementById('greeting-title');
+    if (titleEl) {
+      titleEl.textContent = getTimeBasedGreeting();
+    }
+
     // 1. Viewport & Virtual Keyboard Handler
     initViewportManager(this.chatStream, this.bottomBar);
 
@@ -130,6 +137,12 @@ class KaazAIApp {
     this.queryInput.value = '';
     triggerHaptic('medium');
 
+    // Remove welcome hero if present for a clean chat stream (like ChatGPT/Claude)
+    const hero = document.getElementById('welcome-hero');
+    if (hero) {
+      hero.remove();
+    }
+
     // 1. Render User Message
     const userBubble = renderUserBubble(query);
     this.chatStream.appendChild(userBubble);
@@ -173,11 +186,11 @@ class KaazAIApp {
     row.className = 'message-row bot';
     row.innerHTML = `
       <div class="bot-avatar-wrap">
-        <div class="bot-avatar-inner" style="background: #ef4444;">${icons.alertTriangle}</div>
+        <div class="bot-avatar-inner" style="background: #ef4444; border-color: #ef4444; color: #fff;">${icons.alertTriangle}</div>
       </div>
-      <div class="bubble bot-bubble" style="border-left: 4px solid #ef4444;">
-        <p><strong>সংযোগ বিঘ্নিত হয়েছে</strong></p>
-        <p style="font-size: 0.88rem; color: #0f172a; margin-top: 4px;">
+      <div class="bubble bot-bubble" style="border-left: 3px solid #ef4444;">
+        <p style="font-weight: 700; color: #b91c1c;">সংযোগ বিঘ্নিত হয়েছে</p>
+        <p style="font-size: 0.9rem; color: #475569; margin-top: 4px;">
           সার্ভারের সাথে সংযোগ স্থাপন করা সম্ভব হয়নি। অনুগ্রহ করে ইন্টারনেট কানেকশন চেক করুন।
         </p>
       </div>
@@ -187,21 +200,10 @@ class KaazAIApp {
   }
 
   private resetChat(): void {
-    this.chatStream.innerHTML = `
-      <div class="message-row bot">
-        <div class="bot-avatar-wrap">
-          <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="Kaaz AI" class="bot-avatar-img" /></div>
-        </div>
-        <div class="bubble bot-bubble">
-          <p><strong>Kaaz AI</strong>-তে স্বাগতম</p>
-          <p style="margin-top: 4px; font-size: 0.95rem; color: #1e293b;">
-            কী সেবা সম্পর্কে জানতে চান? নিচে লিখুন অথবা সাজেশনে ট্যাপ করুন।
-          </p>
-        </div>
-      </div>
-    `;
+    this.chatStream.innerHTML = renderWelcomeHeroHtml();
     this.queryInput.value = '';
     this.queryInput.focus();
+    this.scrollToBottom();
   }
 
   private registerServiceWorker(): void {
