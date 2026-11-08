@@ -71,25 +71,26 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
+  padding: 0 10px;
   padding-top: var(--safe-top);
   z-index: 50;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
 .btn-menu-toggle {
   background: transparent;
   border: none;
   color: #ffffff;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: background 0.12s;
+  flex-shrink: 0;
 }
 
 .btn-menu-toggle:active {
@@ -100,54 +101,53 @@ html, body {
   width: 22px;
   height: 22px;
   stroke: #ffffff;
+  flex-shrink: 0;
 }
 
 .brand-section {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1;
+  text-align: center;
 }
 
 .header-logo-img {
-  height: 32px;
+  height: 34px;
+  max-width: 140px;
   width: auto;
   display: block;
+  margin: 0 auto;
   object-fit: contain;
 }
 
 .sidebar-logo-img {
-  height: 28px;
+  height: 30px;
+  max-width: 130px;
   width: auto;
   display: block;
   object-fit: contain;
 }
 
+/* ChatGPT/Gemini Style Icon-only New Chat Button */
 .btn-header-action {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  border: none;
   color: #ffffff;
-  padding: 6px 12px;
-  border-radius: 4px; /* বাটন রেডিয়াস কম */
-  font-size: 0.88rem;
-  font-weight: 600;
-  cursor: pointer;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-family: inherit;
-  transition: all 0.12s;
-}
-
-.btn-icon {
-  width: 15px;
-  height: 15px;
-  stroke: #ffffff;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.12s;
+  padding: 0;
+  flex-shrink: 0;
 }
 
 .btn-header-action:active {
-  background: rgba(255, 255, 255, 0.28);
-  border-color: #ffffff;
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.18);
 }
 
 /* ========================================================

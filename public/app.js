@@ -110,7 +110,7 @@
     </div>
   `,e}function T(){let i=document.createElement("div");return i.className="message-row bot typing-row",i.id="bot-typing-indicator",i.innerHTML=`
     <div class="bot-avatar-wrap">
-      <div class="bot-avatar-inner"><img src="/assets/icon-white.png" alt="\u09B8\u09B9\u0995\u09BE\u09B0\u09C0" class="bot-avatar-img" /></div>
+      <div class="bot-avatar-inner"><img src="/assets/icon-white.svg" alt="\u09B8\u09B9\u0995\u09BE\u09B0\u09C0" class="bot-avatar-img" /></div>
     </div>
     <div class="typing-bubble">
       <div class="typing-dot"></div>
@@ -119,7 +119,7 @@
     </div>
   `,i}function B(i){let e=document.createElement("div");e.className="message-row bot";let s=`
     <div class="bot-avatar-wrap">
-      <div class="bot-avatar-inner"><img src="/assets/icon-white.png" alt="\u09B8\u09B9\u0995\u09BE\u09B0\u09C0" class="bot-avatar-img" /></div>
+      <div class="bot-avatar-inner"><img src="/assets/icon-white.svg" alt="\u09B8\u09B9\u0995\u09BE\u09B0\u09C0" class="bot-avatar-img" /></div>
     </div>
   `;if(i.action==="SAFE_REFUSAL")return e.innerHTML=`
       ${s}
@@ -276,7 +276,7 @@
     `,this.chatStream.appendChild(e),u("\u0987\u09A8\u09CD\u099F\u09BE\u09B0\u09A8\u09C7\u099F \u09B8\u0982\u09AF\u09CB\u0997 \u099A\u09C7\u0995 \u0995\u09B0\u09C1\u09A8")}resetChat(){this.chatStream.innerHTML=`
       <div class="message-row bot">
         <div class="bot-avatar-wrap">
-          <div class="bot-avatar-inner"><img src="/assets/icon-white.png" alt="\u09B8\u09B9\u0995\u09BE\u09B0\u09C0" class="bot-avatar-img" /></div>
+          <div class="bot-avatar-inner"><img src="/assets/icon-white.svg" alt="\u09B8\u09B9\u0995\u09BE\u09B0\u09C0" class="bot-avatar-img" /></div>
         </div>
         <div class="bubble bot-bubble">
           <p><strong>\u09B8\u09B9\u0995\u09BE\u09B0\u09C0</strong>-\u09A4\u09C7 \u09B8\u09CD\u09AC\u09BE\u0997\u09A4\u09AE</p>
