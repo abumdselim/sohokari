@@ -193,7 +193,7 @@ class KaazAIApp {
           <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="Kaaz AI" class="bot-avatar-img" /></div>
         </div>
         <div class="bubble bot-bubble">
-          <p><strong>Kaaz AI (কাজ এআই)</strong>-তে স্বাগতম</p>
+          <p><strong>Kaaz AI</strong>-তে স্বাগতম</p>
           <p style="margin-top: 4px; font-size: 0.95rem; color: #1e293b;">
             কী সেবা সম্পর্কে জানতে চান? নিচে লিখুন অথবা সাজেশনে ট্যাপ করুন।
           </p>

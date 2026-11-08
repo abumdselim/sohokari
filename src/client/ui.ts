@@ -16,12 +16,9 @@ export function renderUserBubble(text: string): HTMLElement {
   const row = document.createElement('div');
   row.className = 'message-row user';
 
-  const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
   row.innerHTML = `
-    <div class="bubble user-bubble">
+    <div class="user-bubble">
       <div class="bubble-content">${escapeHtml(text)}</div>
-      <div class="bubble-time">${timeStr}</div>
     </div>
   `;
   return row;
@@ -47,29 +44,36 @@ export function renderTypingIndicator(): HTMLElement {
 
 export function parseMarkdownToHtml(markdown: string): string {
   if (!markdown) return '';
-  
+
   const text = markdown.replace(/\r\n/g, '\n');
   const lines = text.split('\n');
   const result: string[] = [];
-  let inList = false;
+  let inUl = false;
+  let inOl = false;
 
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
+    const rawLine = lines[i].trim();
 
-    if (!line) {
-      if (inList) {
-        result.push('</ul>');
-        inList = false;
-      }
+    if (!rawLine) {
+      if (inUl) { result.push('</ul>'); inUl = false; }
+      if (inOl) { result.push('</ol>'); inOl = false; }
       continue;
     }
 
-    let safeLine = escapeHtml(line);
+    // Horizontal Rule
+    if (/^(\-{3,}|\*{3,}|_{3,})$/.test(rawLine)) {
+      if (inUl) { result.push('</ul>'); inUl = false; }
+      if (inOl) { result.push('</ol>'); inOl = false; }
+      result.push('<hr class="rag-hr">');
+      continue;
+    }
+
+    let safeLine = escapeHtml(rawLine);
 
     // Format bold: **text**
     safeLine = safeLine.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-    // Format code: `code`
+    // Format inline code: `code`
     safeLine = safeLine.replace(/`([^`]+)`/g, '<code class="rag-code">$1</code>');
 
     // Format links: [text](url)
@@ -77,36 +81,66 @@ export function parseMarkdownToHtml(markdown: string): string {
 
     // Headers
     if (safeLine.startsWith('#### ')) {
-      if (inList) { result.push('</ul>'); inList = false; }
+      if (inUl) { result.push('</ul>'); inUl = false; }
+      if (inOl) { result.push('</ol>'); inOl = false; }
       result.push(`<h4 class="rag-h4">${safeLine.substring(5)}</h4>`);
     } else if (safeLine.startsWith('### ')) {
-      if (inList) { result.push('</ul>'); inList = false; }
+      if (inUl) { result.push('</ul>'); inUl = false; }
+      if (inOl) { result.push('</ol>'); inOl = false; }
       result.push(`<h3 class="rag-h3">${safeLine.substring(4)}</h3>`);
     } else if (safeLine.startsWith('## ')) {
-      if (inList) { result.push('</ul>'); inList = false; }
+      if (inUl) { result.push('</ul>'); inUl = false; }
+      if (inOl) { result.push('</ol>'); inOl = false; }
       result.push(`<h2 class="rag-h2">${safeLine.substring(3)}</h2>`);
     } else if (safeLine.startsWith('&gt; ') || safeLine.startsWith('> ')) {
-      if (inList) { result.push('</ul>'); inList = false; }
+      if (inUl) { result.push('</ul>'); inUl = false; }
+      if (inOl) { result.push('</ol>'); inOl = false; }
       const bqText = safeLine.replace(/^(&gt;|>)\s*/, '');
       result.push(`<blockquote class="rag-blockquote">${bqText}</blockquote>`);
-    } else if (safeLine.startsWith('• ') || safeLine.startsWith('- ') || safeLine.startsWith('* ')) {
-      if (!inList) {
+    } else if (/^[•\-\*]\s+/.test(safeLine)) {
+      if (inOl) { result.push('</ol>'); inOl = false; }
+      if (!inUl) {
         result.push('<ul class="rag-ul">');
-        inList = true;
+        inUl = true;
       }
-      const itemText = safeLine.replace(/^[•\-\*]\s*/, '');
+      const itemText = safeLine.replace(/^[•\-\*]\s+/, '');
       result.push(`<li class="rag-li">${itemText}</li>`);
+    } else if (/^([0-9]+|[০-৯]+)\.\s+/.test(safeLine)) {
+      if (inUl) { result.push('</ul>'); inUl = false; }
+      if (!inOl) {
+        result.push('<ol class="rag-ol">');
+        inOl = true;
+      }
+      const itemText = safeLine.replace(/^([0-9]+|[০-৯]+)\.\s+/, '');
+      result.push(`<li class="rag-oli">${itemText}</li>`);
     } else {
-      if (inList) { result.push('</ul>'); inList = false; }
+      if (inUl) { result.push('</ul>'); inUl = false; }
+      if (inOl) { result.push('</ol>'); inOl = false; }
       result.push(`<p class="rag-p">${safeLine}</p>`);
     }
   }
 
-  if (inList) {
-    result.push('</ul>');
-  }
+  if (inUl) result.push('</ul>');
+  if (inOl) result.push('</ol>');
 
   return result.join('\n');
+}
+
+function attachActionListeners(row: HTMLElement, copyPayload: string, title: string): void {
+  const copyBtn = row.querySelector('.btn-copy-action') as HTMLButtonElement | null;
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      copyToClipboard(copyPayload, title);
+      const textSpan = copyBtn.querySelector('.action-label');
+      const originalText = textSpan ? textSpan.textContent : 'কপি করুন';
+      copyBtn.classList.add('copied');
+      if (textSpan) textSpan.textContent = 'কপি হয়েছে!';
+      setTimeout(() => {
+        copyBtn.classList.remove('copied');
+        if (textSpan) textSpan.textContent = originalText;
+      }, 2000);
+    });
+  }
 }
 
 export function renderBotBubble(data: any): HTMLElement {
@@ -119,10 +153,9 @@ export function renderBotBubble(data: any): HTMLElement {
     </div>
   `;
 
-  const execTime = data.trace?.execution_time_ms ?? data.execution_time_ms ?? 0;
-
   // Case 1: Out of scope
   if (data.action === 'SAFE_REFUSAL') {
+    const refusalText = data.reply_bn || 'দুঃখিত, এই তথ্যের প্রামাণ্য রেকর্ড পাওয়া যায়নি।';
     row.innerHTML = `
       ${avatar}
       <div class="bubble bot-bubble refusal-bubble">
@@ -130,13 +163,16 @@ export function renderBotBubble(data: any): HTMLElement {
           ${icons.alertTriangle}
           <span>তথ্য তালিকায় নেই</span>
         </div>
-        <p class="refusal-text">${escapeHtml(data.reply_bn || 'দুঃখিত, এই তথ্যের প্রামাণ্য রেকর্ড পাওয়া যায়নি।').replace(/\n/g, '<br>')}</p>
-        <div class="bubble-meta">
-          <span>${icons.clock} ${execTime}ms</span>
-          <span>সুরক্ষিত ফিল্টার</span>
+        <p class="refusal-text">${escapeHtml(refusalText).replace(/\n/g, '<br>')}</p>
+        <div class="msg-actions-bar">
+          <button class="btn-action-pill btn-copy-action" data-copy="${escapeHtml(refusalText)}" title="কপি করুন">
+            ${icons.copy}
+            <span class="action-label">কপি করুন</span>
+          </button>
         </div>
       </div>
     `;
+    attachActionListeners(row, refusalText, 'তথ্য');
     return row;
   }
 
@@ -154,9 +190,6 @@ export function renderBotBubble(data: any): HTMLElement {
         <p class="bubble-prompt"><strong>নির্দিষ্ট সেবা নির্বাচন করুন</strong></p>
         <p class="bubble-subtext">আপনার অনুসন্ধানের সাথে সংশ্লিষ্ট সেবাগুলোর মধ্যে বেছে নিন:</p>
         <div class="chips-container">${chipsHtml}</div>
-        <div class="bubble-meta">
-          <span>${icons.clock} ${execTime}ms</span>
-        </div>
       </div>
     `;
     return row;
@@ -190,57 +223,33 @@ export function renderBotBubble(data: any): HTMLElement {
     const ms = data.matched_service;
     const portalUrl = ms?.official_portal_url || '';
     const title = ms?.title_bn || 'সরকারি সেবা ও জরুরি তথ্য';
-
-    let actionButtonsHtml = '';
-    if (portalUrl) {
-      actionButtonsHtml += `
-        <a href="${escapeHtml(portalUrl)}" target="_blank" rel="noopener" class="contact-pill portal-pill">
-          ${icons.globe}
-          <span>অফিসিয়াল পোর্টাল</span>
-          ${icons.externalLink}
-        </a>
-      `;
-    }
-
     const copyPayload = data.reply_bn;
 
     row.innerHTML = `
       ${avatar}
-      <div class="bubble bot-bubble rich-card-bubble rag-card-bubble">
-        <!-- Card Top Bar -->
-        <div class="card-top-bar">
-          <div class="service-title-text" style="color: #0c5b5b; font-weight: 700; display: flex; align-items: center; gap: 6px;">
-            ${icons.shieldCheck} <span>Kaaz AI গাইড (লাইভ রেকর্ড)</span>
-          </div>
-          <button class="btn-copy-card" data-copy="${escapeHtml(copyPayload)}" title="তথ্য কপি করুন">
-            ${icons.copy}
-            <span>কপি</span>
-          </button>
-        </div>
-
-        ${actionButtonsHtml ? `<div class="contact-pills-wrap" style="margin: 8px 0 12px 0;">${actionButtonsHtml}</div>` : ''}
-
-        <!-- AI Rendered Markdown Content -->
+      <div class="bubble bot-bubble rag-card-bubble">
+        <!-- AI Rendered Clean Markdown Content -->
         <div class="rag-body-text">
           ${parseMarkdownToHtml(data.reply_bn)}
         </div>
 
-        <!-- Meta Footer -->
-        <div class="bubble-meta" style="margin-top: 14px; padding-top: 8px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
-          <span style="display: flex; align-items: center; gap: 4px;">${icons.shieldCheck} ১০০% প্রামাণ্য ডেটাবেজ রেকর্ড</span>
-          <span>${icons.clock} ${execTime}ms • এআই লাইভ</span>
+        <!-- Sleek Modern Action Bar (ChatGPT / Claude style) -->
+        <div class="msg-actions-bar">
+          <button class="btn-action-pill btn-copy-action" data-copy="${escapeHtml(copyPayload)}" title="উত্তর কপি করুন">
+            ${icons.copy}
+            <span class="action-label">কপি করুন</span>
+          </button>
+          ${portalUrl ? `
+          <a href="${escapeHtml(portalUrl)}" target="_blank" rel="noopener" class="btn-action-pill btn-portal-action">
+            ${icons.globe}
+            <span>অফিসিয়াল পোর্টাল</span>
+            ${icons.externalLink}
+          </a>` : ''}
         </div>
       </div>
     `;
 
-    // Attach copy event listener
-    const copyBtn = row.querySelector('.btn-copy-card') as HTMLButtonElement | null;
-    if (copyBtn) {
-      copyBtn.addEventListener('click', () => {
-        copyToClipboard(copyPayload, title);
-      });
-    }
-
+    attachActionListeners(row, copyPayload, title);
     return row;
   }
 
@@ -261,7 +270,6 @@ export function renderBotBubble(data: any): HTMLElement {
     steps: []
   };
 
-  const verifiedDate = (s.last_verified_at || '').split('T')[0] || 'আজকে';
   const totalFee = (v.fees || []).reduce((acc: number, f: any) => acc + (f.amount_bdt || 0), 0);
   const totalFeeBn = toBengaliNumber(totalFee);
   const totalFeeInWords = amountInBengaliWords(totalFee);
@@ -298,32 +306,13 @@ export function renderBotBubble(data: any): HTMLElement {
     ${avatar}
     <div class="bubble bot-bubble rich-card-bubble">
       
-      <!-- Card Title & Copy Action -->
-      <div class="card-top-bar">
-        <div class="service-title-text">${escapeHtml(s.name_bn)}</div>
-        <button class="btn-copy-card" data-copy="${escapeHtml(copyPayload)}" title="তথ্য কপি করুন">
-          ${icons.copy}
-          <span>কপি</span>
-        </button>
-      </div>
+      <!-- Service Title -->
+      <div class="service-title-text">${escapeHtml(s.name_bn)}</div>
 
       <!-- Agency Tags -->
       <div class="agency-tags-wrap">
         <span class="agency-tag">${icons.building} ${escapeHtml(s.agency_bn)}</span>
         <span class="agency-tag">${icons.building} ${escapeHtml(s.ministry_bn)}</span>
-      </div>
-
-      <!-- Contact Actions -->
-      <div class="contact-pills-wrap">
-        <a href="${escapeHtml(s.official_portal_url)}" target="_blank" rel="noopener" class="contact-pill portal-pill">
-          ${icons.globe}
-          <span>অফিসিয়াল পোর্টাল</span>
-          ${icons.externalLink}
-        </a>
-        <a href="tel:${escapeHtml(s.helpline_number)}" class="contact-pill call-pill">
-          ${icons.phone}
-          <span>হটলাইন: ${escapeHtml(s.helpline_number)}</span>
-        </a>
       </div>
 
       <!-- Official Fee Card -->
@@ -345,7 +334,7 @@ export function renderBotBubble(data: any): HTMLElement {
       <!-- Required Documents -->
       <div class="section-heading">
         ${icons.fileText}
-        <span>প্রয়োজনীয় কাগজপত্র (চেকলিস্ট)</span>
+        <span>প্রয়োজনীয় কাগজপত্র</span>
       </div>
       <ul class="native-checklist">
         ${docItems}
@@ -369,23 +358,28 @@ export function renderBotBubble(data: any): HTMLElement {
         <p>সরকারি ফি সুনির্দিষ্ট ও রসিদযুক্ত। কাউকে কোনো অতিরিক্ত অর্থ প্রদান করবেন না। কেউ অবৈধ টাকা দাবি করলে সরাসরি হটলাইন <strong>${escapeHtml(s.helpline_number)}</strong> অথবা দুদকের <strong>১০৬</strong> নম্বরে অভিযোগ জানান।</p>
       </div>
 
-      <!-- Decision Trace Footer -->
-      <div class="bubble-meta">
-        <span>গেজেট যাচাই: ${verifiedDate}</span>
-        <span>${icons.clock} ${execTime}ms • ১০০% যাচাইকৃত</span>
+      <!-- Sleek Modern Action Bar (ChatGPT / Claude style) -->
+      <div class="msg-actions-bar">
+        <button class="btn-action-pill btn-copy-action" data-copy="${escapeHtml(copyPayload)}" title="উত্তর কপি করুন">
+          ${icons.copy}
+          <span class="action-label">কপি করুন</span>
+        </button>
+        ${s.official_portal_url ? `
+        <a href="${escapeHtml(s.official_portal_url)}" target="_blank" rel="noopener" class="btn-action-pill btn-portal-action">
+          ${icons.globe}
+          <span>অফিসিয়াল পোর্টাল</span>
+          ${icons.externalLink}
+        </a>` : ''}
+        ${s.helpline_number ? `
+        <a href="tel:${escapeHtml(s.helpline_number)}" class="btn-action-pill btn-call-action">
+          ${icons.phone}
+          <span>হটলাইন: ${escapeHtml(s.helpline_number)}</span>
+        </a>` : ''}
       </div>
 
     </div>
   `;
 
-  // Attach copy event listener
-  const copyBtn = row.querySelector('.btn-copy-card') as HTMLButtonElement | null;
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      const payload = copyBtn.getAttribute('data-copy') || '';
-      copyToClipboard(payload, s.name_bn);
-    });
-  }
-
+  attachActionListeners(row, copyPayload, s.name_bn);
   return row;
 }

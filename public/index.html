@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Kaaz AI (কাজ এআই) - বাংলাদেশ নাগরিক সেবা সহায়ক</title>
+  <title>Kaaz AI (কাজ এআই) - বাংলাদেশ নাগরিক সেবা প্ল্যাটফর্ম</title>
   
   <meta name="description" content="বাংলাদেশ সরকারের সকল নাগরিক সেবার নির্ভুল সরকারি ফি, প্রয়োজনীয় কাগজপত্র ও আবেদনের সম্পূর্ণ নিয়ম জানুন সরাসরি চ্যাট করে।">
-  <meta name="theme-color" content="#0c5b5b">
+  <meta name="theme-color" content="#ffffff">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Kaaz AI">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="/assets/icon-512.png">
   <link rel="apple-touch-icon" href="/assets/icon-512.png">
   
-  <!-- Professional Bangla Google Font: Noto Sans Bengali & Hind Siliguri -->
+  <!-- Premium Modern Typography: Hind Siliguri & Inter (Claude / ChatGPT standard) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="/app.css">
 </head>
@@ -28,7 +28,7 @@
   <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
   <aside id="app-sidebar" class="app-sidebar">
     <div class="sidebar-header">
-      <img src="/assets/kaaz-sidebar-logo.svg?v=1" alt="Kaaz AI" class="sidebar-logo-img" />
+      <img src="/assets/kaaz-logo-header.svg?v=2" alt="Kaaz AI" class="sidebar-logo-img" />
       <button class="btn-sidebar-close" id="btn-close-sidebar" aria-label="বন্ধ করুন">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
           <line x1="18" y1="6" x2="6" y2="18"/>
@@ -48,7 +48,7 @@
 
     <!-- Services Quick Menu -->
     <div class="sidebar-nav-section">
-      <div class="sidebar-section-title">নাগরিক সেবা বিভাগ</div>
+      <div class="sidebar-section-title">জনপ্রিয় সেবা বিভাগ</div>
       <div class="sidebar-menu-list">
         <button class="sidebar-menu-item" data-query="জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
@@ -76,32 +76,41 @@
           </svg>
           <span>ই-নামজারি ও জমি খারিজ</span>
         </button>
+
+        <button class="sidebar-menu-item" data-query="ড্রাইভিং লাইসেন্স নবায়ন করার সরকারি ফি ও নিয়ম কি?">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+            <circle cx="12" cy="12" r="9"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span>বিআরটিএ ড্রাইভিং লাইসেন্স</span>
+        </button>
       </div>
     </div>
 
     <!-- Official Emergency Helplines -->
     <div class="sidebar-nav-section" style="margin-top: 18px;">
-      <div class="sidebar-section-title">জরুরি সরকারি হটলাইন</div>
+      <div class="sidebar-section-title">জরুরি হটলাইন</div>
       <div class="sidebar-helpline-list">
+        <a href="tel:999" class="sidebar-helpline-item">
+          <span>জাতীয় জরুরি সেবা</span>
+          <strong>৯৯৯</strong>
+        </a>
         <a href="tel:333" class="sidebar-helpline-item">
           <span>জাতীয় কল সেন্টার</span>
           <strong>৩৩৩</strong>
         </a>
-        <a href="tel:105" class="sidebar-helpline-item">
-          <span>নির্বাচন কমিশন (এনআইডি)</span>
-          <strong>১০৫</strong>
+        <a href="tel:106" class="sidebar-helpline-item">
+          <span>দুর্নীতি দমন কমিশন (দুদক)</span>
+          <strong>১০৬</strong>
         </a>
         <a href="tel:16122" class="sidebar-helpline-item">
           <span>ভূমি সেবা হটলাইন</span>
           <strong>১৬১২২</strong>
         </a>
-        <a href="tel:16445" class="sidebar-helpline-item">
-          <span>পাসপোর্ট কল সেন্টার</span>
-          <strong>১৬৪৪৫</strong>
-        </a>
-        <a href="tel:106" class="sidebar-helpline-item">
-          <span>দুর্নীতি দমন কমিশন (দুদক)</span>
-          <strong>১০৬</strong>
+        <a href="tel:105" class="sidebar-helpline-item">
+          <span>নির্বাচন কমিশন (এনআইডি)</span>
+          <strong>১০৫</strong>
         </a>
       </div>
     </div>
@@ -113,7 +122,7 @@
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           <path d="m9 12 2 2 4-4"/>
         </svg>
-        <span>১০০% যাচাইকৃত সরকারি তথ্য</span>
+        <span>সরকারি গেজেট ও আইন দ্বারা যাচাইকৃত</span>
       </div>
     </div>
   </aside>
@@ -121,10 +130,10 @@
   <!-- Main Viewport -->
   <div class="app-viewport">
     
-    <!-- Native Header (ChatGPT Mobile Style: Hamburger + Title + New Chat) -->
+    <!-- Minimalist Frosted Header (ChatGPT / Claude Style) -->
     <header class="native-header">
-      <button class="btn-menu-toggle" id="btn-toggle-sidebar" aria-label="মেনু খুলুন">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="header-svg">
+      <button class="btn-header-icon" id="btn-toggle-sidebar" aria-label="মেনু খুলুন" title="মেনু">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-svg">
           <line x1="3" y1="12" x2="21" y2="12"/>
           <line x1="3" y1="6" x2="21" y2="6"/>
           <line x1="3" y1="18" x2="21" y2="18"/>
@@ -132,14 +141,12 @@
       </button>
 
       <div class="brand-section">
-        <img src="/assets/kaaz-logo-white.svg?v=1" alt="Kaaz AI" class="header-logo-img" />
+        <img src="/assets/kaaz-logo-header.svg?v=2" alt="Kaaz AI" class="header-logo-img" />
       </div>
 
-      <!-- ChatGPT/Gemini Style Icon-Only New Chat Button -->
-      <button class="btn-header-action" id="btn-clear-chat" title="নতুন চ্যাট শুরু করুন" aria-label="নতুন চ্যাট">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="header-svg">
-          <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-          <path d="M18.375 2.625a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z"/>
+      <button class="btn-header-icon" id="btn-clear-chat" title="নতুন চ্যাট শুরু করুন" aria-label="নতুন চ্যাট">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-svg">
+          <path d="M12 5v14M5 12h14"/>
         </svg>
       </button>
     </header>
@@ -147,18 +154,17 @@
     <!-- Chat Messages Stream -->
     <main class="chat-scroll-stream" id="chat-stream">
       
-      <!-- Welcome Greeting Bubble -->
-      <div class="message-row bot">
+      <!-- Welcome Greeting Bubble (Claude / ChatGPT style) -->
+      <div class="message-row bot welcome-row">
         <div class="bot-avatar-wrap">
           <div class="bot-avatar-inner">
             <img src="/assets/icon-teal.svg" alt="Kaaz AI" class="bot-avatar-img" />
           </div>
         </div>
-        <div class="bubble bot-bubble">
-          <p class="welcome-heading">আসসালামু আলাইকুম! আমি <strong>Kaaz AI (কাজ এআই)</strong>।</p>
-          <p class="welcome-text">
-            বাংলাদেশ সরকারের যেকোনো নাগরিক সেবার (যেমন: পাসপোর্ট, ভোটার আইডি/এনআইডি, জমির নামজারি/খারিজ) 
-            <strong>সঠিক সরকারি ফি, প্রয়োজনীয় কাগজপত্র ও আবেদনের সরাসরি নিয়ম</strong> জানতে নিচে প্রশ্ন করুন।
+        <div class="bubble bot-bubble welcome-bubble">
+          <h2 class="welcome-heading">আসসালামু আলাইকুম!</h2>
+          <p class="welcome-subtext">
+            আমি <strong>Kaaz AI</strong> — বাংলাদেশ সরকারের যেকোনো নাগরিক সেবার সঠিক সরকারি ফি, প্রয়োজনীয় কাগজপত্র ও দালালমুক্ত নিয়মের ডিজিটাল গাইড। নিচে প্রশ্ন করুন বা যেকোনো বিষয় নির্বাচন করুন:
           </p>
           
           <div class="chips-container">
@@ -166,14 +172,14 @@
             <button class="native-chip-btn" data-query="১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?">পাসপোর্ট নবায়ন ফি</button>
             <button class="native-chip-btn" data-query="জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?">ই-নামজারি সরকারি ফি</button>
             <button class="native-chip-btn" data-query="পাসপোর্ট রিনিউ করতে কি কি কাগজপত্র লাগে?">পাসপোর্ট ডকুমেন্টস</button>
-            <button class="native-chip-btn" data-query="নামজারি করতে কি কি দলিল লাগে?">নামজারি ডকুমেন্টস</button>
+            <button class="native-chip-btn" data-query="উত্তরা পশ্চিম থানার ওসির নাম্বার কত?">থানার ওসির নাম্বার</button>
           </div>
         </div>
       </div>
 
     </main>
 
-    <!-- Native Bottom Chat Controls -->
+    <!-- Modern Bottom Chat Controls -->
     <footer class="native-bottom-bar" id="bottom-bar">
       <div class="bottom-container">
         
@@ -183,7 +189,7 @@
           <button class="prompt-pill" data-query="পাসপোর্টের মেয়াদ শেষ নবায়ন করব কিভাবে">পাসপোর্ট নবায়ন নিয়ম</button>
           <button class="prompt-pill" data-query="জরুরি ভিত্তিতে ই-পাসপোর্ট নবায়ন ফি কত">জরুরি পাসপোর্ট ফি</button>
           <button class="prompt-pill" data-query="ই-নামজারি করতে সরকারি ফি মোট কত টাকা">নামজারি ১,১৭০ টাকা</button>
-          <button class="prompt-pill" data-query="খারিজ খতিয়ানের জন্য অনলাইনে কিভাবে আবেদন করব">খারিজ অনলাইন আবেদন</button>
+          <button class="prompt-pill" data-query="তিতাস গ্যাস জরুরি কন্ট্রোল রুমের নাম্বার কত">তিতাস গ্যাস কন্ট্রোল রুম</button>
         </div>
 
         <!-- Chat Input Form -->
@@ -193,23 +199,23 @@
               type="text" 
               id="query-input" 
               class="native-input"
-              placeholder="কী সেবা সম্পর্কে জানতে চান লিখুন..." 
+              placeholder="যেকোনো সরকারি সেবা বা সহায়তার বিষয়ে প্রশ্ন করুন..." 
               autocomplete="off"
               enterkeyhint="send"
               required
             />
-            <button type="submit" class="btn-send-native" aria-label="পাঠান">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="send-svg">
-                <line x1="22" y1="2" x2="11" y2="13"/>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            <button type="submit" class="btn-send-native" aria-label="পাঠান" title="পাঠান">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="send-svg">
+                <line x1="12" y1="19" x2="12" y2="5"/>
+                <polyline points="5 12 12 5 19 12"/>
               </svg>
             </button>
           </div>
         </form>
         
-        <!-- শুধু "১০০% যাচাইকৃত সরকারি তথ্য" -->
+        <!-- Quiet, Elegant Disclaimer Caption -->
         <p class="disclaimer-caption">
-          ১০০% যাচাইকৃত সরকারি তথ্য
+          Kaaz AI • সরকারি সিটিজেন চার্টার ও গেজেট যাচাইকৃত তথ্য
         </p>
       </div>
     </footer>
