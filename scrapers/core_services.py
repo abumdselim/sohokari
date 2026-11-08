@@ -2780,4 +2780,1256 @@ def get_authoritative_citizen_services() -> List[CitizenService]:
         grievance_remedy="পুলিশের অনৈতিক সুবিধা দাবির বিরুদ্ধে আইজিপি কমপ্লেইন সেল মোবাইল: ০১৭৬৯৬৯৩৫৩৫, ০১৭৬৯৬৯৩৫৩৬ অথবা জাতীয় জরুরি সেবা ৯৯৯ বা grs.gov.bd-এ সরাসরি নাম প্রকাশ না করে অভিযোগ দাখিল করুন।"
     ))
 
+    # 33. হেবা দলিল (Hebe Deed / রক্তের সম্পর্কের আত্মীয়দের মধ্যে দানপত্র)
+    services.append(CitizenService(
+        service_id="bd-land-heba-deed-gift-blood-relation",
+        title_bn="রক্তের সম্পর্কের আত্মীয়দের মধ্যে হেবা দলিল (দানপত্র) রেজিস্ট্রেশন নির্দেশিকা",
+        title_en="Bangladesh Heba Deed (Gift Deed within Blood Relations) Official Registration Guide",
+        category="ভূমি ও জমিজমা সেবা",
+        department_agency="নিবন্ধন অধিদপ্তর, আইন ও বিচার বিভাগ",
+        summary="পিতা-মাতা, সন্তান, ভাই-বোন, স্বামী-স্ত্রী এবং নানা-নানী/দাদা-দাদী থেকে নাতি-নাতনীর মধ্যে স্থাবর সম্পত্তি হস্তান্তরের জন্য হেবা দলিল করা যায়। সাধারণ সাফ-কবলা দলিলের মতো এখানে কোনো শতাংশভিত্তিক উচ্চ কর নেই। অজ্ঞতার কারণে দলিল লেখক ও দালালরা লাখ লাখ টাকা চায়, অথচ মুসলিম আইনে রক্তের সম্পর্কের হেবা দলিলের সরকারি রেজিস্ট্রেশন ফি মাত্র ১০০ টাকা ও স্ট্যাম্প ২০০ টাকা!",
+        official_fees=[
+            ServiceFee(
+                category_name="হেবা রেজিস্ট্রেশন ফি (Registration Fee - নির্দিষ্ট)",
+                amount_bdt=100.0,
+                vat_included=True,
+                payment_method="সোনালী ব্যাংক ট্রেজারি চালান",
+                remarks="সম্পত্তির মূল্য যত কোটি টাকাই হোক না কেন, সরকারি রেজিস্ট্রেশন ফি মাত্র ১০০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="হেবা স্ট্যাম্প শুল্ক (Stamp Duty)",
+                amount_bdt=200.0,
+                vat_included=True,
+                payment_method="নন-জুডিশিয়াল স্ট্যাম্প",
+                remarks="নির্দিষ্ট স্ট্যাম্প ফি মাত্র ২০০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="হলফনামা স্ট্যাম্প ও এন-ফি",
+                amount_bdt=300.0,
+                vat_included=True,
+                payment_method="স্ট্যাম্প",
+                remarks="হলফনামা ৩০০ টাকার স্ট্যাম্প + এন-ফি (প্রতি ৩০০ শব্দে ২৪ টাকা)।"
+            )
+        ],
+        processing_time_sla="দলিল উপস্থাপনের দিনই সম্পাদন ও রসিদ প্রদান",
+        required_documents=[
+            RequiredDocument(
+                name="রক্তের সম্পর্কের বৈধ প্রমাণপত্র (জাতীয় পরিচয়পত্র ও ডিজিটাল জন্ম সনদ)",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি ও মূল কপি"
+            ),
+            RequiredDocument(
+                name="চেয়ারম্যান / ওয়ার্ড কাউন্সিলর কর্তৃক রক্তের সম্পর্কের পারিবারিক প্রত্যয়নপত্র",
+                is_mandatory=True,
+                format_type="মূল প্রত্যয়ন"
+            ),
+            RequiredDocument(
+                name="দাতার নামে হালনাগাদ নামজারি খতিয়ান ও ডিসিআর কপি",
+                is_mandatory=True,
+                format_type="অনলাইন কপি"
+            ),
+            RequiredDocument(
+                name="হালনাগাদ ভূমি উন্নয়ন কর (খাজনা) পরিশোধের দাখিলা",
+                is_mandatory=True,
+                format_type="অনলাইন দাখিলা রশিদ"
+            ),
+            RequiredDocument(
+                name="মূল দলিলের ফটোকপি বা বায়া দলিলের কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="রক্তের সম্পর্কের যোগ্যতা যাচাই",
+                description="হেবা শুধুমাত্র স্বামী-স্ত্রী, পিতা-মাতা ও সন্তান, ভাই-বোন, দাদা-দাদী/নানা-নানী এবং নাতি-নাতনীর মধ্যে বৈধ। রক্তের সম্পর্কের প্রমাণপত্র প্রস্তুত করুন।",
+                action_url="http://www.dolil.gov.bd",
+                tips="দূর সম্পর্কের আত্মীয় বা অনাত্মীয়দের ক্ষেত্রে সাধারণ হেবা প্রযোজ্য নয়, তখন দানপত্র (Gift) হবে।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="হেবা দলিল ড্রাফট তৈরি",
+                description="২০০ টাকার নন-জুডিশিয়াল স্ট্যাম্পে হেবা দলিলের বিবরণ ও তফসিল লিখুন। ৩০০ টাকার স্ট্যাম্পে হলফনামা যুক্ত করুন।",
+                tips="কোনো শতাংশভিত্তিক স্থানীয় সরকার কর বা উৎস কর এখানে প্রযোজ্য নয়।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="ট্রেজারি চালানে ১০০ টাকা সরকারি ফি জমা",
+                description="সোনালী ব্যাংকে রেজিস্ট্রেশন ফি বাবদ মাত্র ১০০ টাকা জমা দিন।",
+                tips="দালালরা সাধারণ দলিলের হিসাব দেখিয়ে ২০-৩০ হাজার টাকা দাবি করে, যা সম্পূর্ণ মিথ্যা।"
+            ),
+            ApplicationStep(
+                step_number=4,
+                title="সাব-রেজিস্ট্রি অফিসে সম্পাদন ও ৫২ ধারার রসিদ গ্রহণ",
+                description="দাতা ও গ্রহীতা সাব-রেজিস্ট্রারের এজলাসে উপস্থিত হয়ে ফিঙ্গারপ্রিন্ট ও স্বাক্ষর দিন। দলিল সম্পন্ন হলে ৫২ ধারার মূল প্রাপ্তি রসিদ বুঝে নিন।"
+            )
+        ],
+        official_portal_url="http://www.dolil.gov.bd",
+        application_url="http://www.dolil.gov.bd",
+        citizen_charter_url="https://mor.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: দলিল লেখক বা নকলনবিশরা হেবা দলিলের জন্য সম্পত্তির মূল্যের শতাংশ হারে টাকা দাবি করলে তা রেজিস্ট্রেশন আইনের সুস্পষ্ট লঙ্ঘন। রক্তের সম্পর্কের হেবা দলিলের সরকারি ফি মাত্র ১০০ টাকা রেজিস্ট্রেশন ও ২০০ টাকা স্ট্যাম্প। অতিরিক্ত কোনো অর্থ দেবেন না।"
+    ))
+
+    # 34. আমমোক্তারনামা দলিল (Power of Attorney - PoA)
+    services.append(CitizenService(
+        service_id="bd-land-power-of-attorney-poa-registration",
+        title_bn="আমমোক্তারনামা দলিল (Power of Attorney) সম্পাদন ও রেজিস্ট্রেশন নির্দেশিকা",
+        title_en="Bangladesh Power of Attorney (PoA) Official Deed Registration Guide",
+        category="ভূমি ও জমিজমা সেবা",
+        department_agency="নিবন্ধন অধিদপ্তর, আইন ও বিচার বিভাগ",
+        summary="জমিজমা দেখাশোনা, মামলা পরিচালনা বা রেজিস্ট্রির ক্ষমতা অন্য কাউকে অর্পণ করতে আমমোক্তারনামা (পাওয়ার অব অ্যাটর্নি) দলিল করা হয়। সাধারণ আমমোক্তারনামার সরকারি স্ট্যাম্প ফি মাত্র ১,৫০০ টাকা। সাব-রেজিস্ট্রি অফিসের দালালরা মানুষের অজ্ঞতার সুযোগ নিয়ে ৫০,০০০ টাকা পর্যন্ত দাবি করে।",
+        official_fees=[
+            ServiceFee(
+                category_name="সাধারণ আমমোক্তারনামা স্ট্যাম্প শুল্ক (General PoA)",
+                amount_bdt=1500.0,
+                vat_included=True,
+                payment_method="নন-জুডিশিয়াল স্ট্যাম্প",
+                remarks="মামলা পরিচালনা ও সম্পত্তি তদারকির জন্য নির্দিষ্ট সরকারি ফি ১৫০০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="রেজিস্ট্রেশন ফি",
+                amount_bdt=1000.0,
+                vat_included=True,
+                payment_method="ট্রেজারি চালান",
+                remarks="সরকারি ট্রেজারি চালান ফি।"
+            ),
+            ServiceFee(
+                category_name="হলফনামা স্ট্যাম্প ফি",
+                amount_bdt=300.0,
+                vat_included=True,
+                payment_method="স্ট্যাম্প",
+                remarks="আমমোক্তারদাতার হলফনামা ৩০০ টাকার স্ট্যাম্প।"
+            )
+        ],
+        processing_time_sla="দলিল উপস্থাপনের দিনই সম্পাদন ও রসিদ প্রদান",
+        required_documents=[
+            RequiredDocument(
+                name="আমমোক্তারদাতা ও আমমোক্তারগ্রহীতার জাতীয় পরিচয়পত্র (NID)",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি ও আসল কপি"
+            ),
+            RequiredDocument(
+                name="উভয় পক্ষের পাসপোর্ট সাইজ ল্যাব প্রিন্ট রঙিন ছবি",
+                is_mandatory=True,
+                format_type="ছবি"
+            ),
+            RequiredDocument(
+                name="তফসিলভুক্ত সম্পত্তির হালনাগাদ খতিয়ান, ডিসিআর ও খাজনার দাখিলা",
+                is_mandatory=True,
+                format_type="অনলাইন কপি"
+            ),
+            RequiredDocument(
+                name="মূল দলিলের কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="আমমোক্তারনামার ধরন নির্বাচন",
+                description="সাধারণ আমমোক্তারনামা (General PoA) নাকি বিক্রির ক্ষমতাসহ অপ্রত্যাহারযোগ্য (Irrevocable PoA) তা নির্ধারণ করুন। সাধারণ তদারকি ও মামলা লড়তে সাধারণ আমমোক্তারনামা যথেষ্ট।",
+                action_url="http://www.dolil.gov.bd",
+                tips="অপ্রয়োজনে বিক্রির ক্ষমতাসম্পন্ন আমমোক্তারনামা দেবেন না।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="১,৫০০ টাকার স্ট্যাম্পে দলিল প্রস্তুত",
+                description="নির্ধারিত স্ট্যাম্পে দলিলের শর্তাবলি লিখুন। ক্ষমতার পরিধি ও মেয়াদ স্পষ্টভাবে উল্লেখ করুন।",
+                tips="কোনো অনির্দিষ্ট বা অস্পষ্ট শর্ত রাখবেন না।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="সাব-রেজিস্ট্রারের এজলাসে উভয়ের উপস্থিতি",
+                description="দাতা ও গ্রহীতা নিজে উপস্থিত হয়ে সাব-রেজিস্ট্রারের সামনে স্বাক্ষর ও বায়োমেট্রিক প্রদান করুন।",
+                tips="উপস্থিতি ছাড়া কোনো ভুয়া আমমোক্তারনামা আইনত কার্যকর হয় না।"
+            )
+        ],
+        official_portal_url="http://www.dolil.gov.bd",
+        application_url="http://www.dolil.gov.bd",
+        citizen_charter_url="https://mor.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: দালালদের মাধ্যমে কোনো ব্ল্যাঙ্ক স্ট্যাম্পে সই করবেন না। পাওয়ার অব অ্যাটর্নি অপব্যবহার করে জমি আত্মসাতের ঘটনা ঘটে। সরকারি নিয়ম মেনে সুনির্দিষ্ট দায়িত্বের জন্য সীমিত ক্ষমতার আমমোক্তারনামা সম্পাদন করুন।"
+    ))
+
+    # 35. রাজউক / উন্নয়ন কর্তৃপক্ষ ভবন নির্মাণ নকশা অনুমোদন (Building Plan)
+    services.append(CitizenService(
+        service_id="bd-rajuk-building-plan-ecps-approval",
+        title_bn="রাজউক / উন্নয়ন কর্তৃপক্ষ ভবন নির্মাণ প্ল্যান (ই-সিপিএস) অনুমোদন নির্দেশিকা",
+        title_en="RAJUK / Development Authority Building Construction Permit (e-CPS) Guide",
+        category="আবাসন ও নগর উন্নয়ন",
+        department_agency="রাজধানী উন্নয়ন কর্তৃপক্ষ (রাজউক) / সিডিএ / কেডিএ, গৃহায়ন ও গণপূর্ত মন্ত্রণালয়",
+        summary="বাড়ি বা বাণিজ্যিক ভবন নির্মাণ করতে রাজউক বা স্থানীয় উন্নয়ন কর্তৃপক্ষের অনুমোদন আবশ্যক। রাজউক চত্বরে দালাল ও কর্মচারীরা প্ল্যান পাসের নামে ফ্ল্যাটপ্রতি বা তলাপ্রতি লাখ লাখ টাকা ঘুষ দাবি করে। বর্তমানে e-CPS (ইলেকট্রনিক কনস্ট্রাকশন পারমিটিং সিস্টেম) পোর্টালে সম্পূর্ণ অনলাইনে নকশা সাবমিট করে নির্ধারিত সরকারি স্কয়ারমিটার ফি দিয়ে ছাড়পত্র পাওয়া যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="ভূমি ব্যবহার ছাড়পত্র ফি (Land Use Clearance - LUT)",
+                amount_bdt=1500.0,
+                vat_included=True,
+                payment_method="অনলাইন ব্যাংক গেটওয়ে",
+                remarks="আবাসিক প্লটের ছাড়পত্র ফি।"
+            ),
+            ServiceFee(
+                category_name="ভবন নির্মাণ অনুমোদন ফি (Building Permit Fee - প্রতি বর্গমিটার)",
+                amount_bdt=50.0,
+                vat_included=True,
+                payment_method="ব্যাংক চালান / পে-অর্ডার",
+                remarks="বিল্ট-আপ এরিয়া অনুযায়ী প্রতি বর্গমিটারে সরকার নির্ধারিত প্রমিত রেট।"
+            ),
+            ServiceFee(
+                category_name="বিশেষ প্রকল্প ও বাণিজ্যিক নকশা পরীক্ষণ ফি",
+                amount_bdt=5000.0,
+                vat_included=True,
+                payment_method="অনলাইন",
+                remarks="বাণিজ্যিক ও বহুতল ভবনের ক্ষেত্রে প্রযোজ্য।"
+            )
+        ],
+        processing_time_sla="ভূমি ছাড়পত্র: ১৫ কার্যদিবস | চূড়ান্ত নির্মাণ পারমিট: ৩০ থেকে ৪৫ কার্যদিবস",
+        required_documents=[
+            RequiredDocument(
+                name="অনুমোদিত স্থপতি ও প্রকৌশলী (IEB/IAB সদস্য) কর্তৃক প্রস্তুতকৃত অটোক্যাড ও পিডিএফ নকশা",
+                is_mandatory=True,
+                format_type="ডিজিটাল সিএডি ও ড্রয়িং ফাইল"
+            ),
+            RequiredDocument(
+                name="জমির মালিকানা দলিল, হালনাগাদ নামজারি খতিয়ান ও খাজনার দাখিলা",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="মৃত্তিকা পরীক্ষা প্রতিবেদন (Soil Test Report) ও স্ট্রাকচারাল ডিজাইন",
+                is_mandatory=True,
+                format_type="পিডিএফ ফাইল"
+            ),
+            RequiredDocument(
+                name="আবেদনকারীর জাতীয় পরিচয়পত্র (NID)",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="ই-সিপিএস পোর্টালে আবেদন শুরু",
+                description="http://ecps.rajuk.gov.bd ওয়েবসাইটে গিয়ে একাউন্ট খুলুন। আপনার অনুমোদিত স্থপতিকে ডিজাইনার হিসেবে অ্যাসাইন করুন।",
+                action_url="http://ecps.rajuk.gov.bd",
+                tips="রাজউকের তালিকাভুক্ত স্থপতি (IAB রেজিস্টার্ড) ছাড়া নকশা সিস্টেমে আপলোড করা যায় না।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="ভূমি ব্যবহার ছাড়পত্র ও নকশা আপলোড",
+                description="মাস্টার প্ল্যান অনুযায়ী জমির ছাড়পত্র নিন। এরপর স্ট্রাকচারাল, আর্কিটেকচারাল এবং প্লাম্বিং নকশা আপলোড করুন।",
+                tips="সেটব্যাক রুলস (রাস্তা ও চারপাশের ফাঁকা জায়গা) শতভাগ মেনে ড্রয়িং করুন।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="অনলাইনে সরকারি ফি পরিশোধ ও অনুমোদন",
+                description="সিস্টেমে প্রদর্শিত সরকারি স্কয়ারমিটার ফি ব্যাংকে জমা দিন। রাজউক অথরাইজড অফিসার ও বিসি কমিটি অনলাইনে রিভিউ করে ডিজিটাল কিউআর কোডযুক্ত প্ল্যান অনুমোদন করবেন।"
+            )
+        ],
+        official_portal_url="http://www.rajuk.gov.bd",
+        application_url="http://ecps.rajuk.gov.bd",
+        citizen_charter_url="https://rajuk.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: রাজউক ভবনে ঘুরঘুর করা দালাল বা অসাধু কর্মচারীরা প্ল্যান পাস করিয়ে দেওয়ার নামে লাখ লাখ টাকা ঘুষ দাবি করে। e-CPS সিস্টেম সম্পূর্ণ ডিজিটাল, যেখানে ফাইলের প্রতি মুহূর্তের স্ট্যাটাস ট্র্যাকিং থাকে। ফাইল আটকে রাখলে সরাসরি রাজউক চেয়ারম্যান বা দুদকের হটলাইন ১০৬-এ অভিযোগ দিন।"
+    ))
+
+    # 36. সিটি কর্পোরেশন ও পৌরসভা হোল্ডিং ট্যাক্স নির্ধারণ ও নাম পরিবর্তন
+    services.append(CitizenService(
+        service_id="bd-citycorp-holding-tax-assessment-mutation",
+        title_bn="সিটি কর্পোরেশন ও পৌরসভা হোল্ডিং ট্যাক্স নির্ধারণ ও নাম পরিবর্তন নির্দেশিকা",
+        title_en="City Corporation & Pourashava Holding Tax Assessment & Ownership Transfer Guide",
+        category="স্থানীয় সরকার ও আবাসন",
+        department_agency="স্থানীয় সরকার বিভাগ, সিটি কর্পোরেশন ও পৌরসভাসমূহ",
+        summary="নতুন বাড়ি বা ফ্ল্যাট ক্রয়ের পর পৌরসভা বা সিটি কর্পোরেশনে হোল্ডিং নম্বর নিতে ও ট্যাক্স নির্ধারণ করতে গেলে রাজস্ব পরিদর্শকরা ইচ্ছাকৃতভাবে ট্যাক্স বাড়িয়ে দিয়ে পরে কমানোর নামে মোটা অঙ্কের ঘুষ দাবি করে। অনলাইনে সরকারি ফর্মে আবেদন করে সরকার নির্ধারিত ভাড়ার শতাংশ হারে স্বচ্ছভাবে হোল্ডিং নির্ধারণ করা যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="হোল্ডিং নির্ধারণ আবেদন ফি",
+                amount_bdt=200.0,
+                vat_included=True,
+                payment_method="পৌরসভা / সিটি কর্পোরেশন ক্যাশ কাউন্টার বা অনলাইন",
+                remarks="সরকারি আবেদন ফরম ফি মাত্র ২০০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="হোল্ডিং নাম পরিবর্তন / নামজারি ফি (ফ্ল্যাট/বাড়ি)",
+                amount_bdt=500.0,
+                vat_included=True,
+                payment_method="অনলাইন পেমেন্ট",
+                remarks="মালিকানা পরিবর্তনের সরকারি নির্দিষ্ট ফি।"
+            ),
+            ServiceFee(
+                category_name="বাৎসরিক পৌর কর (Property Tax Rate)",
+                amount_bdt=7.0,
+                vat_included=True,
+                payment_method="অনলাইন বিকাশ / ব্যাংক",
+                remarks="ভবনের বাৎসরিক মূল্যায়নকৃত ভাড়ার ৭% থেকে ১২% (বাণিজ্যিক হলে প্রযোজ্য রেট)।"
+            )
+        ],
+        processing_time_sla="সরেজমিনে পরিদর্শনের পর সর্বোচ্চ ১৫ কার্যদিবসের মধ্যে চূড়ান্ত হোল্ডিং নম্বর বরাদ্দ",
+        required_documents=[
+            RequiredDocument(
+                name="আবেদনকারীর জাতীয় পরিচয়পত্র (NID) কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="জমির মূল রেজিস্ট্রিকৃত দলিল ও হালনাগাদ নামজারি খতিয়ান",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="অনুমোদিত ভবনের নকশা (রাজউক বা পৌরসভা কর্তৃক অনুমোদিত প্ল্যান)",
+                is_mandatory=True,
+                format_type="নকশার কপি"
+            ),
+            RequiredDocument(
+                name="বিদ্যুৎ বিল বা গ্যাস বিলের কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="আবেদন ফরম পূরণ ও জমা",
+                description="সংশ্লিষ্ট জোনাল অফিসে রাজস্ব বিভাগে 'হোল্ডিং নির্ধারণ' বা 'নাম পরিবর্তনের' ফরম পূরণ করুন। দলিলের কপি ও এনআইডি সংযুক্ত করুন।",
+                action_url="https://lgd.gov.bd",
+                tips="বাড়ির মোট আয়তন ও তলার সংখ্যা সঠিকভাবে লিখুন।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="রাজস্ব পরিদর্শক কর্তৃক সরেজমিনে পরিদর্শন",
+                description="অ্যাসেসর বা পরিদর্শক বাড়ি পরিদর্শন করে বাৎসরিক আনুমানিক ভাড়া হিসাব করবেন।",
+                tips="অযৌক্তিক উচ্চ ভাড়া ধার্য করলে রাজস্ব কর্মকর্তা বরাবরে আপত্তি দাখিল করা যায়।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="হোল্ডিং প্লেট ও বার্ষিক কর পরিশোধ",
+                description="নির্ধারিত হোল্ডিং ট্যাক্স ব্যাংকে বা অনলাইনে জমা দিয়ে ডিজিটাল ট্যাক্স রসিদ সংগ্রহ করুন।"
+            )
+        ],
+        official_portal_url="https://lgd.gov.bd",
+        application_url="https://lgd.gov.bd",
+        citizen_charter_url="https://lgd.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: রাজস্ব পরিদর্শক বা দালালদের ট্যাক্স কমিয়ে দেওয়ার আশ্বাসে কোনো নগদ টাকা দেবেন না। ট্যাক্স অ্যাসেসমেন্টে অনিয়ম হলে সিটি কর্পোরেশনের রিভিউ বোর্ডে (Review Board) আবেদন করে আইনানুযায়ী কর পুনর্নির্ধারণ করা যায়।"
+    ))
+
+    # 37. ফার্মেসির ড্রাগ লাইসেন্স (ঔষধ প্রশাসন অধিদপ্তর - DGDA)
+    services.append(CitizenService(
+        service_id="bd-dgda-drug-license-pharmacy-guide",
+        title_bn="ফার্মেসির ড্রাগ লাইসেন্স (নতুন ও নবায়ন) আবেদন ও সরকারি ফি নির্দেশিকা",
+        title_en="DGDA Retail Pharmacy Drug License Application, Renewal & Official Fee Guide",
+        category="স্বাস্থ্য ও বাণিজ্য লাইসেন্স",
+        department_agency="ঔষধ প্রশাসন অধিদপ্তর (DGDA), স্বাস্থ্য সেবা বিভাগ",
+        summary="ফার্মেসি বা ঔষধের দোকান পরিচালনা করতে ঔষধ প্রশাসন অধিদপ্তর থেকে ড্রাগ লাইসেন্স নেওয়া আইনত বাধ্যতামূলক। ড্রাগ সুপারের নামে দালাল চক্র ফার্মেসি মালিকদের কাছ থেকে ৫০,০০০ থেকে ১ লাখ টাকা পর্যন্ত ঘুষ দাবি করে। অথচ সরকারি ট্রেজারি চালান ফি সিটি কর্পোরেশনে মাত্র ৫,০০০ টাকা এবং ইউনিয়ন পরিষদে মাত্র ২,৫০০ টাকা! dgda.gov.bd পোর্টালে সরাসরি ফি দিয়ে অনলাইনে আবেদন করা যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="খুচরা ড্রাগ লাইসেন্স (সিটি কর্পোরেশন ও জেলা সদর এলাকা)",
+                amount_bdt=5000.0,
+                vat_included=True,
+                payment_method="সোনালী ব্যাংক ট্রেজারি চালান (কোড: ১-২৭০১-০০০১-১৮১৬)",
+                remarks="সরকারি নির্ধারিত প্রমিত ফি ৫,০০০ টাকা (+১৫% ভ্যাট ৭৫০ টাকা = মোট ৫,৭৫০ টাকা)।"
+            ),
+            ServiceFee(
+                category_name="খুচরা ড্রাগ লাইসেন্স (পৌরসভা এলাকা)",
+                amount_bdt=3000.0,
+                vat_included=True,
+                payment_method="ট্রেজারি চালান",
+                remarks="পৌরসভা এলাকার জন্য ৩,০০০ টাকা (+১৫% ভ্যাট)।"
+            ),
+            ServiceFee(
+                category_name="খুচরা ড্রাগ লাইসেন্স (ইউনিয়ন পরিষদ ও অন্যান্য এলাকা)",
+                amount_bdt=2500.0,
+                vat_included=True,
+                payment_method="ট্রেজারি চালান",
+                remarks="গ্রামাঞ্চলের জন্য মাত্র ২,৫০০ টাকা (+ভ্যাট)।"
+            ),
+            ServiceFee(
+                category_name="ড্রাগ লাইসেন্স নবায়ন ফি (প্রতি ২ বছর পর পর)",
+                amount_bdt=2500.0,
+                vat_included=True,
+                payment_method="ট্রেজারি চালান",
+                remarks="মূল ফির ৫০% হারে পরিশোধযোগ্য।"
+            )
+        ],
+        processing_time_sla="দোকান পরিদর্শন ও ড্রাগ সুপারের তদন্ত সাপেক্ষে সর্বোচ্চ ৩০ কার্যদিবস",
+        required_documents=[
+            RequiredDocument(
+                name="বাংলাদেশ ফার্মেসী কাউন্সিল কর্তৃক প্রদত্ত ফার্মাসিস্ট রেজিস্ট্রেশন সনদ (গ্রেড-সি/বি/এ)",
+                is_mandatory=True,
+                format_type="ফার্মাসিস্ট সার্টিফিকেট ও রেজিস্ট্রেশন কার্ড",
+                how_to_obtain="ফার্মেসী কাউন্সিল থেকে কোর্স সম্পন্ন করে প্রাপ্ত সনদ"
+            ),
+            RequiredDocument(
+                name="ফার্মাসিস্টের অঙ্গীকারনামা (উক্ত ফার্মেসিতে দায়িত্ব পালনের সম্মতিপত্র)",
+                is_mandatory=True,
+                format_type="স্বাক্ষরিত ফরম"
+            ),
+            RequiredDocument(
+                name="হালনাগাদ ট্রেড লাইসেন্স (ফার্মেসি বা ড্রাগ স্টোর উল্লেখসহ)",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="দোকানের ভাড়ার চুক্তিপত্র অথবা নিজস্ব দোকান হলে দলিলের ফটোকপি",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="আবেদনকারীর জাতীয় পরিচয়পত্র (NID) ও পাসপোর্ট সাইজ ছবি",
+                is_mandatory=True,
+                format_type="ফটোকপি ও ছবি"
+            ),
+            RequiredDocument(
+                name="সরকারি ট্রেজারি চালানের মূল কপি",
+                is_mandatory=True,
+                format_type="ব্যাংক রসিদ"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="ডিজিডিএ অনলাইন পোর্টালে ফর্ম-৭ পূরণ",
+                description="https://dgda.gov.bd ওয়েবসাইটে যান। 'অনলাইন ড্রাগ লাইসেন্সিং সিস্টেম' (ODLS)-এ গিয়ে আবেদনকারীর তথ্য ও দোকানের ঠিকানা দিন।",
+                action_url="https://dgda.gov.bd",
+                tips="দোকানে কমপক্ষে ১২০ বর্গফুট পাকা ফ্লোর ও রেফ্রিজারেটরের ব্যবস্থা থাকতে হবে।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="ফার্মাসিস্ট সনদ ও চালানের কপি আপলোড",
+                description="ফার্মাসিস্ট রেজিস্ট্রেশন সার্টিফিকেট, ট্রেড লাইসেন্স এবং সোনালী ব্যাংকে জমা দেওয়া সরকারি চালানের কপি আপলোড করুন।",
+                tips="ভাড়া করা বা ভুয়া ফার্মাসিস্ট সার্টিফিকেট দিলে লাইসেন্স বাতিল ও মামলা হতে পারে।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="ড্রাগ সুপার কর্তৃক সরেজমিনে দোকান পরিদর্শন",
+                description="জেলা ঔষধ পরিদর্শক (Drug Superintendent) আপনার দোকান পরিদর্শন করে তাপমাত্রা নিয়ন্ত্রণ ব্যবস্থা ও ফ্রিজ যাচাই করবেন।",
+                tips="কোনো কর্মচারীকে ঘুষ দেবেন না। সরকারি চালানের রসিদ প্রদর্শন করুন।"
+            ),
+            ApplicationStep(
+                step_number=4,
+                title="ডিজিটাল ড্রাগ লাইসেন্স (ফর্ম-৮) গ্রহণ",
+                description="আবেদন অনুমোদিত হলে কিউআর কোডযুক্ত আসল ডিজিটাল ড্রাগ লাইসেন্স সিস্টেমে চলে আসবে, যা ডাউনলোড করে দোকানে বাঁধাই করে ঝুলিয়ে রাখুন।"
+            )
+        ],
+        official_portal_url="https://dgda.gov.bd",
+        application_url="https://dgda.gov.bd",
+        citizen_charter_url="https://dgda.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: ঔষধ প্রশাসনের দালালরা ৫০ হাজার থেকে লাখ টাকা না দিলে লাইসেন্স হবে না বলে ভীতি ছড়ায়। ODLS সম্পূর্ণ অনলাইন সিস্টেম। আপনার দোকানে ফার্মাসিস্ট ও প্রয়োজনীয় ড্রাগ স্টোরেজ থাকলে ড্রাগ সুপার লাইসেন্স দিতে বাধ্য। ঘুষ দাবি করলে সরাসরি ডিজি বরাবরে অভিযোগ করুন।",
+        grievance_remedy="ড্রাগ লাইসেন্সে ঘুষ দাবি করলে ঔষধ প্রশাসন অধিদপ্তরের হটলাইন ০২-২২২২৮০৯৮০ অথবা দুদক হটলাইন ১০৬-এ সরাসরি অভিযোগ জানান।"
+    ))
+
+    # 38. বিএসটিআই (BSTI) পণ্যের গুণগত মান সনদ ও সিএম লাইসেন্স (CM License)
+    services.append(CitizenService(
+        service_id="bd-bsti-cm-license-product-standard",
+        title_bn="বিএসটিআই (BSTI) পণ্যের গুণগত মান সনদ ও সিএম লাইসেন্স নির্দেশিকা",
+        title_en="BSTI Product Quality Certification Marks (CM License) Official Guide",
+        category="শিল্প ও মান নিয়ন্ত্রণ",
+        department_agency="বাংলাদেশ স্ট্যান্ডার্ডস অ্যান্ড টেস্টিং ইনস্টিটিউশন (BSTI), শিল্প মন্ত্রণালয়",
+        summary="খাদ্য, পানীয়, কসমেটিকস, ব্যাটারি, সিমেন্ট বা প্যাকেজজাত পণ্য বাজারজাত করতে বিএসটিআই মানচিহ্ন (CM License) বাধ্যতামূলক। বিএসটিআই ভবনের আশেপাশে দালালরা লাখ লাখ টাকা ঘুষ দাবি করে। bsti.gov.bd পোর্টালে সরাসরি আবেদন করে সরকার নির্ধারিত ল্যাব টেস্ট ফি ও লাইসেন্স ফি দিয়ে প্রমিত মান নিশ্চিত করে লাইসেন্স পাওয়া যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="সিএম লাইসেন্স প্রাথমিক আবেদন ফি",
+                amount_bdt=1000.0,
+                vat_included=True,
+                payment_method="সোনালী ব্যাংক চালান বা অনলাইন পেমেন্ট",
+                remarks="প্রতি আবেদনের সরকারি ফি ১,০০০ টাকা (+১৫% ভ্যাট)।"
+            ),
+            ServiceFee(
+                category_name="ল্যাবরেটরি পরীক্ষণ ফি (পণ্যভেদে নির্ধারিত)",
+                amount_bdt=3000.0,
+                vat_included=True,
+                payment_method="ব্যাংক পে-অর্ডার / চালান",
+                remarks="খাদ্য ও কেমিক্যালের রাসায়নিক টেস্ট ফি ৩,০০০ থেকে ১০,০০০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="বার্ষিক মার্কিং ফি (Marking Fee)",
+                amount_bdt=0.1,
+                vat_included=True,
+                payment_method="অনলাইন",
+                remarks="মোট বিক্রয় মূল্যের ০.০৭% থেকে ০.১০% অথবা পণ্যের বাৎসরিক সর্বনিম্ন ফি।"
+            )
+        ],
+        processing_time_sla="কারখানা পরিদর্শন ও ল্যাব টেস্টের পর সর্বোচ্চ ৩০ থেকে ৪৫ কার্যদিবস",
+        required_documents=[
+            RequiredDocument(
+                name="হালনাগাদ ট্রেড লাইসেন্স ও ই-টিআইএন সার্টিফিকেট",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="ট্রেডমার্ক রেজিস্ট্রেশন বা ট্রেডমার্ক প্রাপ্তির আবেদনপত্রের কপি",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="কারখানার লে-আউট প্ল্যান ও প্রস্তুত প্রক্রিয়ার প্রবাহচিত্র (Flow Chart)",
+                is_mandatory=True,
+                format_type="পিডিএফ ফাইল"
+            ),
+            RequiredDocument(
+                name="কোয়ালিটি কন্ট্রোল যন্ত্রপাতি ও ল্যাব টেকনিশিয়ানের বিবরণ",
+                is_mandatory=True,
+                format_type="নথিপত্র"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="বিএসটিআই অনলাইন পোর্টালে ই-সিএম আবেদন",
+                description="https://bsti.gov.bd পোর্টালে গিয়ে 'e-CM System'-এ উদ্যোক্তা প্রোফাইল খুলুন। পণ্যের বিডিএস (BDS) স্ট্যান্ডার্ড অনুযায়ী আবেদন ফরম পূরণ করুন।",
+                action_url="https://bsti.gov.bd",
+                tips="পণ্যের মোড়কে প্রয়োজনীয় লেবেলিং নীতিমালা মেনে চলুন।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="কারখানা পরিদর্শন ও পণ্যের নমুনা সংগ্রহ",
+                description="বিএসটিআই কর্মকর্তা কারখানা পরিদর্শন করে উৎপাদন প্রক্রিয়া দেখবেন এবং তিনটি সিলযুক্ত নমুনা ল্যাবে পরীক্ষার জন্য সংগ্রহ করবেন।",
+                tips="পরীক্ষক কর্মকর্তাকে কোনো নগদ অর্থ দেওয়া আইনত নিষিদ্ধ।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="ল্যাব রিপোর্ট ও সিএম লাইসেন্স প্রদান",
+                description="বিএসটিআই ন্যাশনাল ল্যাবে নমুনা পাস হলে আপনাকে কিউআর কোডযুক্ত আসল সিএম লাইসেন্স দেওয়া হবে যা ৩ বছর মেয়াদে বৈধ থাকে।"
+            )
+        ],
+        official_portal_url="https://bsti.gov.bd",
+        application_url="https://bsti.gov.bd",
+        citizen_charter_url="https://bsti.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: বিএসটিআই লাইসেন্স করে দেওয়ার নামে মধ্যস্থতাকারীরা নকল সনদপত্র বানিয়ে দেয়। বাজারে ভ্রাম্যমাণ আদালত বিএসটিআই লাইসেন্স বারকোড স্ক্যান করে ভুয়া প্রমাণ পেলে প্রতিষ্ঠান সিলগালা ও জেল জরিমানা করে। শুধুমাত্র অফিশিয়াল পোর্টালে সরাসরি আবেদন করুন।"
+    ))
+
+    # 39. ট্রেডমার্ক ও ব্র্যান্ড নাম নিবন্ধন (ডিপিডিটি - DPDT)
+    services.append(CitizenService(
+        service_id="bd-dpdt-trademark-brand-registration",
+        title_bn="ট্রেডমার্ক ও ব্র্যান্ড নাম রেজিস্ট্রেশন নির্দেশিকা (ডিপিডিটি)",
+        title_en="Bangladesh DPDT Trademark & Brand Name Official Registration Guide",
+        category="মেধাসম্পদ ও ব্যবসা",
+        department_agency="পেটেন্ট, শিল্প-নকশা ও ট্রেডমার্ক অধিদপ্তর (ডিপিডিটি), শিল্প মন্ত্রণালয়",
+        summary="নিজের ব্যবসা, পণ্যের ব্র্যান্ড নাম, স্লোগান বা লোগোর আইনি মালিকানা সুরক্ষিত রাখতে ট্রেডমার্ক নিবন্ধন করতে হয়। আইনি দালালরা একটি ট্রেডমার্কের জন্য ৫০,০০০ থেকে ১ লাখ টাকা পর্যন্ত ফি আদায় করে। অথচ শিল্প মন্ত্রণালয়ের ডিপিডিটি পোর্টালে ট্রেডমার্ক আবেদনের সরকারি ট্রেজারি চালান ফি মাত্র ৩,৫০০ টাকা (+১৫% ভ্যাট)। ঘরে বসেই অনলাইনে নিজের ব্র্যান্ড নাম সুরক্ষিত রাখা সম্ভব।",
+        official_fees=[
+            ServiceFee(
+                category_name="ট্রেডমার্ক প্রাথমিক আবেদন সরকারি ফি (Form TM-1)",
+                amount_bdt=4025.0,
+                vat_included=True,
+                payment_method="সোনালী ব্যাংক ট্রেজারি চালান (কোড: ১-৩৬৩১-০০০১-২৬৮১) বা অনলাইন",
+                remarks="মূল আবেদন ফি ৩,৫০০ টাকা + ১৫% ভ্যাট ৫২৫ টাকা = ৪,০২৫ টাকা।"
+            ),
+            ServiceFee(
+                category_name="ট্রেডমার্ক জার্নাল প্রকাশনা ফি",
+                amount_bdt=1725.0,
+                vat_included=True,
+                payment_method="ট্রেজারি চালান",
+                remarks="পরীক্ষায় পাস করার পর সরকারি গেজেট জার্নালে প্রকাশের ফি (১৫০০ + ভ্যাট)।"
+            ),
+            ServiceFee(
+                category_name="চূড়ান্ত ট্রেডমার্ক রেজিস্ট্রেশন সার্টিফিকেট ফি (১০ বছর মেয়াদি)",
+                amount_bdt=17250.0,
+                vat_included=True,
+                payment_method="ট্রেজারি চালান",
+                remarks="গেজেটে কোনো আপত্তি না এলে ১০ বছরের সুরক্ষার জন্য ১৫,০০০ টাকা (+ভ্যাট)।"
+            )
+        ],
+        processing_time_sla="প্রাথমিক পরীক্ষা ও স্বীকৃতি: ১-২ মাস | জার্নাল ও চূড়ান্ত সনদ: ৯ থেকে ১২ মাস",
+        required_documents=[
+            RequiredDocument(
+                name="ব্র্যান্ডের নাম ও লোগোর পরিষ্কার জেপিজি/পিডিএফ কপি (লোগো স্পেসিফিকেশন)",
+                is_mandatory=True,
+                format_type="ডিজিটাল গ্রাফিক্স কপি"
+            ),
+            RequiredDocument(
+                name="আবেদনকারীর জাতীয় পরিচয়পত্র (NID) কপি বা কোম্পানির ট্রেড লাইসেন্স",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="পণ্য বা সেবার আন্তর্জাতিক নাইস শ্রেণিবিন্যাস (Nice Classification - Class 1 to 45)",
+                is_mandatory=True,
+                format_type="শ্রেণি উল্লেখ"
+            ),
+            RequiredDocument(
+                name="সোনালী ব্যাংকে সরকারি ট্রেজারি চালানের মূল কপি",
+                is_mandatory=True,
+                format_type="ব্যাংক রসিদ"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="ডিপিডিটি পোর্টালে ট্রেডমার্ক অনুসন্ধান (Search)",
+                description="https://dpdt.gov.bd ওয়েবসাইটে গিয়ে 'Public Search'-এ আপনার ব্র্যান্ড নামটি অন্য কারও নামে ইতোমধ্যে আছে কিনা তা বিনামূল্যে চেক করুন।",
+                action_url="https://dpdt.gov.bd",
+                tips="নামটি বিদ্যমান কোনো জনপ্রিয় ব্র্যান্ডের কাছাকাছি বা বিভ্রান্তিকর হতে পারবে না।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="টিএম-১ (TM-1) ফর্ম পূরণ ও চালান জমা",
+                description="সোনালী ব্যাংকে ৪,০২৫ টাকার চালান জমা দিয়ে টিএম-১ ফর্ম পূরণ করে অনলাইনে আবেদন সাবমিট করুন। তাৎক্ষণিক একটি অ্যাপ্লিকেশন নম্বর পাবেন।",
+                tips="অ্যাপ্লিকেশন নম্বর পাওয়ার দিন থেকেই আপনি আপনার নামের সাথে 'TM' চিহ্ন ব্যবহার করতে পারবেন।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="ট্রেডমার্ক এক্সামিনার কর্তৃক পরীক্ষা ও জার্নাল প্রকাশ",
+                description="রেজিস্ট্রার নাম পরীক্ষা করে অনুমতি দিলে সরকারি ট্রেডমার্ক জার্নালে দুই মাসের জন্য প্রকাশ করা হবে যাতে কারো কোনো আপত্তি থাকলে জানাতে পারে।",
+                tips="আপত্তি না এলে চূড়ান্ত সার্টিফিকেট প্রস্তুত হয়।"
+            ),
+            ApplicationStep(
+                step_number=4,
+                title="১০ বছর মেয়াদি ট্রেডমার্ক সার্টিফিকেট ও ® সিম্বল লাভ",
+                description="চূড়ান্ত ফি জমা দিয়ে সিলমোহরযুক্ত ট্রেডমার্ক রেজিস্ট্রেশন সার্টিফিকেট নিন। এরপর থেকে আপনার ব্র্যান্ড নামের পাশে '®' (Registered) চিহ্ন ব্যবহার করতে পারবেন এবং কেউ কপি করলে কপিরাইট ও ট্রেডমার্ক আইনে ক্ষতিপূরণ দাবি করতে পারবেন।"
+            )
+        ],
+        official_portal_url="https://dpdt.gov.bd",
+        application_url="https://dpdt.gov.bd",
+        citizen_charter_url="https://dpdt.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: দালালরা একটি ট্রেডমার্কের জন্য লাখ টাকা হাতিয়ে নেয়। আপনি নিজে সরাসরি ডিপিডিটির ওয়েবসাইটে ফর্ম পূরণ করে সরকারি চালানে ৩,৫০০ টাকা জমা দিয়ে আবেদন সম্পন্ন করতে পারেন। কোনো তৃতীয় পক্ষের কোনো প্রভাব খাটানোর নিয়ম নেই।"
+    ))
+
+    # 40. কপিরাইট নিবন্ধন (কপিরাইট অফিস বাংলাদেশ)
+    services.append(CitizenService(
+        service_id="bd-copyright-registration-software-creative",
+        title_bn="কপিরাইট নিবন্ধন (সফটওয়্যার, বই ও ক্রিয়েটিভ কাজ) নির্দেশিকা",
+        title_en="Bangladesh Copyright Office Software, Book & Creative Work Registration Guide",
+        category="মেধাসম্পদ ও আইটি",
+        department_agency="বাংলাদেশ কপিরাইট অফিস, সংস্কৃতি বিষয়ক মন্ত্রণালয়",
+        summary="নিজের লেখা বই, মৌলিক গান, চলচ্চিত্র, ফটোগ্রাফি অথবা তৈরি করা সফটওয়্যার ও মোবাইল অ্যাপের কোড যাতে কেউ চুরি বা পাইরেসি করতে না পারে, সেজন্য কপিরাইট নিবন্ধন করা আবশ্যক। কপিরাইট অফিসের দালালরা ২০,০০০-৩০,০০০ টাকা দাবি করে, অথচ সফটওয়্যারের সরকারি ফি মাত্র ২,০০০ টাকা এবং বই বা সাহিত্যকর্মের ফি মাত্র ১,০০০ টাকা!",
+        official_fees=[
+            ServiceFee(
+                category_name="সফটওয়্যার / কম্পিউটার প্রোগ্রাম / মোবাইল অ্যাপ কপিরাইট ফি",
+                amount_bdt=2000.0,
+                vat_included=True,
+                payment_method="সোনালী ব্যাংক ট্রেজারি চালান (কোড: ১-৩৪৩১-০০০১-১৮১৬)",
+                remarks="আইটি সফটওয়্যারের সরকারি রেজিস্ট্রেশন ফি মাত্র ২,০০০ টাকা (+১৫% ভ্যাট)।"
+            ),
+            ServiceFee(
+                category_name="সাহিত্যকর্ম / বই / পাণ্ডুলিপি কপিরাইট ফি",
+                amount_bdt=1000.0,
+                vat_included=True,
+                payment_method="ট্রেজারি চালান",
+                remarks="বই ও নাটকের সরকারি নির্দিষ্ট ফি ১,০০০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="সঙ্গীতকর্ম ও অডিও-ভিডিও অ্যালবাম ফি",
+                amount_bdt=1500.0,
+                vat_included=True,
+                payment_method="ট্রেজারি চালান",
+                remarks="গান ও ভিডিও অ্যালবামের সরকারি ফি।"
+            )
+        ],
+        processing_time_sla="আবেদন ও গেজেট নোটিশের পর সর্বোচ্চ ৩০ কার্যদিবসের মধ্যে চূড়ান্ত কপিরাইট সনদ",
+        required_documents=[
+            RequiredDocument(
+                name="সফটওয়্যারের সোর্স কোড ও ইউজার ম্যানুয়াল (অথবা বই/গানের মূল কপি - ২ সেট)",
+                is_mandatory=True,
+                format_type="সিডি/ডিভিডি অথবা প্রিন্ট কপি"
+            ),
+            RequiredDocument(
+                name="আবেদনকারী/রচয়িতার জাতীয় পরিচয়পত্র (NID) কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="স্বত্বাধিকারীর অঙ্গীকারনামা (মৌলিক সৃষ্টির ঘোষণাপত্র)",
+                is_mandatory=True,
+                format_type="স্বাক্ষরিত মূল ফরম"
+            ),
+            RequiredDocument(
+                name="সরকারি ট্রেজারি চালানের মূল কপি",
+                is_mandatory=True,
+                format_type="ব্যাংক রসিদ"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="ই-কপিরাইট পোর্টালে অনলাইন আবেদন",
+                description="http://www.copyrightoffice.gov.bd ওয়েবসাইটে যান। 'অনলাইন কপিরাইট আবেদন' সিস্টেমে গিয়ে ফর্ম-২ পূরণ করুন।",
+                action_url="http://www.copyrightoffice.gov.bd",
+                tips="কাজটি সম্পূর্ণ নিজের মৌলিক সৃষ্টি হতে হবে, অন্য কারো কাজ থেকে কপি করা যাবে না।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="সোনালী ব্যাংকে সরকারি চালান ফি জমা",
+                description="সফটওয়্যারের জন্য ২,০০০ টাকা বা বইয়ের জন্য ১,০০০ টাকা চালানে জমা দিয়ে রসিদ সিস্টেমে আপলোড করুন।",
+                tips="কোনো মধ্যস্থতাকারীকে অতিরিক্ত টাকা দেবেন না।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="কপিরাইট রেজিস্ট্রারের চূড়ান্ত সনদ লাভ",
+                description="কপিরাইট পরীক্ষক যাচাই শেষে আপনাকে সরকারি সিলমোহরযুক্ত কপিরাইট রেজিস্ট্রেশন সার্টিফিকেট প্রদান করবেন যা রচয়িতার আজীবন এবং মৃত্যুর পর আরও ৬০ বছর পর্যন্ত কার্যকর থাকে।"
+            )
+        ],
+        official_portal_url="http://www.copyrightoffice.gov.bd",
+        application_url="http://www.copyrightoffice.gov.bd",
+        citizen_charter_url="https://copyrightoffice.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: কপিরাইট সনদ সম্পূর্ণ আইনগত বিষয়। দালাল ছাড়াই যেকোনো প্রোগ্রামার বা লেখক ঘরে বসে অনলাইনে সরাসরি সরকারের কপিরাইট রেজিস্ট্রি থেকে নিজের সৃষ্টি নিরাপদ রাখতে পারেন।"
+    ))
+
+    # 41. ওয়াসা (WASA) নতুন পানির সংযোগ ও গভীর নলকূপ লাইসেন্স
+    services.append(CitizenService(
+        service_id="bd-wasa-new-water-sewerage-connection",
+        title_bn="ওয়াসা (WASA) নতুন পানির সংযোগ ও গভীর নলকূপ অনুমতি নির্দেশিকা",
+        title_en="WASA New Water & Sewerage Connection Official Procedure & Fee Guide",
+        category="নাগরিক ইউটিলিটি ও পানি",
+        department_agency="ঢাকা / চট্টগ্রাম / রাজশাহী / খুলনা ওয়াসা, স্থানীয় সরকার বিভাগ",
+        summary="নতুন বাড়ি বা ভবনে ওয়াসার পানির লাইন ও স্যুয়ারেজ সংযোগ নিতে স্থানীয় দালালরা ৫০,০০০ থেকে ১ লাখ টাকা পর্যন্ত ঘুষ দাবি করে। ওয়াসা এখন ই-ওয়াসা (e-WASA) অনলাইন পোর্টালে ডিজিটাল আবেদন চালু করেছে, যেখানে নির্ধারিত সংযোগ চার্জ ও মিটারের ডিমান্ড নোট দিয়ে সরাসরি বৈধ পানির সংযোগ পাওয়া যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="আবেদন ফরম ফি (আবাসিক)",
+                amount_bdt=300.0,
+                vat_included=True,
+                payment_method="অনলাইন পেমেন্ট গেটওয়ে / ব্যাংক",
+                remarks="সরকারি আবেদন ফি মাত্র ৩০০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="পানি ও স্যুয়ারেজ সংযোগ জামানত ও প্রসেসিং ফি (ডিমান্ড নোট)",
+                amount_bdt=5000.0,
+                vat_included=True,
+                payment_method="ব্যাংক পে-অর্ডার / চালান",
+                remarks="পাইপের ব্যাস (ডায়ামিটার যেমন: ৩/৪ ইঞ্চি বা ১ ইঞ্চি) অনুযায়ী ওয়াসা নির্ধারিত সরকারি ডিমান্ড নোট।"
+            ),
+            ServiceFee(
+                category_name="রাস্তা খনন ক্ষতিপূরণ ফি (সিটি কর্পোরেশন রোড কাটিং চার্জ)",
+                amount_bdt=3000.0,
+                vat_included=True,
+                payment_method="চালান",
+                remarks="রাস্তা কাটার প্রয়োজন হলে প্রযোজ্য সরকারি ফি।"
+            )
+        ],
+        processing_time_sla="কারিগরি পরিদর্শন ও ডিমান্ড নোটের পর সর্বোচ্চ ১৫ কার্যদিবস",
+        required_documents=[
+            RequiredDocument(
+                name="আবেদনকারীর জাতীয় পরিচয়পত্র (NID)",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="জমির মালিকানা দলিল ও হালনাগাদ নামজারি খতিয়ান",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="সিটি কর্পোরেশন / পৌরসভার অনুমোদিত হোল্ডিং ট্যাক্স দাখিলা",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="রাজউক বা স্থানীয় কর্তৃপক্ষের অনুমোদিত ভবনের নকশা (প্ল্যান)",
+                is_mandatory=True,
+                format_type="নকশার কপি"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="ই-ওয়াসা পোর্টালে অনলাইন আবেদন",
+                description="https://dwasa.org.bd (বা নিজ ওয়াসার পোর্টালে) যান। 'New Connection' অপশনে ক্লিক করে ৩০০ টাকা ফি দিয়ে আবেদন করুন।",
+                action_url="https://dwasa.org.bd",
+                tips="আপনার নিকটবর্তী মূল পানির পাইপলাইনের অবস্থান ও দূরত্ব উল্লেখ করুন।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="ওয়াসা প্রকৌশলী কর্তৃক প্রাক্কলন ও ডিমান্ড নোট জারি",
+                description="ওয়াসা জোনাল প্রকৌশলী এসে পাইপের সাইজ পরীক্ষা করবেন এবং সরকারি ডিমান্ড নোট ইস্যু করবেন।",
+                tips="প্রকৌশলী বা পরিদর্শককে কোনো অবৈধ টাকা দেবেন না।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="ডিমান্ড নোট পরিশোধ ও মিটার সংযোগ",
+                description="অনুমোদিত ব্যাংকে ডিমান্ড নোটের টাকা জমা দিলে ওয়াসা অনুমোদিত প্লাম্বার এসে পাইপ সংযোগ করে ডিজিটাল ওয়াটার মিটার স্থাপন করবে।"
+            )
+        ],
+        official_portal_url="https://dwasa.org.bd",
+        application_url="https://dwasa.org.bd",
+        citizen_charter_url="https://dwasa.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: অবৈধ পানির লাইন বা চোরাই মিটার নিলে ওয়াসার ভ্রাম্যমাণ আদালত লাখ টাকা জরিমানা ও পানির লাইন চিরতরে বিচ্ছিন্ন করে দেয়। শুধুমাত্র বৈধ ই-ওয়াসা সিস্টেমের মাধ্যমে ডিমান্ড নোট দিয়ে সংযোগ নিন।"
+    ))
+
+    # 42. তিতাস / বাখরাবাদ গ্যাস গ্রাহক নাম পরিবর্তন ও বিল সংশোধন
+    services.append(CitizenService(
+        service_id="bd-titas-gas-bill-correction-name-change",
+        title_bn="আবাসিক গ্যাস সংযোগের নাম পরিবর্তন ও বিল সংশোধন নির্দেশিকা (তিতাস/বাখরাবাদ)",
+        title_en="Residential Gas Connection Ownership Transfer & Bill Correction Guide (Titas/Bakhrabad)",
+        category="বিদ্যুৎ ও জ্বালানি",
+        department_agency="তিতাস গ্যাস টিঅ্যান্ডডি কোং লি. / বাখরাবাদ গ্যাস, পেট্রোবাংলা",
+        summary="ফ্ল্যাট বা বাড়ি কেনার পর তিতাস গ্যাস বিলের কাগজপত্রে পূর্ববর্তী মালিকের নাম পরিবর্তন করা এবং বকেয়া বা অতিরিক্ত বিল সংশোধন করতে গ্যাস অফিসের দালালরা ২০,০০০-৩০,০০০ টাকা হাতিয়ে নেয়। গ্যাস অফিসে নির্ধারিত ফরমে আবেদন করে নামমাত্র সরকারি ফি দিয়ে সরাসরি নিজের নামে গ্যাস সংযোগ স্থানান্তর করা যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="গ্রাহক নাম পরিবর্তন ফি (আবাসিক)",
+                amount_bdt=500.0,
+                vat_included=True,
+                payment_method="তিতাস ব্যাংকিং বুথ / অনলাইন",
+                remarks="সরকারি নির্ধারিত নির্দিষ্ট ফি মাত্র ৫০০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="বকেয়া বিল ও ডাটা এন্ট্রি ভুল সংশোধন ফি",
+                amount_bdt=0.0,
+                vat_included=True,
+                payment_method="সম্পূর্ণ বিনামূল্যে (০ টাকা)",
+                remarks="বিলিং ভুলের জন্য কোনো ফি নেই।"
+            )
+        ],
+        processing_time_sla="আবেদন ও মূল দলিল যাচাইয়ের পর সর্বোচ্চ ১০ থেকে ১৫ কার্যদিবস",
+        required_documents=[
+            RequiredDocument(
+                name="নতুন মালিকের জাতীয় পরিচয়পত্র (NID) কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="ফ্ল্যাট বা বাড়ির রেজিস্ট্রিকৃত সাফ-কবলা দলিল ও নামজারি খতিয়ান",
+                is_mandatory=True,
+                format_type="ফটোকপি ও আসল কপি প্রদর্শন"
+            ),
+            RequiredDocument(
+                name="সর্বশেষ পরিশোধিত গ্যাস বিলের মূল কপি (কোনো বকেয়া থাকা যাবে না)",
+                is_mandatory=True,
+                format_type="ব্যাংক সিলযুক্ত রসিদ"
+            ),
+            RequiredDocument(
+                name="২০০ টাকার নন-জুডিশিয়াল স্ট্যাম্পে অঙ্গীকারনামা",
+                is_mandatory=True,
+                format_type="হলফনামা"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="তিতাস জোনাল অফিসে নির্ধারিত ফর্মে আবেদন",
+                description="সংশ্লিষ্ট তিতাস রাজস্ব শাখায় গিয়ে 'নাম পরিবর্তন ফরম' সংগ্রহ করুন। দলিলের ফটোকপি ও বকেয়াহীন বিলের কপি সংযুক্ত করুন।",
+                action_url="https://titasgas.org.bd",
+                tips="আগের মালিকের কোনো বকেয়া বিল থাকলে তা আগেই ক্লিয়ার করতে হবে।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="৫০০ টাকা সরকারি ফি জমা ও শুনানি",
+                description="ব্যাংক বুথে ৫০০ টাকার রসিদ জমা দিন। রাজস্ব কর্মকর্তা দলিল যাচাই করে মূল নথিতে নতুন মালিকের নাম আপডেট করবেন।",
+                tips="পরবর্তী মাস থেকেই নতুন মালিকের নামে গ্যাস বিল আসবে।"
+            )
+        ],
+        official_portal_url="https://titasgas.org.bd",
+        application_url="https://titasgas.org.bd",
+        citizen_charter_url="https://titasgas.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: তিতাস গ্যাস চত্বরে দালালদের ফাঁদে পড়বেন না। নিজের দলিলের কপি ও পরিশোধিত বিল জমা দিলে সরকারিভাবে মাত্র ৫০০ টাকায় নাম পরিবর্তন হয়ে যায়।"
+    ))
+
+    # 43. কৃষি ঋণ ও বীজ/সার প্রণোদনা প্রাপ্তি (কৃষি সম্প্রসারণ অধিদপ্তর)
+    services.append(CitizenService(
+        service_id="bd-dae-agricultural-loan-subsidy-seed",
+        title_bn="৪% রেয়াতি সুদের সরকারি কৃষি ঋণ ও বিনামূল্যে বীজ/সার প্রণোদনা নির্দেশিকা",
+        title_en="Bangladesh 4% Concessionary Agricultural Loan & Free Seed/Fertilizer Subsidy Guide",
+        category="কৃষি ও খাদ্য নিরাপত্তা",
+        department_agency="কৃষি সম্প্রসারণ অধিদপ্তর (DAE) ও বাংলাদেশ ব্যাংক",
+        summary="প্রকৃত কৃষকদের ফসল উৎপাদন, ডাল, তৈলবীজ, ভুট্টা ও মশলা চাষে সরকার মাত্র ৪% রেয়াতি সুদে ব্যাংক ঋণ এবং বিনামূল্যে সার-বীজ প্রণোদনা দেয়। গ্রামের দালাল ও টাউটরা ঋণ তুলে দেওয়ার নামে কৃষকদের কাছ থেকে ১০-২০% কমিশন কেটে নেয়। অথচ কৃষক কৃষি কার্ড ও ১০ টাকার ব্যাংক হিসাব দিয়ে সরাসরি ব্যাংকে গিয়ে কোনো ঘুষ বা কমিশন ছাড়াই সরকারি ঋণ পাওয়ার অধিকার রাখেন।",
+        official_fees=[
+            ServiceFee(
+                category_name="কৃষি ঋণ আবেদন সরকারি ফি",
+                amount_bdt=0.0,
+                vat_included=True,
+                payment_method="সম্পূর্ণ বিনামূল্যে (০ টাকা)",
+                remarks="ঋণ আবেদনের কোনো ফি নেই।"
+            ),
+            ServiceFee(
+                category_name="কৃষকের ১০ টাকার ব্যাংক অ্যাকাউন্ট খোলার ফি",
+                amount_bdt=10.0,
+                vat_included=True,
+                payment_method="সোনালী / অগ্রণী / জনতা / বাংলাদেশ কৃষি ব্যাংক",
+                remarks="মাত্র ১০ টাকা প্রাথমিক জমা দিয়ে সরকারি একাউন্ট খোলা যায়।"
+            )
+        ],
+        processing_time_sla="ইউনিয়ন কৃষি কমিটি ও ব্যাংক ফিল্ড যাচাইয়ের পর সর্বোচ্চ ১০ কার্যদিবসের মধ্যে ঋণ বিতরণ",
+        required_documents=[
+            RequiredDocument(
+                name="উপসহকারী কৃষি কর্মকর্তা (BS) কর্তৃক প্রদত্ত কৃষক কার্ড / কৃষি উপকরণ সহায়তা কার্ড",
+                is_mandatory=True,
+                format_type="মূল কার্ড"
+            ),
+            RequiredDocument(
+                name="কৃষকের জাতীয় পরিচয়পত্র (NID) কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="১০ টাকার সরকারি ব্যাংক অ্যাকাউন্টের চেক বই বা পাস বইয়ের কপি",
+                is_mandatory=True,
+                format_type="কপি"
+            ),
+            RequiredDocument(
+                name="জমির খতিয়ান বা বর্গাচাষী হলে জমির মালিকের প্রত্যয়নপত্র",
+                is_mandatory=True,
+                format_type="কাউন্সিলর/মেম্বার সনদ"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="কৃষক কার্ড প্রস্তুত ও ১০ টাকার ব্যাংক একাউন্ট খোলা",
+                description="ইউনিয়ন উপসহকারী কৃষি কর্মকর্তার কাছে গিয়ে কৃষক কার্ড সংগ্রহ করুন এবং বাংলাদেশ কৃষি ব্যাংক বা সোনালী ব্যাংকে মাত্র ১০ টাকায় হিসাব খুলুন।",
+                action_url="https://dae.gov.bd",
+                tips="বর্গাচাষীদের জন্যও বিশেষ সরকারি ঋণের বিধান রয়েছে।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="ব্যাংক শাখায় সরাসরি কৃষি ঋণ আবেদন",
+                description="কোনো দালালের মাধ্যমে না গিয়ে সরাসরি ব্যাংক ম্যানেজারের সাথে দেখা করে কৃষি ঋণের ফর্ম পূরণ করুন।",
+                tips="বাংলাদেশ ব্যাংকের নিয়ম অনুযায়ী কৃষি ঋণে কোনো গোপন চার্জ বা বাড়তি কমিশন নেওয়া সম্পূর্ণ নিষিদ্ধ।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="সরাসরি অ্যাকাউন্টে ঋণ বিতরণ ও ফসল কর্তন শেষে পরিশোধ",
+                description="ব্যাংক আপনার জমিন পরিদর্শন করে সরাসরি আপনার একাউন্টে ৪% সুদে ঋণের টাকা পাঠিয়ে দেবে। ফসল উঠলে কিস্তিতে ঋণ পরিশোধ করুন।"
+            )
+        ],
+        official_portal_url="https://dae.gov.bd",
+        application_url="https://dae.gov.bd",
+        citizen_charter_url="https://dae.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: কোনো মেম্বার বা টাউটকে ঋণের টাকার ভাগ দেবেন না। সরকার কৃষকদের সর্বোচ্চ অগ্রাধিকার দিয়েছে। কোনো ব্যাংক ম্যানেজার কৃষি ঋণ দিতে গড়িমসি বা ঘুষ চাইলে বাংলাদেশ ব্যাংকের আর্থিক অন্তর্ভুক্তি বিভাগ বা হটলাইন ১৬২৩৬-এ সরাসরি জানান।"
+    ))
+
+    # 44. ডেইরি ও পোল্ট্রি খামার নিবন্ধন ও প্রাণিসম্পদ প্রণোদনা (DLS)
+    services.append(CitizenService(
+        service_id="bd-dls-dairy-poultry-farm-registration",
+        title_bn="ডেইরি ও পোল্ট্রি খামার নিবন্ধন এবং সরকারি অনুদান/ভ্যাকসিন নির্দেশিকা",
+        title_en="Department of Livestock Services (DLS) Dairy & Poultry Farm Registration Guide",
+        category="প্রাণিসম্পদ ও কৃষি",
+        department_agency="প্রাণিসম্পদ অধিদপ্তর (DLS), মৎস্য ও প্রাণিসম্পদ মন্ত্রণালয়",
+        summary="গরু, ছাগল ও মুরগির খামার করে তরুণ উদ্যোক্তারা সরকারি আর্থিক প্রণোদনা, স্বল্প সুদে ঋণ এবং বিনামূল্যে ভ্যাকসিন পেতে পারেন। প্রাণিসম্পদ অফিসের দালালরা খামার নিবন্ধনের নামে হাজার হাজার টাকা নেয়, অথচ প্রাণিসম্পদ অধিদপ্তরে খামার নিবন্ধন সম্পূর্ণ বিনামূল্যে করা যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="খামার নিবন্ধন সরকারি ফি",
+                amount_bdt=0.0,
+                vat_included=True,
+                payment_method="সম্পূর্ণ বিনামূল্যে (০ টাকা)",
+                remarks="খামার নিবন্ধনের কোনো ফি নেই।"
+            ),
+            ServiceFee(
+                category_name="সরকারি ভ্যাকসিন (তড়কা, বাদলা, ক্ষুরারোগ, রানীক্ষেত)",
+                amount_bdt=10.0,
+                vat_included=True,
+                payment_method="উপজেলা প্রাণিসম্পদ হাসপাতাল কাউন্টার",
+                remarks="সরকারি প্রমিত মূল্য মাত্র ৫ থেকে ১০ টাকা মাত্র।"
+            )
+        ],
+        processing_time_sla="আবেদন ও পরিদর্শনের পর সর্বোচ্চ ৭ কার্যদিবসের মধ্যে নিবন্ধন সনদ প্রদান",
+        required_documents=[
+            RequiredDocument(
+                name="উদ্যোক্তার জাতীয় পরিচয়পত্র (NID) কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="খামারের জমির মালিকানা বা ভাড়ার চুক্তিপত্র",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="ইউনিয়ন পরিষদ / পৌরসভার ট্রেড লাইসেন্স",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="পশু বা পাখির সংখ্যা ও বিবরণ সম্বলিত তালিকা",
+                is_mandatory=True,
+                format_type="তালিকা"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="উপজেলা প্রাণিসম্পদ অফিসে নির্ধারিত ফর্মে আবেদন",
+                description="উপজেলা প্রাণিসম্পদ কর্মকর্তার (ULO) কার্যালয়ে খামার নিবন্ধনের ফরম পূরণ করে জমা দিন।",
+                action_url="https://dls.gov.bd",
+                tips="খামারে বর্জ্য ব্যবস্থাপনা ও বায়োসিকিউরিটি নিশ্চিত রাখুন।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="ভেটেরিনারি সার্জন কর্তৃক খামার পরিদর্শন",
+                description="সরকারি ডাক্তার খামার পরিদর্শন করে প্রাণিস্বাস্থ্য ও পরিবেশগত রিপোর্ট প্রদান করবেন।",
+                tips="পরিদর্শনের জন্য কোনো ফি দেওয়ার প্রয়োজন নেই।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="খামার রেজিস্ট্রেশন নম্বর ও প্রণোদনা গ্রহণ",
+                description="নিবন্ধন সনদ পেলে আপনি খামারি হিসেবে সরকারের যেকোনো জরুরি দুর্যোগকালীন নগদ সহায়তা ও ফ্রি ভ্যাকসিনেশনের অগ্রাধিকার পাবেন।"
+            )
+        ],
+        official_portal_url="https://dls.gov.bd",
+        application_url="https://dls.gov.bd",
+        citizen_charter_url="https://dls.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: প্রাণিসম্পদ অধিদপ্তরের সেবা সম্পূর্ণ কৃষিবান্ধব। কোনো তৃতীয় পক্ষের মাধ্যমে টাকা লেনদেন করবেন না। সরাসরি উপজেলা প্রাণিসম্পদ হাসপাতালে যোগাযোগ করুন।"
+    ))
+
+    # 45. পররাষ্ট্র ও শিক্ষা মন্ত্রণালয়ে সার্টিফিকেট সত্যায়ন (Attestation)
+    services.append(CitizenService(
+        service_id="bd-mofa-certificate-attestation-apostille",
+        title_bn="পররাষ্ট্র ও শিক্ষা মন্ত্রণালয়ে শিক্ষাগত সনদ ও জন্ম নিবন্ধন সত্যায়ন নির্দেশিকা",
+        title_en="Ministry of Foreign Affairs (MOFA) & MOE Certificate Attestation Free Guide",
+        category="শিক্ষা ও বৈদেশিক সনদ",
+        department_agency="কনস্যুলার ও কল্যাণ অনুবিভাগ, পররাষ্ট্র মন্ত্রণালয় / শিক্ষা মন্ত্রণালয়",
+        summary="উচ্চশিক্ষা, চাকরি বা পারিবারিক ভিসায় বিদেশে যাওয়ার জন্য এসএসসি, এইচএসসি, ডিগ্রি সার্টিফিকেট, বিবাহ সনদ (নিকাহনামা) এবং জন্ম নিবন্ধন পররাষ্ট্র ও শিক্ষা মন্ত্রণালয় থেকে সত্যায়ন (Attestation) করা আবশ্যক। পররাষ্ট্র মন্ত্রণালয়ের গেটে দালাল চক্র প্রতি সনদের জন্য ১,০০০ থেকে ৫,০০০ টাকা হাতিয়ে নেয়। অথচ স্বয়ং পররাষ্ট্র ও শিক্ষা মন্ত্রণালয়ের কাউন্টারে যেকোনো নাগরিকের সার্টিফিকেট সত্যায়ন সম্পূর্ণ বিনামূল্যে (ফি ০ টাকা) করা হয়!",
+        official_fees=[
+            ServiceFee(
+                category_name="পররাষ্ট্র মন্ত্রণালয় কনস্যুলার সত্যায়ন সরকারি ফি",
+                amount_bdt=0.0,
+                vat_included=True,
+                payment_method="সম্পূর্ণ বিনামূল্যে (০ টাকা)",
+                remarks="মন্ত্রণালয়ের কাউন্টারে কোনো ফি নেই।"
+            ),
+            ServiceFee(
+                category_name="শিক্ষা মন্ত্রণালয় সত্যায়ন ফি",
+                amount_bdt=0.0,
+                vat_included=True,
+                payment_method="সম্পূর্ণ বিনামূল্যে (০ টাকা)",
+                remarks="সরকারি ফি ০ টাকা।"
+            )
+        ],
+        processing_time_sla="সকালে জমা দিলে দুপুর ২টার মধ্যে একই দিনে ডিজিটাল কিউআর সত্যায়ন সম্পন্ন",
+        required_documents=[
+            RequiredDocument(
+                name="সংশ্লিষ্ট শিক্ষাবোর্ড / বিশ্ববিদ্যালয় কর্তৃক মূল সনদের পেছনের পাতায় সত্যায়ন সিল",
+                is_mandatory=True,
+                format_type="মূল সনদ ও ১ সেট পরিষ্কার ফটোকপি"
+            ),
+            RequiredDocument(
+                name="আবেদনকারীর আসল পাসপোর্ট বা জাতীয় পরিচয়পত্র (NID)",
+                is_mandatory=True,
+                format_type="মূল কপি প্রদর্শন"
+            ),
+            RequiredDocument(
+                name="বিবাহ সনদ বা জন্ম নিবন্ধন হলে আইন মন্ত্রণালয়ের সত্যায়ন সিল",
+                is_mandatory=False,
+                format_type="মূল কপি"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="বোর্ড বা বিশ্ববিদ্যালয় থেকে প্রাথমিক সত্যায়ন",
+                description="যে শিক্ষাবোর্ড বা ভার্সিটি থেকে পাস করেছেন, তাদের পরীক্ষা নিয়ন্ত্রক শাখা থেকে সনদের পেছনে ভেরিফিকেশন সিল করিয়ে নিন।",
+                action_url="https://mofa.gov.bd",
+                tips="বোর্ড সিল ছাড়া মন্ত্রণালয় সরাসরি সত্যায়ন করে না।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="শিক্ষা মন্ত্রণালয়ে সত্যায়ন (সেগুনবাগিচা কাউন্টার)",
+                description="শিক্ষা মন্ত্রণালয়ের সত্যায়ন কাউন্টারে মূল সনদ দেখান। কোনো ফি ছাড়াই তাৎক্ষণিক সিল ও সাক্ষর করে দেওয়া হবে।",
+                tips="দালালরা বলে ভেতরে ঢোকা যায় না—সাধারণ নাগরিকরা সরাসরি কাউন্টারে যেতে পারেন।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="পররাষ্ট্র মন্ত্রণালয়ের কনস্যুলার উইংয়ে জমা",
+                description="সেগুনবাগিচায় পররাষ্ট্র মন্ত্রণালয়ের কনস্যুলার কাউন্টারে সকাল ৯টা থেকে বেলা ১২টার মধ্যে জমা দিন। কোনো ফরমের দরকার নেই। কাউন্টার থেকে টোকেন নিন।",
+                tips="দুপুর ১টা থেকে ৩টার মধ্যে টোকেন দেখালেই কিউআর কোডযুক্ত ডিজিটাল পররাষ্ট্র সত্যায়ন স্টিকার লাগানো মূল সনদ আপনার হাতে তুলে দেওয়া হবে।"
+            )
+        ],
+        official_portal_url="https://mofa.gov.bd",
+        application_url="https://attest.mofa.gov.bd",
+        citizen_charter_url="https://mofa.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: পররাষ্ট্র মন্ত্রণালয়ের গেটের বাইরে দাঁড়িয়ে থাকা কোনো দালালকে নিজের মূল্যবান আসল সনদপত্র দেবেন না। তারা অনেক সময় ভুয়া বা জাল স্টিকার লাগিয়ে দেয় যা এম্বাসিতে ধরা পড়লে ভিসা বাতিল ও আজীবন ব্ল্যাকলিস্ট হতে পারেন। মন্ত্রণালয় নিজেই সম্পূর্ণ বিনামূল্যে দ্রুততম সময়ে আসল সিল দিয়ে থাকে।"
+    ))
+
+    # 46. বেসরকারি শিক্ষক নিবন্ধন (NTRCA) সনদ ও তথ্য সংশোধন
+    services.append(CitizenService(
+        service_id="bd-ntrca-teacher-registration-certificate-correction",
+        title_bn="এনটিআরসিএ (NTRCA) শিক্ষক নিবন্ধন সনদ সংশোধন ও ডুপ্লিকেট কপি উত্তোলন",
+        title_en="NTRCA Teacher Registration Certificate Correction & Duplicate Copy Guide",
+        category="শিক্ষা ও শিক্ষক নিয়োগ",
+        department_agency="বেসরকারি শিক্ষক নিবন্ধন ও প্রত্যয়ন কর্তৃপক্ষ (NTRCA), শিক্ষা মন্ত্রণালয়",
+        summary="এমপিওভুক্ত স্কুল, কলেজ ও মাদ্রাসায় শিক্ষকতার জন্য এনটিআরসিএ নিবন্ধন সনদ অপরিহার্য। সনদে নাম ভুল বা সনদ হারিয়ে গেলে দালাল চক্র শিক্ষকদের কাছ থেকে ২০,০০০ থেকে ৫০,০০০ টাকা পর্যন্ত দাবি করে। এনটিআরসিএ পোর্টালে সরাসরি সরকার নির্ধারিত ফি সোনালী ব্যাংকে জমা দিয়ে নির্ভুলভাবে সনদ সংশোধন ও উত্তোলন করা যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="সনদ তথ্য সংশোধন ফি",
+                amount_bdt=500.0,
+                vat_included=True,
+                payment_method="সোনালী ব্যাংক ট্রেজারি পে-অর্ডার / চালান",
+                remarks="সরকারি প্রমিত ফি ৫০০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="হারানো সনদের ডুপ্লিকেট (দ্বিতীয় কপি) ফি",
+                amount_bdt=1000.0,
+                vat_included=True,
+                payment_method="সোনালী ব্যাংক",
+                remarks="ডুপ্লিকেট কপি ফি ১,০০০ টাকা।"
+            )
+        ],
+        processing_time_sla="আবেদন ও কাগজপত্র যাচাইয়ের পর সর্বোচ্চ ১৫ থেকে ২০ কার্যদিবস",
+        required_documents=[
+            RequiredDocument(
+                name="আবেদনকারীর জাতীয় পরিচয়পত্র (NID) ও এসএসসি সার্টিফিকেটের সত্যায়িত কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="এনটিআরসিএ মূল সনদপত্র (সংশোধনের ক্ষেত্রে) অথবা জিডি কপি (হারিয়ে গেলে)",
+                is_mandatory=True,
+                format_type="মূল কপি / জিডি"
+            ),
+            RequiredDocument(
+                name="পত্রিকায় প্রকাশিত হারানো বিজ্ঞপ্তি বা নাম ভুলের বিজ্ঞপ্তির মূল কাটিং",
+                is_mandatory=True,
+                format_type="পত্রিকার কাটিং"
+            ),
+            RequiredDocument(
+                name="সোনালী ব্যাংকের পে-অর্ডারের মূল কপি",
+                is_mandatory=True,
+                format_type="ব্যাংক ড্রাফট"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="এনটিআরসিএ সচিব বরাবর আবেদন",
+                description="http://www.ntrca.gov.bd সাইট থেকে নির্ধারিত আবেদন ফরম ডাউনলোড করে নির্ভুলভাবে পূরণ করুন। পে-অর্ডার ও প্রয়োজনীয় কাগজপত্র সংযুক্ত করুন।",
+                action_url="http://www.ntrca.gov.bd",
+                tips="আপনার রোল নম্বর, ব্যাচ ও রেজিস্ট্রেশন নম্বর সতর্কভাবে লিখুন।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="সরাসরি এনটিআরসিএ কার্যালয়ে জমা বা রেজিস্ট্রি ডাকযোগে প্রেরণ",
+                description="রেড ক্রিসেন্ট বোরাক টাওয়ার, ইস্কাটন গার্ডেন রোড, ঢাকায় এনআইটিআরসিএ কাউন্টারে জমা দিন অথবা ডাকযোগে পাঠান।",
+                tips="কোনো বহিরাগত দালালের সাথে আর্থিক লেনদেন করবেন না।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="সংশোধিত নতুন সনদ গ্রহণ",
+                description="যাচাই কমিটি অনুমোদন দিলে আপনাকে নতুন মুদ্রিত আসল সনদ প্রদান করা হবে।"
+            )
+        ],
+        official_portal_url="http://www.ntrca.gov.bd",
+        application_url="http://www.ntrca.gov.bd",
+        citizen_charter_url="https://ntrca.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: শিক্ষক নিবন্ধন নিয়ে কোনো অসাধু চক্রের কথায় প্রলুব্ধ হবেন না। এনটিআরসিএ সনদ সম্পূর্ণ মেধা ও সরকারি প্রক্রিয়ায় নিয়ন্ত্রিত হয়।"
+    ))
+
+    # 47. বীর মুক্তিযোদ্ধা সম্মানী ভাতা ও চিকিৎসা সহায়তা (জিটুপি - G2P)
+    services.append(CitizenService(
+        service_id="bd-freedom-fighter-honorarium-allowance-g2p",
+        title_bn="বীর মুক্তিযোদ্ধা সম্মানী ভাতা ও চিকিৎসা সহায়তা নির্দেশিকা (G2P পদ্ধতি)",
+        title_en="Freedom Fighters Monthly Honorarium Allowance & Medical Aid Official Guide",
+        category="মুক্তিযুদ্ধ ও সামাজিক নিরাপত্তা",
+        department_agency="মুক্তিযুদ্ধ বিষয়ক মন্ত্রণালয়",
+        summary="জাতির শ্রেষ্ঠ সন্তান বীর মুক্তিযোদ্ধা ও তাদের শহীদ/ওয়ারিশ পরিবারকে সরকার প্রতি মাসে ২০,০০০ টাকা সম্মানী ভাতা এবং বিশেষ চিকিৎসা অনুদান প্রদান করে। ভাতা প্রাপ্তিতে যেন কোনো ঘুষ বা হয়রানি না হয়, সেজন্য জিটুপি (Government to Person - G2P) পদ্ধতিতে সরাসরি মুক্তিযোদ্ধার ব্যাংক একাউন্টে প্রতি মাসের শুরুতে টাকা পাঠিয়ে দেওয়া হয়।",
+        official_fees=[
+            ServiceFee(
+                category_name="ভাতা ও চিকিৎসা সহায়তা আবেদন সরকারি ফি",
+                amount_bdt=0.0,
+                vat_included=True,
+                payment_method="সম্পূর্ণ বিনামূল্যে (০ টাকা)",
+                remarks="মুক্তিযোদ্ধাদের সেবায় কোনো ফি নেই।"
+            )
+        ],
+        processing_time_sla="এমআইএস (MIS) ভেরিফিকেশনের পর সরাসরি নিয়মিত মাসিক বিতরণ",
+        required_documents=[
+            RequiredDocument(
+                name="মুক্তিযুদ্ধ বিষয়ক মন্ত্রণালয়ের সমন্বিত তালিকা ও ডিজিটাল সনদ / লাল মুক্তিবার্তা নম্বর",
+                is_mandatory=True,
+                format_type="প্রমাণপত্র কপি"
+            ),
+            RequiredDocument(
+                name="বীর মুক্তিযোদ্ধা / ওয়ারিশ সুবিধাভোগীর জাতীয় পরিচয়পত্র (NID)",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="সুবিধাভোগীর নিজস্ব ব্যাংক অ্যাকাউন্টের চেক পাতার কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="ওয়ারিশান সনদ (বীর মুক্তিযোদ্ধার মৃত্যুর ক্ষেত্রে)",
+                is_mandatory=False,
+                format_type="ইউপি/সিটি কর্পোরেশন সনদ"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="মন্ত্রণালয়ের এমআইএস (MIS) পোর্টালে ডাটা যাচাই",
+                description="https://mis.molwa.gov.bd পোর্টালে আপনার মুক্তিযোদ্ধা সনদ ও গেজেট নম্বর যাচাই করুন।",
+                action_url="https://mis.molwa.gov.bd",
+                tips="নাম ও জন্মতারিখ এনআইডির সাথে হুবহু মিল থাকতে হবে।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="উপজেলা নির্বাহী কর্মকর্তা (UNO) কার্যালয়ে ব্যাংক হিসাব সংযোজন",
+                description="সংশ্লিষ্ট উপজেলা নির্বাহী কর্মকর্তার কাছে এনআইডি ও ব্যাংকের চেকের কপি জমা দিন। এটি কেন্দ্রীয় G2P সিস্টেমে লিঙ্ক করা হবে।",
+                tips="কোনো ব্যক্তির কাছে টাকা বা চাঁদা দেওয়া সম্পূর্ণ নিষিদ্ধ।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="সরাসরি অ্যাকাউন্টে মাসিক ২০,০০০ টাকা জমা",
+                description="প্রতি মাসের শুরুতে বাংলাদেশ ব্যাংক থেকে সরাসরি আপনার ব্যাংক একাউন্টে সম্মানী ভাতার টাকা জমা হবে এবং মোবাইলে এসএমএস পাবেন।"
+            )
+        ],
+        official_portal_url="https://molwa.gov.bd",
+        application_url="https://mis.molwa.gov.bd",
+        citizen_charter_url="https://molwa.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: মুক্তিযোদ্ধা ভাতা তালিকায় নাম তোলার জন্য কোনো দালালকে টাকা দেবেন না। জাল মুক্তিযোদ্ধা সনদ শাস্তিযোগ্য অপরাধ। প্রকৃত বীর মুক্তিযোদ্ধারা কোনো মধ্যস্বত্বভোগী ছাড়া সরাসরি সরকারের এই রাষ্ট্রীয় সম্মাননা লাভ করেন।"
+    ))
+
+    # 48. প্রতিবন্ধী শিক্ষার্থীদের শিক্ষা উপবৃত্তি নির্দেশিকা
+    services.append(CitizenService(
+        service_id="bd-disability-student-education-stipend",
+        title_bn="প্রতিবন্ধী শিক্ষার্থীদের সরকারি শিক্ষা উপবৃত্তি আবেদন নির্দেশিকা",
+        title_en="Government Education Stipend for Students with Disabilities Application Guide",
+        category="শিক্ষা ও সমাজকল্যাণ",
+        department_agency="সমাজসেবা অধিদপ্তর, সমাজকল্যাণ মন্ত্রণালয়",
+        summary="বিশেষ চাহিদা সম্পন্ন ও প্রতিবন্ধী শিক্ষার্থীদের পড়াশোনা চালিয়ে নেওয়ার জন্য সরকার প্রাথমিক থেকে বিশ্ববিদ্যালয় পর্যন্ত প্রতি মাসে মাসিক উপবৃত্তি প্রদান করে। বিদ্যালয় ও সমাজসেবা অফিসের কর্মচারীদের উৎকোচ দেওয়ার সংস্কৃতি বন্ধ করতে এই উপবৃত্তি এখন সরাসরি মোবাইল ওয়ালেটে পৌঁছে দেওয়া হয়।",
+        official_fees=[
+            ServiceFee(
+                category_name="উপবৃত্তি আবেদন সরকারি ফি",
+                amount_bdt=0.0,
+                vat_included=True,
+                payment_method="সম্পূর্ণ বিনামূল্যে (০ টাকা)",
+                remarks="আবেদনের জন্য কোনো ফি বা টাকা দিতে হয় না।"
+            )
+        ],
+        processing_time_sla="শিক্ষাবর্ষের শুরুতে আবেদন সাপেক্ষে সরাসরি ত্রৈমাসিক বিতরণ",
+        required_documents=[
+            RequiredDocument(
+                name="সমাজসেবা অধিদপ্তর কর্তৃক প্রদত্ত 'সুবর্ণ নাগরিক' প্রতিবন্ধী পরিচয়পত্র (DIS কার্ড)",
+                is_mandatory=True,
+                format_type="ডিজিটাল কার্ডের কপি",
+                how_to_obtain="উপজেলা সমাজসেবা কার্যালয় থেকে বিনামূল্যে সংগ্রহ"
+            ),
+            RequiredDocument(
+                name="শিক্ষা প্রতিষ্ঠানের প্রধান কর্তৃক অধ্যয়নরত থাকার প্রত্যয়নপত্র",
+                is_mandatory=True,
+                format_type="সিলযুক্ত মূল সনদ"
+            ),
+            RequiredDocument(
+                name="শিক্ষার্থী বা অভিভাবকের নামে নিবন্ধিত সচল নগদ/বিকাশ মোবাইল একাউন্ট",
+                is_mandatory=True,
+                format_type="মোবাইল নম্বর"
+            ),
+            RequiredDocument(
+                name="শিক্ষার্থীর অনলাইন জন্ম নিবন্ধন বা এনআইডি কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="সুবর্ণ নাগরিক আইডি সংগ্রহ",
+                description="নিকটস্থ উপজেলা সমাজসেবা কার্যালয়ে গিয়ে বিনামূল্যে প্রতিবন্ধী কার্ড (সুবর্ণ নাগরিক) গ্রহণ করুন।",
+                action_url="https://dss.gov.bd",
+                tips="কার্ড তৈরিতে কোনো ফি লাগে না।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="শিক্ষা প্রতিষ্ঠান বা সমাজসেবা অফিসে আবেদন",
+                description="বিদ্যালয়ের প্রধান শিক্ষকের প্রত্যয়নসহ সমাজসেবা পোর্টালে উপবৃত্তির জন্য আবেদন করুন।",
+                tips="মোবাইল ওয়ালেট নম্বরটি অভিভাবকের নিজের এনআইডি দিয়ে নিবন্ধিত হতে হবে।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="মোবাইল ওয়ালেটে নিয়মিত উপবৃত্তি লাভ",
+                description="প্রাথমিকে মাসিক ৭৫০ টাকা, মাধ্যমিকে ৮০০ টাকা, উচ্চমাধ্যমিকে ৯০০ টাকা এবং স্নাতক/স্নাতকোত্তর স্তরে মাসিক ১,৩০০ টাকা হারে প্রতি ৩ মাস পর পর সরাসরি মোবাইলে টাকা চলে আসবে।"
+            )
+        ],
+        official_portal_url="https://dss.gov.bd",
+        application_url="https://dss.gov.bd",
+        citizen_charter_url="https://dss.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: বিশেষ শিশুদের উপবৃত্তি পাওয়া তাদের নাগরিক অধিকার। কোনো শিক্ষক বা অফিস সহকারী উপবৃত্তি মঞ্জুরের জন্য টাকা দাবি করলে অবিলম্বে উপজেলা নির্বাহী কর্মকর্তা বা জাতীয় হেল্পলাইন ১০৯৮-এ অভিযোগ দায়ের করুন।"
+    ))
+
     return services
