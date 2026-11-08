@@ -100,6 +100,64 @@ export default {
       }
     }
 
+    // Emergency & Helpline Directory API (/api/directory)
+    if (url.pathname === '/api/directory' && request.method === 'GET') {
+      if (!env.DB) {
+        return new Response(JSON.stringify({ error: 'D1 binding not available' }), {
+          status: 503,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+
+      try {
+        const category = url.searchParams.get('category');
+        const district = url.searchParams.get('district');
+        const thana = url.searchParams.get('thana');
+        const q = url.searchParams.get('q');
+
+        let sql = 'SELECT * FROM emergency_directories WHERE 1=1';
+        const params: any[] = [];
+
+        if (category) {
+          sql += ' AND category = ?';
+          params.push(category);
+        }
+        if (district) {
+          sql += ' AND (district_bn LIKE ? OR division_bn LIKE ?)';
+          params.push(`%${district}%`, `%${district}%`);
+        }
+        if (thana) {
+          sql += ' AND upazila_thana_bn LIKE ?';
+          params.push(`%${thana}%`);
+        }
+        if (q) {
+          sql += ' AND (organization_name_bn LIKE ? OR service_scope LIKE ? OR short_code LIKE ? OR phone_numbers LIKE ?)';
+          params.push(`%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`);
+        }
+
+        sql += ' ORDER BY id ASC LIMIT 100';
+
+        let stmt = env.DB.prepare(sql);
+        if (params.length > 0) {
+          stmt = stmt.bind(...params);
+        }
+
+        const rows = await stmt.all();
+
+        return new Response(
+          JSON.stringify({ total: rows.results?.length || 0, directory: rows.results }, null, 2),
+          {
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+          }
+        );
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err?.message }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+    }
+
     // Explicit RAG Endpoint (/api/rag)
     if (url.pathname === '/api/rag' && request.method === 'POST') {
       try {

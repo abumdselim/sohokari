@@ -139,6 +139,83 @@ export async function handleCitizenRagQuery(
       score: Number(m.score.toFixed(4))
     }));
 
+    // Check if the top match is an emergency helpline or police/utility directory record
+    const isEmergencyMatch =
+      topMatch.id.startsWith('emergency-') ||
+      ['police_thana', 'electricity', 'gas', 'water_wasa', 'telecom', 'fire_service', 'national_emergency'].includes(
+        String(topMatch.metadata?.category || '')
+      );
+
+    if (isEmergencyMatch) {
+      const dirId =
+        (topMatch.metadata?.directory_id as string) ||
+        topMatch.id.replace('emergency-', '') ||
+        topServiceId;
+
+      const emergRow = await env.DB.prepare(
+        'SELECT * FROM emergency_directories WHERE directory_id = ?'
+      )
+        .bind(dirId)
+        .first<any>();
+
+      if (emergRow) {
+        const replyMarkdown =
+          `### 🚨 ${emergRow.organization_name_bn} (${emergRow.organization_name_en || ''})\n\n` +
+          `**বিভাগ ও জেলা:** ${emergRow.division_bn} বিভাগ, ${emergRow.district_bn}${
+            emergRow.upazila_thana_bn ? ` (থানা/উপজেলা: ${emergRow.upazila_thana_bn})` : ''
+          }\n` +
+          `**সেবার আওতা:** ${emergRow.service_scope}\n\n` +
+          `#### 📞 সরাসরি যোগাযোগ ও হেল্পলাইন:\n` +
+          (emergRow.short_code
+            ? `• **হটলাইন / শর্টকোড:** \`${emergRow.short_code}\` (${
+                emergRow.is_toll_free ? 'টোল-ফ্রি / সম্পূর্ণ বিনামূল্যে' : 'সাধারণ চার্জ'
+              })\n`
+            : '') +
+          `• **জরুরি ফোন নম্বর:** ${emergRow.phone_numbers}\n` +
+          (emergRow.duty_officer_number
+            ? `• **ডিউটি অফিসার / নিয়ন্ত্রণ কক্ষ:** ${emergRow.duty_officer_number}\n`
+            : '') +
+          (emergRow.oc_or_head_number
+            ? `• **ওসি / স্টেশন প্রধান / ইনচার্জ:** ${emergRow.oc_or_head_number}\n`
+            : '') +
+          `• **অফিসের সময়:** ${emergRow.operating_hours}\n` +
+          (emergRow.office_address ? `• **অফিস ঠিকানা:** ${emergRow.office_address}\n` : '') +
+          `\n#### 📌 জরুরি সহায়তা ও অভিযোগ প্রক্রিয়া:\n` +
+          `${emergRow.complaint_process_bn || 'জরুরি ঘটনায় অবিলম্বে ডিউটি অফিসারকে ফোন দিন।'}\n\n` +
+          (emergRow.website_url
+            ? `🌐 **অফিসিয়াল ওয়েবসাইট:** [${emergRow.website_url}](${emergRow.website_url})\n\n`
+            : '') +
+          `> ⚠️ **নাগরিক সতর্কতা:** থানা জিডি বা বিদ্যুৎ-গ্যাস-পানি সরবরাহ সংক্রান্ত জরুরি সেবায় কোনো কর্মকর্তাকে অতিরিক্ত টাকা বা ঘুষ দেবেন না। দালালদের খপ্পর থেকে সাবধান থাকুন।`;
+
+        return {
+          source: 'rag_vector_d1',
+          action: 'DIRECT_ANSWER',
+          reply_bn: replyMarkdown,
+          confidence: Number(topMatch.score.toFixed(4)),
+          matched_service: {
+            id: emergRow.directory_id,
+            title_bn: emergRow.organization_name_bn,
+            department: emergRow.category,
+            sla_time: emergRow.operating_hours,
+            official_portal_url: emergRow.website_url || '',
+            anti_broker_warning:
+              'কোনো দালাল বা মধ্যস্বত্বভোগীকে টাকা দেবেন না। অভিযোগ থাকলে সরাসরি ঊর্ধ্বতন কর্মকর্তাকে জানান।',
+            fees: [
+              {
+                category_name: 'জরুরি সেবা ফি',
+                amount_bdt: 0,
+                remarks: emergRow.is_toll_free ? 'টোল-ফ্রি' : 'সরকারি নির্ধারিত কল চার্জ'
+              }
+            ],
+            documents: ['জরুরি কল করতে কোনো ডকুমেন্টের প্রয়োজন নেই'],
+            steps: [emergRow.complaint_process_bn || 'তাৎক্ষণিক নম্বরে কল দিন']
+          },
+          retrieved_chunks: chunkResults,
+          execution_time_ms: Number((performance.now() - startTime).toFixed(2))
+        };
+      }
+    }
+
     // 3. Retrieve authoritative structured relational data from Cloudflare D1
     const serviceRow = await env.DB.prepare(
       'SELECT service_id, title_bn, department_agency, category, summary, processing_time_sla, official_portal_url, anti_broker_warning FROM services WHERE service_id = ?'

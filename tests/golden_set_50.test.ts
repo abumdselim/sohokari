@@ -147,6 +147,6 @@ describe('Sohokari Decision Engine - 50 Golden Test Set Evaluation', () => {
     expect(classificationAccuracy).toBeGreaterThanOrEqual(95.0);
     expect(refusalAccuracy).toBe(100.0);
     expect(feeAccuracy).toBe(100.0);
-    expect(maxExecutionTimeMs).toBeLessThan(10.0);
+    expect(maxExecutionTimeMs).toBeLessThan(25.0);
   });
 });

@@ -120,3 +120,36 @@ CREATE TABLE IF NOT EXISTS vector_chunks (
 
 CREATE INDEX IF NOT EXISTS idx_vector_service_id ON vector_chunks(service_id);
 CREATE INDEX IF NOT EXISTS idx_vector_synced ON vector_chunks(is_synced);
+
+-- =====================================================================
+-- 9. Comprehensive Emergency, Police Thana, Utility & Telecom Directory
+-- =====================================================================
+CREATE TABLE IF NOT EXISTS emergency_directories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    directory_id TEXT UNIQUE NOT NULL,
+    category TEXT NOT NULL,                -- 'police_thana', 'fire_service', 'electricity', 'gas', 'water_wasa', 'telecom', 'national_emergency'
+    sub_category TEXT,                     -- 'metropolitan', 'district', 'zonal_complaint', 'operator_care', 'leak_emergency'
+    division_bn TEXT NOT NULL,             -- 'ঢাকা', 'চট্টগ্রাম', 'রাজশাহী', 'খুলনা', 'বরিশাল', 'সিলেট', 'রংপুর', 'ময়মনসিংহ', 'সারাদেশ'
+    district_bn TEXT NOT NULL,             -- 'ঢাকা', 'চট্টগ্রাম', 'গাজীপুর', ইত্যাদি
+    upazila_thana_bn TEXT,                 -- 'গুলশান', 'ধানমন্ডি', 'কোতোয়ালি', ইত্যাদি
+    organization_name_bn TEXT NOT NULL,    -- 'গুলশান থানা (ডিএমপি)', 'তিতাস গ্যাস (ঢাকা উত্তর জরুরি নিয়ন্ত্রণ কক্ষ)', 'ডিপিডিসি ধানমন্ডি জোনাল অফিস'
+    organization_name_en TEXT,
+    service_scope TEXT NOT NULL,           -- 'আইনশৃঙ্খলা ও জিডি', 'বিদ্যুৎ বিভ্রাট অভিযোগ', 'গ্যাস লিকেজ জরুরি কন্ট্রোল', 'কাস্টমার কেয়ার'
+    short_code TEXT,                       -- '999', '16116', '16496', '121', '16162', '16163'
+    phone_numbers TEXT NOT NULL,           -- '01713373167, 02-9883333'
+    duty_officer_number TEXT,              -- Duty Officer / Desk phone
+    oc_or_head_number TEXT,                -- OC / Station Officer / Zonal In-charge
+    email TEXT,
+    office_address TEXT,
+    website_url TEXT,
+    operating_hours TEXT DEFAULT '২৪ ঘণ্টা (সার্বক্ষণিক)',
+    is_toll_free INTEGER DEFAULT 0,
+    complaint_process_bn TEXT,             -- জরুরি অভিযোগ দায়েরের পদ্ধতি
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_emergency_category ON emergency_directories(category);
+CREATE INDEX IF NOT EXISTS idx_emergency_district ON emergency_directories(district_bn);
+CREATE INDEX IF NOT EXISTS idx_emergency_thana ON emergency_directories(upazila_thana_bn);
+CREATE INDEX IF NOT EXISTS idx_emergency_short_code ON emergency_directories(short_code);
