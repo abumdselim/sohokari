@@ -248,10 +248,8 @@ html, body {
   box-shadow: 4px 0 24px rgba(15, 23, 42, 0.12);
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 16px 14px;
-  padding-top: calc(16px + var(--safe-top));
+  overflow: hidden; /* Prevent parent scrolling so header stays rock-solid fixed */
+  padding: 0;
 }
 
 .app-sidebar.open {
@@ -259,12 +257,35 @@ html, body {
 }
 
 .sidebar-header {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
+  padding: 14px 16px;
+  padding-top: calc(14px + var(--safe-top));
+  background: #ffffff;
   border-bottom: 1px solid var(--slate-100);
+  z-index: 10;
+}
+
+.sidebar-scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 14px 24px 14px;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: var(--slate-300) transparent;
+}
+
+.sidebar-scroll-content::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-scroll-content::-webkit-scrollbar-thumb {
+  background: var(--slate-300);
+  border-radius: 4px;
 }
 
 .btn-sidebar-close {
@@ -1992,6 +2013,11 @@ html, body {
 
   .btn-sidebar-close {
     display: none;
+  }
+
+  .sidebar-header {
+    background: #fafafa;
+    border-bottom: 1px solid var(--slate-200);
   }
 
   /* Viewport stretches to take remaining horizontal space */

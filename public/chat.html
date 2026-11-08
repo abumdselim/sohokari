@@ -37,112 +37,116 @@
       </button>
     </div>
 
-    <!-- Link to Landing Page -->
-    <a href="/" class="sidebar-menu-item" style="border: 1px solid var(--slate-200); margin-bottom: 10px; font-weight: 600; text-decoration: none;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-        <polyline points="9 22 9 12 15 12 15 22"/>
-      </svg>
-      <span>প্ল্যাটফর্ম পরিচিতি ও ফিচার</span>
-    </a>
-
-    <!-- New Chat in Sidebar -->
-    <button class="sidebar-new-chat-btn" id="btn-sidebar-new-chat">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-        <line x1="12" y1="5" x2="12" y2="19"/>
-        <line x1="5" y1="12" x2="19" y2="12"/>
-      </svg>
-      <span>নতুন চ্যাট শুরু করুন</span>
-    </button>
-
-    <!-- Chat History Section (Persisted to Cloudflare D1) -->
-    <div class="sidebar-nav-section" id="sidebar-history-section">
-      <div class="sidebar-section-title">পূর্ববর্তী চ্যাট হিস্ট্রি</div>
-      <div class="chat-history-list" id="chat-history-list"></div>
-    </div>
-
-    <!-- Services Quick Menu -->
-    <div class="sidebar-nav-section">
-      <div class="sidebar-section-title">জনপ্রিয় সেবা বিভাগ</div>
-      <div class="sidebar-menu-list">
-        <button class="sidebar-menu-item" data-query="জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-            <rect width="20" height="14" x="2" y="5" rx="2"/>
-            <line x1="2" y1="10" x2="22" y2="10"/>
-          </svg>
-          <span>জাতীয় পরিচয়পত্র (এনআইডি)</span>
-        </button>
-
-        <button class="sidebar-menu-item" data-query="১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-          </svg>
-          <span>ই-পাসপোর্ট সেবা ও নবায়ন</span>
-        </button>
-
-        <button class="sidebar-menu-item" data-query="জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-          </svg>
-          <span>ই-নামজারি ও জমি খারিজ</span>
-        </button>
-
-        <button class="sidebar-menu-item" data-query="ড্রাইভিং লাইসেন্স নবায়ন করার সরকারি ফি ও নিয়ম কি?">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-            <circle cx="12" cy="12" r="9"/>
-            <line x1="12" y1="8" x2="12" y2="12"/>
-            <line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-          <span>বিআরটিএ ড্রাইভিং লাইসেন্স</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Official Emergency Helplines -->
-    <div class="sidebar-nav-section" style="margin-top: 18px;">
-      <div class="sidebar-section-title">জরুরি হটলাইন</div>
-      <div class="sidebar-helpline-list">
-        <a href="tel:999" class="sidebar-helpline-item">
-          <span>জাতীয় জরুরি সেবা</span>
-          <strong>৯৯৯</strong>
-        </a>
-        <a href="tel:333" class="sidebar-helpline-item">
-          <span>জাতীয় কল সেন্টার</span>
-          <strong>৩৩৩</strong>
-        </a>
-        <a href="tel:106" class="sidebar-helpline-item">
-          <span>দুর্নীতি দমন কমিশন (দুদক)</span>
-          <strong>১০৬</strong>
-        </a>
-        <a href="tel:16122" class="sidebar-helpline-item">
-          <span>ভূমি সেবা হটলাইন</span>
-          <strong>১৬১২২</strong>
-        </a>
-        <a href="tel:105" class="sidebar-helpline-item">
-          <span>নির্বাচন কমিশন (এনআইডি)</span>
-          <strong>১০৫</strong>
-        </a>
-      </div>
-    </div>
-
-    <!-- Sidebar User Profile & Auth Section -->
-    <div id="sidebar-user-section" class="sidebar-user-section"></div>
-
-    <!-- Sidebar Bottom Status -->
-    <div class="sidebar-footer">
-      <div class="sidebar-verified-badge">
+    <!-- Pinned Scrollable Sidebar Body -->
+    <div class="sidebar-scroll-content">
+      <!-- Link to Landing Page -->
+      <a href="/" class="sidebar-menu-item" style="border: 1px solid var(--slate-200); margin-bottom: 10px; font-weight: 600; text-decoration: none;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <path d="m9 12 2 2 4-4"/>
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
         </svg>
-        <span>সরকারি গেজেট ও আইন দ্বারা যাচাইকৃত</span>
+        <span>প্ল্যাটফর্ম পরিচিতি ও ফিচার</span>
+      </a>
+
+      <!-- New Chat in Sidebar -->
+      <button class="sidebar-new-chat-btn" id="btn-sidebar-new-chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        <span>নতুন চ্যাট শুরু করুন</span>
+      </button>
+
+      <!-- Chat History Section (Persisted to Cloudflare D1) -->
+      <div class="sidebar-nav-section" id="sidebar-history-section">
+        <div class="sidebar-section-title">পূর্ববর্তী চ্যাট হিস্ট্রি</div>
+        <div class="chat-history-list" id="chat-history-list"></div>
+      </div>
+
+      <!-- Services Quick Menu -->
+      <div class="sidebar-nav-section">
+        <div class="sidebar-section-title">জনপ্রিয় সেবা বিভাগ</div>
+        <div class="sidebar-menu-list">
+          <button class="sidebar-menu-item" data-query="জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+              <rect width="20" height="14" x="2" y="5" rx="2"/>
+              <line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+            <span>জাতীয় পরিচয়পত্র (এনআইডি)</span>
+          </button>
+
+          <button class="sidebar-menu-item" data-query="১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span>ই-পাসপোর্ট সেবা ও নবায়ন</span>
+          </button>
+
+          <button class="sidebar-menu-item" data-query="জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+            <span>ই-নামজারি ও জমি খারিজ</span>
+          </button>
+
+          <button class="sidebar-menu-item" data-query="ড্রাইভিং লাইসেন্স নবায়ন করার সরকারি ফি ও নিয়ম কি?">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+              <circle cx="12" cy="12" r="9"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <span>বিআরটিএ ড্রাইভিং লাইসেন্স</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Official Emergency Helplines -->
+      <div class="sidebar-nav-section" style="margin-top: 18px;">
+        <div class="sidebar-section-title">জরুরি হটলাইন</div>
+        <div class="sidebar-helpline-list">
+          <a href="tel:999" class="sidebar-helpline-item">
+            <span>জাতীয় জরুরি সেবা</span>
+            <strong>৯৯৯</strong>
+          </a>
+          <a href="tel:333" class="sidebar-helpline-item">
+            <span>জাতীয় কল সেন্টার</span>
+            <strong>৩৩৩</strong>
+          </a>
+          <a href="tel:106" class="sidebar-helpline-item">
+            <span>দুর্নীতি দমন কমিশন (দুদক)</span>
+            <strong>১০৬</strong>
+          </a>
+          <a href="tel:16122" class="sidebar-helpline-item">
+            <span>ভূমি সেবা হটলাইন</span>
+            <strong>১৬১২২</strong>
+          </a>
+          <a href="tel:105" class="sidebar-helpline-item">
+            <span>নির্বাচন কমিশন (এনআইডি)</span>
+            <strong>১০৫</strong>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sidebar User Profile & Auth Section -->
+      <div id="sidebar-user-section" class="sidebar-user-section"></div>
+
+      <!-- Sidebar Bottom Status -->
+      <div class="sidebar-footer">
+        <div class="sidebar-verified-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          <span>সরকারি গেজেট ও আইন দ্বারা যাচাইকৃত</span>
+        </div>
       </div>
     </div>
+  </aside>
   </aside>
 
   <!-- Main Viewport -->
