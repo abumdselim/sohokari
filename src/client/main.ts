@@ -176,7 +176,7 @@ class KaazAIApp {
       container.innerHTML = `
         <button class="btn-header-auth" id="btn-header-login" title="চ্যাট হিস্ট্রি সেভ করতে লগইন করুন">
           ${icons.shieldCheck}
-          <span>লগইন / সাইন আপ</span>
+          <span>লগইন</span>
         </button>
       `;
 
@@ -213,7 +213,7 @@ class KaazAIApp {
       container.innerHTML = `
         <div class="sidebar-auth-prompt">
           <p>আপনার চ্যাট হিস্ট্রি স্থায়ীভাবে সংরক্ষণ করতে লগইন করুন।</p>
-          <button class="btn-sidebar-auth" id="btn-sidebar-login">লগইন / সাইন আপ</button>
+          <button class="btn-sidebar-auth" id="btn-sidebar-login">লগইন করুন</button>
         </div>
       `;
 

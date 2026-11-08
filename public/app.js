@@ -433,7 +433,7 @@
       `:(s.innerHTML=`
         <button class="btn-header-auth" id="btn-header-login" title="\u099A\u09CD\u09AF\u09BE\u099F \u09B9\u09BF\u09B8\u09CD\u099F\u09CD\u09B0\u09BF \u09B8\u09C7\u09AD \u0995\u09B0\u09A4\u09C7 \u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C1\u09A8">
           ${c.shieldCheck}
-          <span>\u09B2\u0997\u0987\u09A8 / \u09B8\u09BE\u0987\u09A8 \u0986\u09AA</span>
+          <span>\u09B2\u0997\u0987\u09A8</span>
         </button>
       `,document.getElementById("btn-header-login")?.addEventListener("click",()=>{h.openAuthModal("login",()=>{m("\u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B2\u0997\u0987\u09A8 \u09B9\u09DF\u09C7\u099B\u09C7!")})})))}renderSidebarAuth(t){let s=document.getElementById("sidebar-user-section");s&&(t?(s.innerHTML=`
         <div class="sidebar-user-footer">
@@ -446,7 +446,7 @@
       `,document.getElementById("btn-sidebar-logout")?.addEventListener("click",()=>{h.logout(),m("\u09B2\u0997\u0986\u0989\u099F \u0995\u09B0\u09BE \u09B9\u09DF\u09C7\u099B\u09C7")})):(s.innerHTML=`
         <div class="sidebar-auth-prompt">
           <p>\u0986\u09AA\u09A8\u09BE\u09B0 \u099A\u09CD\u09AF\u09BE\u099F \u09B9\u09BF\u09B8\u09CD\u099F\u09CD\u09B0\u09BF \u09B8\u09CD\u09A5\u09BE\u09DF\u09C0\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u0995\u09B0\u09A4\u09C7 \u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C1\u09A8\u0964</p>
-          <button class="btn-sidebar-auth" id="btn-sidebar-login">\u09B2\u0997\u0987\u09A8 / \u09B8\u09BE\u0987\u09A8 \u0986\u09AA</button>
+          <button class="btn-sidebar-auth" id="btn-sidebar-login">\u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C1\u09A8</button>
         </div>
       `,document.getElementById("btn-sidebar-login")?.addEventListener("click",()=>{h.openAuthModal("login",()=>{m("\u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B2\u0997\u0987\u09A8 \u09B9\u09DF\u09C7\u099B\u09C7!")})})))}async loadChatHistory(){let t=document.getElementById("chat-history-list");if(!t)return;if(!h.isAuthenticated()){t.innerHTML=`
         <div style="padding: 10px; font-size: 0.82rem; color: var(--slate-500); text-align: center;">
