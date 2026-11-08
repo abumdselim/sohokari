@@ -1920,4 +1920,864 @@ def get_authoritative_citizen_services() -> List[CitizenService]:
         anti_broker_warning="সতর্কতা: দালালদের মাধ্যমে মালিকানা পরিবর্তন করলে বিক্রেতার ভূয়া সই দিয়ে জালিয়াতি করার ঝুঁকি থাকে যা পরবর্তীতে দুর্ঘটনা বা ফৌজদারি অপরাধে মারাত্মক আইনি বিপদ ডেকে আনে। নিজে উপস্থিত হয়ে আসল মালিকের সামনে সরাসরি মালিকানা পরিবর্তন সম্পন্ন করুন।"
     ))
 
+    # 23. বিদেশে গমনে মেডিকেল টেস্ট (GAMCA / Wafid) অনলাইন স্লিপ বুকিং
+    services.append(CitizenService(
+        service_id="bd-gamca-wafid-medical-appointment-guide",
+        title_bn="বিদেশে গমনে গামকা (GAMCA/Wafid) মেডিকেল অনলাইন অ্যাপয়েন্টমেন্ট ও ফি",
+        title_en="GAMCA / Wafid Medical Examination Online Appointment & Official Fee Guide (GCC Countries)",
+        category="প্রবাসী কল্যাণ ও বৈদেশিক কর্মসংস্থান",
+        department_agency="উপসাগরীয় স্বাস্থ্য কাউন্সিল (Gulf Health Council) ও প্রবাসী কল্যাণ মন্ত্রণালয়",
+        summary="সৌদি আরব, ওমান, কাতার, কুয়েত, বাহরাইন ও সংযুক্ত আরব আমিরাত গমনে গামকা অনুমোদিত সেন্টারে মেডিকেল টেস্ট বাধ্যতামূলক। ট্রাভেল এজেন্সি ও দালালরা একটি মেডিকেল স্লিপের জন্য ৩,০০০ থেকে ৮,০০০ টাকা হাতিয়ে নেয়। অথচ অফিসিয়াল wafid.com পোর্টালে সরাসরি ১০ মার্কিন ডলার (প্রায় ১,২০০ টাকা) কার্ডে পরিশোধ করে তাৎক্ষণিক অ্যাপয়েন্টমেন্ট স্লিপ পাওয়া যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="Wafid আন্তর্জাতিক অনলাইন অ্যাপয়েন্টমেন্ট স্লিপ ফি",
+                amount_bdt=1250.0,
+                vat_included=True,
+                payment_method="আন্তর্জাতিক ক্রেডিট / ডেবিট কার্ড (Visa, Mastercard)",
+                remarks="১০ মার্কিন ডলার ($10 USD) সমমূল্যের টাকা।"
+            ),
+            ServiceFee(
+                category_name="মেডিকেল সেন্টার ফি (পুরুষ কর্মী - সম্পূর্ণ শারীরিক ও ল্যাব টেস্ট)",
+                amount_bdt=8500.0,
+                vat_included=True,
+                payment_method="মেডিকেল সেন্টার কাউন্টারে সরাসরি নগদ / কার্ড",
+                remarks="GAMCA নির্ধারিত প্রমিত মেডিকেল ফি (ব্লাড টেস্ট, এক্স-রে, এইচআইভি, হেপাটাইটিস ইত্যাদি)।"
+            ),
+            ServiceFee(
+                category_name="মেডিকেল সেন্টার ফি (নারী কর্মী)",
+                amount_bdt=8500.0,
+                vat_included=True,
+                payment_method="সরাসরি মেডিকেল সেন্টার",
+                remarks="গর্ভধারণ ও অন্যান্য অতিরিক্ত টেস্ট অন্তর্ভুক্ত।"
+            )
+        ],
+        processing_time_sla="অনলাইন স্লিপ: তাৎক্ষণিক | মেডিকেল রিপোর্ট: টেস্টের পর ২৪ থেকে ৪৮ ঘণ্টার মধ্যে অনলাইন রেজাল্ট",
+        required_documents=[
+            RequiredDocument(
+                name="আবেদনকারীর মূল পাসপোর্ট (সর্বনিম্ন ৬ মাস মেয়াদি)",
+                is_mandatory=True,
+                format_type="মূল কপি ও ২ সেট ফটোকপি"
+            ),
+            RequiredDocument(
+                name="Wafid অনলাইন অ্যাপয়েন্টমেন্ট স্লিপ প্রিন্ট কপি",
+                is_mandatory=True,
+                format_type="রঙিন প্রিন্ট কপি",
+                how_to_obtain="wafid.com থেকে ডাউনলোড"
+            ),
+            RequiredDocument(
+                name="পাসপোর্ট সাইজ সাদা ব্যাকগ্রাউন্ডের ল্যাব ছবি (৪ কপি)",
+                is_mandatory=True,
+                format_type="ছবি"
+            ),
+            RequiredDocument(
+                name="জাতীয় পরিচয়পত্র (NID) কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="Wafid অফিশিয়াল পোর্টালে বুকিং শুরু",
+                description="https://wafid.com ওয়েবসাইটে যান। 'Book an Appointment' বাটনে ক্লিক করুন। আপনার দেশ (Bangladesh), শহর (Dhaka/Chittagong/Sylhet) এবং গন্তব্য দেশ (যেমন: Saudi Arabia) নির্বাচন করুন।",
+                action_url="https://wafid.com/book-appointment",
+                tips="সিস্টেম স্বয়ংক্রিয়ভাবে এলোমেলোভাবে (Randomly) একটি অনুমোদিত মেডিকেল সেন্টার বরাদ্দ করে। কোনো নির্দিষ্ট সেন্টার পছন্দ করার সরকারি সুযোগ নেই।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="পাসপোর্ট তথ্য পূরণ ও ১০ ডলার ফি পরিশোধ",
+                description="পাসপোর্ট নম্বর, জাতীয়তা, ভিসা ক্যাটাগরি (Work Visa) নির্ভুলভাবে লিখুন। এরপর ডুয়েল কারেন্সি ডেবিট/ক্রেডিট কার্ড দিয়ে ১০ ডলার পরিশোধ করুন।",
+                tips="দালালকে ৩,০০০-৫,০০০ টাকা না দিয়ে ব্যাংকের ডুয়েল কারেন্সি কার্ড দিয়ে ১,২৫০ টাকায় নিজেই স্লিপ কাটুন।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="মেডিকেল সেন্টারে টেস্ট প্রদান",
+                description="স্লিপে উল্লেখিত নির্দিষ্ট মেডিকেল সেন্টারে সকাল ৮টা থেকে ১০টার মধ্যে খালি পেটে উপস্থিত হন। নির্ধারিত ৮,৫০০ টাকা ফি জমা দিয়ে রক্ত পরীক্ষা ও বুকের এক্স-রে সম্পন্ন করুন।",
+                tips="টেস্টের আগে কোনো অ্যান্টিবায়োটিক বা ভারী ওষুধ সেবন করবেন না।"
+            ),
+            ApplicationStep(
+                step_number=4,
+                title="অনলাইনে মেডিকেল রিপোর্ট 'FIT' স্ট্যাটাস চেক",
+                description="wafid.com-এর 'View Medical Status' অপশনে পাসপোর্ট নম্বর দিয়ে রিপোর্ট চেক করুন। ফিট রিপোর্টটি সরাসরি বিএমইটি ও সৌদি/উপসাগরীয় দূতাবাস সিস্টেমে সিঙ্ক হয়ে যায়।"
+            )
+        ],
+        official_portal_url="https://wafid.com",
+        application_url="https://wafid.com/book-appointment",
+        citizen_charter_url="https://bmet.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: কোনো দালাল 'মেডিকেল সেন্টারের নাম বদলে দেব' বা 'আনফিট হলে ফিট করে দেব' বলে লাখ টাকা দাবি করলে সরাসরি প্রতারণার শিকার হবেন। গামকা সেন্টারের কোনো রেজাল্ট ম্যানুয়ালি পরিবর্তন করা অসম্ভব, এটি সরাসরি বারকোড স্ক্যানের মাধ্যমে সেন্ট্রাল সার্ভারে সংরক্ষিত হয়।",
+        grievance_remedy="কোনো মেডিকেল সেন্টার নির্ধারিত ফির চেয়ে বেশি অর্থ দাবি করলে প্রবাসী কল্যাণ মন্ত্রণালয়ের কন্ট্রোল রুম ১৬১৩৫ অথবা গামকা বাংলাদেশ অফিসে লিখিত অভিযোগ জানান।"
+    ))
+
+    # 24. পারিবারিক সম্পত্তি আপস বণ্টননামা দলিল (Family Partition Deed)
+    services.append(CitizenService(
+        service_id="bd-land-family-partition-deed-bonton",
+        title_bn="পারিবারিক আপস বণ্টননামা দলিল সম্পাদন ও রেজিস্ট্রেশন নির্দেশিকা",
+        title_en="Bangladesh Family Property Amicable Partition Deed (Bontonnamah) Registration Guide",
+        category="ভূমি ও জমিজমা সেবা",
+        department_agency="নিবন্ধন অধিদপ্তর, আইন ও বিচার বিভাগ",
+        summary="পিতা-মাতার মৃত্যুর পর ভাই-বোন ও ওয়ারিশদের মধ্যে জমি বা ফ্ল্যাট আপসে ভাগাভাগি করার জন্য বণ্টননামা দলিল আবশ্যক। অজ্ঞতার কারণে দলিল লেখকরা জমির মূল্যের ওপর লাখ লাখ টাকা চায়। অথচ রেজিস্ট্রেশন আইন অনুযায়ী আপস বণ্টননামা দলিলের স্ট্যাম্প শুল্ক ও রেজিস্ট্রেশন ফি নির্দিষ্ট (Fixed)—সম্পত্তির মূল্য যত কোটি টাকাই হোক না কেন, মোট সরকারি ফি মাত্র ৫০০ থেকে ১,০০০ টাকা!",
+        official_fees=[
+            ServiceFee(
+                category_name="আপস বণ্টননামা রেজিস্ট্রেশন ফি (সম্পত্তির মূল্য ৩ লাখের বেশি হলে)",
+                amount_bdt=500.0,
+                vat_included=True,
+                payment_method="সোনালী ব্যাংক ট্রেজারি চালান",
+                remarks="সম্পত্তির মূল্য ৩ লাখ টাকার ঊর্ধ্বে হলে নির্ধারিত নির্দিষ্ট ফি মাত্র ৫০০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="আপস বণ্টননামা স্ট্যাম্প শুল্ক (Stamp Duty)",
+                amount_bdt=50.0,
+                vat_included=True,
+                payment_method="নন-জুডিশিয়াল স্ট্যাম্প",
+                remarks="নির্দিষ্ট স্ট্যাম্প ফি মাত্র ৫০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="হলফনামা স্ট্যাম্প ফি",
+                amount_bdt=300.0,
+                vat_included=True,
+                payment_method="স্ট্যাম্প",
+                remarks="ওয়ারিশদের হলফনামা ৩০০ টাকার স্ট্যাম্পে সম্পাদন।"
+            )
+        ],
+        processing_time_sla="দলিল উপস্থাপনের দিনই সম্পাদন ও রসিদ প্রদান",
+        required_documents=[
+            RequiredDocument(
+                name="মূল মালিকের মৃত্যু সনদ (ডিজিটাল ডেথ সার্টিফিকেট)",
+                is_mandatory=True,
+                format_type="অনলাইন কপি",
+                how_to_obtain="bdris.gov.bd পোর্টাল"
+            ),
+            RequiredDocument(
+                name="অনলাইন ওয়ারিশান সনদপত্র (Family Inheritance Certificate)",
+                is_mandatory=True,
+                format_type="ইউপি চেয়ারম্যান / পৌর মেয়র / কাউন্সিলর স্বাক্ষরিত মূল সনদ"
+            ),
+            RequiredDocument(
+                name="বণ্টনযোগ্য সকল জমির মূল দলিল, পূর্ববর্তী বায়া দলিল ও আরএস/বিএস খতিয়ান",
+                is_mandatory=True,
+                format_type="স্ক্যান ও মূল কপি"
+            ),
+            RequiredDocument(
+                name="হালনাগাদ ভূমি উন্নয়ন কর (খাজনা) পরিশোধের দাখিলা",
+                is_mandatory=True,
+                format_type="অনলাইন দাখিলা রশিদ"
+            ),
+            RequiredDocument(
+                name="বণ্টনের নকশা / ট্রেস ম্যাপ (কোন ওয়ারিশ কোন অংশে থাকবেন তার স্পষ্ট সীমানা)",
+                is_mandatory=True,
+                format_type="সার্ভেয়ার স্বাক্ষরিত নকশা"
+            ),
+            RequiredDocument(
+                name="সকল জীবিত ওয়ারিশের এনআইডি ও পাসপোর্ট সাইজ ছবি",
+                is_mandatory=True,
+                format_type="সত্যায়িত কপি"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="ওয়ারিশান সনদ সংগ্রহ ও সীমানা চিহ্নিতকরণ",
+                description="স্থানীয় ইউনিয়ন পরিষদ বা সিটি কর্পোরেশন থেকে অনলাইন কিউআর কোডযুক্ত ওয়ারিশান সনদ নিন। অনুমোদিত আমিন/সার্ভেয়ার দিয়ে জমি মেপে কে কোন অংশ পাবেন তা সহ বণ্টন নকশা চূড়ান্ত করুন।",
+                action_url="http://www.dolil.gov.bd",
+                tips="সকল ওয়ারিশের সর্বসম্মত সম্মতি থাকতে হবে।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="আপস বণ্টননামা দলিল খসড়া তৈরি",
+                description="দলিল ফর্মে কার অংশে কত শতক জমি পড়েছে এবং তফসিল স্পষ্টভাবে লিখুন। দলিলের উপরে ৫০ টাকার নন-জুডিশিয়াল স্ট্যাম্প ও হলফনামা যুক্ত করুন।",
+                tips="সাধারণ সাফ-কবলা দলিলের মতো এখানে কোনো শতাংশভিত্তিক ফি নেই, এটি নির্দিষ্ট ফি।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="ট্রেজারি চালানে সরকারি ৫০০ টাকা জমা",
+                description="সোনালী ব্যাংকে রেজিস্ট্রেশন ফি বাবদ ৫০০ টাকা সরকারি কোডে জমা দিয়ে রসিদ নিন।",
+                tips="কোনো দালাল লাখ টাকা দাবি করলে আইন দেখান—বণ্টননামায় শতাংশ হারে ফি আইনত অবৈধ।"
+            ),
+            ApplicationStep(
+                step_number=4,
+                title="সাব-রেজিস্ট্রি অফিসে সম্পাদন",
+                description="সকল ওয়ারিশ একত্রে সাব-রেজিস্ট্রারের সামনে উপস্থিত হয়ে স্বাক্ষর ও আঙুলের ছাপ দিন। দলিল রেজিস্ট্রি শেষে প্রত্যেকে যার যার অংশে আলাদাভাবে নামজারি (মিউটেশন) করতে পারবেন।"
+            )
+        ],
+        official_portal_url="http://www.dolil.gov.bd",
+        application_url="http://www.dolil.gov.bd",
+        citizen_charter_url="https://mor.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: দলিল লেখক সমিতি বা দালালরা বলে 'সম্পত্তির মূল্যের শতকরা ২% বা ৫% দিতে হবে'—এটি ডাহা মিথ্যা ও প্রতারণা। স্ট্যাম্প আইন এবং রেজিস্ট্রেশন অ্যাক্ট অনুযায়ী পারিবারিক বণ্টননামা দলিলের সরকারি খরচ মাত্র ৫০০ টাকা রেজিস্ট্রেশন ফি + ৫০ টাকা স্ট্যাম্প শুল্ক। কোনো অতিরিক্ত অর্থ দেবেন না।"
+    ))
+
+    # 25. সরকারি কর্মচারী ও প্রাথমিক শিক্ষকদের পেনশন মঞ্জুরি ও ই-পেনশন (iBAS++ EFT)
+    services.append(CitizenService(
+        service_id="bd-govt-pension-ibas-eft-processing",
+        title_bn="সরকারি চাকরিজীবী ও প্রাথমিক শিক্ষকদের ডিজিটাল পেনশন মঞ্জুরি ও EFT নির্দেশিকা",
+        title_en="Bangladesh Government Employees & Primary Teachers Pension & Monthly EFT Disbursement Guide",
+        category="অর্থ ও পেনশন সেবা",
+        department_agency="হিসাব মহানিয়ন্ত্রকের কার্যালয় (CGA), অর্থ বিভাগ, অর্থ মন্ত্রণালয়",
+        summary="অবসরপ্রাপ্ত সরকারি কর্মচারী ও প্রাথমিক বিদ্যালয়ের শিক্ষকদের পেনশন চালু করতে থানা বা জেলা হিসাবরক্ষণ অফিসে (DAO/CAO) বছরের পর বছর ফাইল আটকে ঘুষ নেওয়া হতো। সরকার এখন সম্পূর্ণ ই-পেনশন ও iBAS++ সিস্টেম বাধ্যতামূলক করেছে, যার মাধ্যমে কোনো মধ্যস্বত্বভোগী ছাড়া পেনশনের লাম্পগ্রান্ট এবং মাসিক পেনশন সরাসরি ব্যাংকে EFT এর মাধ্যমে চলে আসে।",
+        official_fees=[
+            ServiceFee(
+                category_name="পেনশন প্রসেসিং সরকারি ফি",
+                amount_bdt=0.0,
+                vat_included=True,
+                payment_method="সম্পূর্ণ বিনামূল্যে (০ টাকা)",
+                remarks="পেনশন প্রক্রিয়াকরণে কোনো সরকারি ফি বা চার্জ নেই।"
+            )
+        ],
+        processing_time_sla="পিআরএল শেষ হওয়ার পূর্বে সর্বোচ্চ ৩০ কার্যদিবসের মধ্যে চূড়ান্ত পেনশন অনুমোদন",
+        required_documents=[
+            RequiredDocument(
+                name="পেনশন আবেদন ফরম (ই-পেনশন ফরম ২.১)",
+                is_mandatory=True,
+                format_type="পূরণকৃত ও স্বাক্ষরিত মূল ফর্ম"
+            ),
+            RequiredDocument(
+                name="হালনাগাদ সার্ভিস বুক (Service Book) মূল কপি",
+                is_mandatory=True,
+                format_type="অফিস প্রধান কর্তৃক প্রতিস্বাক্ষরিত মূল কপি"
+            ),
+            RequiredDocument(
+                name="পিআরএল (PRL) মঞ্জুরির সরকারি আদেশ (GO)",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="পেনশনারের জাতীয় পরিচয়পত্র ও ৩ কপি সত্যায়িত ছবি",
+                is_mandatory=True,
+                format_type="সত্যায়িত কপি"
+            ),
+            RequiredDocument(
+                name="নমিনীর ছবি, এনআইডি এবং উত্তরাধিকার সনদ",
+                is_mandatory=True,
+                format_type="সত্যায়িত কপি"
+            ),
+            RequiredDocument(
+                name="পেনশনারের ব্যাংক একাউন্ট সংক্রান্ত প্রত্যয়নপত্র (MICS চেক পাতা স্ক্যান)",
+                is_mandatory=True,
+                format_type="ব্যাংক ম্যানেজারের সিলযুক্ত কপি"
+            ),
+            RequiredDocument(
+                name="বেসরকারি অনাপত্তিপত্র (NDC - No Demand Certificate)",
+                is_mandatory=True,
+                format_type="দপ্তর প্রধান কর্তৃক প্রদত্ত সনদ"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="পিআরএল শুরুর ৬ মাস আগে সার্ভিস বুক হালনাগাদ",
+                description="অবসরে যাওয়ার ৬ মাস পূর্বে নিজ অফিস থেকে সার্ভিস বুক ও সার্ভিস ভেরিফিকেশন রোল সিজিএ বা হিসাবরক্ষণ অফিস থেকে যাচাই (Pay Fixation Verification) করিয়ে নিন।",
+                action_url="https://ibas.finance.gov.bd",
+                tips="অনলাইন পে-ফিক্সেশন এনআইডির সাথে হুবহু মিল থাকতে হবে।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="ই-পেনশন আবেদন ও ডকুমেন্টস সাবমিশন",
+                description="অফিস প্রধান বরাবর পেনশন আবেদন ফরম ও এনডিসি জমা দিন। অফিস প্রধান পেনশন মঞ্জুরি আদেশ (PPO) তৈরি করে অনলাইনে হিসাবরক্ষণ অফিসে (iBAS++ পোর্টালে) ফরোয়ার্ড করবেন।",
+                tips="এখন আর ম্যানুয়াল ফাইল নিয়ে হিসাবরক্ষণ অফিসে দৌড়াদৌড়ি করতে হয় না।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="হিসাবরক্ষণ কর্মকর্তা কর্তৃক অডিট ও অনুমোদন",
+                description="হিসাবরক্ষণ কর্মকর্তা অনলাইনে পিটিও (Pension Payment Order) পাস করবেন এবং এককালীন গ্র্যাচুইটি ও লাম্পগ্রান্ট অনুমোদনের বিল ইস্যু করবেন।",
+                tips="কোনো অডিটর ফাইল আটকে ঘুষ দাবি করলে সরাসরি সিজিএ-র হেল্পলাইনে জানান।"
+            ),
+            ApplicationStep(
+                step_number=4,
+                title="সরাসরি ব্যাংক অ্যাকাউন্টে ইএফটি (EFT) পেমেন্ট লাভ",
+                description="টাকা স্বয়ংক্রিয়ভাবে বাংলাদেশ ব্যাংকের BEFTN নেটওয়ার্ক দিয়ে সরাসরি আপনার ব্যাংকে জমা হবে। মোবাইলে ক্রেডিট মেসেজ আসবে। প্রতি মাসের ১ তারিখে পেনশন সরাসরি ব্যাংকে চলে আসবে, ব্যাংকে গিয়ে লাইনে দাঁড়ানোর প্রয়োজন নেই।"
+            )
+        ],
+        official_portal_url="https://cga.gov.bd",
+        application_url="https://ibas.finance.gov.bd",
+        citizen_charter_url="https://cga.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: হিসাবরক্ষণ অফিসের কোনো কর্মকর্তা বা কর্মচারী পেনশনের চেক ছাড়ানোর জন্য পারসেন্টেজ বা ঘুষ দাবি করলে তা সম্পূর্ণ ফৌজদারি অপরাধ। iBAS++ সিস্টেমে পেনশনের পুরো প্রক্রিয়াটি ডিজিটালাইজড এবং সেন্ট্রালি ট্র্যাক করা হয়। কাউকে ১ টাকাও দেবেন না।",
+        grievance_remedy="পেনশন মঞ্জুরিতে ঘুষ বা হয়রানির শিকার হলে সিজিএ (Controller General of Accounts) অভিযোগ সেল ০২-৯৩৩০৩১২ অথবা অর্থ বিভাগের ই-মেইল অভিযোগ কেন্দ্রে অভিযোগ জানান।"
+    ))
+
+    # 26. পরিবেশ অধিদপ্তর পরিবেশগত ছাড়পত্র (DoE Environmental Clearance - ECC)
+    services.append(CitizenService(
+        service_id="bd-doe-environmental-clearance-certificate-ecc",
+        title_bn="পরিবেশ অধিদপ্তর পরিবেশগত ছাড়পত্র (ECC) অনলাইন আবেদন ও ফি নির্দেশিকা",
+        title_en="Bangladesh Department of Environment Clearance Certificate (ECC) Online Guide",
+        category="শিল্প ও পরিবেশ সেবা",
+        department_agency="পরিবেশ অধিদপ্তর, পরিবেশ, বন ও জলবায়ু পরিবর্তন মন্ত্রণালয়",
+        summary="যেকোনো শিল্প-কারখানা, রাইস মিল, ওয়ার্কশপ, পোল্ট্রি ফার্ম, ক্লিনিক বা আবাসন প্রকল্পের জন্য পরিবেশগত ছাড়পত্র (ECC) বাধ্যতামূলক। পরিবেশ অফিসের নামে দালালরা ১ থেকে ৫ লাখ টাকা ঘুষ দাবি করে। e-ecc.doe.gov.bd পোর্টালে সবুজ, হলুদ, কমলা ও লাল ক্যাটাগরি অনুযায়ী সরকার নির্ধারিত ফি দিয়ে সরাসরি অনলাইনে ছাড়পত্র পাওয়া যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="সবুজ শ্রেণি (Green Category - ক্ষুদ্র কুটির শিল্প/দোকান)",
+                amount_bdt=1500.0,
+                vat_included=True,
+                payment_method="সোনালী ব্যাংক ট্রেজারি চালান (কোড: ১-৪৫৩১-০০০১-২৬৮১)",
+                remarks="বিনিয়োগ সীমা ৫০ লাখ পর্যন্ত হলে ফি মাত্র ১৫০০ টাকা (+১৫% ভ্যাট)।"
+            ),
+            ServiceFee(
+                category_name="কমলা শ্রেণি (Orange Category - মাঝারি কারখানা/রাইস মিল)",
+                amount_bdt=5000.0,
+                vat_included=True,
+                payment_method="ট্রেজারি চালান",
+                remarks="বিনিয়োগ অনুপাত অনুযায়ী ৫,০০০ থেকে ১৫,০০০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="লাল শ্রেণি (Red Category - বড় রাসায়নিক/টেক্সটাইল শিল্প)",
+                amount_bdt=25000.0,
+                vat_included=True,
+                payment_method="ট্রেজারি চালান",
+                remarks="ইআইএ (EIA) ও ইটিপি (ETP) প্ল্যান সাপেক্ষে।"
+            )
+        ],
+        processing_time_sla="সবুজ শ্রেণি: ৭ কার্যদিবস | কমলা শ্রেণি: ৩০ কার্যদিবস | লাল শ্রেণি: ৬০ কার্যদিবস",
+        required_documents=[
+            RequiredDocument(
+                name="প্রকল্পের বিস্তারিত বিবরণ ও বিনিয়োগের পরিমাণ সম্বলিত প্রোজেক্ট প্রোফাইল",
+                is_mandatory=True,
+                format_type="পিডিএফ ফাইল"
+            ),
+            RequiredDocument(
+                name="কারখানা বা প্রকল্পের জমির মালিকানা দলিল / ভাড়ার চুক্তিপত্র ও খতিয়ান",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="হালনাগাদ ট্রেড লাইসেন্স ও টিআইএন সার্টিফিকেট",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="স্থানীয় কর্তৃপক্ষের অনাপত্তিপত্র (ইউপি চেয়ারম্যান বা পৌর মেয়রের প্রত্যয়নপত্র)",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="কারখানার লে-আউট প্ল্যান ও বর্জ্য ব্যবস্থাপনা পরিকল্পনা (EMP / ETP)",
+                is_mandatory=True,
+                format_type="প্রকৌশলী নকশা"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="পরিবেশ অধিদপ্তরের পোর্টালে নিবন্ধন",
+                description="https://e-ecc.doe.gov.bd পোর্টালে প্রবেশ করে উদ্যোক্তা একাউন্ট তৈরি করুন। আপনার প্রকল্পের সঠিক ক্যাটাগরি (সবুজ/কমলা/লাল) নির্বাচন করুন।",
+                action_url="https://e-ecc.doe.gov.bd",
+                tips="সবুজ ক্যাটাগরির প্রকল্প হলে কোনো দীর্ঘ তদন্ত ছাড়াই তাৎক্ষণিক ছাড়পত্র পাওয়া যায়।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="তথ্য পূরণ ও প্রয়োজনীয় ডকুমেন্টস আপলোড",
+                description="লে-আউট প্ল্যান, জমির দলিল, বিনিয়োগের পরিমাণ ও ট্রেড লাইসেন্স আপলোড করুন।",
+                tips="বর্জ্য নিষ্কাশনের সঠিক ব্যবস্থা প্রদর্শন করুন।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="সরকারি ট্রেজারি চালান প্রদান",
+                description="সোনালী ব্যাংকে নির্দিষ্ট কোডে সরকারি ফি জমা দিয়ে চালানের নম্বর ও স্ক্যান কপি সিস্টেমে এন্ট্রি করুন।",
+                tips="পরিবেশ পরিদর্শককে ব্যক্তিগতভাবে কোনো টাকা দেবেন না।"
+            ),
+            ApplicationStep(
+                step_number=4,
+                title="পরিদর্শন ও কিউআর কোডযুক্ত ডিজিটাল সনদ প্রাপ্তি",
+                description="পরিবেশ পরিদর্শক সরেজমিনে স্থান পরিদর্শন করবেন। আবেদন অনুমোদিত হলে সিস্টেম থেকে কিউআর কোডযুক্ত ডিজিটাল পরিবেশগত ছাড়পত্র ডাউনলোড করে প্রিন্ট করুন।"
+            )
+        ],
+        official_portal_url="https://doe.gov.bd",
+        application_url="https://e-ecc.doe.gov.bd",
+        citizen_charter_url="https://doe.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: দালালরা ছাড়পত্র পাইয়ে দেওয়ার নামে পরিবেশ অধিদপ্তরের কর্মকর্তাদের নাম ভাঙিয়ে লাখ লাখ টাকা হাতিয়ে নেয়। অনলাইনে আবেদন করলে প্রতিটি ফাইলের অগ্রগতি ঢাকা হেডকোয়ার্টার্স থেকে সরাসরি ট্র্যাক করা হয়। ঘুষ দেওয়া এবং নেওয়া উভয়ই আইনত দণ্ডনীয় অপরাধ।",
+        grievance_remedy="অনলাইনে কোনো আবেদন অনাকাঙ্ক্ষিতভাবে ঝুলিয়ে রাখলে পরিবেশ অধিদপ্তরের মহাপরিচালক (DG) বা দুদক হটলাইন ১০৬-এ অভিযোগ জানান।"
+    ))
+
+    # 27. ফায়ার সার্ভিস ও সিভিল ডিফেন্স ফায়ার লাইসেন্স (Fire License)
+    services.append(CitizenService(
+        service_id="bd-fire-service-safety-license-guide",
+        title_bn="ফায়ার সার্ভিস অগ্নিনিরাপত্তা ছাড়পত্র ও ফায়ার লাইসেন্স নির্দেশিকা",
+        title_en="Bangladesh Fire Service & Civil Defence Fire Safety Clearance & License Guide",
+        category="শিল্প ও নাগরিক নিরাপত্তা",
+        department_agency="ফায়ার সার্ভিস ও সিভিল ডিফেন্স অধিদপ্তর, স্বরাষ্ট্র মন্ত্রণালয়",
+        summary="বাণিজ্যিক ভবন, গুদাম, মার্কেট, রেস্তোরাঁ, এলপিজি গ্যাস সিলিন্ডার বিক্রয় কেন্দ্র ও কারখানার জন্য ফায়ার লাইসেন্স থাকা বাধ্যতামূলক। ফায়ার স্টেশনের আশেপাশে দালাল চক্র ফায়ার লাইসেন্সের জন্য ২০,০০০ থেকে ৫০,০০০ টাকা পর্যন্ত দাবি করে। অথচ ভবনের আয়তন অনুযায়ী সরকারি ট্রেজারি ফি মাত্র ১,৫০০ থেকে ৫,০০০ টাকার মধ্যে।",
+        official_fees=[
+            ServiceFee(
+                category_name="ফায়ার লাইসেন্স সরকারি ফি (১,০০০ বর্গফুট পর্যন্ত বাণিজ্যিক প্রতিষ্ঠান)",
+                amount_bdt=1500.0,
+                vat_included=True,
+                payment_method="বাংলাদেশ ব্যাংক / সোনালী ব্যাংক ট্রেজারি চালান (কোড: ১-২২৬১-০০০১-২৬৮১)",
+                remarks="সরকারি নির্ধারিত প্রমিত ফি।"
+            ),
+            ServiceFee(
+                category_name="ফায়ার লাইসেন্স সরকারি ফি (১,০০১ থেকে ৫,০০০ বর্গফুট)",
+                amount_bdt=3000.0,
+                vat_included=True,
+                payment_method="ট্রেজারি চালান",
+                remarks="ভবনের আয়তন অনুযায়ী নির্দিষ্ট সরকারি ফি।"
+            ),
+            ServiceFee(
+                category_name="গ্যাস সিলিন্ডার ও বিপজ্জনক দ্রব্য সংরক্ষণাগার ফি",
+                amount_bdt=5000.0,
+                vat_included=True,
+                payment_method="ট্রেজারি চালান",
+                remarks="বিশেষ ঝুঁকি পরিদর্শন অন্তর্ভুক্ত।"
+            )
+        ],
+        processing_time_sla="পরিদর্শন সাপেক্ষে সর্বোচ্চ ১৫ কার্যদিবস",
+        required_documents=[
+            RequiredDocument(
+                name="আবেদনকারীর জাতীয় পরিচয়পত্র (NID) কপি",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="হালনাগাদ ট্রেড লাইসেন্স",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="ভবন বা প্রতিষ্ঠানের অনুমোদিত আর্কিটেকচারাল লে-আউট নকশা",
+                is_mandatory=True,
+                format_type="ব্লু-প্রিন্ট / নকশা"
+            ),
+            RequiredDocument(
+                name="ভবন নির্মাণের অনুমোদনপত্র (রাজউক / সিডিএ / কেডিএ / পৌরসভা)",
+                is_mandatory=True,
+                format_type="অনুমোদনপত্র কপি"
+            ),
+            RequiredDocument(
+                name="অগ্নিনির্বাপক সিলিন্ডার (ABC/CO2 Dry Chemical Powder) ক্রয়ের ভাউচার",
+                is_mandatory=True,
+                format_type="রশিদ"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="ফায়ার সার্ভিসের পোর্টালে ই-লাইসেন্স আবেদন",
+                description="https://efirelicense.gov.bd ওয়েবসাইটে যান। প্রতিষ্ঠান ও ভবনের বিস্তারিত তথ্য পূরণ করে আবেদন সাবমিট করুন।",
+                action_url="https://efirelicense.gov.bd",
+                tips="প্রতিষ্ঠানে জরুরি নির্গমন সিঁড়ি (Fire Exit) ও সিলিন্ডারের অবস্থান স্পষ্ট উল্লেখ করুন।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="চালানে সরকারি ফি পরিশোধ",
+                description="নির্দিষ্ট কোডে সোনালী ব্যাংকে চালানের মাধ্যমে সরকারি ফি জমা দিন। চালানের কপি সিস্টেমে আপলোড করুন।",
+                tips="কোনো কর্মচারীকে নগদ টাকা দেবেন না।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="ফায়ার পরিদর্শক কর্তৃক সরেজমিনে পরিদর্শন",
+                description="নিকটস্থ ফায়ার স্টেশনের পরিদর্শক আপনার ভবন পরিদর্শন করবেন এবং মহড়ার ব্যবস্থা ও অগ্নিনির্বাপক ব্যবস্থা দেখবেন। সন্তোষজনক হলে তিনি ইতিবাচক প্রতিবেদন দাখিল করবেন।",
+                tips="পর্যাপ্ত ফায়ার এক্সটিংগুইশার ও স্মোক ডিটেক্টর প্রস্তুত রাখুন।"
+            ),
+            ApplicationStep(
+                step_number=4,
+                title="ডিজিটাল ফায়ার লাইসেন্স ডাউনলোড",
+                description="উপ-পরিচালক বা সহকারী পরিচালক অনুমোদন দিলে সিস্টেম থেকে কিউআর কোডযুক্ত আসল ডিজিটাল ফায়ার লাইসেন্স ডাউনলোড করে প্রিন্ট করুন।"
+            )
+        ],
+        official_portal_url="https://fireservice.gov.bd",
+        application_url="https://efirelicense.gov.bd",
+        citizen_charter_url="https://fireservice.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: ফায়ার স্টেশনের দালালরা সনদ পাইয়ে দেওয়ার নামে বিপুল অর্থ দাবি করে এবং অনেক ক্ষেত্রে নকল জাল সার্টিফিকেট ধরিয়ে দেয়। কোনো দুর্ঘটনায় নকল লাইসেন্স ধরা পড়লে ভবন মালিকের বিরুদ্ধে জামিন-অযোগ্য ফৌজদারি মামলা হবে। শুধুমাত্র ই-ফায়ার লাইসেন্স পোর্টালের ডিজিটাল সনদ গ্রহণ করুন।"
+    ))
+
+    # 28. প্রধান আমদানি ও রপ্তানি নিয়ন্ত্রকের দপ্তর (CCI&E) আমদানি-রপ্তানি সনদ (IRC/ERC)
+    services.append(CitizenService(
+        service_id="bd-ccie-irc-erc-import-export-registration",
+        title_bn="আমদানি ও রপ্তানি সনদ (IRC ও ERC) অনলাইন নিবন্ধন ও ফি",
+        title_en="Bangladesh Import & Export Registration Certificate (IRC & ERC) Official Online Guide",
+        category="ব্যবসা ও আন্তর্জাতিক বাণিজ্য",
+        department_agency="প্রধান আমদানি ও রপ্তানি নিয়ন্ত্রকের দপ্তর (CCI&E), বাণিজ্য মন্ত্রণালয়",
+        summary="আন্তর্জাতিক বাণিজ্য ও পণ্য আমদানি-রপ্তানি করার জন্য আইআরসি (IRC) ও ইআরসি (ERC) সনদ বাধ্যতামূলক। সিঅ্যান্ডএফ দালালরা এর জন্য ৫০,০০০ থেকে ১ লাখ টাকা পর্যন্ত ফি নেয়। olrs.ccie.gov.bd পোর্টালে সরাসরি অনলাইনে আবেদন করে নির্ধারিত সরকারি ফি দিয়ে ঘরে বসেই সনদ পাওয়া যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="রপ্তানি নিবন্ধন সনদ (ERC - বাৎসরিক যেকোনো পরিমাণ রপ্তানির জন্য)",
+                amount_bdt=7000.0,
+                vat_included=True,
+                payment_method="অনলাইন ই-পেমেন্ট বা সোনালী ব্যাংক চালান",
+                remarks="সরকারি ফি ৭,০০০ টাকা (+১৫% ভ্যাট)।"
+            ),
+            ServiceFee(
+                category_name="আমদানি নিবন্ধন সনদ (IRC - বাৎসরিক আমদানি সীমা ৫০ লাখ টাকা পর্যন্ত)",
+                amount_bdt=18000.0,
+                vat_included=True,
+                payment_method="অনলাইন চালান",
+                remarks="আমদানি সীমার উপর ভিত্তি করে সরকারি স্লাব নির্ধারিত।"
+            ),
+            ServiceFee(
+                category_name="আমদানি নিবন্ধন সনদ (IRC - বাৎসরিক আমদানি সীমা ৫ লাখ টাকা পর্যন্ত ক্ষুদ্র আমদানিকারক)",
+                amount_bdt=5000.0,
+                vat_included=True,
+                payment_method="অনলাইন চালান",
+                remarks="ক্ষুদ্র উদ্যোক্তাদের জন্য বিশেষ ছাড়।"
+            )
+        ],
+        processing_time_sla="অনলাইন আবেদন ও ফি জমার পর সর্বোচ্চ ৩ কার্যদিবসের মধ্যে ডিজিটাল সনদ প্রস্তুত",
+        required_documents=[
+            RequiredDocument(
+                name="হালনাগাদ বাণিজ্যিক ট্রেড লাইসেন্স",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="ই-টিআইএন সার্টিফিকেট ও সর্বশেষ আয়কর রিটার্ন দাখিলের প্রাপ্তিস্বীকার",
+                is_mandatory=True,
+                format_type="অনলাইন কপি"
+            ),
+            RequiredDocument(
+                name="ভ্যাট (BIN) রেজিস্ট্রেশন সনদপত্র",
+                is_mandatory=True,
+                format_type="অনলাইন কপি"
+            ),
+            RequiredDocument(
+                name="তফসিলি ব্যাংকের সলভেন্সি সার্টিফিকেট (Bank Solvency Certificate)",
+                is_mandatory=True,
+                format_type="ব্যাংক ম্যানেজারের সিলযুক্ত মূল কপি"
+            ),
+            RequiredDocument(
+                name="স্বীকৃত চেম্বার অব কমার্স বা ট্রেড অ্যাসোসিয়েশনের মেম্বারশিপ সার্টিফিকেট",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="OLRS পোর্টালে অনলাইন রেজিস্ট্রেশন",
+                description="https://olrs.ccie.gov.bd ওয়েবসাইটে যান। আপনার প্রতিষ্ঠানের নাম ও ইমেইল দিয়ে রেজিস্ট্রেশন করুন।",
+                action_url="https://olrs.ccie.gov.bd",
+                tips="আপনার ট্রেড লাইসেন্স ও ব্যাংক একাউন্টের নাম হুবহু এক হতে হবে।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="আবেদন ফরম পূরণ ও ডকুমেন্টস আপলোড",
+                description="আমদানি বা রপ্তানি সনদ বাছাই করুন। ব্যাংক সলভেন্সি ও চেম্বার সার্টিফিকেট আপলোড করুন।",
+                tips="কাগজপত্র পরিষ্কারভাবে স্ক্যান করে দিন।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="অনলাইন পেমেন্ট গেটওয়েতে ফি পরিশোধ",
+                description="সিস্টেমের একপে বা সোনালী পেমেন্ট গেটওয়ের মাধ্যমে নির্ধারিত সরকারি ফি পরিশোধ করুন। তাৎক্ষণিক ডিজিটাল চালান স্লিপ তৈরি হবে।",
+                tips="কোনো মধ্যস্থতাকারীকে অতিরিক্ত টাকা দেবেন না।"
+            ),
+            ApplicationStep(
+                step_number=4,
+                title="ডিজিটাল আইআরসি/ইআরসি সনদ ডাউনলোড",
+                description="CCI&E কর্মকর্তা অনুমোদন দিলে কিউআর কোডযুক্ত আসল ডিজিটাল সনদ অনলাইনে প্রস্তুত হবে, যা দিয়ে বাংলাদেশ কাস্টমস ও ব্যাংকে এলসি (Letter of Credit) খোলা যাবে।"
+            )
+        ],
+        official_portal_url="https://ccie.gov.bd",
+        application_url="https://olrs.ccie.gov.bd",
+        citizen_charter_url="https://ccie.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: মতিঝিল বা চট্টগ্রামের দালালরা আইআরসি পাইয়ে দেওয়ার নামে লাখ টাকা হাতিয়ে নেয়। এখন সম্পূর্ণ সেবাটি শতভাগ পেপারলেস এবং অনলাইনভিত্তিক। ঘরে বসেই এটি সংগ্রহ করা সম্ভব।"
+    ))
+
+    # 29. সরকারি হাসপাতালের ওয়ান স্টপ স্বাস্থ্যসেবা ও রোগী ভর্তি নির্দেশিকা
+    services.append(CitizenService(
+        service_id="bd-public-hospital-ticket-admission-guide",
+        title_bn="সরকারি হাসপাতালে ওয়ান স্টপ স্বাস্থ্যসেবা, বৈকালিক টিকিট ও ভর্তি নির্দেশিকা",
+        title_en="Bangladesh Public Hospital Outdoor Ticket, Evening Specialist Service & Admission Guide",
+        category="স্বাস্থ্য ও পরিবার কল্যাণ",
+        department_agency="স্বাস্থ্য সেবা বিভাগ, স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়",
+        summary="ঢাকা মেডিকেল, সোহরাওয়ার্দী, বিএসএমএমইউ (পিজি) কিংবা জেলা সদর হাসপাতালে রোগী নিয়ে গেলে দালাল চক্র টিকিট কাটা, ট্রলি নেওয়া, টেস্ট করানো এবং বেড দেওয়ার নামে অসহায় রোগীদের সর্বস্বান্ত করে। সরকারি হাসপাতালে বহির্বিভাগ টিকিট মাত্র ১০ টাকা এবং বৈকালিক বিশেষজ্ঞ ডাক্তার কনসালটেন্সি ফি মাত্র ২০০-৩০০ টাকা। স্বাস্থ্য বাতায়ন হেল্পলাইন ১৬২৬৩-তে ফোন করে যেকোনো সময় বিনামূল্যে সরকারি ডাক্তারের পরামর্শ নেওয়া যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="উপজেলা স্বাস্থ্য কমপ্লেক্স ও জেলা সদর হাসপাতাল বহির্বিভাগ টিকিট",
+                amount_bdt=10.0,
+                vat_included=True,
+                payment_method="হাসপাতাল টিকিট কাউন্টার",
+                remarks="সরকারি নির্ধারিত প্রমিত টিকিট ফি মাত্র ১০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="মেডিকেল কলেজ ও বিশেষায়িত টারশিয়ারি হাসপাতাল বহির্বিভাগ টিকিট",
+                amount_bdt=20.0,
+                vat_included=True,
+                payment_method="হাসপাতাল কাউন্টার",
+                remarks="টিকিট ফি মাত্র ২০ টাকা।"
+            ),
+            ServiceFee(
+                category_name="সরকারি বৈকালিক প্রাতিষ্ঠানিক প্র্যাকটিস (অধ্যাপক / বিশেষজ্ঞ ডাক্তার)",
+                amount_bdt=300.0,
+                vat_included=True,
+                payment_method="হাসপাতাল বৈকালিক কাউন্টার",
+                remarks="বিকালে সরকারি হাসপাতালেই প্রাইভেট চেম্বারের মতো বিশেষজ্ঞ ডাক্তার দেখানো যায়।"
+            ),
+            ServiceFee(
+                category_name="সাধারণ বেড ও ভর্তি ফি",
+                amount_bdt=15.0,
+                vat_included=True,
+                payment_method="কাউন্টার",
+                remarks="ভর্তি ফি মাত্র ১৫ টাকা। সাধারণ ওয়ার্ডের কোনো দৈনিক বেড চার্জ নেই।"
+            )
+        ],
+        processing_time_sla="তাৎক্ষণিক বহির্বিভাগ টিকিট ও সেবা | জরুরি বিভাগ ২৪ ঘণ্টা খোলা",
+        required_documents=[
+            RequiredDocument(
+                name="রোগীর জাতীয় পরিচয়পত্র (NID) অথবা জন্ম নিবন্ধন নম্বর",
+                is_mandatory=True,
+                format_type="টিকিট কাউন্টারে মৌখিক বা কার্ড প্রদর্শন"
+            ),
+            RequiredDocument(
+                name="পূর্ববর্তী প্রেসক্রিপশন ও টেস্টের রিপোর্ট (যদি থাকে)",
+                is_mandatory=False,
+                format_type="মূল ফাইল"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="হাসপাতাল কাউন্টারে ১০/২০ টাকার সরকারি টিকিট কাটা",
+                description="সরাসরি টিকিট কাউন্টারে গিয়ে রোগীর নাম, বয়স ও সমস্যা বলুন। ১০ টাকার টিকিট কেটে নির্দিষ্ট রুম নম্বরে ডাক্তারের জন্য অপেক্ষা করুন।",
+                action_url="https://dghs.gov.bd",
+                tips="কাউন্টারের সামনে দালালরা এসে বলবে 'তাড়াতাড়ি ডাক্তার দেখায় দিচ্ছি, ১০০ টাকা দেন'—কখনোই তাদের সাথে যাবেন না।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="ডাক্তার দেখানো ও বিনামূল্যে ওষুধ সংগ্রহ",
+                description="ডাক্তার ব্যবস্থাপত্র লিখলে হাসপাতালের নিজস্ব ডিসপেনসারি কাউন্টারে যান। সরকারি তালিকায় থাকা ওষুধগুলো সম্পূর্ণ বিনামূল্যে দেওয়া হয়।",
+                tips="ওষুধের জন্য কাউকে টাকা দিতে হয় না।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="হাসপাতাল ল্যাবে সরকার নির্ধারিত নামমাত্র মূল্যে টেস্ট",
+                description="বাইরের প্রাইভেট ক্লিনিকে না গিয়ে হাসপাতালের নিজস্ব প্যাথলজিতে সরকারি নামমাত্র মূল্যে (রক্ত পরীক্ষা ৫০-১০০ টাকা, এক্স-রে ১০০-২০০ টাকা) টেস্ট করান।",
+                tips="দালালরা প্রাইভেট ক্লিনিকে নিয়ে বেশি টাকা কমিশনের ধান্দা করে।"
+            ),
+            ApplicationStep(
+                step_number=4,
+                title="ভর্তি ও জরুরি সেবা",
+                description="ভর্তির প্রয়োজন হলে জরুরি বিভাগ বা বহির্বিভাগের চিকিৎসকের সিলযুক্ত স্লিপ নিয়ে ভর্তি কাউন্টারে ১৫ টাকা জমা দিয়ে বেডে যান। কোনো ট্রলিম্যান বা আয়াকে বকশিশ দেওয়ার কোনো বাধ্যবাধকতা নেই।"
+            )
+        ],
+        official_portal_url="https://dghs.gov.bd",
+        application_url="https://dghs.gov.bd",
+        citizen_charter_url="https://hsd.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: হাসপাতাল চত্বরে সক্রিয় দালালরা রোগী ভাগিয়ে প্রাইভেট হাসপাতালে নিয়ে যায় এবং আইসিইউ বা টেস্টের নামে প্রতারণা করে। রোগী বা স্বজনরা যেকোনো বিপদে আনসার সদস্য বা হাসপাতাল পুলিশ ক্যাম্পে যোগাযোগ করুন। বিনামূল্যে স্বাস্থ্য পরামর্শের জন্য স্বাস্থ্য বাতায়ন ১৬২৬৩-তে কল করুন।",
+        grievance_remedy="হাসপাতালে ডাক্তার অনুপস্থিত থাকলে বা চিকিৎসা অবহেলা হলে হাসপাতাল পরিচালক / সিভিল সার্জন বরাবরে অভিযোগ করুন অথবা জাতীয় জরুরি সেবা ৯৯৯ বা ১৬২৬৩-এ রিপোর্ট করুন।"
+    ))
+
+    # 30. নতুন বিদ্যুৎ সংযোগ ও ডিজিটাল মিটার আবেদন (পল্লী বিদ্যুৎ ও ডেসকো/ডিপিডিসি)
+    services.append(CitizenService(
+        service_id="bd-electricity-new-connection-meter-guide",
+        title_bn="নতুন বিদ্যুৎ সংযোগ ও ডিজিটাল মিটার আবেদন নির্দেশিকা (পল্লী বিদ্যুৎ/ডেসকো/ডিপিডিসি)",
+        title_en="Bangladesh New Electricity Connection & Digital Smart Meter Application Guide",
+        category="বিদ্যুৎ, জ্বালানি ও খনিজ সম্পদ",
+        department_agency="বাংলাদেশ পল্লী বিদ্যুতায়ন বোর্ড (BREB) / ডেসকো / ডিপিডিসি",
+        summary="নতুন বাড়ি বা ব্যবসা প্রতিষ্ঠানে পল্লী বিদ্যুৎ বা ডেসকো/ডিপিডিসি থেকে মিটার নিতে স্থানীয় দালাল বা কথিত ইলেকট্রিশিয়ানরা ১৫,০০০ থেকে ৩০,০০০ টাকা দাবি করে। অনলাইনে ঘরে বসেই মাত্র কয়েকশ থেকে কয়েক হাজার টাকায় সরকারি নিয়মে সংযোগ পাওয়া যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="আবেদন ফি (এক ফেজ আবাসিক সংযোগ)",
+                amount_bdt=115.0,
+                vat_included=True,
+                payment_method="বিকাশ, রকেট, নগদ বা অনলাইন",
+                remarks="আবেদন ফি ১০০ টাকা + ১৫% ভ্যাট = ১১৫ টাকা।"
+            ),
+            ServiceFee(
+                category_name="নিরাপত্তা জামানত (Security Deposit - প্রতি কিলোওয়াট)",
+                amount_bdt=600.0,
+                vat_included=True,
+                payment_method="অনলাইন পেমেন্ট",
+                remarks="ফেরতযোগ্য সরকারি জামানত।"
+            ),
+            ServiceFee(
+                category_name="মিটার টেস্ট ও সার্ভিস সংযোগ ফি",
+                amount_bdt=800.0,
+                vat_included=True,
+                payment_method="অনলাইন",
+                remarks="মিটার সরবরাহ ও তার টানার সরকারি চার্জ।"
+            )
+        ],
+        processing_time_sla="আবেদন ও ওয়্যারিং পরিদর্শনের পর সর্বোচ্চ ৭ থেকে ১৫ কার্যদিবস",
+        required_documents=[
+            RequiredDocument(
+                name="আবেদনকারীর জাতীয় পরিচয়পত্র (NID) কপি",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="যে জমিতে সংযোগ হবে তার খারিজ খতিয়ান বা দলিলের কপি",
+                is_mandatory=True,
+                format_type="স্ক্যান কপি"
+            ),
+            RequiredDocument(
+                name="লাইসেন্সপ্রাপ্ত ইলেকট্রিশিয়ান কর্তৃক বাড়ি ওয়্যারিং প্রত্যয়নপত্র",
+                is_mandatory=True,
+                format_type="প্রত্যয়ন ফরম"
+            ),
+            RequiredDocument(
+                name="নিকটবর্তী প্রতিবেশীর বিদ্যুৎ বিলের কপি (হিসাব নম্বর উল্লেখের জন্য)",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="বিদ্যুৎ বিতরণ সংস্থার পোর্টালে অনলাইন আবেদন",
+                description="পল্লী বিদ্যুৎ হলে https://rebpbs.org এবং ঢাকা হলে desco.org.bd বা dpdc.org.bd-এ যান। 'নতুন সংযোগ আবেদন' অপশনে ক্লিক করে ১১৫ টাকা আবেদন ফি বিকাশ দিয়ে সাবমিট করুন।",
+                action_url="https://rebpbs.org",
+                tips="আপনার নিকটবর্তী ট্রান্সফরমার ও পোলের নম্বর সঠিকভাবে দিন।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="লাইনম্যান কর্তৃক কারিগরি পরিদর্শন",
+                description="বিদ্যুৎ অফিসের ওয়্যারিং পরিদর্শক সরেজমিনে এসে বাড়ির ওয়্যারিং ও আর্থিং রড পরীক্ষা করবেন।",
+                tips="ওয়্যারিং টেস্টের জন্য কোনো পরিদর্শককে ব্যক্তিগত টাকা দেওয়া নিষিদ্ধ।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="ডিমান্ড নোটের ফি অনলাইনে জমা",
+                description="সিস্টেমে ডিমান্ড নোট ইস্যু হবে। জামানত ও মিটার চার্জের টাকা সরাসরি রকেট/বিকাশ বা ব্যাংকে জমা দিন।",
+                tips="দালালরা বলে 'অফিস খরচ লাগবে'—ডিমান্ড নোটের বাইরে কোনো টাকা নেই।"
+            ),
+            ApplicationStep(
+                step_number=4,
+                title="মিটার স্থাপন ও বিদ্যুৎ চালু",
+                description="ফি জমার ৩-৫ দিনের মধ্যে লাইনম্যান এসে সরকারি সিলযুক্ত ডিজিটাল মিটার স্থাপন করে বিদ্যুৎ চালু করে দেবে।"
+            )
+        ],
+        official_portal_url="https://reb.gov.bd",
+        application_url="https://rebpbs.org",
+        citizen_charter_url="https://mpemr.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: কোনো দালাল বা অসাধু ইলেকট্রিশিয়ানকে মিটার আনার জন্য চুক্তি করে টাকা দেবেন না। তারা অবৈধ হুক লাইন বা চোরাই মিটার লাগিয়ে দিলে বিদ্যুৎ আদালতের অভিযানে জেল ও লাখ টাকা জরিমানা হতে পারে। সম্পূর্ণ বৈধ অনলাইন আবেদন করুন।",
+        grievance_remedy="বিদ্যুৎ সংযোগে কালক্ষেপণ বা ঘুষ দাবি করলে পল্লী বিদ্যুতের জিএম (General Manager) অথবা মন্ত্রণালয় হটলাইন ১৬৯৯৯-এ অভিযোগ দায়ের করুন।"
+    ))
+
+    # 31. বিআরটিএ ট্যাক্স টোকেন ও মোটরযান রুট পারমিট অনলাইন নবায়ন
+    services.append(CitizenService(
+        service_id="bd-brta-tax-token-route-permit-renewal",
+        title_bn="বিআরটিএ মোটরযান ট্যাক্স টোকেন ও রুট পারমিট অনলাইন নবায়ন নির্দেশিকা",
+        title_en="Bangladesh BRTA Motor Vehicle Tax Token & Route Permit Online Renewal Guide",
+        category="যানবাহন ও লাইসেন্স",
+        department_agency="বাংলাদেশ সড়ক পরিবহন কর্তৃপক্ষ (বিআরটিএ), সড়ক পরিবহন ও মহাসড়ক বিভাগ",
+        summary="প্রতি বছর মোটরসাইকেল, প্রাইভেট কার, বাস বা ট্রাকের ট্যাক্স টোকেন নবায়ন করতে ব্যাংকে গিয়ে লম্বা লাইনে দাঁড়াতে হয় অথবা দালাল ধরে বাড়তি টাকা দিতে হয়। বিএসপি (BSP) সিস্টেমে ঘরে বসেই মোবাইল ব্যাংকিংয়ে এক সেকেন্ডে ট্যাক্স পরিশোধ করে ডিজিটাল কিউআর কোডযুক্ত ট্যাক্স টোকেন ডাউনলোড করা যায়।",
+        official_fees=[
+            ServiceFee(
+                category_name="মোটরসাইকেল বার্ষিক ট্যাক্স টোকেন ফি",
+                amount_bdt=1150.0,
+                vat_included=True,
+                payment_method="বিকাশ, রকেট, নগদ, উপায়, কার্ড বা যেকোনো ব্যাংক",
+                remarks="১০ বছরের এককালীন ট্যাক্স না থাকলে বার্ষিক নবায়ন ফি।"
+            ),
+            ServiceFee(
+                category_name="প্রাইভেট কার বার্ষিক রোড ট্যাক্স ও টোকেন (১৫০০ সিসি পর্যন্ত)",
+                amount_bdt=15000.0,
+                vat_included=True,
+                payment_method="অনলাইন পেমেন্ট গেটওয়ে",
+                remarks="সরকারি নির্ধারিত প্রমিত ফি + এআইটি প্রযোজ্য।"
+            ),
+            ServiceFee(
+                category_name="লেট ফি / জরিমানা (মেয়াদোত্তীর্ণ হলে)",
+                amount_bdt=200.0,
+                vat_included=True,
+                payment_method="অনলাইন",
+                remarks="বিলম্বে পরিশোধের সরকারি রুলস অনুযায়ী হিসাব।"
+            )
+        ],
+        processing_time_sla="অনলাইনে ফি জমার সাথে সাথে তাৎক্ষণিক ডিজিটাল ট্যাক্স টোকেন প্রস্তুত",
+        required_documents=[
+            RequiredDocument(
+                name="গাড়ির পূর্ববর্তী ট্যাক্স টোকেনের তথ্য বা ছবি",
+                is_mandatory=True,
+                format_type="তথ্য ইনপুট"
+            ),
+            RequiredDocument(
+                name="গাড়ির চেসিস নম্বর ও রেজিস্ট্রেশন নম্বর",
+                is_mandatory=True,
+                format_type="তথ্য ইনপুট"
+            ),
+            RequiredDocument(
+                name="আয়কর রিটার্ন দাখিলের প্রমাণপত্র (গাড়ির ক্ষেত্রে বাধ্যতামূলক)",
+                is_mandatory=True,
+                format_type="অনলাইন টিআইএন ও রিটার্ন রসিদ"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="বিএসপি পোর্টালে লগইন",
+                description="https://bsp.brta.gov.bd সাইটে লগইন করে আপনার মোটরযান প্রোফাইলে যান। 'ট্যাক্স টোকেন নবায়ন' বাটনে ক্লিক করুন।",
+                action_url="https://bsp.brta.gov.bd",
+                tips="আপনার গাড়ি আগেই বিএসপি প্রোফাইলে যুক্ত না থাকলে চেসিস নম্বর দিয়ে যুক্ত করে নিন।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="বকেয়া ট্যাক্স হিসাব ও অনলাইন পেমেন্ট",
+                description="সিস্টেম স্বয়ংক্রিয়ভাবে সরকারি ট্যাক্স ও ভ্যাট হিসাব করে দেবে। বিকাশ বা কার্ড দিয়ে ফি পরিশোধ করুন।",
+                tips="কোনো ব্যাংকে গিয়ে ঘণ্টার পর ঘণ্টা লাইনে দাঁড়াতে হবে না।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="কিউআর কোডযুক্ত ডিজিটাল ট্যাক্স টোকেন ডাউনলোড ও প্রিন্ট",
+                description="পেমেন্ট সফল হওয়ার সাথে সাথে কিউআর কোডযুক্ত রঙিন ডিজিটাল ট্যাক্স টোকেন স্ক্রিনে চলে আসবে। এটি ডাউনলোড করে প্রিন্ট করে গাড়িতে রাখুন। ট্রাফিক পুলিশ কিউআর কোড স্ক্যান করে তাৎক্ষণিক বৈধতা যাচাই করতে পারবে।"
+            )
+        ],
+        official_portal_url="https://brta.gov.bd",
+        application_url="https://bsp.brta.gov.bd",
+        citizen_charter_url="https://brta.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: দালালদের মাধ্যমে ভুয়া ম্যানুয়াল সিল দেওয়া ট্যাক্স টোকেন কাটাবেন না। পুলিশি তল্লাশিতে বারকোড বা কিউআর কোড ম্যাচ না করলে গাড়ি ডাম্পিংয়ে পাঠানো হবে এবং জাল দলিলের মামলা হবে। সম্পূর্ণ অফিশিয়াল বিএসপি সিস্টেম থেকে ই-ট্যাক্স টোকেন নিন।"
+    ))
+
+    # 32. পাসপোর্টের পুলিশ ভেরিফিকেশন (SB Verification) ট্র্যাকিং ও অযাচিত দাবি রোধ
+    services.append(CitizenService(
+        service_id="bd-passport-police-sb-verification-guide",
+        title_bn="পাসপোর্টের পুলিশ ভেরিফিকেশন (SB) ট্র্যাকিং ও অযাচিত ঘুষ দাবি রোধ নির্দেশিকা",
+        title_en="Bangladesh e-Passport Special Branch (SB) Police Verification Tracking & Anti-Extortion Guide",
+        category="পাসপোর্ট ও ইমিগ্রেশন",
+        department_agency="স্পেশাল ব্রাঞ্চ (SB), বাংলাদেশ পুলিশ",
+        summary="নতুন পাসপোর্টের ক্ষেত্রে পুলিশ ভেরিফিকেশনের নামে তদন্তকারী কর্মকর্তারা প্রায়ই বাড়ি এসে বা থানায় ডেকে ১,০০০ থেকে ৫,০০০ টাকা 'চা-মিষ্টির খরচ' বা ঘুষ দাবি করে। স্বরাষ্ট্র মন্ত্রণালয় ও পুলিশ সদরদপ্তরের সুস্পষ্ট নির্দেশ অনুযায়ী—পাসপোর্ট ভেরিফিকেশনে নাগরিকদের কোনো ফি বা অর্থ দেওয়ার কোনো সরকারি নিয়ম নেই (ফি সম্পূর্ণ ০ টাকা)। নাগরিকের তথ্য সঠিক থাকলে কোনো অর্থ ছাড়াই রিপোর্ট পজিটিভ দিতে পুলিশ বাধ্য।",
+        official_fees=[
+            ServiceFee(
+                category_name="পুলিশ ভেরিফিকেশন সরকারি ফি",
+                amount_bdt=0.0,
+                vat_included=True,
+                payment_method="সম্পূর্ণ বিনামূল্যে (০ টাকা)",
+                remarks="পুলিশ ভেরিফিকেশনের জন্য কোনো প্রকার অর্থ নেওয়া আইনত দণ্ডনীয় ঘুষ।"
+            )
+        ],
+        processing_time_sla="এসবি অফিসে ফাইল প্রেরণের পর সর্বোচ্চ ৩ থেকে ৭ কার্যদিবসের মধ্যে রিপোর্ট নিষ্পত্তি",
+        required_documents=[
+            RequiredDocument(
+                name="আবেদনকারীর আসল জাতীয় পরিচয়পত্র (NID) বা অনলাইন জন্ম সনদ",
+                is_mandatory=True,
+                format_type="মূল কপি পরিদর্শন"
+            ),
+            RequiredDocument(
+                name="স্থায়ী ঠিকানার প্রমাণপত্র (চেয়ারম্যান/কাউন্সিলর প্রত্যয়ন বা হোল্ডিং ট্যাক্স দাখিলা)",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="পিতা ও মাতার জাতীয় পরিচয়পত্র (NID)",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            ),
+            RequiredDocument(
+                name="পাসপোর্টের অনলাইন রেজিস্ট্রেশন সামারি শিট ও ডেলিভারি স্লিপ",
+                is_mandatory=True,
+                format_type="ফটোকপি"
+            )
+        ],
+        step_by_step_process=[
+            ApplicationStep(
+                step_number=1,
+                title="পাসপোর্ট স্ট্যাটাস ট্র্যাকিং",
+                description="https://www.epassport.gov.bd পোর্টালে অ্যাপ্লিকেশন আইডি ও জন্মতারিখ দিয়ে চেক করুন। স্ট্যাটাস যখন 'Police Verification' দেখাবে, তখন ফাইলটি আপনার সংশ্লিষ্ট এলাকার এসবি বা ডিএসবি শাখায় থাকে।",
+                action_url="https://www.epassport.gov.bd/landing",
+                tips="নবায়নকৃত সাধারণ পাসপোর্টে কোনো পুলিশ ভেরিফিকেশন লাগে না, শুধুমাত্র নতুন পাসপোর্টে প্রযোজ্য।"
+            ),
+            ApplicationStep(
+                step_number=2,
+                title="তদন্ত কর্মকর্তার সাথে যোগাযোগ ও আসল কাগজপত্র প্রদর্শন",
+                description="তদন্তকারী কর্মকর্তা ফোন দিলে তাকে আপনার স্থায়ী ঠিকানার ইউটিলিটি বিল, চেয়ারম্যান সার্টিফিকেট ও আসল এনআইডি দেখান।",
+                tips="কর্মকর্তা যদি বলেন 'অফিস খরচ লাগবে', তাকে বিনয়ের সাথে বলুন যে সরকার নির্ধারিত পাসপোর্ট ফি চালানে জমা দেওয়া আছে, কোনো বাড়তি খরচ দেওয়ার সরকারি নিয়ম নেই।"
+            ),
+            ApplicationStep(
+                step_number=3,
+                title="অনলাইন রিপোর্ট সাবমিশন ও ছাড়পত্র",
+                description="তদন্তকারী কর্মকর্তা তার মোবাইল অ্যাপ দিয়ে সরাসরি কেন্দ্রীয় এসবি সার্ভারে ডিজিটাল পজিটিভ রিপোর্ট আপলোড করবেন। আপনার পাসপোর্টের স্ট্যাটাস স্বয়ংক্রিয়ভাবে 'Pending for Approval' হয়ে যাবে।"
+            )
+        ],
+        official_portal_url="https://police.gov.bd",
+        application_url="https://www.epassport.gov.bd",
+        citizen_charter_url="https://police.portal.gov.bd/site/view/citizen_charter",
+        anti_broker_warning="সতর্কতা: পুলিশ ভেরিফিকেশনের জন্য কাউকে কোনো নগদ টাকা দেবেন না। যদি কোনো কর্মকর্তা অনৈতিকভাবে টাকা দাবি করে বা টাকা না দিলে নেতিবাচক রিপোর্ট দেওয়ার হুমকি দেয়, তবে অবিলম্বে পুলিশ সদরদপ্তরের আইজিপি কমপ্লেইন সেল অথবা স্থানীয় পুলিশ সুপার (SP) বরাবর সরাসরি অভিযোগ করুন।",
+        grievance_remedy="পুলিশের অনৈতিক সুবিধা দাবির বিরুদ্ধে আইজিপি কমপ্লেইন সেল মোবাইল: ০১৭৬৯৬৯৩৫৩৫, ০১৭৬৯৬৯৩৫৩৬ অথবা জাতীয় জরুরি সেবা ৯৯৯ বা grs.gov.bd-এ সরাসরি নাম প্রকাশ না করে অভিযোগ দাখিল করুন।"
+    ))
+
     return services

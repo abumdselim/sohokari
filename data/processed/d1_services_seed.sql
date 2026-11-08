@@ -1806,3 +1806,773 @@ DELETE FROM service_steps WHERE service_id = 'bd-brta-vehicle-ownership-transfer
             VALUES ('bd-brta-vehicle-ownership-transfer', 4, 'নতুন মালিকের নামে স্মার্ট কার্ড গ্রহণ', 'স্মার্ট কার্ড প্রস্তুত হলে এসএমএস আসবে। এরপর বিআরটিএ অফিস থেকে অথবা ডাকযোগে নতুন মালিকের নামে মুদ্রিত স্মার্ট রেজিস্ট্রেশন সার্টিফিকেট গ্রহণ করুন।', NULL, NULL);
             
 
+-- Service: বিদেশে গমনে গামকা (GAMCA/Wafid) মেডিকেল অনলাইন অ্যাপয়েন্টমেন্ট ও ফি (bd-gamca-wafid-medical-appointment-guide)
+
+        INSERT INTO services (
+            service_id, title_bn, title_en, category, sub_category, 
+            department_agency, summary, processing_time_sla, 
+            official_portal_url, application_url, citizen_charter_url, 
+            anti_broker_warning, grievance_remedy, source_platform, updated_at
+        ) VALUES (
+            'bd-gamca-wafid-medical-appointment-guide', 'বিদেশে গমনে গামকা (GAMCA/Wafid) মেডিকেল অনলাইন অ্যাপয়েন্টমেন্ট ও ফি', 'GAMCA / Wafid Medical Examination Online Appointment & Official Fee Guide (GCC Countries)', 
+            'প্রবাসী কল্যাণ ও বৈদেশিক কর্মসংস্থান', NULL, 'উপসাগরীয় স্বাস্থ্য কাউন্সিল (Gulf Health Council) ও প্রবাসী কল্যাণ মন্ত্রণালয়', 
+            'সৌদি আরব, ওমান, কাতার, কুয়েত, বাহরাইন ও সংযুক্ত আরব আমিরাত গমনে গামকা অনুমোদিত সেন্টারে মেডিকেল টেস্ট বাধ্যতামূলক। ট্রাভেল এজেন্সি ও দালালরা একটি মেডিকেল স্লিপের জন্য ৩,০০০ থেকে ৮,০০০ টাকা হাতিয়ে নেয়। অথচ অফিসিয়াল wafid.com পোর্টালে সরাসরি ১০ মার্কিন ডলার (প্রায় ১,২০০ টাকা) কার্ডে পরিশোধ করে তাৎক্ষণিক অ্যাপয়েন্টমেন্ট স্লিপ পাওয়া যায়।', 'অনলাইন স্লিপ: তাৎক্ষণিক | মেডিকেল রিপোর্ট: টেস্টের পর ২৪ থেকে ৪৮ ঘণ্টার মধ্যে অনলাইন রেজাল্ট', 
+            'https://wafid.com', 'https://wafid.com/book-appointment', 
+            'https://bmet.portal.gov.bd/site/view/citizen_charter', 'সতর্কতা: কোনো দালাল ''মেডিকেল সেন্টারের নাম বদলে দেব'' বা ''আনফিট হলে ফিট করে দেব'' বলে লাখ টাকা দাবি করলে সরাসরি প্রতারণার শিকার হবেন। গামকা সেন্টারের কোনো রেজাল্ট ম্যানুয়ালি পরিবর্তন করা অসম্ভব, এটি সরাসরি বারকোড স্ক্যানের মাধ্যমে সেন্ট্রাল সার্ভারে সংরক্ষিত হয়।', 
+            'কোনো মেডিকেল সেন্টার নির্ধারিত ফির চেয়ে বেশি অর্থ দাবি করলে প্রবাসী কল্যাণ মন্ত্রণালয়ের কন্ট্রোল রুম ১৬১৩৫ অথবা গামকা বাংলাদেশ অফিসে লিখিত অভিযোগ জানান।', 'services.portal.gov.bd', CURRENT_TIMESTAMP
+        )
+        ON CONFLICT(service_id) DO UPDATE SET
+            title_bn=excluded.title_bn,
+            title_en=excluded.title_en,
+            category=excluded.category,
+            department_agency=excluded.department_agency,
+            summary=excluded.summary,
+            processing_time_sla=excluded.processing_time_sla,
+            official_portal_url=excluded.official_portal_url,
+            application_url=excluded.application_url,
+            citizen_charter_url=excluded.citizen_charter_url,
+            anti_broker_warning=excluded.anti_broker_warning,
+            grievance_remedy=excluded.grievance_remedy,
+            updated_at=CURRENT_TIMESTAMP;
+        
+DELETE FROM service_fees WHERE service_id = 'bd-gamca-wafid-medical-appointment-guide';
+DELETE FROM service_documents WHERE service_id = 'bd-gamca-wafid-medical-appointment-guide';
+DELETE FROM service_steps WHERE service_id = 'bd-gamca-wafid-medical-appointment-guide';
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-gamca-wafid-medical-appointment-guide', 'Wafid আন্তর্জাতিক অনলাইন অ্যাপয়েন্টমেন্ট স্লিপ ফি', 1250.0, 1, 'আন্তর্জাতিক ক্রেডিট / ডেবিট কার্ড (Visa, Mastercard)', '১০ মার্কিন ডলার ($10 USD) সমমূল্যের টাকা।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-gamca-wafid-medical-appointment-guide', 'মেডিকেল সেন্টার ফি (পুরুষ কর্মী - সম্পূর্ণ শারীরিক ও ল্যাব টেস্ট)', 8500.0, 1, 'মেডিকেল সেন্টার কাউন্টারে সরাসরি নগদ / কার্ড', 'GAMCA নির্ধারিত প্রমিত মেডিকেল ফি (ব্লাড টেস্ট, এক্স-রে, এইচআইভি, হেপাটাইটিস ইত্যাদি)।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-gamca-wafid-medical-appointment-guide', 'মেডিকেল সেন্টার ফি (নারী কর্মী)', 8500.0, 1, 'সরাসরি মেডিকেল সেন্টার', 'গর্ভধারণ ও অন্যান্য অতিরিক্ত টেস্ট অন্তর্ভুক্ত।');
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-gamca-wafid-medical-appointment-guide', 'আবেদনকারীর মূল পাসপোর্ট (সর্বনিম্ন ৬ মাস মেয়াদি)', 1, 0, 'মূল কপি ও ২ সেট ফটোকপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-gamca-wafid-medical-appointment-guide', 'Wafid অনলাইন অ্যাপয়েন্টমেন্ট স্লিপ প্রিন্ট কপি', 1, 0, 'রঙিন প্রিন্ট কপি', 'wafid.com থেকে ডাউনলোড');
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-gamca-wafid-medical-appointment-guide', 'পাসপোর্ট সাইজ সাদা ব্যাকগ্রাউন্ডের ল্যাব ছবি (৪ কপি)', 1, 0, 'ছবি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-gamca-wafid-medical-appointment-guide', 'জাতীয় পরিচয়পত্র (NID) কপি', 1, 0, 'ফটোকপি', NULL);
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-gamca-wafid-medical-appointment-guide', 1, 'Wafid অফিশিয়াল পোর্টালে বুকিং শুরু', 'https://wafid.com ওয়েবসাইটে যান। ''Book an Appointment'' বাটনে ক্লিক করুন। আপনার দেশ (Bangladesh), শহর (Dhaka/Chittagong/Sylhet) এবং গন্তব্য দেশ (যেমন: Saudi Arabia) নির্বাচন করুন।', 'https://wafid.com/book-appointment', 'সিস্টেম স্বয়ংক্রিয়ভাবে এলোমেলোভাবে (Randomly) একটি অনুমোদিত মেডিকেল সেন্টার বরাদ্দ করে। কোনো নির্দিষ্ট সেন্টার পছন্দ করার সরকারি সুযোগ নেই।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-gamca-wafid-medical-appointment-guide', 2, 'পাসপোর্ট তথ্য পূরণ ও ১০ ডলার ফি পরিশোধ', 'পাসপোর্ট নম্বর, জাতীয়তা, ভিসা ক্যাটাগরি (Work Visa) নির্ভুলভাবে লিখুন। এরপর ডুয়েল কারেন্সি ডেবিট/ক্রেডিট কার্ড দিয়ে ১০ ডলার পরিশোধ করুন।', NULL, 'দালালকে ৩,০০০-৫,০০০ টাকা না দিয়ে ব্যাংকের ডুয়েল কারেন্সি কার্ড দিয়ে ১,২৫০ টাকায় নিজেই স্লিপ কাটুন।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-gamca-wafid-medical-appointment-guide', 3, 'মেডিকেল সেন্টারে টেস্ট প্রদান', 'স্লিপে উল্লেখিত নির্দিষ্ট মেডিকেল সেন্টারে সকাল ৮টা থেকে ১০টার মধ্যে খালি পেটে উপস্থিত হন। নির্ধারিত ৮,৫০০ টাকা ফি জমা দিয়ে রক্ত পরীক্ষা ও বুকের এক্স-রে সম্পন্ন করুন।', NULL, 'টেস্টের আগে কোনো অ্যান্টিবায়োটিক বা ভারী ওষুধ সেবন করবেন না।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-gamca-wafid-medical-appointment-guide', 4, 'অনলাইনে মেডিকেল রিপোর্ট ''FIT'' স্ট্যাটাস চেক', 'wafid.com-এর ''View Medical Status'' অপশনে পাসপোর্ট নম্বর দিয়ে রিপোর্ট চেক করুন। ফিট রিপোর্টটি সরাসরি বিএমইটি ও সৌদি/উপসাগরীয় দূতাবাস সিস্টেমে সিঙ্ক হয়ে যায়।', NULL, NULL);
+            
+
+-- Service: পারিবারিক আপস বণ্টননামা দলিল সম্পাদন ও রেজিস্ট্রেশন নির্দেশিকা (bd-land-family-partition-deed-bonton)
+
+        INSERT INTO services (
+            service_id, title_bn, title_en, category, sub_category, 
+            department_agency, summary, processing_time_sla, 
+            official_portal_url, application_url, citizen_charter_url, 
+            anti_broker_warning, grievance_remedy, source_platform, updated_at
+        ) VALUES (
+            'bd-land-family-partition-deed-bonton', 'পারিবারিক আপস বণ্টননামা দলিল সম্পাদন ও রেজিস্ট্রেশন নির্দেশিকা', 'Bangladesh Family Property Amicable Partition Deed (Bontonnamah) Registration Guide', 
+            'ভূমি ও জমিজমা সেবা', NULL, 'নিবন্ধন অধিদপ্তর, আইন ও বিচার বিভাগ', 
+            'পিতা-মাতার মৃত্যুর পর ভাই-বোন ও ওয়ারিশদের মধ্যে জমি বা ফ্ল্যাট আপসে ভাগাভাগি করার জন্য বণ্টননামা দলিল আবশ্যক। অজ্ঞতার কারণে দলিল লেখকরা জমির মূল্যের ওপর লাখ লাখ টাকা চায়। অথচ রেজিস্ট্রেশন আইন অনুযায়ী আপস বণ্টননামা দলিলের স্ট্যাম্প শুল্ক ও রেজিস্ট্রেশন ফি নির্দিষ্ট (Fixed)—সম্পত্তির মূল্য যত কোটি টাকাই হোক না কেন, মোট সরকারি ফি মাত্র ৫০০ থেকে ১,০০০ টাকা!', 'দলিল উপস্থাপনের দিনই সম্পাদন ও রসিদ প্রদান', 
+            'http://www.dolil.gov.bd', 'http://www.dolil.gov.bd', 
+            'https://mor.portal.gov.bd/site/view/citizen_charter', 'সতর্কতা: দলিল লেখক সমিতি বা দালালরা বলে ''সম্পত্তির মূল্যের শতকরা ২% বা ৫% দিতে হবে''—এটি ডাহা মিথ্যা ও প্রতারণা। স্ট্যাম্প আইন এবং রেজিস্ট্রেশন অ্যাক্ট অনুযায়ী পারিবারিক বণ্টননামা দলিলের সরকারি খরচ মাত্র ৫০০ টাকা রেজিস্ট্রেশন ফি + ৫০ টাকা স্ট্যাম্প শুল্ক। কোনো অতিরিক্ত অর্থ দেবেন না।', 
+            NULL, 'services.portal.gov.bd', CURRENT_TIMESTAMP
+        )
+        ON CONFLICT(service_id) DO UPDATE SET
+            title_bn=excluded.title_bn,
+            title_en=excluded.title_en,
+            category=excluded.category,
+            department_agency=excluded.department_agency,
+            summary=excluded.summary,
+            processing_time_sla=excluded.processing_time_sla,
+            official_portal_url=excluded.official_portal_url,
+            application_url=excluded.application_url,
+            citizen_charter_url=excluded.citizen_charter_url,
+            anti_broker_warning=excluded.anti_broker_warning,
+            grievance_remedy=excluded.grievance_remedy,
+            updated_at=CURRENT_TIMESTAMP;
+        
+DELETE FROM service_fees WHERE service_id = 'bd-land-family-partition-deed-bonton';
+DELETE FROM service_documents WHERE service_id = 'bd-land-family-partition-deed-bonton';
+DELETE FROM service_steps WHERE service_id = 'bd-land-family-partition-deed-bonton';
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-land-family-partition-deed-bonton', 'আপস বণ্টননামা রেজিস্ট্রেশন ফি (সম্পত্তির মূল্য ৩ লাখের বেশি হলে)', 500.0, 1, 'সোনালী ব্যাংক ট্রেজারি চালান', 'সম্পত্তির মূল্য ৩ লাখ টাকার ঊর্ধ্বে হলে নির্ধারিত নির্দিষ্ট ফি মাত্র ৫০০ টাকা।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-land-family-partition-deed-bonton', 'আপস বণ্টননামা স্ট্যাম্প শুল্ক (Stamp Duty)', 50.0, 1, 'নন-জুডিশিয়াল স্ট্যাম্প', 'নির্দিষ্ট স্ট্যাম্প ফি মাত্র ৫০ টাকা।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-land-family-partition-deed-bonton', 'হলফনামা স্ট্যাম্প ফি', 300.0, 1, 'স্ট্যাম্প', 'ওয়ারিশদের হলফনামা ৩০০ টাকার স্ট্যাম্পে সম্পাদন।');
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-land-family-partition-deed-bonton', 'মূল মালিকের মৃত্যু সনদ (ডিজিটাল ডেথ সার্টিফিকেট)', 1, 0, 'অনলাইন কপি', 'bdris.gov.bd পোর্টাল');
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-land-family-partition-deed-bonton', 'অনলাইন ওয়ারিশান সনদপত্র (Family Inheritance Certificate)', 1, 0, 'ইউপি চেয়ারম্যান / পৌর মেয়র / কাউন্সিলর স্বাক্ষরিত মূল সনদ', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-land-family-partition-deed-bonton', 'বণ্টনযোগ্য সকল জমির মূল দলিল, পূর্ববর্তী বায়া দলিল ও আরএস/বিএস খতিয়ান', 1, 0, 'স্ক্যান ও মূল কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-land-family-partition-deed-bonton', 'হালনাগাদ ভূমি উন্নয়ন কর (খাজনা) পরিশোধের দাখিলা', 1, 0, 'অনলাইন দাখিলা রশিদ', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-land-family-partition-deed-bonton', 'বণ্টনের নকশা / ট্রেস ম্যাপ (কোন ওয়ারিশ কোন অংশে থাকবেন তার স্পষ্ট সীমানা)', 1, 0, 'সার্ভেয়ার স্বাক্ষরিত নকশা', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-land-family-partition-deed-bonton', 'সকল জীবিত ওয়ারিশের এনআইডি ও পাসপোর্ট সাইজ ছবি', 1, 0, 'সত্যায়িত কপি', NULL);
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-land-family-partition-deed-bonton', 1, 'ওয়ারিশান সনদ সংগ্রহ ও সীমানা চিহ্নিতকরণ', 'স্থানীয় ইউনিয়ন পরিষদ বা সিটি কর্পোরেশন থেকে অনলাইন কিউআর কোডযুক্ত ওয়ারিশান সনদ নিন। অনুমোদিত আমিন/সার্ভেয়ার দিয়ে জমি মেপে কে কোন অংশ পাবেন তা সহ বণ্টন নকশা চূড়ান্ত করুন।', 'http://www.dolil.gov.bd', 'সকল ওয়ারিশের সর্বসম্মত সম্মতি থাকতে হবে।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-land-family-partition-deed-bonton', 2, 'আপস বণ্টননামা দলিল খসড়া তৈরি', 'দলিল ফর্মে কার অংশে কত শতক জমি পড়েছে এবং তফসিল স্পষ্টভাবে লিখুন। দলিলের উপরে ৫০ টাকার নন-জুডিশিয়াল স্ট্যাম্প ও হলফনামা যুক্ত করুন।', NULL, 'সাধারণ সাফ-কবলা দলিলের মতো এখানে কোনো শতাংশভিত্তিক ফি নেই, এটি নির্দিষ্ট ফি।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-land-family-partition-deed-bonton', 3, 'ট্রেজারি চালানে সরকারি ৫০০ টাকা জমা', 'সোনালী ব্যাংকে রেজিস্ট্রেশন ফি বাবদ ৫০০ টাকা সরকারি কোডে জমা দিয়ে রসিদ নিন।', NULL, 'কোনো দালাল লাখ টাকা দাবি করলে আইন দেখান—বণ্টননামায় শতাংশ হারে ফি আইনত অবৈধ।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-land-family-partition-deed-bonton', 4, 'সাব-রেজিস্ট্রি অফিসে সম্পাদন', 'সকল ওয়ারিশ একত্রে সাব-রেজিস্ট্রারের সামনে উপস্থিত হয়ে স্বাক্ষর ও আঙুলের ছাপ দিন। দলিল রেজিস্ট্রি শেষে প্রত্যেকে যার যার অংশে আলাদাভাবে নামজারি (মিউটেশন) করতে পারবেন।', NULL, NULL);
+            
+
+-- Service: সরকারি চাকরিজীবী ও প্রাথমিক শিক্ষকদের ডিজিটাল পেনশন মঞ্জুরি ও EFT নির্দেশিকা (bd-govt-pension-ibas-eft-processing)
+
+        INSERT INTO services (
+            service_id, title_bn, title_en, category, sub_category, 
+            department_agency, summary, processing_time_sla, 
+            official_portal_url, application_url, citizen_charter_url, 
+            anti_broker_warning, grievance_remedy, source_platform, updated_at
+        ) VALUES (
+            'bd-govt-pension-ibas-eft-processing', 'সরকারি চাকরিজীবী ও প্রাথমিক শিক্ষকদের ডিজিটাল পেনশন মঞ্জুরি ও EFT নির্দেশিকা', 'Bangladesh Government Employees & Primary Teachers Pension & Monthly EFT Disbursement Guide', 
+            'অর্থ ও পেনশন সেবা', NULL, 'হিসাব মহানিয়ন্ত্রকের কার্যালয় (CGA), অর্থ বিভাগ, অর্থ মন্ত্রণালয়', 
+            'অবসরপ্রাপ্ত সরকারি কর্মচারী ও প্রাথমিক বিদ্যালয়ের শিক্ষকদের পেনশন চালু করতে থানা বা জেলা হিসাবরক্ষণ অফিসে (DAO/CAO) বছরের পর বছর ফাইল আটকে ঘুষ নেওয়া হতো। সরকার এখন সম্পূর্ণ ই-পেনশন ও iBAS++ সিস্টেম বাধ্যতামূলক করেছে, যার মাধ্যমে কোনো মধ্যস্বত্বভোগী ছাড়া পেনশনের লাম্পগ্রান্ট এবং মাসিক পেনশন সরাসরি ব্যাংকে EFT এর মাধ্যমে চলে আসে।', 'পিআরএল শেষ হওয়ার পূর্বে সর্বোচ্চ ৩০ কার্যদিবসের মধ্যে চূড়ান্ত পেনশন অনুমোদন', 
+            'https://cga.gov.bd', 'https://ibas.finance.gov.bd', 
+            'https://cga.portal.gov.bd/site/view/citizen_charter', 'সতর্কতা: হিসাবরক্ষণ অফিসের কোনো কর্মকর্তা বা কর্মচারী পেনশনের চেক ছাড়ানোর জন্য পারসেন্টেজ বা ঘুষ দাবি করলে তা সম্পূর্ণ ফৌজদারি অপরাধ। iBAS++ সিস্টেমে পেনশনের পুরো প্রক্রিয়াটি ডিজিটালাইজড এবং সেন্ট্রালি ট্র্যাক করা হয়। কাউকে ১ টাকাও দেবেন না।', 
+            'পেনশন মঞ্জুরিতে ঘুষ বা হয়রানির শিকার হলে সিজিএ (Controller General of Accounts) অভিযোগ সেল ০২-৯৩৩০৩১২ অথবা অর্থ বিভাগের ই-মেইল অভিযোগ কেন্দ্রে অভিযোগ জানান।', 'services.portal.gov.bd', CURRENT_TIMESTAMP
+        )
+        ON CONFLICT(service_id) DO UPDATE SET
+            title_bn=excluded.title_bn,
+            title_en=excluded.title_en,
+            category=excluded.category,
+            department_agency=excluded.department_agency,
+            summary=excluded.summary,
+            processing_time_sla=excluded.processing_time_sla,
+            official_portal_url=excluded.official_portal_url,
+            application_url=excluded.application_url,
+            citizen_charter_url=excluded.citizen_charter_url,
+            anti_broker_warning=excluded.anti_broker_warning,
+            grievance_remedy=excluded.grievance_remedy,
+            updated_at=CURRENT_TIMESTAMP;
+        
+DELETE FROM service_fees WHERE service_id = 'bd-govt-pension-ibas-eft-processing';
+DELETE FROM service_documents WHERE service_id = 'bd-govt-pension-ibas-eft-processing';
+DELETE FROM service_steps WHERE service_id = 'bd-govt-pension-ibas-eft-processing';
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-govt-pension-ibas-eft-processing', 'পেনশন প্রসেসিং সরকারি ফি', 0.0, 1, 'সম্পূর্ণ বিনামূল্যে (০ টাকা)', 'পেনশন প্রক্রিয়াকরণে কোনো সরকারি ফি বা চার্জ নেই।');
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-govt-pension-ibas-eft-processing', 'পেনশন আবেদন ফরম (ই-পেনশন ফরম ২.১)', 1, 0, 'পূরণকৃত ও স্বাক্ষরিত মূল ফর্ম', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-govt-pension-ibas-eft-processing', 'হালনাগাদ সার্ভিস বুক (Service Book) মূল কপি', 1, 0, 'অফিস প্রধান কর্তৃক প্রতিস্বাক্ষরিত মূল কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-govt-pension-ibas-eft-processing', 'পিআরএল (PRL) মঞ্জুরির সরকারি আদেশ (GO)', 1, 0, 'ফটোকপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-govt-pension-ibas-eft-processing', 'পেনশনারের জাতীয় পরিচয়পত্র ও ৩ কপি সত্যায়িত ছবি', 1, 0, 'সত্যায়িত কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-govt-pension-ibas-eft-processing', 'নমিনীর ছবি, এনআইডি এবং উত্তরাধিকার সনদ', 1, 0, 'সত্যায়িত কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-govt-pension-ibas-eft-processing', 'পেনশনারের ব্যাংক একাউন্ট সংক্রান্ত প্রত্যয়নপত্র (MICS চেক পাতা স্ক্যান)', 1, 0, 'ব্যাংক ম্যানেজারের সিলযুক্ত কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-govt-pension-ibas-eft-processing', 'বেসরকারি অনাপত্তিপত্র (NDC - No Demand Certificate)', 1, 0, 'দপ্তর প্রধান কর্তৃক প্রদত্ত সনদ', NULL);
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-govt-pension-ibas-eft-processing', 1, 'পিআরএল শুরুর ৬ মাস আগে সার্ভিস বুক হালনাগাদ', 'অবসরে যাওয়ার ৬ মাস পূর্বে নিজ অফিস থেকে সার্ভিস বুক ও সার্ভিস ভেরিফিকেশন রোল সিজিএ বা হিসাবরক্ষণ অফিস থেকে যাচাই (Pay Fixation Verification) করিয়ে নিন।', 'https://ibas.finance.gov.bd', 'অনলাইন পে-ফিক্সেশন এনআইডির সাথে হুবহু মিল থাকতে হবে।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-govt-pension-ibas-eft-processing', 2, 'ই-পেনশন আবেদন ও ডকুমেন্টস সাবমিশন', 'অফিস প্রধান বরাবর পেনশন আবেদন ফরম ও এনডিসি জমা দিন। অফিস প্রধান পেনশন মঞ্জুরি আদেশ (PPO) তৈরি করে অনলাইনে হিসাবরক্ষণ অফিসে (iBAS++ পোর্টালে) ফরোয়ার্ড করবেন।', NULL, 'এখন আর ম্যানুয়াল ফাইল নিয়ে হিসাবরক্ষণ অফিসে দৌড়াদৌড়ি করতে হয় না।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-govt-pension-ibas-eft-processing', 3, 'হিসাবরক্ষণ কর্মকর্তা কর্তৃক অডিট ও অনুমোদন', 'হিসাবরক্ষণ কর্মকর্তা অনলাইনে পিটিও (Pension Payment Order) পাস করবেন এবং এককালীন গ্র্যাচুইটি ও লাম্পগ্রান্ট অনুমোদনের বিল ইস্যু করবেন।', NULL, 'কোনো অডিটর ফাইল আটকে ঘুষ দাবি করলে সরাসরি সিজিএ-র হেল্পলাইনে জানান।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-govt-pension-ibas-eft-processing', 4, 'সরাসরি ব্যাংক অ্যাকাউন্টে ইএফটি (EFT) পেমেন্ট লাভ', 'টাকা স্বয়ংক্রিয়ভাবে বাংলাদেশ ব্যাংকের BEFTN নেটওয়ার্ক দিয়ে সরাসরি আপনার ব্যাংকে জমা হবে। মোবাইলে ক্রেডিট মেসেজ আসবে। প্রতি মাসের ১ তারিখে পেনশন সরাসরি ব্যাংকে চলে আসবে, ব্যাংকে গিয়ে লাইনে দাঁড়ানোর প্রয়োজন নেই।', NULL, NULL);
+            
+
+-- Service: পরিবেশ অধিদপ্তর পরিবেশগত ছাড়পত্র (ECC) অনলাইন আবেদন ও ফি নির্দেশিকা (bd-doe-environmental-clearance-certificate-ecc)
+
+        INSERT INTO services (
+            service_id, title_bn, title_en, category, sub_category, 
+            department_agency, summary, processing_time_sla, 
+            official_portal_url, application_url, citizen_charter_url, 
+            anti_broker_warning, grievance_remedy, source_platform, updated_at
+        ) VALUES (
+            'bd-doe-environmental-clearance-certificate-ecc', 'পরিবেশ অধিদপ্তর পরিবেশগত ছাড়পত্র (ECC) অনলাইন আবেদন ও ফি নির্দেশিকা', 'Bangladesh Department of Environment Clearance Certificate (ECC) Online Guide', 
+            'শিল্প ও পরিবেশ সেবা', NULL, 'পরিবেশ অধিদপ্তর, পরিবেশ, বন ও জলবায়ু পরিবর্তন মন্ত্রণালয়', 
+            'যেকোনো শিল্প-কারখানা, রাইস মিল, ওয়ার্কশপ, পোল্ট্রি ফার্ম, ক্লিনিক বা আবাসন প্রকল্পের জন্য পরিবেশগত ছাড়পত্র (ECC) বাধ্যতামূলক। পরিবেশ অফিসের নামে দালালরা ১ থেকে ৫ লাখ টাকা ঘুষ দাবি করে। e-ecc.doe.gov.bd পোর্টালে সবুজ, হলুদ, কমলা ও লাল ক্যাটাগরি অনুযায়ী সরকার নির্ধারিত ফি দিয়ে সরাসরি অনলাইনে ছাড়পত্র পাওয়া যায়।', 'সবুজ শ্রেণি: ৭ কার্যদিবস | কমলা শ্রেণি: ৩০ কার্যদিবস | লাল শ্রেণি: ৬০ কার্যদিবস', 
+            'https://doe.gov.bd', 'https://e-ecc.doe.gov.bd', 
+            'https://doe.portal.gov.bd/site/view/citizen_charter', 'সতর্কতা: দালালরা ছাড়পত্র পাইয়ে দেওয়ার নামে পরিবেশ অধিদপ্তরের কর্মকর্তাদের নাম ভাঙিয়ে লাখ লাখ টাকা হাতিয়ে নেয়। অনলাইনে আবেদন করলে প্রতিটি ফাইলের অগ্রগতি ঢাকা হেডকোয়ার্টার্স থেকে সরাসরি ট্র্যাক করা হয়। ঘুষ দেওয়া এবং নেওয়া উভয়ই আইনত দণ্ডনীয় অপরাধ।', 
+            'অনলাইনে কোনো আবেদন অনাকাঙ্ক্ষিতভাবে ঝুলিয়ে রাখলে পরিবেশ অধিদপ্তরের মহাপরিচালক (DG) বা দুদক হটলাইন ১০৬-এ অভিযোগ জানান।', 'services.portal.gov.bd', CURRENT_TIMESTAMP
+        )
+        ON CONFLICT(service_id) DO UPDATE SET
+            title_bn=excluded.title_bn,
+            title_en=excluded.title_en,
+            category=excluded.category,
+            department_agency=excluded.department_agency,
+            summary=excluded.summary,
+            processing_time_sla=excluded.processing_time_sla,
+            official_portal_url=excluded.official_portal_url,
+            application_url=excluded.application_url,
+            citizen_charter_url=excluded.citizen_charter_url,
+            anti_broker_warning=excluded.anti_broker_warning,
+            grievance_remedy=excluded.grievance_remedy,
+            updated_at=CURRENT_TIMESTAMP;
+        
+DELETE FROM service_fees WHERE service_id = 'bd-doe-environmental-clearance-certificate-ecc';
+DELETE FROM service_documents WHERE service_id = 'bd-doe-environmental-clearance-certificate-ecc';
+DELETE FROM service_steps WHERE service_id = 'bd-doe-environmental-clearance-certificate-ecc';
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-doe-environmental-clearance-certificate-ecc', 'সবুজ শ্রেণি (Green Category - ক্ষুদ্র কুটির শিল্প/দোকান)', 1500.0, 1, 'সোনালী ব্যাংক ট্রেজারি চালান (কোড: ১-৪৫৩১-০০০১-২৬৮১)', 'বিনিয়োগ সীমা ৫০ লাখ পর্যন্ত হলে ফি মাত্র ১৫০০ টাকা (+১৫% ভ্যাট)।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-doe-environmental-clearance-certificate-ecc', 'কমলা শ্রেণি (Orange Category - মাঝারি কারখানা/রাইস মিল)', 5000.0, 1, 'ট্রেজারি চালান', 'বিনিয়োগ অনুপাত অনুযায়ী ৫,০০০ থেকে ১৫,০০০ টাকা।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-doe-environmental-clearance-certificate-ecc', 'লাল শ্রেণি (Red Category - বড় রাসায়নিক/টেক্সটাইল শিল্প)', 25000.0, 1, 'ট্রেজারি চালান', 'ইআইএ (EIA) ও ইটিপি (ETP) প্ল্যান সাপেক্ষে।');
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-doe-environmental-clearance-certificate-ecc', 'প্রকল্পের বিস্তারিত বিবরণ ও বিনিয়োগের পরিমাণ সম্বলিত প্রোজেক্ট প্রোফাইল', 1, 0, 'পিডিএফ ফাইল', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-doe-environmental-clearance-certificate-ecc', 'কারখানা বা প্রকল্পের জমির মালিকানা দলিল / ভাড়ার চুক্তিপত্র ও খতিয়ান', 1, 0, 'স্ক্যান কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-doe-environmental-clearance-certificate-ecc', 'হালনাগাদ ট্রেড লাইসেন্স ও টিআইএন সার্টিফিকেট', 1, 0, 'স্ক্যান কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-doe-environmental-clearance-certificate-ecc', 'স্থানীয় কর্তৃপক্ষের অনাপত্তিপত্র (ইউপি চেয়ারম্যান বা পৌর মেয়রের প্রত্যয়নপত্র)', 1, 0, 'স্ক্যান কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-doe-environmental-clearance-certificate-ecc', 'কারখানার লে-আউট প্ল্যান ও বর্জ্য ব্যবস্থাপনা পরিকল্পনা (EMP / ETP)', 1, 0, 'প্রকৌশলী নকশা', NULL);
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-doe-environmental-clearance-certificate-ecc', 1, 'পরিবেশ অধিদপ্তরের পোর্টালে নিবন্ধন', 'https://e-ecc.doe.gov.bd পোর্টালে প্রবেশ করে উদ্যোক্তা একাউন্ট তৈরি করুন। আপনার প্রকল্পের সঠিক ক্যাটাগরি (সবুজ/কমলা/লাল) নির্বাচন করুন।', 'https://e-ecc.doe.gov.bd', 'সবুজ ক্যাটাগরির প্রকল্প হলে কোনো দীর্ঘ তদন্ত ছাড়াই তাৎক্ষণিক ছাড়পত্র পাওয়া যায়।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-doe-environmental-clearance-certificate-ecc', 2, 'তথ্য পূরণ ও প্রয়োজনীয় ডকুমেন্টস আপলোড', 'লে-আউট প্ল্যান, জমির দলিল, বিনিয়োগের পরিমাণ ও ট্রেড লাইসেন্স আপলোড করুন।', NULL, 'বর্জ্য নিষ্কাশনের সঠিক ব্যবস্থা প্রদর্শন করুন।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-doe-environmental-clearance-certificate-ecc', 3, 'সরকারি ট্রেজারি চালান প্রদান', 'সোনালী ব্যাংকে নির্দিষ্ট কোডে সরকারি ফি জমা দিয়ে চালানের নম্বর ও স্ক্যান কপি সিস্টেমে এন্ট্রি করুন।', NULL, 'পরিবেশ পরিদর্শককে ব্যক্তিগতভাবে কোনো টাকা দেবেন না।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-doe-environmental-clearance-certificate-ecc', 4, 'পরিদর্শন ও কিউআর কোডযুক্ত ডিজিটাল সনদ প্রাপ্তি', 'পরিবেশ পরিদর্শক সরেজমিনে স্থান পরিদর্শন করবেন। আবেদন অনুমোদিত হলে সিস্টেম থেকে কিউআর কোডযুক্ত ডিজিটাল পরিবেশগত ছাড়পত্র ডাউনলোড করে প্রিন্ট করুন।', NULL, NULL);
+            
+
+-- Service: ফায়ার সার্ভিস অগ্নিনিরাপত্তা ছাড়পত্র ও ফায়ার লাইসেন্স নির্দেশিকা (bd-fire-service-safety-license-guide)
+
+        INSERT INTO services (
+            service_id, title_bn, title_en, category, sub_category, 
+            department_agency, summary, processing_time_sla, 
+            official_portal_url, application_url, citizen_charter_url, 
+            anti_broker_warning, grievance_remedy, source_platform, updated_at
+        ) VALUES (
+            'bd-fire-service-safety-license-guide', 'ফায়ার সার্ভিস অগ্নিনিরাপত্তা ছাড়পত্র ও ফায়ার লাইসেন্স নির্দেশিকা', 'Bangladesh Fire Service & Civil Defence Fire Safety Clearance & License Guide', 
+            'শিল্প ও নাগরিক নিরাপত্তা', NULL, 'ফায়ার সার্ভিস ও সিভিল ডিফেন্স অধিদপ্তর, স্বরাষ্ট্র মন্ত্রণালয়', 
+            'বাণিজ্যিক ভবন, গুদাম, মার্কেট, রেস্তোরাঁ, এলপিজি গ্যাস সিলিন্ডার বিক্রয় কেন্দ্র ও কারখানার জন্য ফায়ার লাইসেন্স থাকা বাধ্যতামূলক। ফায়ার স্টেশনের আশেপাশে দালাল চক্র ফায়ার লাইসেন্সের জন্য ২০,০০০ থেকে ৫০,০০০ টাকা পর্যন্ত দাবি করে। অথচ ভবনের আয়তন অনুযায়ী সরকারি ট্রেজারি ফি মাত্র ১,৫০০ থেকে ৫,০০০ টাকার মধ্যে।', 'পরিদর্শন সাপেক্ষে সর্বোচ্চ ১৫ কার্যদিবস', 
+            'https://fireservice.gov.bd', 'https://efirelicense.gov.bd', 
+            'https://fireservice.portal.gov.bd/site/view/citizen_charter', 'সতর্কতা: ফায়ার স্টেশনের দালালরা সনদ পাইয়ে দেওয়ার নামে বিপুল অর্থ দাবি করে এবং অনেক ক্ষেত্রে নকল জাল সার্টিফিকেট ধরিয়ে দেয়। কোনো দুর্ঘটনায় নকল লাইসেন্স ধরা পড়লে ভবন মালিকের বিরুদ্ধে জামিন-অযোগ্য ফৌজদারি মামলা হবে। শুধুমাত্র ই-ফায়ার লাইসেন্স পোর্টালের ডিজিটাল সনদ গ্রহণ করুন।', 
+            NULL, 'services.portal.gov.bd', CURRENT_TIMESTAMP
+        )
+        ON CONFLICT(service_id) DO UPDATE SET
+            title_bn=excluded.title_bn,
+            title_en=excluded.title_en,
+            category=excluded.category,
+            department_agency=excluded.department_agency,
+            summary=excluded.summary,
+            processing_time_sla=excluded.processing_time_sla,
+            official_portal_url=excluded.official_portal_url,
+            application_url=excluded.application_url,
+            citizen_charter_url=excluded.citizen_charter_url,
+            anti_broker_warning=excluded.anti_broker_warning,
+            grievance_remedy=excluded.grievance_remedy,
+            updated_at=CURRENT_TIMESTAMP;
+        
+DELETE FROM service_fees WHERE service_id = 'bd-fire-service-safety-license-guide';
+DELETE FROM service_documents WHERE service_id = 'bd-fire-service-safety-license-guide';
+DELETE FROM service_steps WHERE service_id = 'bd-fire-service-safety-license-guide';
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-fire-service-safety-license-guide', 'ফায়ার লাইসেন্স সরকারি ফি (১,০০০ বর্গফুট পর্যন্ত বাণিজ্যিক প্রতিষ্ঠান)', 1500.0, 1, 'বাংলাদেশ ব্যাংক / সোনালী ব্যাংক ট্রেজারি চালান (কোড: ১-২২৬১-০০০১-২৬৮১)', 'সরকারি নির্ধারিত প্রমিত ফি।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-fire-service-safety-license-guide', 'ফায়ার লাইসেন্স সরকারি ফি (১,০০১ থেকে ৫,০০০ বর্গফুট)', 3000.0, 1, 'ট্রেজারি চালান', 'ভবনের আয়তন অনুযায়ী নির্দিষ্ট সরকারি ফি।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-fire-service-safety-license-guide', 'গ্যাস সিলিন্ডার ও বিপজ্জনক দ্রব্য সংরক্ষণাগার ফি', 5000.0, 1, 'ট্রেজারি চালান', 'বিশেষ ঝুঁকি পরিদর্শন অন্তর্ভুক্ত।');
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-fire-service-safety-license-guide', 'আবেদনকারীর জাতীয় পরিচয়পত্র (NID) কপি', 1, 0, 'ফটোকপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-fire-service-safety-license-guide', 'হালনাগাদ ট্রেড লাইসেন্স', 1, 0, 'ফটোকপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-fire-service-safety-license-guide', 'ভবন বা প্রতিষ্ঠানের অনুমোদিত আর্কিটেকচারাল লে-আউট নকশা', 1, 0, 'ব্লু-প্রিন্ট / নকশা', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-fire-service-safety-license-guide', 'ভবন নির্মাণের অনুমোদনপত্র (রাজউক / সিডিএ / কেডিএ / পৌরসভা)', 1, 0, 'অনুমোদনপত্র কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-fire-service-safety-license-guide', 'অগ্নিনির্বাপক সিলিন্ডার (ABC/CO2 Dry Chemical Powder) ক্রয়ের ভাউচার', 1, 0, 'রশিদ', NULL);
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-fire-service-safety-license-guide', 1, 'ফায়ার সার্ভিসের পোর্টালে ই-লাইসেন্স আবেদন', 'https://efirelicense.gov.bd ওয়েবসাইটে যান। প্রতিষ্ঠান ও ভবনের বিস্তারিত তথ্য পূরণ করে আবেদন সাবমিট করুন।', 'https://efirelicense.gov.bd', 'প্রতিষ্ঠানে জরুরি নির্গমন সিঁড়ি (Fire Exit) ও সিলিন্ডারের অবস্থান স্পষ্ট উল্লেখ করুন।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-fire-service-safety-license-guide', 2, 'চালানে সরকারি ফি পরিশোধ', 'নির্দিষ্ট কোডে সোনালী ব্যাংকে চালানের মাধ্যমে সরকারি ফি জমা দিন। চালানের কপি সিস্টেমে আপলোড করুন।', NULL, 'কোনো কর্মচারীকে নগদ টাকা দেবেন না।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-fire-service-safety-license-guide', 3, 'ফায়ার পরিদর্শক কর্তৃক সরেজমিনে পরিদর্শন', 'নিকটস্থ ফায়ার স্টেশনের পরিদর্শক আপনার ভবন পরিদর্শন করবেন এবং মহড়ার ব্যবস্থা ও অগ্নিনির্বাপক ব্যবস্থা দেখবেন। সন্তোষজনক হলে তিনি ইতিবাচক প্রতিবেদন দাখিল করবেন।', NULL, 'পর্যাপ্ত ফায়ার এক্সটিংগুইশার ও স্মোক ডিটেক্টর প্রস্তুত রাখুন।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-fire-service-safety-license-guide', 4, 'ডিজিটাল ফায়ার লাইসেন্স ডাউনলোড', 'উপ-পরিচালক বা সহকারী পরিচালক অনুমোদন দিলে সিস্টেম থেকে কিউআর কোডযুক্ত আসল ডিজিটাল ফায়ার লাইসেন্স ডাউনলোড করে প্রিন্ট করুন।', NULL, NULL);
+            
+
+-- Service: আমদানি ও রপ্তানি সনদ (IRC ও ERC) অনলাইন নিবন্ধন ও ফি (bd-ccie-irc-erc-import-export-registration)
+
+        INSERT INTO services (
+            service_id, title_bn, title_en, category, sub_category, 
+            department_agency, summary, processing_time_sla, 
+            official_portal_url, application_url, citizen_charter_url, 
+            anti_broker_warning, grievance_remedy, source_platform, updated_at
+        ) VALUES (
+            'bd-ccie-irc-erc-import-export-registration', 'আমদানি ও রপ্তানি সনদ (IRC ও ERC) অনলাইন নিবন্ধন ও ফি', 'Bangladesh Import & Export Registration Certificate (IRC & ERC) Official Online Guide', 
+            'ব্যবসা ও আন্তর্জাতিক বাণিজ্য', NULL, 'প্রধান আমদানি ও রপ্তানি নিয়ন্ত্রকের দপ্তর (CCI&E), বাণিজ্য মন্ত্রণালয়', 
+            'আন্তর্জাতিক বাণিজ্য ও পণ্য আমদানি-রপ্তানি করার জন্য আইআরসি (IRC) ও ইআরসি (ERC) সনদ বাধ্যতামূলক। সিঅ্যান্ডএফ দালালরা এর জন্য ৫০,০০০ থেকে ১ লাখ টাকা পর্যন্ত ফি নেয়। olrs.ccie.gov.bd পোর্টালে সরাসরি অনলাইনে আবেদন করে নির্ধারিত সরকারি ফি দিয়ে ঘরে বসেই সনদ পাওয়া যায়।', 'অনলাইন আবেদন ও ফি জমার পর সর্বোচ্চ ৩ কার্যদিবসের মধ্যে ডিজিটাল সনদ প্রস্তুত', 
+            'https://ccie.gov.bd', 'https://olrs.ccie.gov.bd', 
+            'https://ccie.portal.gov.bd/site/view/citizen_charter', 'সতর্কতা: মতিঝিল বা চট্টগ্রামের দালালরা আইআরসি পাইয়ে দেওয়ার নামে লাখ টাকা হাতিয়ে নেয়। এখন সম্পূর্ণ সেবাটি শতভাগ পেপারলেস এবং অনলাইনভিত্তিক। ঘরে বসেই এটি সংগ্রহ করা সম্ভব।', 
+            NULL, 'services.portal.gov.bd', CURRENT_TIMESTAMP
+        )
+        ON CONFLICT(service_id) DO UPDATE SET
+            title_bn=excluded.title_bn,
+            title_en=excluded.title_en,
+            category=excluded.category,
+            department_agency=excluded.department_agency,
+            summary=excluded.summary,
+            processing_time_sla=excluded.processing_time_sla,
+            official_portal_url=excluded.official_portal_url,
+            application_url=excluded.application_url,
+            citizen_charter_url=excluded.citizen_charter_url,
+            anti_broker_warning=excluded.anti_broker_warning,
+            grievance_remedy=excluded.grievance_remedy,
+            updated_at=CURRENT_TIMESTAMP;
+        
+DELETE FROM service_fees WHERE service_id = 'bd-ccie-irc-erc-import-export-registration';
+DELETE FROM service_documents WHERE service_id = 'bd-ccie-irc-erc-import-export-registration';
+DELETE FROM service_steps WHERE service_id = 'bd-ccie-irc-erc-import-export-registration';
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-ccie-irc-erc-import-export-registration', 'রপ্তানি নিবন্ধন সনদ (ERC - বাৎসরিক যেকোনো পরিমাণ রপ্তানির জন্য)', 7000.0, 1, 'অনলাইন ই-পেমেন্ট বা সোনালী ব্যাংক চালান', 'সরকারি ফি ৭,০০০ টাকা (+১৫% ভ্যাট)।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-ccie-irc-erc-import-export-registration', 'আমদানি নিবন্ধন সনদ (IRC - বাৎসরিক আমদানি সীমা ৫০ লাখ টাকা পর্যন্ত)', 18000.0, 1, 'অনলাইন চালান', 'আমদানি সীমার উপর ভিত্তি করে সরকারি স্লাব নির্ধারিত।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-ccie-irc-erc-import-export-registration', 'আমদানি নিবন্ধন সনদ (IRC - বাৎসরিক আমদানি সীমা ৫ লাখ টাকা পর্যন্ত ক্ষুদ্র আমদানিকারক)', 5000.0, 1, 'অনলাইন চালান', 'ক্ষুদ্র উদ্যোক্তাদের জন্য বিশেষ ছাড়।');
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-ccie-irc-erc-import-export-registration', 'হালনাগাদ বাণিজ্যিক ট্রেড লাইসেন্স', 1, 0, 'স্ক্যান কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-ccie-irc-erc-import-export-registration', 'ই-টিআইএন সার্টিফিকেট ও সর্বশেষ আয়কর রিটার্ন দাখিলের প্রাপ্তিস্বীকার', 1, 0, 'অনলাইন কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-ccie-irc-erc-import-export-registration', 'ভ্যাট (BIN) রেজিস্ট্রেশন সনদপত্র', 1, 0, 'অনলাইন কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-ccie-irc-erc-import-export-registration', 'তফসিলি ব্যাংকের সলভেন্সি সার্টিফিকেট (Bank Solvency Certificate)', 1, 0, 'ব্যাংক ম্যানেজারের সিলযুক্ত মূল কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-ccie-irc-erc-import-export-registration', 'স্বীকৃত চেম্বার অব কমার্স বা ট্রেড অ্যাসোসিয়েশনের মেম্বারশিপ সার্টিফিকেট', 1, 0, 'স্ক্যান কপি', NULL);
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-ccie-irc-erc-import-export-registration', 1, 'OLRS পোর্টালে অনলাইন রেজিস্ট্রেশন', 'https://olrs.ccie.gov.bd ওয়েবসাইটে যান। আপনার প্রতিষ্ঠানের নাম ও ইমেইল দিয়ে রেজিস্ট্রেশন করুন।', 'https://olrs.ccie.gov.bd', 'আপনার ট্রেড লাইসেন্স ও ব্যাংক একাউন্টের নাম হুবহু এক হতে হবে।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-ccie-irc-erc-import-export-registration', 2, 'আবেদন ফরম পূরণ ও ডকুমেন্টস আপলোড', 'আমদানি বা রপ্তানি সনদ বাছাই করুন। ব্যাংক সলভেন্সি ও চেম্বার সার্টিফিকেট আপলোড করুন।', NULL, 'কাগজপত্র পরিষ্কারভাবে স্ক্যান করে দিন।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-ccie-irc-erc-import-export-registration', 3, 'অনলাইন পেমেন্ট গেটওয়েতে ফি পরিশোধ', 'সিস্টেমের একপে বা সোনালী পেমেন্ট গেটওয়ের মাধ্যমে নির্ধারিত সরকারি ফি পরিশোধ করুন। তাৎক্ষণিক ডিজিটাল চালান স্লিপ তৈরি হবে।', NULL, 'কোনো মধ্যস্থতাকারীকে অতিরিক্ত টাকা দেবেন না।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-ccie-irc-erc-import-export-registration', 4, 'ডিজিটাল আইআরসি/ইআরসি সনদ ডাউনলোড', 'CCI&E কর্মকর্তা অনুমোদন দিলে কিউআর কোডযুক্ত আসল ডিজিটাল সনদ অনলাইনে প্রস্তুত হবে, যা দিয়ে বাংলাদেশ কাস্টমস ও ব্যাংকে এলসি (Letter of Credit) খোলা যাবে।', NULL, NULL);
+            
+
+-- Service: সরকারি হাসপাতালে ওয়ান স্টপ স্বাস্থ্যসেবা, বৈকালিক টিকিট ও ভর্তি নির্দেশিকা (bd-public-hospital-ticket-admission-guide)
+
+        INSERT INTO services (
+            service_id, title_bn, title_en, category, sub_category, 
+            department_agency, summary, processing_time_sla, 
+            official_portal_url, application_url, citizen_charter_url, 
+            anti_broker_warning, grievance_remedy, source_platform, updated_at
+        ) VALUES (
+            'bd-public-hospital-ticket-admission-guide', 'সরকারি হাসপাতালে ওয়ান স্টপ স্বাস্থ্যসেবা, বৈকালিক টিকিট ও ভর্তি নির্দেশিকা', 'Bangladesh Public Hospital Outdoor Ticket, Evening Specialist Service & Admission Guide', 
+            'স্বাস্থ্য ও পরিবার কল্যাণ', NULL, 'স্বাস্থ্য সেবা বিভাগ, স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়', 
+            'ঢাকা মেডিকেল, সোহরাওয়ার্দী, বিএসএমএমইউ (পিজি) কিংবা জেলা সদর হাসপাতালে রোগী নিয়ে গেলে দালাল চক্র টিকিট কাটা, ট্রলি নেওয়া, টেস্ট করানো এবং বেড দেওয়ার নামে অসহায় রোগীদের সর্বস্বান্ত করে। সরকারি হাসপাতালে বহির্বিভাগ টিকিট মাত্র ১০ টাকা এবং বৈকালিক বিশেষজ্ঞ ডাক্তার কনসালটেন্সি ফি মাত্র ২০০-৩০০ টাকা। স্বাস্থ্য বাতায়ন হেল্পলাইন ১৬২৬৩-তে ফোন করে যেকোনো সময় বিনামূল্যে সরকারি ডাক্তারের পরামর্শ নেওয়া যায়।', 'তাৎক্ষণিক বহির্বিভাগ টিকিট ও সেবা | জরুরি বিভাগ ২৪ ঘণ্টা খোলা', 
+            'https://dghs.gov.bd', 'https://dghs.gov.bd', 
+            'https://hsd.portal.gov.bd/site/view/citizen_charter', 'সতর্কতা: হাসপাতাল চত্বরে সক্রিয় দালালরা রোগী ভাগিয়ে প্রাইভেট হাসপাতালে নিয়ে যায় এবং আইসিইউ বা টেস্টের নামে প্রতারণা করে। রোগী বা স্বজনরা যেকোনো বিপদে আনসার সদস্য বা হাসপাতাল পুলিশ ক্যাম্পে যোগাযোগ করুন। বিনামূল্যে স্বাস্থ্য পরামর্শের জন্য স্বাস্থ্য বাতায়ন ১৬২৬৩-তে কল করুন।', 
+            'হাসপাতালে ডাক্তার অনুপস্থিত থাকলে বা চিকিৎসা অবহেলা হলে হাসপাতাল পরিচালক / সিভিল সার্জন বরাবরে অভিযোগ করুন অথবা জাতীয় জরুরি সেবা ৯৯৯ বা ১৬২৬৩-এ রিপোর্ট করুন।', 'services.portal.gov.bd', CURRENT_TIMESTAMP
+        )
+        ON CONFLICT(service_id) DO UPDATE SET
+            title_bn=excluded.title_bn,
+            title_en=excluded.title_en,
+            category=excluded.category,
+            department_agency=excluded.department_agency,
+            summary=excluded.summary,
+            processing_time_sla=excluded.processing_time_sla,
+            official_portal_url=excluded.official_portal_url,
+            application_url=excluded.application_url,
+            citizen_charter_url=excluded.citizen_charter_url,
+            anti_broker_warning=excluded.anti_broker_warning,
+            grievance_remedy=excluded.grievance_remedy,
+            updated_at=CURRENT_TIMESTAMP;
+        
+DELETE FROM service_fees WHERE service_id = 'bd-public-hospital-ticket-admission-guide';
+DELETE FROM service_documents WHERE service_id = 'bd-public-hospital-ticket-admission-guide';
+DELETE FROM service_steps WHERE service_id = 'bd-public-hospital-ticket-admission-guide';
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-public-hospital-ticket-admission-guide', 'উপজেলা স্বাস্থ্য কমপ্লেক্স ও জেলা সদর হাসপাতাল বহির্বিভাগ টিকিট', 10.0, 1, 'হাসপাতাল টিকিট কাউন্টার', 'সরকারি নির্ধারিত প্রমিত টিকিট ফি মাত্র ১০ টাকা।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-public-hospital-ticket-admission-guide', 'মেডিকেল কলেজ ও বিশেষায়িত টারশিয়ারি হাসপাতাল বহির্বিভাগ টিকিট', 20.0, 1, 'হাসপাতাল কাউন্টার', 'টিকিট ফি মাত্র ২০ টাকা।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-public-hospital-ticket-admission-guide', 'সরকারি বৈকালিক প্রাতিষ্ঠানিক প্র্যাকটিস (অধ্যাপক / বিশেষজ্ঞ ডাক্তার)', 300.0, 1, 'হাসপাতাল বৈকালিক কাউন্টার', 'বিকালে সরকারি হাসপাতালেই প্রাইভেট চেম্বারের মতো বিশেষজ্ঞ ডাক্তার দেখানো যায়।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-public-hospital-ticket-admission-guide', 'সাধারণ বেড ও ভর্তি ফি', 15.0, 1, 'কাউন্টার', 'ভর্তি ফি মাত্র ১৫ টাকা। সাধারণ ওয়ার্ডের কোনো দৈনিক বেড চার্জ নেই।');
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-public-hospital-ticket-admission-guide', 'রোগীর জাতীয় পরিচয়পত্র (NID) অথবা জন্ম নিবন্ধন নম্বর', 1, 0, 'টিকিট কাউন্টারে মৌখিক বা কার্ড প্রদর্শন', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-public-hospital-ticket-admission-guide', 'পূর্ববর্তী প্রেসক্রিপশন ও টেস্টের রিপোর্ট (যদি থাকে)', 0, 0, 'মূল ফাইল', NULL);
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-public-hospital-ticket-admission-guide', 1, 'হাসপাতাল কাউন্টারে ১০/২০ টাকার সরকারি টিকিট কাটা', 'সরাসরি টিকিট কাউন্টারে গিয়ে রোগীর নাম, বয়স ও সমস্যা বলুন। ১০ টাকার টিকিট কেটে নির্দিষ্ট রুম নম্বরে ডাক্তারের জন্য অপেক্ষা করুন।', 'https://dghs.gov.bd', 'কাউন্টারের সামনে দালালরা এসে বলবে ''তাড়াতাড়ি ডাক্তার দেখায় দিচ্ছি, ১০০ টাকা দেন''—কখনোই তাদের সাথে যাবেন না।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-public-hospital-ticket-admission-guide', 2, 'ডাক্তার দেখানো ও বিনামূল্যে ওষুধ সংগ্রহ', 'ডাক্তার ব্যবস্থাপত্র লিখলে হাসপাতালের নিজস্ব ডিসপেনসারি কাউন্টারে যান। সরকারি তালিকায় থাকা ওষুধগুলো সম্পূর্ণ বিনামূল্যে দেওয়া হয়।', NULL, 'ওষুধের জন্য কাউকে টাকা দিতে হয় না।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-public-hospital-ticket-admission-guide', 3, 'হাসপাতাল ল্যাবে সরকার নির্ধারিত নামমাত্র মূল্যে টেস্ট', 'বাইরের প্রাইভেট ক্লিনিকে না গিয়ে হাসপাতালের নিজস্ব প্যাথলজিতে সরকারি নামমাত্র মূল্যে (রক্ত পরীক্ষা ৫০-১০০ টাকা, এক্স-রে ১০০-২০০ টাকা) টেস্ট করান।', NULL, 'দালালরা প্রাইভেট ক্লিনিকে নিয়ে বেশি টাকা কমিশনের ধান্দা করে।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-public-hospital-ticket-admission-guide', 4, 'ভর্তি ও জরুরি সেবা', 'ভর্তির প্রয়োজন হলে জরুরি বিভাগ বা বহির্বিভাগের চিকিৎসকের সিলযুক্ত স্লিপ নিয়ে ভর্তি কাউন্টারে ১৫ টাকা জমা দিয়ে বেডে যান। কোনো ট্রলিম্যান বা আয়াকে বকশিশ দেওয়ার কোনো বাধ্যবাধকতা নেই।', NULL, NULL);
+            
+
+-- Service: নতুন বিদ্যুৎ সংযোগ ও ডিজিটাল মিটার আবেদন নির্দেশিকা (পল্লী বিদ্যুৎ/ডেসকো/ডিপিডিসি) (bd-electricity-new-connection-meter-guide)
+
+        INSERT INTO services (
+            service_id, title_bn, title_en, category, sub_category, 
+            department_agency, summary, processing_time_sla, 
+            official_portal_url, application_url, citizen_charter_url, 
+            anti_broker_warning, grievance_remedy, source_platform, updated_at
+        ) VALUES (
+            'bd-electricity-new-connection-meter-guide', 'নতুন বিদ্যুৎ সংযোগ ও ডিজিটাল মিটার আবেদন নির্দেশিকা (পল্লী বিদ্যুৎ/ডেসকো/ডিপিডিসি)', 'Bangladesh New Electricity Connection & Digital Smart Meter Application Guide', 
+            'বিদ্যুৎ, জ্বালানি ও খনিজ সম্পদ', NULL, 'বাংলাদেশ পল্লী বিদ্যুতায়ন বোর্ড (BREB) / ডেসকো / ডিপিডিসি', 
+            'নতুন বাড়ি বা ব্যবসা প্রতিষ্ঠানে পল্লী বিদ্যুৎ বা ডেসকো/ডিপিডিসি থেকে মিটার নিতে স্থানীয় দালাল বা কথিত ইলেকট্রিশিয়ানরা ১৫,০০০ থেকে ৩০,০০০ টাকা দাবি করে। অনলাইনে ঘরে বসেই মাত্র কয়েকশ থেকে কয়েক হাজার টাকায় সরকারি নিয়মে সংযোগ পাওয়া যায়।', 'আবেদন ও ওয়্যারিং পরিদর্শনের পর সর্বোচ্চ ৭ থেকে ১৫ কার্যদিবস', 
+            'https://reb.gov.bd', 'https://rebpbs.org', 
+            'https://mpemr.gov.bd/site/view/citizen_charter', 'সতর্কতা: কোনো দালাল বা অসাধু ইলেকট্রিশিয়ানকে মিটার আনার জন্য চুক্তি করে টাকা দেবেন না। তারা অবৈধ হুক লাইন বা চোরাই মিটার লাগিয়ে দিলে বিদ্যুৎ আদালতের অভিযানে জেল ও লাখ টাকা জরিমানা হতে পারে। সম্পূর্ণ বৈধ অনলাইন আবেদন করুন।', 
+            'বিদ্যুৎ সংযোগে কালক্ষেপণ বা ঘুষ দাবি করলে পল্লী বিদ্যুতের জিএম (General Manager) অথবা মন্ত্রণালয় হটলাইন ১৬৯৯৯-এ অভিযোগ দায়ের করুন।', 'services.portal.gov.bd', CURRENT_TIMESTAMP
+        )
+        ON CONFLICT(service_id) DO UPDATE SET
+            title_bn=excluded.title_bn,
+            title_en=excluded.title_en,
+            category=excluded.category,
+            department_agency=excluded.department_agency,
+            summary=excluded.summary,
+            processing_time_sla=excluded.processing_time_sla,
+            official_portal_url=excluded.official_portal_url,
+            application_url=excluded.application_url,
+            citizen_charter_url=excluded.citizen_charter_url,
+            anti_broker_warning=excluded.anti_broker_warning,
+            grievance_remedy=excluded.grievance_remedy,
+            updated_at=CURRENT_TIMESTAMP;
+        
+DELETE FROM service_fees WHERE service_id = 'bd-electricity-new-connection-meter-guide';
+DELETE FROM service_documents WHERE service_id = 'bd-electricity-new-connection-meter-guide';
+DELETE FROM service_steps WHERE service_id = 'bd-electricity-new-connection-meter-guide';
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-electricity-new-connection-meter-guide', 'আবেদন ফি (এক ফেজ আবাসিক সংযোগ)', 115.0, 1, 'বিকাশ, রকেট, নগদ বা অনলাইন', 'আবেদন ফি ১০০ টাকা + ১৫% ভ্যাট = ১১৫ টাকা।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-electricity-new-connection-meter-guide', 'নিরাপত্তা জামানত (Security Deposit - প্রতি কিলোওয়াট)', 600.0, 1, 'অনলাইন পেমেন্ট', 'ফেরতযোগ্য সরকারি জামানত।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-electricity-new-connection-meter-guide', 'মিটার টেস্ট ও সার্ভিস সংযোগ ফি', 800.0, 1, 'অনলাইন', 'মিটার সরবরাহ ও তার টানার সরকারি চার্জ।');
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-electricity-new-connection-meter-guide', 'আবেদনকারীর জাতীয় পরিচয়পত্র (NID) কপি', 1, 0, 'স্ক্যান কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-electricity-new-connection-meter-guide', 'যে জমিতে সংযোগ হবে তার খারিজ খতিয়ান বা দলিলের কপি', 1, 0, 'স্ক্যান কপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-electricity-new-connection-meter-guide', 'লাইসেন্সপ্রাপ্ত ইলেকট্রিশিয়ান কর্তৃক বাড়ি ওয়্যারিং প্রত্যয়নপত্র', 1, 0, 'প্রত্যয়ন ফরম', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-electricity-new-connection-meter-guide', 'নিকটবর্তী প্রতিবেশীর বিদ্যুৎ বিলের কপি (হিসাব নম্বর উল্লেখের জন্য)', 1, 0, 'ফটোকপি', NULL);
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-electricity-new-connection-meter-guide', 1, 'বিদ্যুৎ বিতরণ সংস্থার পোর্টালে অনলাইন আবেদন', 'পল্লী বিদ্যুৎ হলে https://rebpbs.org এবং ঢাকা হলে desco.org.bd বা dpdc.org.bd-এ যান। ''নতুন সংযোগ আবেদন'' অপশনে ক্লিক করে ১১৫ টাকা আবেদন ফি বিকাশ দিয়ে সাবমিট করুন।', 'https://rebpbs.org', 'আপনার নিকটবর্তী ট্রান্সফরমার ও পোলের নম্বর সঠিকভাবে দিন।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-electricity-new-connection-meter-guide', 2, 'লাইনম্যান কর্তৃক কারিগরি পরিদর্শন', 'বিদ্যুৎ অফিসের ওয়্যারিং পরিদর্শক সরেজমিনে এসে বাড়ির ওয়্যারিং ও আর্থিং রড পরীক্ষা করবেন।', NULL, 'ওয়্যারিং টেস্টের জন্য কোনো পরিদর্শককে ব্যক্তিগত টাকা দেওয়া নিষিদ্ধ।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-electricity-new-connection-meter-guide', 3, 'ডিমান্ড নোটের ফি অনলাইনে জমা', 'সিস্টেমে ডিমান্ড নোট ইস্যু হবে। জামানত ও মিটার চার্জের টাকা সরাসরি রকেট/বিকাশ বা ব্যাংকে জমা দিন।', NULL, 'দালালরা বলে ''অফিস খরচ লাগবে''—ডিমান্ড নোটের বাইরে কোনো টাকা নেই।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-electricity-new-connection-meter-guide', 4, 'মিটার স্থাপন ও বিদ্যুৎ চালু', 'ফি জমার ৩-৫ দিনের মধ্যে লাইনম্যান এসে সরকারি সিলযুক্ত ডিজিটাল মিটার স্থাপন করে বিদ্যুৎ চালু করে দেবে।', NULL, NULL);
+            
+
+-- Service: বিআরটিএ মোটরযান ট্যাক্স টোকেন ও রুট পারমিট অনলাইন নবায়ন নির্দেশিকা (bd-brta-tax-token-route-permit-renewal)
+
+        INSERT INTO services (
+            service_id, title_bn, title_en, category, sub_category, 
+            department_agency, summary, processing_time_sla, 
+            official_portal_url, application_url, citizen_charter_url, 
+            anti_broker_warning, grievance_remedy, source_platform, updated_at
+        ) VALUES (
+            'bd-brta-tax-token-route-permit-renewal', 'বিআরটিএ মোটরযান ট্যাক্স টোকেন ও রুট পারমিট অনলাইন নবায়ন নির্দেশিকা', 'Bangladesh BRTA Motor Vehicle Tax Token & Route Permit Online Renewal Guide', 
+            'যানবাহন ও লাইসেন্স', NULL, 'বাংলাদেশ সড়ক পরিবহন কর্তৃপক্ষ (বিআরটিএ), সড়ক পরিবহন ও মহাসড়ক বিভাগ', 
+            'প্রতি বছর মোটরসাইকেল, প্রাইভেট কার, বাস বা ট্রাকের ট্যাক্স টোকেন নবায়ন করতে ব্যাংকে গিয়ে লম্বা লাইনে দাঁড়াতে হয় অথবা দালাল ধরে বাড়তি টাকা দিতে হয়। বিএসপি (BSP) সিস্টেমে ঘরে বসেই মোবাইল ব্যাংকিংয়ে এক সেকেন্ডে ট্যাক্স পরিশোধ করে ডিজিটাল কিউআর কোডযুক্ত ট্যাক্স টোকেন ডাউনলোড করা যায়।', 'অনলাইনে ফি জমার সাথে সাথে তাৎক্ষণিক ডিজিটাল ট্যাক্স টোকেন প্রস্তুত', 
+            'https://brta.gov.bd', 'https://bsp.brta.gov.bd', 
+            'https://brta.gov.bd/site/view/citizen_charter', 'সতর্কতা: দালালদের মাধ্যমে ভুয়া ম্যানুয়াল সিল দেওয়া ট্যাক্স টোকেন কাটাবেন না। পুলিশি তল্লাশিতে বারকোড বা কিউআর কোড ম্যাচ না করলে গাড়ি ডাম্পিংয়ে পাঠানো হবে এবং জাল দলিলের মামলা হবে। সম্পূর্ণ অফিশিয়াল বিএসপি সিস্টেম থেকে ই-ট্যাক্স টোকেন নিন।', 
+            NULL, 'services.portal.gov.bd', CURRENT_TIMESTAMP
+        )
+        ON CONFLICT(service_id) DO UPDATE SET
+            title_bn=excluded.title_bn,
+            title_en=excluded.title_en,
+            category=excluded.category,
+            department_agency=excluded.department_agency,
+            summary=excluded.summary,
+            processing_time_sla=excluded.processing_time_sla,
+            official_portal_url=excluded.official_portal_url,
+            application_url=excluded.application_url,
+            citizen_charter_url=excluded.citizen_charter_url,
+            anti_broker_warning=excluded.anti_broker_warning,
+            grievance_remedy=excluded.grievance_remedy,
+            updated_at=CURRENT_TIMESTAMP;
+        
+DELETE FROM service_fees WHERE service_id = 'bd-brta-tax-token-route-permit-renewal';
+DELETE FROM service_documents WHERE service_id = 'bd-brta-tax-token-route-permit-renewal';
+DELETE FROM service_steps WHERE service_id = 'bd-brta-tax-token-route-permit-renewal';
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-brta-tax-token-route-permit-renewal', 'মোটরসাইকেল বার্ষিক ট্যাক্স টোকেন ফি', 1150.0, 1, 'বিকাশ, রকেট, নগদ, উপায়, কার্ড বা যেকোনো ব্যাংক', '১০ বছরের এককালীন ট্যাক্স না থাকলে বার্ষিক নবায়ন ফি।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-brta-tax-token-route-permit-renewal', 'প্রাইভেট কার বার্ষিক রোড ট্যাক্স ও টোকেন (১৫০০ সিসি পর্যন্ত)', 15000.0, 1, 'অনলাইন পেমেন্ট গেটওয়ে', 'সরকারি নির্ধারিত প্রমিত ফি + এআইটি প্রযোজ্য।');
+            
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-brta-tax-token-route-permit-renewal', 'লেট ফি / জরিমানা (মেয়াদোত্তীর্ণ হলে)', 200.0, 1, 'অনলাইন', 'বিলম্বে পরিশোধের সরকারি রুলস অনুযায়ী হিসাব।');
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-brta-tax-token-route-permit-renewal', 'গাড়ির পূর্ববর্তী ট্যাক্স টোকেনের তথ্য বা ছবি', 1, 0, 'তথ্য ইনপুট', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-brta-tax-token-route-permit-renewal', 'গাড়ির চেসিস নম্বর ও রেজিস্ট্রেশন নম্বর', 1, 0, 'তথ্য ইনপুট', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-brta-tax-token-route-permit-renewal', 'আয়কর রিটার্ন দাখিলের প্রমাণপত্র (গাড়ির ক্ষেত্রে বাধ্যতামূলক)', 1, 0, 'অনলাইন টিআইএন ও রিটার্ন রসিদ', NULL);
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-brta-tax-token-route-permit-renewal', 1, 'বিএসপি পোর্টালে লগইন', 'https://bsp.brta.gov.bd সাইটে লগইন করে আপনার মোটরযান প্রোফাইলে যান। ''ট্যাক্স টোকেন নবায়ন'' বাটনে ক্লিক করুন।', 'https://bsp.brta.gov.bd', 'আপনার গাড়ি আগেই বিএসপি প্রোফাইলে যুক্ত না থাকলে চেসিস নম্বর দিয়ে যুক্ত করে নিন।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-brta-tax-token-route-permit-renewal', 2, 'বকেয়া ট্যাক্স হিসাব ও অনলাইন পেমেন্ট', 'সিস্টেম স্বয়ংক্রিয়ভাবে সরকারি ট্যাক্স ও ভ্যাট হিসাব করে দেবে। বিকাশ বা কার্ড দিয়ে ফি পরিশোধ করুন।', NULL, 'কোনো ব্যাংকে গিয়ে ঘণ্টার পর ঘণ্টা লাইনে দাঁড়াতে হবে না।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-brta-tax-token-route-permit-renewal', 3, 'কিউআর কোডযুক্ত ডিজিটাল ট্যাক্স টোকেন ডাউনলোড ও প্রিন্ট', 'পেমেন্ট সফল হওয়ার সাথে সাথে কিউআর কোডযুক্ত রঙিন ডিজিটাল ট্যাক্স টোকেন স্ক্রিনে চলে আসবে। এটি ডাউনলোড করে প্রিন্ট করে গাড়িতে রাখুন। ট্রাফিক পুলিশ কিউআর কোড স্ক্যান করে তাৎক্ষণিক বৈধতা যাচাই করতে পারবে।', NULL, NULL);
+            
+
+-- Service: পাসপোর্টের পুলিশ ভেরিফিকেশন (SB) ট্র্যাকিং ও অযাচিত ঘুষ দাবি রোধ নির্দেশিকা (bd-passport-police-sb-verification-guide)
+
+        INSERT INTO services (
+            service_id, title_bn, title_en, category, sub_category, 
+            department_agency, summary, processing_time_sla, 
+            official_portal_url, application_url, citizen_charter_url, 
+            anti_broker_warning, grievance_remedy, source_platform, updated_at
+        ) VALUES (
+            'bd-passport-police-sb-verification-guide', 'পাসপোর্টের পুলিশ ভেরিফিকেশন (SB) ট্র্যাকিং ও অযাচিত ঘুষ দাবি রোধ নির্দেশিকা', 'Bangladesh e-Passport Special Branch (SB) Police Verification Tracking & Anti-Extortion Guide', 
+            'পাসপোর্ট ও ইমিগ্রেশন', NULL, 'স্পেশাল ব্রাঞ্চ (SB), বাংলাদেশ পুলিশ', 
+            'নতুন পাসপোর্টের ক্ষেত্রে পুলিশ ভেরিফিকেশনের নামে তদন্তকারী কর্মকর্তারা প্রায়ই বাড়ি এসে বা থানায় ডেকে ১,০০০ থেকে ৫,০০০ টাকা ''চা-মিষ্টির খরচ'' বা ঘুষ দাবি করে। স্বরাষ্ট্র মন্ত্রণালয় ও পুলিশ সদরদপ্তরের সুস্পষ্ট নির্দেশ অনুযায়ী—পাসপোর্ট ভেরিফিকেশনে নাগরিকদের কোনো ফি বা অর্থ দেওয়ার কোনো সরকারি নিয়ম নেই (ফি সম্পূর্ণ ০ টাকা)। নাগরিকের তথ্য সঠিক থাকলে কোনো অর্থ ছাড়াই রিপোর্ট পজিটিভ দিতে পুলিশ বাধ্য।', 'এসবি অফিসে ফাইল প্রেরণের পর সর্বোচ্চ ৩ থেকে ৭ কার্যদিবসের মধ্যে রিপোর্ট নিষ্পত্তি', 
+            'https://police.gov.bd', 'https://www.epassport.gov.bd', 
+            'https://police.portal.gov.bd/site/view/citizen_charter', 'সতর্কতা: পুলিশ ভেরিফিকেশনের জন্য কাউকে কোনো নগদ টাকা দেবেন না। যদি কোনো কর্মকর্তা অনৈতিকভাবে টাকা দাবি করে বা টাকা না দিলে নেতিবাচক রিপোর্ট দেওয়ার হুমকি দেয়, তবে অবিলম্বে পুলিশ সদরদপ্তরের আইজিপি কমপ্লেইন সেল অথবা স্থানীয় পুলিশ সুপার (SP) বরাবর সরাসরি অভিযোগ করুন।', 
+            'পুলিশের অনৈতিক সুবিধা দাবির বিরুদ্ধে আইজিপি কমপ্লেইন সেল মোবাইল: ০১৭৬৯৬৯৩৫৩৫, ০১৭৬৯৬৯৩৫৩৬ অথবা জাতীয় জরুরি সেবা ৯৯৯ বা grs.gov.bd-এ সরাসরি নাম প্রকাশ না করে অভিযোগ দাখিল করুন।', 'services.portal.gov.bd', CURRENT_TIMESTAMP
+        )
+        ON CONFLICT(service_id) DO UPDATE SET
+            title_bn=excluded.title_bn,
+            title_en=excluded.title_en,
+            category=excluded.category,
+            department_agency=excluded.department_agency,
+            summary=excluded.summary,
+            processing_time_sla=excluded.processing_time_sla,
+            official_portal_url=excluded.official_portal_url,
+            application_url=excluded.application_url,
+            citizen_charter_url=excluded.citizen_charter_url,
+            anti_broker_warning=excluded.anti_broker_warning,
+            grievance_remedy=excluded.grievance_remedy,
+            updated_at=CURRENT_TIMESTAMP;
+        
+DELETE FROM service_fees WHERE service_id = 'bd-passport-police-sb-verification-guide';
+DELETE FROM service_documents WHERE service_id = 'bd-passport-police-sb-verification-guide';
+DELETE FROM service_steps WHERE service_id = 'bd-passport-police-sb-verification-guide';
+
+            INSERT INTO service_fees (service_id, category_name, amount_bdt, vat_included, payment_method, remarks)
+            VALUES ('bd-passport-police-sb-verification-guide', 'পুলিশ ভেরিফিকেশন সরকারি ফি', 0.0, 1, 'সম্পূর্ণ বিনামূল্যে (০ টাকা)', 'পুলিশ ভেরিফিকেশনের জন্য কোনো প্রকার অর্থ নেওয়া আইনত দণ্ডনীয় ঘুষ।');
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-passport-police-sb-verification-guide', 'আবেদনকারীর আসল জাতীয় পরিচয়পত্র (NID) বা অনলাইন জন্ম সনদ', 1, 0, 'মূল কপি পরিদর্শন', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-passport-police-sb-verification-guide', 'স্থায়ী ঠিকানার প্রমাণপত্র (চেয়ারম্যান/কাউন্সিলর প্রত্যয়ন বা হোল্ডিং ট্যাক্স দাখিলা)', 1, 0, 'ফটোকপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-passport-police-sb-verification-guide', 'পিতা ও মাতার জাতীয় পরিচয়পত্র (NID)', 1, 0, 'ফটোকপি', NULL);
+            
+
+            INSERT INTO service_documents (service_id, name, is_mandatory, attestation_required, format_type, how_to_obtain)
+            VALUES ('bd-passport-police-sb-verification-guide', 'পাসপোর্টের অনলাইন রেজিস্ট্রেশন সামারি শিট ও ডেলিভারি স্লিপ', 1, 0, 'ফটোকপি', NULL);
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-passport-police-sb-verification-guide', 1, 'পাসপোর্ট স্ট্যাটাস ট্র্যাকিং', 'https://www.epassport.gov.bd পোর্টালে অ্যাপ্লিকেশন আইডি ও জন্মতারিখ দিয়ে চেক করুন। স্ট্যাটাস যখন ''Police Verification'' দেখাবে, তখন ফাইলটি আপনার সংশ্লিষ্ট এলাকার এসবি বা ডিএসবি শাখায় থাকে।', 'https://www.epassport.gov.bd/landing', 'নবায়নকৃত সাধারণ পাসপোর্টে কোনো পুলিশ ভেরিফিকেশন লাগে না, শুধুমাত্র নতুন পাসপোর্টে প্রযোজ্য।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-passport-police-sb-verification-guide', 2, 'তদন্ত কর্মকর্তার সাথে যোগাযোগ ও আসল কাগজপত্র প্রদর্শন', 'তদন্তকারী কর্মকর্তা ফোন দিলে তাকে আপনার স্থায়ী ঠিকানার ইউটিলিটি বিল, চেয়ারম্যান সার্টিফিকেট ও আসল এনআইডি দেখান।', NULL, 'কর্মকর্তা যদি বলেন ''অফিস খরচ লাগবে'', তাকে বিনয়ের সাথে বলুন যে সরকার নির্ধারিত পাসপোর্ট ফি চালানে জমা দেওয়া আছে, কোনো বাড়তি খরচ দেওয়ার সরকারি নিয়ম নেই।');
+            
+
+            INSERT INTO service_steps (service_id, step_number, title, description, action_url, tips)
+            VALUES ('bd-passport-police-sb-verification-guide', 3, 'অনলাইন রিপোর্ট সাবমিশন ও ছাড়পত্র', 'তদন্তকারী কর্মকর্তা তার মোবাইল অ্যাপ দিয়ে সরাসরি কেন্দ্রীয় এসবি সার্ভারে ডিজিটাল পজিটিভ রিপোর্ট আপলোড করবেন। আপনার পাসপোর্টের স্ট্যাটাস স্বয়ংক্রিয়ভাবে ''Pending for Approval'' হয়ে যাবে।', NULL, NULL);
+            
+
