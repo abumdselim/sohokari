@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary: #059669;
-  --primary-dark: #047857;
-  --primary-deep: #064e3b;
-  --primary-light: #ecfdf5;
-  --user-bubble: #047857;
+  --primary: #0c5b5b;
+  --primary-dark: #084747;
+  --primary-deep: #053131;
+  --primary-light: #e6f2f2;
+  --user-bubble: #0c5b5b;
   --user-text: #ffffff;
   --bot-bubble: #ffffff;
   --text-main: #000000;
