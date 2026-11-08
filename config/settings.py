@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     CLOUDFLARE_R2_ACCESS_KEY_ID: Optional[str] = None
     CLOUDFLARE_R2_SECRET_ACCESS_KEY: Optional[str] = None
     CLOUDFLARE_R2_ENDPOINT: Optional[str] = None
-    CLOUDFLARE_VECTORIZE_INDEX: str = "sohokari-citizen-services"
+    CLOUDFLARE_VECTORIZE_INDEX: str = "sohokari-citizen-services-m3"
 
     # Cloudinary
     CLOUDINARY_CLOUD_NAME: Optional[str] = None

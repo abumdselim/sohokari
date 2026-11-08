@@ -16,7 +16,7 @@ database_id = "f335655f-8553-42b0-86f0-e708ef5385d2"
 # Cloudflare Vectorize binding
 [[vectorize]]
 binding = "VECTORIZE"
-index_name = "sohokari-citizen-services"
+index_name = "sohokari-citizen-services-m3"
 
 # Cloudflare R2 bucket binding
 [[r2_buckets]]
