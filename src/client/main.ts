@@ -5,7 +5,7 @@ import { renderUserBubble, renderBotBubble, renderTypingIndicator } from './ui';
 import { icons } from './icons';
 import { ChatResponse } from '../types/engine';
 
-class SohokariApp {
+class KaazAIApp {
   private chatStream: HTMLElement;
   private chatForm: HTMLFormElement;
   private queryInput: HTMLInputElement;
@@ -190,10 +190,10 @@ class SohokariApp {
     this.chatStream.innerHTML = `
       <div class="message-row bot">
         <div class="bot-avatar-wrap">
-          <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="সহকারী" class="bot-avatar-img" /></div>
+          <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="Kaaz AI" class="bot-avatar-img" /></div>
         </div>
         <div class="bubble bot-bubble">
-          <p><strong>সহকারী</strong>-তে স্বাগতম</p>
+          <p><strong>Kaaz AI (কাজ এআই)</strong>-তে স্বাগতম</p>
           <p style="margin-top: 4px; font-size: 0.95rem; color: #1e293b;">
             কী সেবা সম্পর্কে জানতে চান? নিচে লিখুন অথবা সাজেশনে ট্যাপ করুন।
           </p>
@@ -215,5 +215,5 @@ class SohokariApp {
 
 // Bootstrap once DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  new SohokariApp();
+  new KaazAIApp();
 });

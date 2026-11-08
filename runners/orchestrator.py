@@ -17,7 +17,7 @@ console = Console(force_terminal=True, legacy_windows=False)
 
 class SohokariEngine:
     """
-    Central Orchestrator for the 'সহকারী' (Sohokari) citizen services data pipeline.
+    Central Orchestrator for the 'Kaaz AI' (কাজ এআই) citizen services data pipeline.
     """
     def __init__(self):
         self.d1_manager = CloudflareD1Manager()
@@ -54,7 +54,7 @@ class SohokariEngine:
         return services
 
     def display_summary(self, services: List[CitizenService]):
-        table = Table(title="সহকারী (Sohokari) - নাগরিক সেবা ডাটাবেজ সামারি", show_header=True, header_style="bold magenta")
+        table = Table(title="Kaaz AI (কাজ এআই) - নাগরিক সেবা ডাটাবেজ সামারি", show_header=True, header_style="bold magenta")
         table.add_column("আইডি", style="dim", width=25)
         table.add_column("সেবার নাম (বাংলা)", style="bold cyan")
         table.add_column("দপ্তর / মন্ত্রণালয়", style="yellow")

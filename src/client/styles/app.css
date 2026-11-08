@@ -439,7 +439,7 @@ html, body {
   margin-top: 4px;
 }
 
-/* Assistant ("সহকারী") Message: Chat Inbox Bubble on the left */
+/* Assistant ("Kaaz AI") Message: Chat Inbox Bubble on the left */
 .bot-bubble {
   background: #ffffff;
   color: var(--text-main);

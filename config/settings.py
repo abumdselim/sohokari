@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     )
 
     # Project Info
-    PROJECT_NAME: str = "সহকারী (Sohokari)"
+    PROJECT_NAME: str = "Kaaz AI (কাজ এআই)"
     PROJECT_VERSION: str = "1.0.0"
     BASE_DIR: Path = BASE_DIR
 
@@ -50,7 +50,7 @@ class Settings(BaseSettings):
     # Scraping Engine Settings
     SCRAPER_CONCURRENCY: int = Field(default=5, description="Concurrent scraper workers")
     SCRAPER_DELAY_SECONDS: float = Field(default=1.5, description="Polite delay between requests")
-    SCRAPER_USER_AGENT: str = "SohokariCitizenBot/1.0 (+https://github.com/abumdselim/sohokari; Public Citizen Services Aggregator)"
+    SCRAPER_USER_AGENT: str = "KaazAICitizenBot/1.0 (+https://kaazai.com; Public Citizen Services Aggregator)"
     CONTINUOUS_CYCLE_INTERVAL_MINUTES: int = 360
     REQUEST_TIMEOUT_SECONDS: int = 45
     MAX_RETRIES: int = 3

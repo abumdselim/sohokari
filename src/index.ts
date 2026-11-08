@@ -29,7 +29,7 @@ export default {
       return new Response(
         JSON.stringify({
           status: 'healthy',
-          project: 'Sohokari (সহকারী)',
+          project: 'Kaaz AI (কাজ এআই)',
           version: '0.2.0-ai-rag',
           verified_services_count: VERIFIED_SERVICES.length,
           bindings: {

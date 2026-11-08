@@ -34,7 +34,7 @@ export function renderTypingIndicator(): HTMLElement {
 
   row.innerHTML = `
     <div class="bot-avatar-wrap">
-      <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="সহকারী" class="bot-avatar-img" /></div>
+      <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="Kaaz AI" class="bot-avatar-img" /></div>
     </div>
     <div class="typing-bubble">
       <div class="typing-dot"></div>
@@ -115,7 +115,7 @@ export function renderBotBubble(data: any): HTMLElement {
 
   const avatar = `
     <div class="bot-avatar-wrap">
-      <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="সহকারী" class="bot-avatar-img" /></div>
+      <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="Kaaz AI" class="bot-avatar-img" /></div>
     </div>
   `;
 
@@ -210,7 +210,7 @@ export function renderBotBubble(data: any): HTMLElement {
         <!-- Card Top Bar -->
         <div class="card-top-bar">
           <div class="service-title-text" style="color: #0c5b5b; font-weight: 700; display: flex; align-items: center; gap: 6px;">
-            ${icons.shieldCheck} <span>সহকারী এআই গাইড (লাইভ রেকর্ড)</span>
+            ${icons.shieldCheck} <span>Kaaz AI গাইড (লাইভ রেকর্ড)</span>
           </div>
           <button class="btn-copy-card" data-copy="${escapeHtml(copyPayload)}" title="তথ্য কপি করুন">
             ${icons.copy}

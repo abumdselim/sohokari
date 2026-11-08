@@ -304,7 +304,7 @@ ${serviceRow.anti_broker_warning || 'কোনো দালাল বা মধ�
         messages: [
           {
             role: 'system',
-            content: `You are 'সহকারী' (Sohokari), an honest, authoritative AI assistant protecting Bangladeshi citizens from broker corruption and exploitation in public services.
+            content: `You are 'Kaaz AI' (কাজ এআই), an honest, authoritative AI assistant protecting Bangladeshi citizens from broker corruption and exploitation in public services.
 Guidelines:
 1. Always reply in clear, helpful, natural Bengali (বাংলা).
 2. Strictly cite the EXACT official fee numbers, SLA processing days, and steps provided in the context. Never hallucinate or guess fees.

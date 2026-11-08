@@ -1,6 +1,6 @@
-# সহকারী (Sohokari) - Bangladesh Citizen Services AI Guide & Data Pipeline
+# Kaaz AI (কাজ এআই) - Bangladesh Citizen Services AI Guide & Data Pipeline
 
-> **Brand:** `সহকারী (Sohokari)`  
+> **Brand:** `Kaaz AI (কাজ এআই)` [formerly Sohokari]  
 > **Mission:** "সঠিক তথ্য জানুন, দালাল ও ভোগান্তি এড়িয়ে সরকারি সেবা গ্রহণ করুন।"  
 > **Architecture:** Cloudflare Workers (Edge Engine + Static PWA) + D1 Database + Vectorize (Semantic Search) + R2 Storage  
 > **Pipeline:** Python Data Scraping Engine (Zyte API + Anti-Bot Bypassing) + Cloud Runners (Deepnote / Camber Cloud)
@@ -8,7 +8,7 @@
 ---
 
 ## 🤝 Overview
-**সহকারী (Sohokari)** is a Bangla-first, high-precision citizen services assistant for Bangladesh. It eliminates reliance on corrupt brokers (*dalals*) by providing direct, receipt-backed official government fees, exact document checklists, and step-by-step procedures for all citizen services.
+**Kaaz AI (কাজ এআই)** is a Bangla-first, high-precision citizen services assistant for Bangladesh. It eliminates reliance on corrupt brokers (*dalals*) by providing direct, receipt-backed official government fees, exact document checklists, and step-by-step procedures for all citizen services.
 
 ### Core Pillars
 1. **Verified Government Services Database:** Complete coverage of high-impact, broker-prone citizen services (Land, Passport, NID, BRTA, Birth/Death Registration, Police Clearance, Social Safety Net, Pension, Taxes).

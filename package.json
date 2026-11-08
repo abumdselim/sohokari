@@ -1,8 +1,8 @@
 {
-  "name": "sohokari",
+  "name": "kaaz-ai",
   "version": "0.1.0",
   "private": true,
-  "description": "Sohokari (সহকারী) - Bangla-First Zero-LLM AI Assistant for Bangladesh Citizen Services",
+  "description": "Kaaz AI (কাজ এআই) - Bangla-First Zero-LLM AI Assistant for Bangladesh Citizen Services",
   "main": "src/index.ts",
   "scripts": {
     "dev": "wrangler dev",

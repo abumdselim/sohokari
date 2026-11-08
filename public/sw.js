@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sohokari-v1';
+const CACHE_NAME = 'kaaz-ai-v1';
 const STATIC_ASSETS = [
   '/',
   '/index.html',

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 44" width="190" height="44" fill="none">
+  <defs>
+    <linearGradient id="badgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf" />
+      <stop offset="100%" stop-color="#0d9488" />
+    </linearGradient>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5eead4" />
+      <stop offset="100%" stop-color="#14b8a6" />
+    </linearGradient>
+  </defs>
+  <!-- Icon: Modern Geometric Spark & Shield -->
+  <g transform="translate(2, 4)">
+    <rect width="36" height="36" rx="10" fill="url(#iconGrad)" />
+    <!-- Stylized K + Spark -->
+    <path d="M12 9v18M12 18l10-9M15 15l7 12" stroke="#042f2e" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="27" cy="10" r="2.2" fill="#ffffff" />
+  </g>
+  <!-- Wordmark -->
+  <text x="46" y="25" font-family="'Inter', system-ui, -apple-system, sans-serif" font-size="22" font-weight="800" fill="#ffffff" letter-spacing="-0.5">Kaaz</text>
+  <!-- AI Badge -->
+  <g transform="translate(108, 8)">
+    <rect width="32" height="20" rx="6" fill="url(#badgeGrad)" />
+    <text x="16" y="14.5" font-family="'Inter', system-ui, -apple-system, sans-serif" font-size="12" font-weight="900" fill="#042f2e" text-anchor="middle" letter-spacing="0.5">AI</text>
+  </g>
+  <!-- Subtitle -->
+  <text x="47" y="37" font-family="'Noto Sans Bengali', system-ui, sans-serif" font-size="9.5" font-weight="600" fill="#99f6e4" letter-spacing="0.3">কাজ এআই • নাগরিক সেবা</text>
+</svg>
