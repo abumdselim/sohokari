@@ -35,7 +35,7 @@ export function renderTypingIndicator(): HTMLElement {
 
   row.innerHTML = `
     <div class="bot-avatar-wrap">
-      <div class="bot-avatar-inner">${icons.shieldCheck}</div>
+      <div class="bot-avatar-inner"><img src="/assets/icon-white.png" alt="সহকারী" class="bot-avatar-img" /></div>
     </div>
     <div class="typing-bubble">
       <div class="typing-dot"></div>
@@ -52,7 +52,7 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
 
   const avatar = `
     <div class="bot-avatar-wrap">
-      <div class="bot-avatar-inner">${icons.shieldCheck}</div>
+      <div class="bot-avatar-inner"><img src="/assets/icon-white.png" alt="সহকারী" class="bot-avatar-img" /></div>
     </div>
   `;
 

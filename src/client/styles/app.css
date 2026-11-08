@@ -63,11 +63,11 @@ html, body {
   stroke-width: 2.2;
 }
 
-/* Header: শুধুমাত্র "সহকারী" এবং ChatGPT-স্টাইল মেনু বাটন */
+/* Header: ব্র্যান্ড কালার (#0c5b5b) এবং অফিশিয়াল লোগো */
 .native-header {
-  height: 54px;
-  background: #ffffff;
-  border-bottom: 2px solid var(--border);
+  height: 56px;
+  background: var(--primary);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -75,12 +75,13 @@ html, body {
   padding-top: var(--safe-top);
   z-index: 50;
   flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 .btn-menu-toggle {
   background: transparent;
   border: none;
-  color: var(--text-bold);
+  color: #ffffff;
   width: 38px;
   height: 38px;
   display: flex;
@@ -88,35 +89,43 @@ html, body {
   justify-content: center;
   cursor: pointer;
   border-radius: 4px;
-  transition: background 0.1s;
+  transition: background 0.12s;
 }
 
 .btn-menu-toggle:active {
-  background: var(--border-subtle);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .header-svg {
   width: 22px;
   height: 22px;
-  stroke: var(--text-bold);
+  stroke: #ffffff;
 }
 
 .brand-section {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-.brand-title {
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: var(--primary-dark);
-  letter-spacing: -0.2px;
+.header-logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.sidebar-logo-img {
+  height: 28px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .btn-header-action {
-  background: #ffffff;
-  border: 1.5px solid var(--border-strong);
-  color: var(--text-bold);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
   padding: 6px 12px;
   border-radius: 4px; /* বাটন রেডিয়াস কম */
   font-size: 0.88rem;
@@ -132,13 +141,13 @@ html, body {
 .btn-icon {
   width: 15px;
   height: 15px;
-  stroke: var(--primary-dark);
+  stroke: #ffffff;
 }
 
 .btn-header-action:active {
-  background: var(--primary-light);
-  border-color: var(--primary);
-  color: var(--primary-dark);
+  background: rgba(255, 255, 255, 0.28);
+  border-color: #ffffff;
+  color: #ffffff;
 }
 
 /* ========================================================
@@ -394,6 +403,13 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.bot-avatar-img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
 }
 
 .bot-svg {
