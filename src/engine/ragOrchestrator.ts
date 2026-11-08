@@ -175,7 +175,7 @@ export async function handleCitizenRagQuery(
         .bind(topServiceId)
         .all<{ category_name: string; amount_bdt: number; vat_included: number; remarks: string }>(),
       env.DB.prepare(
-        'SELECT document_name, is_mandatory, format_type FROM required_documents WHERE service_id = ?'
+        'SELECT name AS document_name, is_mandatory, format_type FROM service_documents WHERE service_id = ?'
       )
         .bind(topServiceId)
         .all<{ document_name: string; is_mandatory: number; format_type: string }>(),
@@ -283,7 +283,8 @@ Guidelines:
       action: fallbackResponse.action,
       reply_bn: fallbackResponse.reply_bn,
       confidence: 0,
-      execution_time_ms
-    };
+      execution_time_ms,
+      debug_error: err?.message || String(err)
+    } as any;
   }
 }

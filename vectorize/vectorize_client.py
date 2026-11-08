@@ -106,27 +106,30 @@ class CloudflareVectorizeClient:
             logger.info(f"Generated embeddings: {len(all_records)}/{len(chunks)}")
             time.sleep(0.3)
 
-        logger.info(f"Uploading all {len(all_records)} vectors in a single unified mutation to Vectorize '{self.index_name}'...")
-        ndjson_lines = [json.dumps(r, ensure_ascii=False) for r in all_records]
-        ndjson_payload = "\n".join(ndjson_lines)
-
-        insert_url = f"{self.vectorize_base}/insert"
-        insert_headers = {
+        logger.info(f"Uploading all {len(all_records)} vectors in batches to Vectorize '{self.index_name}'...")
+        upsert_url = f"{self.vectorize_base}/upsert"
+        upsert_headers = {
             "Authorization": f"Bearer {self.api_token}",
             "Content-Type": "application/x-ndjson"
         }
 
-        try:
-            with httpx.Client(timeout=45) as client:
-                res = client.post(insert_url, headers=insert_headers, content=ndjson_payload.encode("utf-8"))
-                if res.status_code == 200:
-                    data = res.json()
-                    mut_id = data.get("result", {}).get("mutationId")
-                    logger.success(f"Unified Vectorize mutation accepted! Mutation ID: {mut_id}")
-                else:
-                    logger.error(f"Vectorize insert error: {res.text}")
-        except Exception as e:
-            logger.error(f"Network error on Vectorize insert: {e}")
+        upload_batch_size = 150
+        for i in range(0, len(all_records), upload_batch_size):
+            batch = all_records[i:i + upload_batch_size]
+            ndjson_lines = [json.dumps(r, ensure_ascii=False) for r in batch]
+            ndjson_payload = "\n".join(ndjson_lines)
+
+            try:
+                with httpx.Client(timeout=60) as client:
+                    res = client.post(upsert_url, headers=upsert_headers, content=ndjson_payload.encode("utf-8"))
+                    if res.status_code == 200:
+                        data = res.json()
+                        mut_id = data.get("result", {}).get("mutationId")
+                        logger.success(f"Vectorize upsert batch [{i+1}-{min(i+upload_batch_size, len(all_records))}/{len(all_records)}] accepted! Mutation ID: {mut_id}")
+                    else:
+                        logger.error(f"Vectorize upsert error: {res.text}")
+            except Exception as e:
+                logger.error(f"Network error on Vectorize upsert: {e}")
 
     def search(self, query: str, top_k: int = 3) -> List[Dict[str, Any]]:
         """
