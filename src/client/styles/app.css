@@ -210,9 +210,9 @@ html, body {
 }
 
 .sidebar-new-chat-btn {
-  background: #ffffff;
-  border: 1px solid var(--slate-200);
-  color: var(--slate-800);
+  background: #09090b;
+  border: 1px solid #09090b;
+  color: #ffffff;
   padding: 10px 14px;
   border-radius: 10px;
   font-size: 0.92rem;
@@ -223,14 +223,18 @@ html, body {
   gap: 10px;
   font-family: inherit;
   margin-bottom: 18px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   transition: all 0.15s;
 }
 
 .sidebar-new-chat-btn:hover {
-  background: var(--slate-50);
-  border-color: var(--slate-300);
-  color: var(--slate-800);
+  background: #27272a;
+  border-color: #27272a;
+  color: #ffffff;
+}
+
+.sidebar-new-chat-btn:active {
+  transform: scale(0.98);
 }
 
 .sidebar-section-title {
@@ -503,33 +507,54 @@ html, body {
 .hero-card-chip {
   background: #ffffff;
   border: 1px solid var(--slate-200);
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 12px 14px;
   display: flex;
   align-items: center;
   gap: 12px;
   text-align: left;
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
-  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
   font-family: inherit;
 }
 
 .hero-card-chip:hover {
-  border-color: var(--slate-800);
-  background: #fcfdfd;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-color: #09090b;
+  background: #fafafa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transform: translateY(-1px);
 }
 
 .hero-card-chip:active {
   transform: scale(0.98);
+  background: #f4f4f5;
 }
 
-.chip-emoji {
-  font-size: 1.45rem;
-  line-height: 1;
+.chip-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #09090b;
   flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.chip-svg {
+  width: 19px;
+  height: 19px;
+  stroke: currentColor;
+}
+
+.hero-card-chip:hover .chip-icon-box {
+  background: #09090b;
+  color: #ffffff;
+  border-color: #09090b;
 }
 
 .chip-content {
@@ -620,9 +645,9 @@ html, body {
 }
 
 .rag-body-text .rag-blockquote {
-  background: var(--primary-light);
-  border-left: 3px solid var(--primary);
-  color: #14532d;
+  background: var(--slate-100);
+  border-left: 3px solid var(--slate-900);
+  color: var(--slate-900);
   padding: 10px 14px;
   border-radius: 0 8px 8px 0;
   margin: 12px 0;
@@ -637,7 +662,7 @@ html, body {
 }
 
 .rag-body-text .rag-link {
-  color: var(--slate-800);
+  color: var(--slate-900);
   text-decoration: underline;
   text-underline-offset: 3px;
   font-weight: 600;
@@ -662,9 +687,9 @@ html, body {
   gap: 6px;
   padding: 5px 12px;
   border-radius: 18px;
-  border: 1px solid var(--slate-200);
+  border: 1px solid var(--slate-300);
   background: #ffffff;
-  color: var(--slate-500);
+  color: var(--slate-700);
   font-size: 0.82rem;
   font-weight: 600;
   text-decoration: none;
@@ -674,15 +699,19 @@ html, body {
 }
 
 .btn-action-pill:hover {
-  background: var(--slate-50);
-  color: var(--slate-900);
-  border-color: var(--slate-300);
+  background: #09090b;
+  color: #ffffff;
+  border-color: #09090b;
+}
+
+.btn-action-pill:active {
+  transform: scale(0.97);
 }
 
 .btn-action-pill.copied {
-  background: #ecfdf5;
-  color: #059669;
-  border-color: #a7f3d0;
+  background: #09090b;
+  color: #ffffff;
+  border-color: #09090b;
 }
 
 .btn-portal-action {
@@ -821,13 +850,18 @@ html, body {
 }
 
 .tag-mandatory {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: #09090b;
+  color: #ffffff;
+  padding: 2px 7px;
+  border-radius: 4px;
 }
 
 .tag-optional {
   background: var(--slate-100);
   color: var(--slate-600);
+  border: 1px solid var(--slate-200);
+  padding: 2px 7px;
+  border-radius: 4px;
 }
 
 .doc-format {
@@ -854,9 +888,9 @@ html, body {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--primary-tint);
-  color: var(--slate-800);
-  font-size: 0.78rem;
+  background: #09090b;
+  color: #ffffff;
+  font-size: 0.76rem;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -956,8 +990,8 @@ html, body {
 
 .prompt-pill {
   background: #ffffff;
-  border: 1px solid var(--slate-200);
-  color: var(--slate-600);
+  border: 1px solid var(--slate-300);
+  color: var(--slate-800);
   padding: 5px 12px;
   border-radius: 16px;
   font-size: 0.82rem;
@@ -965,19 +999,21 @@ html, body {
   font-family: inherit;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
-  transition: all 0.15s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
 }
 
 .prompt-pill:hover {
-  background: var(--slate-100);
-  color: var(--slate-900);
-  border-color: var(--slate-300);
+  background: #09090b;
+  color: #ffffff;
+  border-color: #09090b;
 }
 
 .prompt-pill:active {
-  transform: scale(0.97);
+  background: #27272a;
+  color: #ffffff;
+  transform: scale(0.96);
 }
 
 /* Chat Input Capsule (ChatGPT Floating Capsule) */
@@ -1060,22 +1096,55 @@ html, body {
 }
 
 .native-chip-btn {
-  background: var(--slate-50);
-  border: 1px solid var(--slate-200);
-  color: var(--slate-700);
-  padding: 6px 11px;
-  border-radius: 18px;
+  background: #ffffff;
+  border: 1.5px solid #09090b;
+  color: #09090b;
+  padding: 6px 13px;
+  border-radius: 20px;
   font-size: 0.84rem;
-  font-weight: 500;
+  font-weight: 600;
   font-family: inherit;
   cursor: pointer;
-  transition: all 0.15s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.15s ease;
 }
 
 .native-chip-btn:hover {
+  background: #09090b;
+  color: #ffffff;
+  border-color: #09090b;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.native-chip-btn:active {
+  transform: scale(0.96);
+}
+
+.refusal-bubble {
+  background: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-left: 3px solid #09090b;
+}
+
+.card-badge.warning-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: var(--slate-100);
-  color: var(--slate-800);
-  border-color: var(--slate-300);
+  color: #09090b;
+  border: 1px solid var(--slate-200);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.card-badge.warning-badge svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
 }
 
 /* Toast */
@@ -1203,15 +1272,21 @@ html, body {
     transform: scale(0.98);
   }
 
-  .chip-emoji {
-    font-size: 1.3rem;
+  .chip-icon-box {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+  }
+
+  .chip-svg {
+    width: 17px;
+    height: 17px;
   }
 
   .chip-title {
     font-size: 0.88rem;
     line-height: 1.35;
   }
-
   .chip-desc {
     font-size: 0.74rem;
     line-height: 1.35;
@@ -1301,7 +1376,9 @@ html, body {
   }
 
   .prompt-pill:active {
-    background: var(--slate-200);
+    background: #09090b;
+    color: #ffffff;
+    border-color: #09090b;
     transform: scale(0.96);
   }
 
@@ -1361,6 +1438,16 @@ html, body {
 
   .hero-card-chip {
     padding: 9px 11px;
+  }
+
+  .chip-icon-box {
+    width: 30px;
+    height: 30px;
+  }
+
+  .chip-svg {
+    width: 15px;
+    height: 15px;
   }
 
   .bot-bubble {

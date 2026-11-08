@@ -186,11 +186,11 @@ class KaazAIApp {
     row.className = 'message-row bot';
     row.innerHTML = `
       <div class="bot-avatar-wrap">
-        <div class="bot-avatar-inner" style="background: #ef4444; border-color: #ef4444; color: #fff;">${icons.alertTriangle}</div>
+        <div class="bot-avatar-inner" style="background: #09090b; border-color: #09090b; color: #ffffff;">${icons.alertTriangle}</div>
       </div>
-      <div class="bubble bot-bubble" style="border-left: 3px solid #ef4444;">
-        <p style="font-weight: 700; color: #b91c1c;">সংযোগ বিঘ্নিত হয়েছে</p>
-        <p style="font-size: 0.9rem; color: #475569; margin-top: 4px;">
+      <div class="bubble bot-bubble" style="border-left: 3px solid #09090b;">
+        <p style="font-weight: 700; color: #09090b;">সংযোগ বিঘ্নিত হয়েছে</p>
+        <p style="font-size: 0.9rem; color: #52525b; margin-top: 4px;">
           সার্ভারের সাথে সংযোগ স্থাপন করা সম্ভব হয়নি। অনুগ্রহ করে ইন্টারনেট কানেকশন চেক করুন।
         </p>
       </div>

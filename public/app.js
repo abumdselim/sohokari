@@ -107,7 +107,7 @@
     <div class="user-bubble">
       <div class="bubble-content">${a(t)}</div>
     </div>
-  `,s}function _(){let t=document.createElement("div");return t.className="message-row bot typing-row",t.id="bot-typing-indicator",t.innerHTML=`
+  `,s}function M(){let t=document.createElement("div");return t.className="message-row bot typing-row",t.id="bot-typing-indicator",t.innerHTML=`
     <div class="bot-avatar-wrap">
       <div class="bot-avatar-inner"><img src="/assets/icon-black.svg?v=1" alt="Kaaz AI" class="bot-avatar-img" /></div>
     </div>
@@ -119,7 +119,7 @@
   `,t}function q(t){if(!t)return"";let i=t.replace(/\r\n/g,`
 `).split(`
 `),e=[],n=!1,o=!1;for(let u=0;u<i.length;u++){let v=i[u].trim();if(!v){n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1);continue}if(/^(\-{3,}|\*{3,}|_{3,})$/.test(v)){n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1),e.push('<hr class="rag-hr">');continue}let l=a(v);if(l=l.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>"),l=l.replace(/`([^`]+)`/g,'<code class="rag-code">$1</code>'),l=l.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener" class="rag-link">$1</a>'),l.startsWith("#### "))n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1),e.push(`<h4 class="rag-h4">${l.substring(5)}</h4>`);else if(l.startsWith("### "))n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1),e.push(`<h3 class="rag-h3">${l.substring(4)}</h3>`);else if(l.startsWith("## "))n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1),e.push(`<h2 class="rag-h2">${l.substring(3)}</h2>`);else if(l.startsWith("&gt; ")||l.startsWith("> ")){n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1);let h=l.replace(/^(&gt;|>)\s*/,"");e.push(`<blockquote class="rag-blockquote">${h}</blockquote>`)}else if(/^[•\-\*]\s+/.test(l)){o&&(e.push("</ol>"),o=!1),n||(e.push('<ul class="rag-ul">'),n=!0);let h=l.replace(/^[•\-\*]\s+/,"");e.push(`<li class="rag-li">${h}</li>`)}else if(/^([0-9]+|[০-৯]+)\.\s+/.test(l)){n&&(e.push("</ul>"),n=!1),o||(e.push('<ol class="rag-ol">'),o=!0);let h=l.replace(/^([0-9]+|[০-৯]+)\.\s+/,"");e.push(`<li class="rag-oli">${h}</li>`)}else n&&(e.push("</ul>"),n=!1),o&&(e.push("</ol>"),o=!1),e.push(`<p class="rag-p">${l}</p>`)}return n&&e.push("</ul>"),o&&e.push("</ol>"),e.join(`
-`)}function k(t,s,i){let e=t.querySelector(".btn-copy-action");e&&e.addEventListener("click",()=>{B(s,i);let n=e.querySelector(".action-label"),o=n?n.textContent:"\u0995\u09AA\u09BF \u0995\u09B0\u09C1\u09A8";e.classList.add("copied"),n&&(n.textContent="\u0995\u09AA\u09BF \u09B9\u09DF\u09C7\u099B\u09C7!"),setTimeout(()=>{e.classList.remove("copied"),n&&(n.textContent=o)},2e3)})}function M(t){let s=document.createElement("div");s.className="message-row bot";let i=`
+`)}function k(t,s,i){let e=t.querySelector(".btn-copy-action");e&&e.addEventListener("click",()=>{B(s,i);let n=e.querySelector(".action-label"),o=n?n.textContent:"\u0995\u09AA\u09BF \u0995\u09B0\u09C1\u09A8";e.classList.add("copied"),n&&(n.textContent="\u0995\u09AA\u09BF \u09B9\u09DF\u09C7\u099B\u09C7!"),setTimeout(()=>{e.classList.remove("copied"),n&&(n.textContent=o)},2e3)})}function _(t){let s=document.createElement("div");s.className="message-row bot";let i=`
     <div class="bot-avatar-wrap">
       <div class="bot-avatar-inner"><img src="/assets/icon-black.svg?v=1" alt="Kaaz AI" class="bot-avatar-img" /></div>
     </div>
@@ -186,7 +186,7 @@
       <span class="fee-name">${a(r.fee_type_bn||r.category_name||"")}</span>
       <span class="fee-amount">${b(r.amount_bdt||0)} \u099F\u09BE\u0995\u09BE</span>
     </div>
-  `).join(""),C=(o.documents||[]).map(r=>`
+  `).join(""),H=(o.documents||[]).map(r=>`
     <li class="doc-item">
       <span class="doc-title">${a(r.document_name_bn||r.document_name||r.name||"")}</span>
       <span class="doc-tag ${r.is_mandatory?"tag-mandatory":"tag-optional"}">
@@ -239,7 +239,7 @@
         <span>\u09AA\u09CD\u09B0\u09DF\u09CB\u099C\u09A8\u09C0\u09DF \u0995\u09BE\u0997\u099C\u09AA\u09A4\u09CD\u09B0</span>
       </div>
       <ul class="native-checklist">
-        ${C}
+        ${H}
       </ul>
 
       <!-- Application Steps -->
@@ -280,7 +280,7 @@
       </div>
 
     </div>
-  `,k(s,T,n.name_bn),s}function x(){let t=new Date().getHours();return t>=5&&t<12?"\u09B6\u09C1\u09AD \u09B8\u0995\u09BE\u09B2!":t>=12&&t<15?"\u09B6\u09C1\u09AD \u09A6\u09C1\u09AA\u09C1\u09B0!":t>=15&&t<18?"\u09B6\u09C1\u09AD \u0985\u09AA\u09B0\u09BE\u09B9\u09CD\u09A8!":t>=18&&t<22?"\u09B6\u09C1\u09AD \u09B8\u09A8\u09CD\u09A7\u09CD\u09AF\u09BE!":"\u09B6\u09C1\u09AD \u09B0\u09BE\u09A4!"}function H(){return`
+  `,k(s,T,n.name_bn),s}function x(){let t=new Date().getHours();return t>=5&&t<12?"\u09B6\u09C1\u09AD \u09B8\u0995\u09BE\u09B2!":t>=12&&t<15?"\u09B6\u09C1\u09AD \u09A6\u09C1\u09AA\u09C1\u09B0!":t>=15&&t<18?"\u09B6\u09C1\u09AD \u0985\u09AA\u09B0\u09BE\u09B9\u09CD\u09A8!":t>=18&&t<22?"\u09B6\u09C1\u09AD \u09B8\u09A8\u09CD\u09A7\u09CD\u09AF\u09BE!":"\u09B6\u09C1\u09AD \u09B0\u09BE\u09A4!"}function C(){return`
     <div class="welcome-hero" id="welcome-hero">
       <div class="welcome-badge-wrap">
         <div class="welcome-badge-circle">
@@ -297,7 +297,13 @@
 
       <div class="hero-chips-grid">
         <button class="hero-card-chip" data-query="\u099C\u09BE\u09A4\u09C0\u09AF\u09BC \u09AA\u09B0\u09BF\u099A\u09AF\u09BC\u09AA\u09A4\u09CD\u09B0 \u09B8\u0982\u09B6\u09CB\u09A7\u09A8 \u0995\u09B0\u09A4\u09C7 \u09B8\u09B0\u0995\u09BE\u09B0\u09BF \u09AB\u09BF \u0995\u09A4 \u09B2\u09BE\u0997\u09C7?">
-          <span class="chip-emoji">\u{1FAAA}</span>
+          <div class="chip-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chip-svg">
+              <rect width="20" height="14" x="2" y="5" rx="2"/>
+              <line x1="2" y1="10" x2="22" y2="10"/>
+              <line x1="12" y1="15" x2="17" y2="15"/>
+            </svg>
+          </div>
           <div class="chip-content">
             <span class="chip-title">\u098F\u09A8\u0986\u0987\u09A1\u09BF \u09B8\u0982\u09B6\u09CB\u09A7\u09A8 \u09AB\u09BF</span>
             <span class="chip-desc">\u09B8\u09A0\u09BF\u0995 \u09AB\u09BF \u0993 \u0986\u09AC\u09C7\u09A6\u09A8\u09C7\u09B0 \u09A8\u09BF\u09DF\u09AE</span>
@@ -305,7 +311,13 @@
         </button>
 
         <button class="hero-card-chip" data-query="\u09E7\u09E6 \u09AC\u099B\u09B0 \u09AE\u09C7\u09AF\u09BC\u09BE\u09A6\u09C0 \u09EA\u09EE \u09AA\u09C3\u09B7\u09CD\u09A0\u09BE\u09B0 \u09AA\u09BE\u09B8\u09AA\u09CB\u09B0\u09CD\u099F \u09A8\u09AC\u09BE\u09AF\u09BC\u09A8 \u09AB\u09BF \u0995\u09A4?">
-          <span class="chip-emoji">\u{1F6C2}</span>
+          <div class="chip-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chip-svg">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
           <div class="chip-content">
             <span class="chip-title">\u09AA\u09BE\u09B8\u09AA\u09CB\u09B0\u09CD\u099F \u09A8\u09AC\u09BE\u09AF\u09BC\u09A8 \u09AB\u09BF</span>
             <span class="chip-desc">\u099C\u09B0\u09C1\u09B0\u09BF \u0993 \u09B8\u09BE\u09A7\u09BE\u09B0\u09A3 \u099A\u09BE\u09B0\u09CD\u099C</span>
@@ -313,7 +325,14 @@
         </button>
 
         <button class="hero-card-chip" data-query="\u099C\u09AE\u09BF \u09A8\u09BE\u09AE\u099C\u09BE\u09B0\u09BF \u09AC\u09BE \u0996\u09BE\u09B0\u09BF\u099C \u0995\u09B0\u09A4\u09C7 \u09AE\u09CB\u099F \u09B8\u09B0\u0995\u09BE\u09B0\u09BF \u09AB\u09BF \u0995\u09A4?">
-          <span class="chip-emoji">\u{1F3DB}\uFE0F</span>
+          <div class="chip-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chip-svg">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+          </div>
           <div class="chip-content">
             <span class="chip-title">\u0987-\u09A8\u09BE\u09AE\u099C\u09BE\u09B0\u09BF \u0993 \u0996\u09BE\u09B0\u09BF\u099C</span>
             <span class="chip-desc">\u09AE\u09CB\u099F \u09B8\u09B0\u0995\u09BE\u09B0\u09BF \u09AB\u09BF \u09E7,\u09E7\u09ED\u09E6 \u099F\u09BE\u0995\u09BE</span>
@@ -321,7 +340,11 @@
         </button>
 
         <button class="hero-card-chip" data-query="\u0989\u09A4\u09CD\u09A4\u09B0\u09BE \u09AA\u09B6\u09CD\u099A\u09BF\u09AE \u09A5\u09BE\u09A8\u09BE\u09B0 \u0993\u09B8\u09BF\u09B0 \u09A8\u09BE\u09AE\u09CD\u09AC\u09BE\u09B0 \u0995\u09A4?">
-          <span class="chip-emoji">\u{1F6A8}</span>
+          <div class="chip-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chip-svg">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
           <div class="chip-content">
             <span class="chip-title">\u099C\u09B0\u09C1\u09B0\u09BF \u09A5\u09BE\u09A8\u09BE \u0993 \u09B9\u099F\u09B2\u09BE\u0987\u09A8</span>
             <span class="chip-desc">\u09AA\u09C1\u09B2\u09BF\u09B6, \u09AC\u09BF\u09A6\u09CD\u09AF\u09C1\u09CE \u0993 \u0997\u09CD\u09AF\u09BE\u09B8 \u09B8\u09C7\u09AC\u09BE</span>
@@ -329,14 +352,14 @@
         </button>
       </div>
     </div>
-  `}var w=class{chatStream;chatForm;queryInput;btnClearChat;bottomBar;appSidebar;sidebarBackdrop;btnToggleSidebar;btnCloseSidebar;btnSidebarNewChat;isProcessing=!1;constructor(){this.chatStream=document.getElementById("chat-stream"),this.chatForm=document.getElementById("chat-form"),this.queryInput=document.getElementById("query-input"),this.btnClearChat=document.getElementById("btn-clear-chat"),this.bottomBar=document.getElementById("bottom-bar"),this.appSidebar=document.getElementById("app-sidebar"),this.sidebarBackdrop=document.getElementById("sidebar-backdrop"),this.btnToggleSidebar=document.getElementById("btn-toggle-sidebar"),this.btnCloseSidebar=document.getElementById("btn-close-sidebar"),this.btnSidebarNewChat=document.getElementById("btn-sidebar-new-chat"),this.init()}init(){let s=document.getElementById("greeting-title");s&&(s.textContent=x()),L(this.chatStream,this.bottomBar),this.registerServiceWorker(),this.chatForm.addEventListener("submit",i=>{i.preventDefault();let e=this.queryInput.value.trim();!e||this.isProcessing||this.sendQuery(e)}),this.btnClearChat.addEventListener("click",()=>{d("light"),this.resetChat()}),this.btnToggleSidebar&&this.btnToggleSidebar.addEventListener("click",()=>{d("light"),this.openSidebar()}),this.btnCloseSidebar&&this.btnCloseSidebar.addEventListener("click",()=>{d("light"),this.closeSidebar()}),this.sidebarBackdrop&&this.sidebarBackdrop.addEventListener("click",()=>{this.closeSidebar()}),this.btnSidebarNewChat&&this.btnSidebarNewChat.addEventListener("click",()=>{d("light"),this.resetChat(),this.closeSidebar()}),document.addEventListener("click",i=>{let e=i.target.closest("[data-query]");if(e){let n=e.getAttribute("data-query");n&&!this.isProcessing&&(d("light"),this.closeSidebar(),this.sendQuery(n))}}),this.scrollToBottom()}openSidebar(){this.appSidebar&&this.sidebarBackdrop&&(this.appSidebar.classList.add("open"),this.sidebarBackdrop.classList.add("open"))}closeSidebar(){this.appSidebar&&this.sidebarBackdrop&&(this.appSidebar.classList.remove("open"),this.sidebarBackdrop.classList.remove("open"))}scrollToBottom(){requestAnimationFrame(()=>{this.chatStream.scrollTop=this.chatStream.scrollHeight})}async sendQuery(s){this.isProcessing=!0,this.queryInput.value="",d("medium");let i=document.getElementById("welcome-hero");i&&i.remove();let e=E(s);this.chatStream.appendChild(e),this.scrollToBottom();let n=_();this.chatStream.appendChild(n),this.scrollToBottom();try{let o=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({query:s})});if(n.remove(),!o.ok)throw new Error(`HTTP error ${o.status}`);let u=await o.json(),v=M(u);this.chatStream.appendChild(v),d("success")}catch{n.remove(),this.renderNetworkError(),d("error")}finally{this.isProcessing=!1,this.scrollToBottom(),this.queryInput.focus()}}renderNetworkError(){let s=document.createElement("div");s.className="message-row bot",s.innerHTML=`
+  `}var w=class{chatStream;chatForm;queryInput;btnClearChat;bottomBar;appSidebar;sidebarBackdrop;btnToggleSidebar;btnCloseSidebar;btnSidebarNewChat;isProcessing=!1;constructor(){this.chatStream=document.getElementById("chat-stream"),this.chatForm=document.getElementById("chat-form"),this.queryInput=document.getElementById("query-input"),this.btnClearChat=document.getElementById("btn-clear-chat"),this.bottomBar=document.getElementById("bottom-bar"),this.appSidebar=document.getElementById("app-sidebar"),this.sidebarBackdrop=document.getElementById("sidebar-backdrop"),this.btnToggleSidebar=document.getElementById("btn-toggle-sidebar"),this.btnCloseSidebar=document.getElementById("btn-close-sidebar"),this.btnSidebarNewChat=document.getElementById("btn-sidebar-new-chat"),this.init()}init(){let s=document.getElementById("greeting-title");s&&(s.textContent=x()),L(this.chatStream,this.bottomBar),this.registerServiceWorker(),this.chatForm.addEventListener("submit",i=>{i.preventDefault();let e=this.queryInput.value.trim();!e||this.isProcessing||this.sendQuery(e)}),this.btnClearChat.addEventListener("click",()=>{d("light"),this.resetChat()}),this.btnToggleSidebar&&this.btnToggleSidebar.addEventListener("click",()=>{d("light"),this.openSidebar()}),this.btnCloseSidebar&&this.btnCloseSidebar.addEventListener("click",()=>{d("light"),this.closeSidebar()}),this.sidebarBackdrop&&this.sidebarBackdrop.addEventListener("click",()=>{this.closeSidebar()}),this.btnSidebarNewChat&&this.btnSidebarNewChat.addEventListener("click",()=>{d("light"),this.resetChat(),this.closeSidebar()}),document.addEventListener("click",i=>{let e=i.target.closest("[data-query]");if(e){let n=e.getAttribute("data-query");n&&!this.isProcessing&&(d("light"),this.closeSidebar(),this.sendQuery(n))}}),this.scrollToBottom()}openSidebar(){this.appSidebar&&this.sidebarBackdrop&&(this.appSidebar.classList.add("open"),this.sidebarBackdrop.classList.add("open"))}closeSidebar(){this.appSidebar&&this.sidebarBackdrop&&(this.appSidebar.classList.remove("open"),this.sidebarBackdrop.classList.remove("open"))}scrollToBottom(){requestAnimationFrame(()=>{this.chatStream.scrollTop=this.chatStream.scrollHeight})}async sendQuery(s){this.isProcessing=!0,this.queryInput.value="",d("medium");let i=document.getElementById("welcome-hero");i&&i.remove();let e=E(s);this.chatStream.appendChild(e),this.scrollToBottom();let n=M();this.chatStream.appendChild(n),this.scrollToBottom();try{let o=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({query:s})});if(n.remove(),!o.ok)throw new Error(`HTTP error ${o.status}`);let u=await o.json(),v=_(u);this.chatStream.appendChild(v),d("success")}catch{n.remove(),this.renderNetworkError(),d("error")}finally{this.isProcessing=!1,this.scrollToBottom(),this.queryInput.focus()}}renderNetworkError(){let s=document.createElement("div");s.className="message-row bot",s.innerHTML=`
       <div class="bot-avatar-wrap">
-        <div class="bot-avatar-inner" style="background: #ef4444; border-color: #ef4444; color: #fff;">${c.alertTriangle}</div>
+        <div class="bot-avatar-inner" style="background: #09090b; border-color: #09090b; color: #ffffff;">${c.alertTriangle}</div>
       </div>
-      <div class="bubble bot-bubble" style="border-left: 3px solid #ef4444;">
-        <p style="font-weight: 700; color: #b91c1c;">\u09B8\u0982\u09AF\u09CB\u0997 \u09AC\u09BF\u0998\u09CD\u09A8\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7</p>
-        <p style="font-size: 0.9rem; color: #475569; margin-top: 4px;">
+      <div class="bubble bot-bubble" style="border-left: 3px solid #09090b;">
+        <p style="font-weight: 700; color: #09090b;">\u09B8\u0982\u09AF\u09CB\u0997 \u09AC\u09BF\u0998\u09CD\u09A8\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7</p>
+        <p style="font-size: 0.9rem; color: #52525b; margin-top: 4px;">
           \u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0\u09C7\u09B0 \u09B8\u09BE\u09A5\u09C7 \u09B8\u0982\u09AF\u09CB\u0997 \u09B8\u09CD\u09A5\u09BE\u09AA\u09A8 \u0995\u09B0\u09BE \u09B8\u09AE\u09CD\u09AD\u09AC \u09B9\u09DF\u09A8\u09BF\u0964 \u0985\u09A8\u09C1\u0997\u09CD\u09B0\u09B9 \u0995\u09B0\u09C7 \u0987\u09A8\u09CD\u099F\u09BE\u09B0\u09A8\u09C7\u099F \u0995\u09BE\u09A8\u09C7\u0995\u09B6\u09A8 \u099A\u09C7\u0995 \u0995\u09B0\u09C1\u09A8\u0964
         </p>
       </div>
-    `,this.chatStream.appendChild(s),m("\u0987\u09A8\u09CD\u099F\u09BE\u09B0\u09A8\u09C7\u099F \u09B8\u0982\u09AF\u09CB\u0997 \u099A\u09C7\u0995 \u0995\u09B0\u09C1\u09A8")}resetChat(){this.chatStream.innerHTML=H(),this.queryInput.value="",this.queryInput.focus(),this.scrollToBottom()}registerServiceWorker(){"serviceWorker"in navigator&&window.location.protocol==="https:"&&navigator.serviceWorker.register("/sw.js").catch(()=>{})}};document.addEventListener("DOMContentLoaded",()=>{new w});})();
+    `,this.chatStream.appendChild(s),m("\u0987\u09A8\u09CD\u099F\u09BE\u09B0\u09A8\u09C7\u099F \u09B8\u0982\u09AF\u09CB\u0997 \u099A\u09C7\u0995 \u0995\u09B0\u09C1\u09A8")}resetChat(){this.chatStream.innerHTML=C(),this.queryInput.value="",this.queryInput.focus(),this.scrollToBottom()}registerServiceWorker(){"serviceWorker"in navigator&&window.location.protocol==="https:"&&navigator.serviceWorker.register("/sw.js").catch(()=>{})}};document.addEventListener("DOMContentLoaded",()=>{new w});})();
