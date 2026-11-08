@@ -11,11 +11,6 @@ export function initViewportManager(
     const vv = window.visualViewport;
     const height = vv ? vv.height : window.innerHeight;
     document.documentElement.style.setProperty('--vvh', `${height}px`);
-
-    // Ensure smooth scroll to bottom
-    requestAnimationFrame(() => {
-      scrollContainer.scrollTop = scrollContainer.scrollHeight;
-    });
   };
 
   if (window.visualViewport) {

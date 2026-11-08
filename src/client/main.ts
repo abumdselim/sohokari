@@ -369,6 +369,15 @@ class KaazAIApp {
     });
   }
 
+  private scrollToBeginning(userBubble: HTMLElement, botBubble?: HTMLElement): void {
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        // Smoothly scroll to the beginning of this interaction (user query and start of bot answer)
+        userBubble.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    });
+  }
+
   public async sendQuery(query: string): Promise<void> {
     this.isProcessing = true;
     this.queryInput.value = '';
@@ -408,6 +417,9 @@ class KaazAIApp {
       this.chatStream.appendChild(botBubble);
       triggerHaptic('success');
 
+      // Scroll so the response starts from the beginning (not bottom)
+      this.scrollToBeginning(userBubble, botBubble);
+
       // 3. Persist to D1 if logged in
       if (AuthClient.isAuthenticated()) {
         const savedSessionId = await AuthClient.saveMessage(this.currentSessionId, query, data);
@@ -420,10 +432,13 @@ class KaazAIApp {
       typingIndicator.remove();
       this.renderNetworkError();
       triggerHaptic('error');
+      this.scrollToBeginning(userBubble);
     } finally {
       this.isProcessing = false;
-      this.scrollToBottom();
-      this.queryInput.focus();
+      // On desktop devices with physical keyboard, keep input focused; on mobile leave unfocused so keyboard doesn't shrink screen
+      if (window.innerWidth >= 900) {
+        this.queryInput.focus();
+      }
     }
   }
 
