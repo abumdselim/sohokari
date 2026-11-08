@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   --primary: #0c5b5b;
@@ -9,8 +9,8 @@
   --user-text: #ffffff;
   --bot-bubble: #ffffff;
   --text-main: #000000;
-  --text-bold: #0f172a;
-  --text-dark: #1e293b;
+  --text-bold: #000000;
+  --text-dark: #000000;
   --app-bg: #f8fafc;
   --border-strong: #94a3b8;
   --border: #cbd5e1;
@@ -18,7 +18,7 @@
   --warning-bg: #fef3c7;
   --warning-border: #f59e0b;
   --warning-text: #78350f;
-  --font-family: 'Anek Bangla', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family: 'Noto Serif Bengali', 'Inter', Georgia, serif;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-top: env(safe-area-inset-top, 0px);
 }
@@ -38,10 +38,12 @@ html, body {
   overflow: hidden;
   background-color: var(--app-bg);
   font-family: var(--font-family);
-  color: var(--text-main);
-  line-height: 1.5;
+  color: #000000;
+  font-weight: 500;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .app-viewport {
@@ -212,7 +214,7 @@ html, body {
 .btn-sidebar-close {
   background: transparent;
   border: none;
-  color: var(--text-bold);
+  color: #000000; font-weight: 700;
   width: 32px;
   height: 32px;
   display: flex;
@@ -280,7 +282,7 @@ html, body {
 .sidebar-menu-item {
   background: #ffffff;
   border: 1px solid var(--border-subtle);
-  color: var(--text-bold);
+  color: #000000; font-weight: 700;
   padding: 9px 12px;
   border-radius: 4px;
   font-size: 0.92rem;
@@ -315,7 +317,7 @@ html, body {
   border: 1px solid var(--border-subtle);
   border-radius: 4px;
   text-decoration: none;
-  color: var(--text-bold);
+  color: #000000; font-weight: 700;
   font-size: 0.88rem;
   font-weight: 500;
 }
@@ -424,14 +426,14 @@ html, body {
 }
 
 .user-bubble .bubble-content {
-  font-weight: 500;
-  font-size: 0.98rem;
-  line-height: 1.45;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.55;
 }
 
 .user-bubble .bubble-time {
   font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: #ffffff; font-weight: 600;
   font-weight: 500;
   text-align: right;
   margin-top: 4px;
@@ -452,13 +454,13 @@ html, body {
 .welcome-heading {
   font-size: 1.05rem;
   font-weight: 600;
-  color: var(--text-bold);
+  color: #000000; font-weight: 700;
   margin-bottom: 4px;
 }
 
 .welcome-text {
   font-size: 0.95rem;
-  color: var(--text-dark);
+  color: #000000; font-weight: 500;
   margin-bottom: 8px;
 }
 
@@ -484,7 +486,7 @@ html, body {
 .btn-copy-card {
   background: #f8fafc;
   border: 1px solid #cbd5e1;
-  color: #475569;
+  color: var(--primary); font-weight: 700;
   padding: 3px 10px;
   border-radius: 14px;
   font-size: 0.82rem;
@@ -624,7 +626,7 @@ html, body {
   justify-content: space-between;
   font-size: 0.94rem;
   font-weight: 600;
-  color: var(--text-bold);
+  color: #000000; font-weight: 700;
 }
 
 .fee-amount {
@@ -636,7 +638,7 @@ html, body {
 .section-heading {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--text-bold);
+  color: #000000; font-weight: 700;
   margin: 14px 0 6px 0;
   display: flex;
   align-items: center;
@@ -685,7 +687,7 @@ html, body {
 
 .tag-optional {
   background: #f1f5f9;
-  color: var(--text-bold);
+  color: #000000; font-weight: 700;
   border: 1px solid var(--border);
 }
 
@@ -729,11 +731,11 @@ html, body {
 
 .step-content {
   flex: 1;
-  color: var(--text-dark);
+  color: #000000; font-weight: 500;
 }
 
 .step-content strong {
-  color: var(--text-bold);
+  color: #000000; font-weight: 700;
 }
 
 /* Dalal Alert */
@@ -766,7 +768,7 @@ html, body {
   margin-top: 10px;
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--text-bold);
+  color: #000000; font-weight: 700;
 }
 
 .bubble-meta span {
@@ -804,13 +806,13 @@ html, body {
 .bubble-prompt {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--text-bold);
+  color: #000000; font-weight: 700;
 }
 
 .bubble-subtext {
   font-size: 0.92rem;
   font-weight: 500;
-  color: var(--text-dark);
+  color: #000000; font-weight: 500;
   margin-top: 2px;
 }
 
@@ -835,7 +837,7 @@ html, body {
 .refusal-text {
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--text-bold);
+  color: #000000; font-weight: 700;
 }
 
 /* Typing Indicator */
@@ -900,7 +902,7 @@ html, body {
 
 .prompt-pill {
   background: #ffffff;
-  color: var(--text-bold);
+  color: #000000; font-weight: 700;
   border: 1.5px solid var(--border-strong);
   font-size: 0.86rem;
   font-weight: 600;
@@ -947,7 +949,7 @@ html, body {
 }
 
 .native-input::placeholder {
-  color: #334155;
+  color: #000000; opacity: 0.75; font-weight: 600;
   font-weight: 400;
 }
 
@@ -979,9 +981,9 @@ html, body {
 
 .disclaimer-caption {
   text-align: center;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-bold);
+  font-size: 0.82rem;
+  font-weight: 700; color: #000000;
+  color: #000000; font-weight: 700;
   margin-top: 4px;
 }
 
