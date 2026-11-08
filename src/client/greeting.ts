@@ -6,9 +6,11 @@ export function getTimeBasedGreeting(): string {
   const hour = new Date().getHours();
   if (hour >= 5 && hour < 12) {
     return 'শুভ সকাল!';
-  } else if (hour >= 12 && hour < 17) {
+  } else if (hour >= 12 && hour < 15) {
+    return 'শুভ দুপুর!';
+  } else if (hour >= 15 && hour < 18) {
     return 'শুভ অপরাহ্ন!';
-  } else if (hour >= 17 && hour < 21) {
+  } else if (hour >= 18 && hour < 22) {
     return 'শুভ সন্ধ্যা!';
   } else {
     return 'শুভ রাত!';

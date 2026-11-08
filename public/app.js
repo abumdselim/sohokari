@@ -280,7 +280,7 @@
       </div>
 
     </div>
-  `,x(s,$,n.name_bn),s}function k(){let t=new Date().getHours();return t>=5&&t<12?"\u09B6\u09C1\u09AD \u09B8\u0995\u09BE\u09B2!":t>=12&&t<17?"\u09B6\u09C1\u09AD \u0985\u09AA\u09B0\u09BE\u09B9\u09CD\u09A8!":t>=17&&t<21?"\u09B6\u09C1\u09AD \u09B8\u09A8\u09CD\u09A7\u09CD\u09AF\u09BE!":"\u09B6\u09C1\u09AD \u09B0\u09BE\u09A4!"}function H(){return`
+  `,x(s,$,n.name_bn),s}function k(){let t=new Date().getHours();return t>=5&&t<12?"\u09B6\u09C1\u09AD \u09B8\u0995\u09BE\u09B2!":t>=12&&t<15?"\u09B6\u09C1\u09AD \u09A6\u09C1\u09AA\u09C1\u09B0!":t>=15&&t<18?"\u09B6\u09C1\u09AD \u0985\u09AA\u09B0\u09BE\u09B9\u09CD\u09A8!":t>=18&&t<22?"\u09B6\u09C1\u09AD \u09B8\u09A8\u09CD\u09A7\u09CD\u09AF\u09BE!":"\u09B6\u09C1\u09AD \u09B0\u09BE\u09A4!"}function H(){return`
     <div class="welcome-hero" id="welcome-hero">
       <div class="welcome-badge-wrap">
         <div class="welcome-badge-circle">

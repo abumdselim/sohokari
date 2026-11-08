@@ -1,10 +1,12 @@
-const CACHE_NAME = 'kaaz-ai-v1';
+const CACHE_NAME = 'kaaz-ai-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/app.css',
-  '/app.js',
-  '/manifest.json'
+  '/app.css?v=2',
+  '/app.js?v=2',
+  '/manifest.json',
+  '/assets/icon-teal.svg',
+  '/assets/kaaz-logo-header.svg?v=3'
 ];
 
 self.addEventListener('install', (event) => {
@@ -32,15 +34,25 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Network-first for dynamic API endpoints
-  if (url.pathname.startsWith('/api/')) {
+  // Network-first for dynamic API endpoints & HTML navigation
+  if (url.pathname.startsWith('/api/') || event.request.mode === 'navigate') {
     event.respondWith(
-      fetch(event.request).catch(() => caches.match(event.request))
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return networkResponse;
+        })
+        .catch(() => caches.match(event.request))
     );
     return;
   }
 
-  // Cache-first with stale-while-revalidate for static shell assets
+  // Stale-while-revalidate for static assets
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       const fetchPromise = fetch(event.request).then((networkResponse) => {
