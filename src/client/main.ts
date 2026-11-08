@@ -190,7 +190,7 @@ class SohokariApp {
     this.chatStream.innerHTML = `
       <div class="message-row bot">
         <div class="bot-avatar-wrap">
-          <div class="bot-avatar-inner"><img src="/assets/icon-white.svg" alt="সহকারী" class="bot-avatar-img" /></div>
+          <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="সহকারী" class="bot-avatar-img" /></div>
         </div>
         <div class="bubble bot-bubble">
           <p><strong>সহকারী</strong>-তে স্বাগতম</p>
