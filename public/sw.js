@@ -1,9 +1,9 @@
-const CACHE_NAME = 'kaaz-ai-v4';
+const CACHE_NAME = 'kaaz-ai-v5';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/app.css?v=4',
-  '/app.js?v=4',
+  '/app.css?v=5',
+  '/app.js?v=5',
   '/manifest.json',
   '/assets/icon-black.svg?v=1',
   '/assets/kaaz-logo-header.svg?v=4',
