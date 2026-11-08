@@ -330,6 +330,92 @@
     </div>
   </section>
 
+  <!-- Kaaz PDF Tools Suite Section -->
+  <section class="section-spacing bg-subtle" id="tools">
+    <div class="landing-container">
+      
+      <div class="section-header">
+        <div class="section-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="section-tag-svg">
+            <rect width="18" height="18" x="3" y="3" rx="2"/>
+            <path d="M7 7h10"/>
+            <path d="M7 12h10"/>
+            <path d="M7 17h10"/>
+          </svg>
+          <span>দৈনন্দিন অফিস ও নাগরিক ইউটিলিটি</span>
+        </div>
+        <h2 class="section-title">Kaaz PDF Tools — ১০০+ শক্তিশালী ফ্রি ব্রাউজার টুলকিট</h2>
+        <p class="section-desc">
+          পাসপোর্ট ও সরকারি চাকরির আবেদনে ফাইল সাইজ কমানো, এনআইডি ও ছবি এক ফাইলে জোড়া লাগানো, ডিজিটাল স্বাক্ষর বা জলছাপ দেওয়া—সব কাজ সম্পন্ন করুন সরাসরি আপনার ব্রাউজারে।
+        </p>
+      </div>
+
+      <!-- Zero-Upload Privacy Guarantee Banner -->
+      <div style="text-align: center;">
+        <div class="tools-privacy-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span>১০০% ব্রাউজার প্রসেসিং: আপনার কোনো ফাইল সার্ভারে আপলোড হয় না — সম্পূর্ণ কাজ ডিভাইসেই সুরক্ষিত থাকে</span>
+        </div>
+      </div>
+
+      <!-- Filter Controls: Tabs & Live Search -->
+      <div class="tools-filter-bar">
+        <div class="tools-cat-tabs">
+          <button class="tools-cat-tab active" data-cat="all">সব টুলস (১০৯+)</button>
+          <button class="tools-cat-tab" data-cat="organize">সাইজ ও অর্গানাইজ (৩২)</button>
+          <button class="tools-cat-tab" data-cat="convert">কনভার্ট ও রূপান্তর (৩৯)</button>
+          <button class="tools-cat-tab" data-cat="edit">এডিট ও সিগনেচার (৩৩)</button>
+          <button class="tools-cat-tab" data-cat="security">নিরাপত্তা ও লক (৫)</button>
+        </div>
+
+        <div class="tools-search-wrap">
+          <svg class="tools-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input 
+            type="text" 
+            id="tool-search-input" 
+            class="tools-search-input" 
+            placeholder="টুলের নাম বা কাজ দিয়ে খুঁজুন... (যেমন: compress, merge, ছবি থেকে পিডিএফ, sign, watermark, split)..." 
+            autocomplete="off"
+          />
+          <button id="tool-search-clear" class="tools-search-clear" title="মুছুন">✕</button>
+        </div>
+      </div>
+
+      <!-- Featured Bento Grid (Populated dynamically & responsive) -->
+      <div class="tools-bento-grid" id="tools-bento-grid">
+        <!-- Rendered by /assets/pdf-tools-interactive.js -->
+      </div>
+
+      <!-- Toggle Full 109 Tools Directory -->
+      <div class="tools-browse-all-row">
+        <button id="btn-toggle-all-tools" class="btn-browse-all-tools">
+          <span>সকল ১০৯টি টুলস বিস্তারিত দেখুন</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Collapsible Full 109 Catalog Container -->
+      <div class="tools-all-catalog-wrap" id="tools-all-catalog-wrap">
+        <div class="catalog-stats-bar">
+          <strong style="color:var(--slate-900);">সম্পূর্ণ Kaaz PDF টুলস ডিরেক্টরি</strong>
+          <span id="catalog-total-count">১০৯টি টুল অন্তর্ভুক্ত</span>
+        </div>
+        <div class="tools-catalog-grid" id="tools-catalog-grid">
+          <!-- Rendered by /assets/pdf-tools-interactive.js -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- Interactive Product Preview Section -->
   <section class="section-spacing bg-subtle" id="preview">
     <div class="landing-container">
@@ -713,6 +799,51 @@
       }
     })();
   </script>
+
+  <!-- Interactive Tool Runner Modal -->
+  <div class="tool-modal-overlay" id="tool-modal-overlay">
+    <div class="tool-modal-box">
+      <div class="tool-modal-header">
+        <div class="tool-modal-header-left">
+          <div class="tool-modal-icon" id="tool-modal-icon">
+            <span class="material-symbols-outlined">description</span>
+          </div>
+          <div>
+            <div class="tool-modal-title" id="tool-modal-title">টুল লোড হচ্ছে...</div>
+            <div class="tool-modal-subtitle" id="tool-modal-subtitle">১০০% ক্লায়েন্ট-সাইড ব্রাউজার প্রসেসিং · জিরো সার্ভার আপলোড</div>
+          </div>
+        </div>
+        <button class="btn-close-modal" id="btn-close-modal" aria-label="বন্ধ করুন">✕</button>
+      </div>
+
+      <div class="tool-modal-body">
+        <div class="tool-dropzone" id="tool-dropzone">
+          <div class="tool-dropzone-icon">
+            <span class="material-symbols-outlined" style="font-size:42px;">cloud_upload</span>
+          </div>
+          <div class="tool-dropzone-text" id="tool-dropzone-text">আপনার ফাইল ড্রপ করুন বা ক্লিক করে সিলেক্ট করুন</div>
+          <div class="tool-dropzone-hint" id="tool-dropzone-hint">১০০% ক্লায়েন্ট-সাইড প্রসেসিং — ফাইল কোনো সার্ভারে আপলোড হয় না</div>
+          <input type="file" id="tool-file-input" style="display:none;" multiple />
+        </div>
+
+        <div class="tool-file-list" id="tool-file-list"></div>
+
+        <div class="tool-options-panel" id="tool-options-panel" style="display:none;"></div>
+      </div>
+
+      <div class="tool-modal-footer">
+        <button class="btn-modal-cancel" id="btn-modal-cancel">বাতিল</button>
+        <button class="btn-modal-run" id="btn-modal-run" disabled>
+          <span class="material-symbols-outlined" style="font-size:18px;">play_arrow</span>
+          <span>সম্পন্ন করুন ও ডাউনলোড</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PDF Tools Engine & Data -->
+  <script src="/assets/pdf-tools-data.js?v=2"></script>
+  <script src="/assets/pdf-tools-interactive.js?v=2"></script>
 
 </body>
 </html>

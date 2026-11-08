@@ -587,6 +587,13 @@ export default {
       }
     }
 
+    // Route /tools or /pdf directly to tools.html
+    if (url.pathname === '/tools' || url.pathname === '/pdf' || url.pathname === '/pdf-tools') {
+      if (env.ASSETS) {
+        return env.ASSETS.fetch(new Request(new URL('/tools.html', request.url), request));
+      }
+    }
+
     // Fall back to static assets (HTML/CSS/JS directory)
     if (env.ASSETS) {
       return env.ASSETS.fetch(request);

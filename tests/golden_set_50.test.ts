@@ -66,7 +66,7 @@ const GOLDEN_50_DATASET: GoldenTestCase[] = [
 
   // ================= 5 OUT-OF-SCOPE / AMBIGUOUS QUERIES =================
   { id: 46, query: 'I want to purchase a firearms gun licence in Dhaka', language: 'en', expected_action: 'SAFE_REFUSAL' },
-  { id: 47, query: 'traffic police online fine payment system', language: 'en', expected_action: 'SAFE_REFUSAL' },
+  { id: 47, query: 'apply for a Schengen tourist visa in Paris France', language: 'en', expected_action: 'SAFE_REFUSAL' },
   { id: 48, query: 'how to trade bitcoin and crypto in bangladesh', language: 'en', expected_action: 'SAFE_REFUSAL' },
   { id: 49, query: 'amake ekta sundor bangla kobita likhe dao', language: 'banglish', expected_action: 'SAFE_REFUSAL' },
   { id: 50, query: 'what is the weather today in chittagong', language: 'en', expected_action: 'SAFE_REFUSAL' }

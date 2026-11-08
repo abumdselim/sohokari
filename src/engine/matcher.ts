@@ -90,14 +90,20 @@ export function matchServices(
 
       if (aliasTokens.length > 0) {
         const matchedInThisAlias = aliasTokens.filter(t => 
-          allTokens.has(t) || allTokensList.some(q => q.length > 2 && (q.startsWith(t) || t.startsWith(q)))
+          allTokens.has(t) || allTokensList.some(q => 
+            q.length > 2 && (
+              (q.startsWith(t) && q.length - t.length <= 2) || 
+              (t.startsWith(q) && t.length - q.length <= 1)
+            )
+          )
         );
         matchedInThisAlias.forEach(t => matchedTokens.push(t));
 
         const coverage = matchedInThisAlias.length / aliasTokens.length;
         if (coverage === 1.0) {
           // All distinctive tokens of alias present
-          const score = item.weight * 0.95;
+          const isSinglePartial = aliasTokens.length === 1 && !allTokens.has(aliasTokens[0]);
+          const score = item.weight * (isSinglePartial ? 0.75 : 0.95);
           if (score > bestScore) {
             bestScore = score;
             bestAlias = item.alias;
@@ -111,7 +117,8 @@ export function matchServices(
           }
         } else if (matchedInThisAlias.length === 1 && aliasTokens.length === 1) {
           // Single-word alias exact match
-          const score = item.weight * 0.90;
+          const isExactToken = allTokens.has(aliasTokens[0]);
+          const score = item.weight * (isExactToken ? 0.90 : 0.70);
           if (score > bestScore) {
             bestScore = score;
             bestAlias = item.alias;
@@ -137,7 +144,12 @@ export function matchServices(
     }
   }
 
-  // Sort descending by confidence
-  results.sort((a, b) => b.confidence - a.confidence);
+  // Sort descending by confidence, breaking ties with number of matched tokens
+  results.sort((a, b) => {
+    if (b.confidence !== a.confidence) {
+      return b.confidence - a.confidence;
+    }
+    return (b.matched_tokens?.length || 0) - (a.matched_tokens?.length || 0);
+  });
   return results;
 }
