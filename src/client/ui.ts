@@ -1,4 +1,3 @@
-import { ChatResponse } from '../types/engine';
 import { copyToClipboard } from './toast';
 import { icons } from './icons';
 import { toBengaliNumber, amountInBengaliWords } from '../engine/bengaliWords';
@@ -46,7 +45,71 @@ export function renderTypingIndicator(): HTMLElement {
   return row;
 }
 
-export function renderBotBubble(data: ChatResponse): HTMLElement {
+export function parseMarkdownToHtml(markdown: string): string {
+  if (!markdown) return '';
+  
+  const text = markdown.replace(/\r\n/g, '\n');
+  const lines = text.split('\n');
+  const result: string[] = [];
+  let inList = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+
+    if (!line) {
+      if (inList) {
+        result.push('</ul>');
+        inList = false;
+      }
+      continue;
+    }
+
+    let safeLine = escapeHtml(line);
+
+    // Format bold: **text**
+    safeLine = safeLine.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    // Format code: `code`
+    safeLine = safeLine.replace(/`([^`]+)`/g, '<code class="rag-code">$1</code>');
+
+    // Format links: [text](url)
+    safeLine = safeLine.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" class="rag-link">$1</a>');
+
+    // Headers
+    if (safeLine.startsWith('#### ')) {
+      if (inList) { result.push('</ul>'); inList = false; }
+      result.push(`<h4 class="rag-h4">${safeLine.substring(5)}</h4>`);
+    } else if (safeLine.startsWith('### ')) {
+      if (inList) { result.push('</ul>'); inList = false; }
+      result.push(`<h3 class="rag-h3">${safeLine.substring(4)}</h3>`);
+    } else if (safeLine.startsWith('## ')) {
+      if (inList) { result.push('</ul>'); inList = false; }
+      result.push(`<h2 class="rag-h2">${safeLine.substring(3)}</h2>`);
+    } else if (safeLine.startsWith('&gt; ') || safeLine.startsWith('> ')) {
+      if (inList) { result.push('</ul>'); inList = false; }
+      const bqText = safeLine.replace(/^(&gt;|>)\s*/, '');
+      result.push(`<blockquote class="rag-blockquote">${bqText}</blockquote>`);
+    } else if (safeLine.startsWith('• ') || safeLine.startsWith('- ') || safeLine.startsWith('* ')) {
+      if (!inList) {
+        result.push('<ul class="rag-ul">');
+        inList = true;
+      }
+      const itemText = safeLine.replace(/^[•\-\*]\s*/, '');
+      result.push(`<li class="rag-li">${itemText}</li>`);
+    } else {
+      if (inList) { result.push('</ul>'); inList = false; }
+      result.push(`<p class="rag-p">${safeLine}</p>`);
+    }
+  }
+
+  if (inList) {
+    result.push('</ul>');
+  }
+
+  return result.join('\n');
+}
+
+export function renderBotBubble(data: any): HTMLElement {
   const row = document.createElement('div');
   row.className = 'message-row bot';
 
@@ -55,6 +118,8 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
       <div class="bot-avatar-inner"><img src="/assets/icon-teal.svg" alt="সহকারী" class="bot-avatar-img" /></div>
     </div>
   `;
+
+  const execTime = data.trace?.execution_time_ms ?? data.execution_time_ms ?? 0;
 
   // Case 1: Out of scope
   if (data.action === 'SAFE_REFUSAL') {
@@ -65,9 +130,9 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
           ${icons.alertTriangle}
           <span>তথ্য তালিকায় নেই</span>
         </div>
-        <p class="refusal-text">${escapeHtml(data.reply_bn).replace(/\n/g, '<br>')}</p>
+        <p class="refusal-text">${escapeHtml(data.reply_bn || 'দুঃখিত, এই তথ্যের প্রামাণ্য রেকর্ড পাওয়া যায়নি।').replace(/\n/g, '<br>')}</p>
         <div class="bubble-meta">
-          <span>${icons.clock} ${data.trace.execution_time_ms}ms</span>
+          <span>${icons.clock} ${execTime}ms</span>
           <span>সুরক্ষিত ফিল্টার</span>
         </div>
       </div>
@@ -77,9 +142,9 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
 
   // Case 2: Disambiguation
   if (data.action === 'DISAMBIGUATE') {
-    const chipsHtml = (data.candidate_services || []).map(c => `
-      <button class="native-chip-btn" data-query="${escapeHtml(c.name_bn)}">
-        ${escapeHtml(c.name_bn)}
+    const chipsHtml = (data.candidate_services || []).map((c: any) => `
+      <button class="native-chip-btn" data-query="${escapeHtml(c.name_bn || c.title_bn || '')}">
+        ${escapeHtml(c.name_bn || c.title_bn || '')}
       </button>
     `).join('');
 
@@ -90,7 +155,7 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
         <p class="bubble-subtext">আপনার অনুসন্ধানের সাথে সংশ্লিষ্ট সেবাগুলোর মধ্যে বেছে নিন:</p>
         <div class="chips-container">${chipsHtml}</div>
         <div class="bubble-meta">
-          <span>${icons.clock} ${data.trace.execution_time_ms}ms</span>
+          <span>${icons.clock} ${execTime}ms</span>
         </div>
       </div>
     `;
@@ -100,7 +165,7 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
   // Case 3: Clarify
   if (data.action === 'CLARIFY' && data.clarifying_question) {
     const q = data.clarifying_question;
-    const chipsHtml = (q.options || []).map(opt => `
+    const chipsHtml = (q.options || []).map((opt: any) => `
       <button class="native-chip-btn" data-query="${escapeHtml(opt.label_bn)}">
         ${escapeHtml(opt.label_bn)}
       </button>
@@ -116,14 +181,77 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
     return row;
   }
 
-  // Case 4: DIRECT_ANSWER
+  // Case 4: RAG or Edge AI Answer (Live Vector + D1 response)
+  const isRagAnswer =
+    data.source === 'rag_vector_d1' ||
+    (data.reply_bn && (!data.variant || !data.variant.fees?.length));
+
+  if (isRagAnswer && data.reply_bn) {
+    const ms = data.matched_service;
+    const portalUrl = ms?.official_portal_url || '';
+    const title = ms?.title_bn || 'সরকারি সেবা ও জরুরি তথ্য';
+
+    let actionButtonsHtml = '';
+    if (portalUrl) {
+      actionButtonsHtml += `
+        <a href="${escapeHtml(portalUrl)}" target="_blank" rel="noopener" class="contact-pill portal-pill">
+          ${icons.globe}
+          <span>অফিসিয়াল পোর্টাল</span>
+          ${icons.externalLink}
+        </a>
+      `;
+    }
+
+    const copyPayload = data.reply_bn;
+
+    row.innerHTML = `
+      ${avatar}
+      <div class="bubble bot-bubble rich-card-bubble rag-card-bubble">
+        <!-- Card Top Bar -->
+        <div class="card-top-bar">
+          <div class="service-title-text" style="color: #0c5b5b; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+            ${icons.shieldCheck} <span>সহকারী এআই গাইড (লাইভ রেকর্ড)</span>
+          </div>
+          <button class="btn-copy-card" data-copy="${escapeHtml(copyPayload)}" title="তথ্য কপি করুন">
+            ${icons.copy}
+            <span>কপি</span>
+          </button>
+        </div>
+
+        ${actionButtonsHtml ? `<div class="contact-pills-wrap" style="margin: 8px 0 12px 0;">${actionButtonsHtml}</div>` : ''}
+
+        <!-- AI Rendered Markdown Content -->
+        <div class="rag-body-text">
+          ${parseMarkdownToHtml(data.reply_bn)}
+        </div>
+
+        <!-- Meta Footer -->
+        <div class="bubble-meta" style="margin-top: 14px; padding-top: 8px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+          <span style="display: flex; align-items: center; gap: 4px;">${icons.shieldCheck} ১০০% প্রামাণ্য ডেটাবেজ রেকর্ড</span>
+          <span>${icons.clock} ${execTime}ms • এআই লাইভ</span>
+        </div>
+      </div>
+    `;
+
+    // Attach copy event listener
+    const copyBtn = row.querySelector('.btn-copy-card') as HTMLButtonElement | null;
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        copyToClipboard(copyPayload, title);
+      });
+    }
+
+    return row;
+  }
+
+  // Case 5: Rule-Engine Classic DIRECT_ANSWER
   const s = data.service || {
     name_bn: '',
     agency_bn: '',
     ministry_bn: '',
     official_portal_url: '',
     helpline_number: '',
-    last_verified_at: ''
+    last_verified_at: new Date().toISOString()
   };
   const v = data.variant || {
     variant_name_bn: '',
@@ -133,20 +261,21 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
     steps: []
   };
 
-  const totalFee = (v.fees || []).reduce((acc, f) => acc + f.amount_bdt, 0);
+  const verifiedDate = (s.last_verified_at || '').split('T')[0] || 'আজকে';
+  const totalFee = (v.fees || []).reduce((acc: number, f: any) => acc + (f.amount_bdt || 0), 0);
   const totalFeeBn = toBengaliNumber(totalFee);
   const totalFeeInWords = amountInBengaliWords(totalFee);
 
-  const feeItems = (v.fees || []).map(f => `
+  const feeItems = (v.fees || []).map((f: any) => `
     <div class="fee-row">
-      <span class="fee-name">${escapeHtml(f.fee_type_bn)}</span>
-      <span class="fee-amount">${toBengaliNumber(f.amount_bdt)} টাকা</span>
+      <span class="fee-name">${escapeHtml(f.fee_type_bn || f.category_name || '')}</span>
+      <span class="fee-amount">${toBengaliNumber(f.amount_bdt || 0)} টাকা</span>
     </div>
   `).join('');
 
-  const docItems = (v.documents || []).map(d => `
+  const docItems = (v.documents || []).map((d: any) => `
     <li class="doc-item">
-      <span class="doc-title">${escapeHtml(d.document_name_bn)}</span>
+      <span class="doc-title">${escapeHtml(d.document_name_bn || d.document_name || d.name || '')}</span>
       <span class="doc-tag ${d.is_mandatory ? 'tag-mandatory' : 'tag-optional'}">
         ${d.is_mandatory ? 'বাধ্যতামূলক' : 'প্রযোজ্য ক্ষেত্রে'}
       </span>
@@ -154,11 +283,11 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
     </li>
   `).join('');
 
-  const stepItems = (v.steps || []).map(step => `
+  const stepItems = (v.steps || []).map((step: any) => `
     <li class="step-item">
-      <div class="step-num">${toBengaliNumber(step.step_number)}</div>
+      <div class="step-num">${toBengaliNumber(step.step_number || 1)}</div>
       <div class="step-content">
-        <strong>${escapeHtml(step.title_bn)}:</strong> ${escapeHtml(step.instruction_bn)}
+        <strong>${escapeHtml(step.title_bn || step.title || '')}:</strong> ${escapeHtml(step.instruction_bn || step.description || '')}
       </div>
     </li>
   `).join('');
@@ -242,8 +371,8 @@ export function renderBotBubble(data: ChatResponse): HTMLElement {
 
       <!-- Decision Trace Footer -->
       <div class="bubble-meta">
-        <span>গেজেট যাচাই: ${s.last_verified_at.split('T')[0]}</span>
-        <span>${icons.clock} ${data.trace.execution_time_ms}ms • ১০০% যাচাইকৃত</span>
+        <span>গেজেট যাচাই: ${verifiedDate}</span>
+        <span>${icons.clock} ${execTime}ms • ১০০% যাচাইকৃত</span>
       </div>
 
     </div>

@@ -215,7 +215,16 @@ export default {
           const ragResult = await handleCitizenRagQuery(query, env);
           // If RAG produced a confident direct answer, return it
           if (ragResult.source === 'rag_vector_d1' || ragResult.confidence >= 0.5) {
-            return new Response(JSON.stringify(ragResult, null, 2), {
+            const unified = {
+              ...ragResult,
+              trace: {
+                execution_time_ms: ragResult.execution_time_ms,
+                confidence_score: ragResult.confidence,
+                rules_evaluated: 1,
+                matched_rule: 'rag_vector_d1'
+              }
+            };
+            return new Response(JSON.stringify(unified, null, 2), {
               headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
