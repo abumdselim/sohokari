@@ -369,14 +369,9 @@ html, body {
 /* Message Rows */
 .message-row {
   display: flex;
-  gap: 8px;
-  width: 100%;
-  animation: fadeIn 0.15s ease-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+  margin-bottom: 16px;
+  gap: 10px;
+  align-items: flex-start;
 }
 
 .message-row.user {
@@ -388,8 +383,8 @@ html, body {
 }
 
 .bot-avatar-wrap {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -405,55 +400,53 @@ html, body {
 }
 
 .bot-avatar-img {
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
   display: block;
 }
 
-.bot-svg {
-  width: 18px;
-  height: 18px;
-  stroke: #ffffff;
-}
-
 .bubble {
-  max-width: 88%;
-  border-radius: 6px; /* কম রেডিয়াস */
-  padding: 14px 16px;
-  font-size: 0.98rem;
-  color: var(--text-main);
+  max-width: 86%;
   -webkit-user-select: text;
   user-select: text;
 }
 
+/* User Message: Chat / Inbox Bubble on the right */
 .user-bubble {
   background: var(--user-bubble);
   color: var(--user-text);
-  border-radius: 6px 6px 1px 6px;
+  border-radius: 18px 18px 4px 18px;
+  padding: 10px 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  max-width: 80%;
+  word-break: break-word;
 }
 
 .user-bubble .bubble-content {
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.98rem;
+  line-height: 1.45;
 }
 
 .user-bubble .bubble-time {
   font-size: 0.72rem;
-  color: #ffffff;
-  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
   text-align: right;
   margin-top: 4px;
 }
 
+/* Assistant ("সহকারী") Message: Chat Inbox Bubble on the left */
 .bot-bubble {
-  background: var(--bot-bubble);
+  background: #ffffff;
   color: var(--text-main);
-  border-radius: 1px 6px 6px 6px;
-  border: 1.5px solid var(--border);
+  border-radius: 4px 18px 18px 18px;
+  border: 1px solid #e2e8f0;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  padding: 14px 16px;
   width: 100%;
+  max-width: 90%;
 }
 
 .welcome-heading {
@@ -489,11 +482,11 @@ html, body {
 }
 
 .btn-copy-card {
-  background: #ffffff;
-  border: 1.5px solid var(--primary-dark);
-  color: var(--primary-dark);
-  padding: 4px 10px;
-  border-radius: 4px; /* কম রেডিয়াস */
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 3px 10px;
+  border-radius: 14px;
   font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
@@ -523,7 +516,7 @@ html, body {
   font-weight: 600;
   color: var(--primary-deep);
   padding: 4px 9px;
-  border-radius: 4px; /* কম রেডিয়াস */
+  border-radius: 14px;
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -541,7 +534,7 @@ html, body {
   font-size: 0.88rem;
   font-weight: 700;
   padding: 6px 12px;
-  border-radius: 4px; /* কম রেডিয়াস */
+  border-radius: 14px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -571,9 +564,10 @@ html, body {
 .fee-box {
   background: #f0fdf4;
   border: 2px solid #86efac;
-  border-radius: 4px; /* কম রেডিয়াস */
+  border-radius: 12px;
   padding: 12px 14px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #bbf7d0;
 }
 
 .fee-box-header {
@@ -791,12 +785,12 @@ html, body {
 
 .native-chip-btn {
   background: #ffffff;
-  border: 1.5px solid var(--primary-dark);
-  color: var(--primary-dark);
-  font-size: 0.92rem;
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  font-size: 0.9rem;
   font-weight: 600;
   padding: 6px 14px;
-  border-radius: 4px; /* কম রেডিয়াস */
+  border-radius: 16px; /* কম রেডিয়াস */
   cursor: pointer;
   font-family: inherit;
   transition: all 0.1s;
