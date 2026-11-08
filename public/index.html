@@ -2,10 +2,10 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
-  <title>Kaaz AI (কাজ এআই) - বাংলাদেশ নাগরিক সেবা প্ল্যাটফর্ম</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Kaaz AI (কাজ এআই) - বাংলাদেশ নাগরিক সেবার প্রামাণ্য ডিজিটাল ইন্টেলিজেন্স</title>
   
-  <meta name="description" content="বাংলাদেশ সরকারের সকল নাগরিক সেবার নির্ভুল সরকারি ফি, প্রয়োজনীয় কাগজপত্র ও আবেদনের সম্পূর্ণ নিয়ম জানুন সরাসরি চ্যাট করে।">
+  <meta name="description" content="বাংলাদেশ সরকারের যেকোনো নাগরিক সেবার সঠিক সরকারি ফি, প্রয়োজনীয় কাগজপত্র, দালালমুক্ত আবেদনের নিয়ম ও অফিশিয়াল হটলাইন ডিরেক্টরি—১০০% প্রামাণ্য সরকারি গেজেট ভিত্তিক এআই প্ল্যাটফর্ম।">
   <meta name="theme-color" content="#ffffff">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,273 +15,627 @@
   <link rel="icon" type="image/png" href="/assets/icon-512.png">
   <link rel="apple-touch-icon" href="/assets/icon-512.png">
   
-  <!-- Premium Modern Typography: Hind Siliguri & Inter (Claude / ChatGPT standard) -->
+  <!-- Premium Modern Typography: Hind Siliguri (Bangla) & Inter (English/Numbers) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="/app.css?v=6">
+  <link rel="stylesheet" href="/landing.css?v=6">
 </head>
 <body>
 
-  <!-- Slide-out Sidebar Drawer (ChatGPT-style) -->
-  <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
-  <aside id="app-sidebar" class="app-sidebar">
-    <div class="sidebar-header">
-      <img src="/assets/kaaz-logo-header.svg?v=4" alt="Kaaz AI" class="sidebar-logo-img" />
-      <button class="btn-sidebar-close" id="btn-close-sidebar" aria-label="বন্ধ করুন">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-          <line x1="18" y1="6" x2="6" y2="18"/>
-          <line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-    </div>
+  <!-- Sticky Minimalist Navigation Bar -->
+  <header class="landing-nav">
+    <div class="nav-container">
+      <a href="/" class="nav-brand" title="Kaaz AI - কাজ এআই">
+        <img src="/assets/kaaz-logo-header.svg?v=4" alt="Kaaz AI Logo" class="nav-logo-img" />
+      </a>
 
-    <!-- New Chat in Sidebar -->
-    <button class="sidebar-new-chat-btn" id="btn-sidebar-new-chat">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-        <line x1="12" y1="5" x2="12" y2="19"/>
-        <line x1="5" y1="12" x2="19" y2="12"/>
-      </svg>
-      <span>নতুন চ্যাট শুরু করুন</span>
-    </button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#features" class="nav-link">ফিচারসমূহ</a></li>
+          <li><a href="#how-it-works" class="nav-link">কীভাবে কাজ করে</a></li>
+          <li><a href="#anti-corruption" class="nav-link">দালাল প্রতিরোধ</a></li>
+          <li><a href="#preview" class="nav-link">লাইভ প্রিভিউ</a></li>
+          <li><a href="#faq" class="nav-link">প্রশ্নোত্তর</a></li>
+        </ul>
+      </nav>
 
-    <!-- Services Quick Menu -->
-    <div class="sidebar-nav-section">
-      <div class="sidebar-section-title">জনপ্রিয় সেবা বিভাগ</div>
-      <div class="sidebar-menu-list">
-        <button class="sidebar-menu-item" data-query="জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-            <rect width="20" height="14" x="2" y="5" rx="2"/>
-            <line x1="2" y1="10" x2="22" y2="10"/>
+      <div class="nav-actions">
+        <a href="/chat" class="btn-nav-chat" title="সরাসরি চ্যাট করুন">
+          <span>এআই চ্যাট শুরু করুন</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
           </svg>
-          <span>জাতীয় পরিচয়পত্র (এনআইডি)</span>
-        </button>
-
-        <button class="sidebar-menu-item" data-query="১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-          </svg>
-          <span>ই-পাসপোর্ট সেবা ও নবায়ন</span>
-        </button>
-
-        <button class="sidebar-menu-item" data-query="জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-          </svg>
-          <span>ই-নামজারি ও জমি খারিজ</span>
-        </button>
-
-        <button class="sidebar-menu-item" data-query="ড্রাইভিং লাইসেন্স নবায়ন করার সরকারি ফি ও নিয়ম কি?">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-            <circle cx="12" cy="12" r="9"/>
-            <line x1="12" y1="8" x2="12" y2="12"/>
-            <line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-          <span>বিআরটিএ ড্রাইভিং লাইসেন্স</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Official Emergency Helplines -->
-    <div class="sidebar-nav-section" style="margin-top: 18px;">
-      <div class="sidebar-section-title">জরুরি হটলাইন</div>
-      <div class="sidebar-helpline-list">
-        <a href="tel:999" class="sidebar-helpline-item">
-          <span>জাতীয় জরুরি সেবা</span>
-          <strong>৯৯৯</strong>
-        </a>
-        <a href="tel:333" class="sidebar-helpline-item">
-          <span>জাতীয় কল সেন্টার</span>
-          <strong>৩৩৩</strong>
-        </a>
-        <a href="tel:106" class="sidebar-helpline-item">
-          <span>দুর্নীতি দমন কমিশন (দুদক)</span>
-          <strong>১০৬</strong>
-        </a>
-        <a href="tel:16122" class="sidebar-helpline-item">
-          <span>ভূমি সেবা হটলাইন</span>
-          <strong>১৬১২২</strong>
-        </a>
-        <a href="tel:105" class="sidebar-helpline-item">
-          <span>নির্বাচন কমিশন (এনআইডি)</span>
-          <strong>১০৫</strong>
         </a>
       </div>
     </div>
+  </header>
 
-    <!-- Sidebar Bottom Status -->
-    <div class="sidebar-footer">
-      <div class="sidebar-verified-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-svg">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <path d="m9 12 2 2 4-4"/>
-        </svg>
-        <span>সরকারি গেজেট ও আইন দ্বারা যাচাইকৃত</span>
-      </div>
-    </div>
-  </aside>
-
-  <!-- Main Viewport -->
-  <div class="app-viewport">
-    
-    <!-- Minimalist Frosted Header (ChatGPT / Claude Style) -->
-    <header class="native-header">
-      <button class="btn-header-icon" id="btn-toggle-sidebar" aria-label="মেনু খুলুন" title="মেনু">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-svg">
-          <line x1="3" y1="12" x2="21" y2="12"/>
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <line x1="3" y1="18" x2="21" y2="18"/>
-        </svg>
-      </button>
-
-      <div class="brand-section">
-        <img src="/assets/kaaz-logo-header.svg?v=4" alt="Kaaz AI" class="header-logo-img" />
-      </div>
-
-      <button class="btn-header-icon" id="btn-clear-chat" title="নতুন চ্যাট শুরু করুন" aria-label="নতুন চ্যাট">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-svg">
-          <path d="M12 5v14M5 12h14"/>
-        </svg>
-      </button>
-    </header>
-
-    <!-- Chat Messages Stream -->
-    <main class="chat-scroll-stream" id="chat-stream">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="landing-container">
       
-      <!-- Welcome Hero Section (Dynamic Time-based Greeting) -->
-      <div class="welcome-hero" id="welcome-hero">
-        <div class="welcome-badge-wrap">
-          <div class="welcome-badge-circle">
-            <img src="/assets/icon-black.svg?v=1" alt="Kaaz AI" class="welcome-badge-icon" />
-          </div>
-        </div>
-        
-        <h1 class="welcome-greeting-title" id="greeting-title">স্বাগতম!</h1>
-        <script>
-          (function(){
-            try {
-              var h = new Date().getHours();
-              var g = (h>=5 && h<12)?'শুভ সকাল!':(h>=12 && h<15)?'শুভ দুপুর!':(h>=15 && h<18)?'শুভ অপরাহ্ন!':(h>=18 && h<22)?'শুভ সন্ধ্যা!':'শুভ রাত!';
-              var el = document.getElementById('greeting-title');
-              if(el) el.textContent = g;
-            } catch(e){}
-          })();
-        </script>
-        <p class="welcome-tagline">আজ আপনাকে কীভাবে সহযোগিতা করতে পারি?</p>
-        
-        <p class="welcome-subtext">
-          বাংলাদেশ সরকারের যেকোনো নাগরিক সেবার অফিশিয়াল ফি, প্রয়োজনীয় কাগজপত্র ও দালালমুক্ত সঠিক নিয়ম জানতে নিচে প্রশ্ন করুন:
-        </p>
-
-        <div class="hero-chips-grid">
-          <button class="hero-card-chip" data-query="জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?">
-            <div class="chip-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chip-svg">
-                <rect width="20" height="14" x="2" y="5" rx="2"/>
-                <line x1="2" y1="10" x2="22" y2="10"/>
-                <line x1="12" y1="15" x2="17" y2="15"/>
-              </svg>
-            </div>
-            <div class="chip-content">
-              <span class="chip-title">এনআইডি সংশোধন ফি</span>
-              <span class="chip-desc">সঠিক ফি ও আবেদনের নিয়ম</span>
-            </div>
-          </button>
-
-          <button class="hero-card-chip" data-query="১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?">
-            <div class="chip-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chip-svg">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="2" y1="12" x2="22" y2="12"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
-            </div>
-            <div class="chip-content">
-              <span class="chip-title">পাসপোর্ট নবায়ন ফি</span>
-              <span class="chip-desc">জরুরি ও সাধারণ চার্জ</span>
-            </div>
-          </button>
-
-          <button class="hero-card-chip" data-query="জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?">
-            <div class="chip-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chip-svg">
-                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
-            </div>
-            <div class="chip-content">
-              <span class="chip-title">ই-নামজারি ও খারিজ</span>
-              <span class="chip-desc">মোট সরকারি ফি ১,১৭০ টাকা</span>
-            </div>
-          </button>
-
-          <button class="hero-card-chip" data-query="উত্তরা পশ্চিম থানার ওসির নাম্বার কত?">
-            <div class="chip-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chip-svg">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </div>
-            <div class="chip-content">
-              <span class="chip-title">জরুরি থানা ও হটলাইন</span>
-              <span class="chip-desc">পুলিশ, বিদ্যুৎ ও গ্যাস সেবা</span>
-            </div>
-          </button>
+      <div class="hero-badge-wrap">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-badge-svg">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          <span>সরকারি সিটিজেন চার্টার ও গেজেট ভেরিফাইড ইন্টেলিজেন্স</span>
         </div>
       </div>
 
-    </main>
+      <h1 class="hero-title">
+        দালালমুক্ত নাগরিক অধিকার ও <br>
+        <span class="hero-title-gradient">স্বচ্ছ সরকারি সেবার</span> ডিজিটাল নির্দেশিকা
+      </h1>
 
-    <!-- Modern Bottom Chat Controls -->
-    <footer class="native-bottom-bar" id="bottom-bar">
-      <div class="bottom-container">
-        
-        <!-- Quick Prompt Suggestion Slider -->
-        <div class="prompt-chips-scroll">
-          <button class="prompt-pill" data-query="এনআইডি সংশোধন করতে কত টাকা লাগে">এনআইডি সংশোধন ফি</button>
-          <button class="prompt-pill" data-query="পাসপোর্টের মেয়াদ শেষ নবায়ন করব কিভাবে">পাসপোর্ট নবায়ন নিয়ম</button>
-          <button class="prompt-pill" data-query="জরুরি ভিত্তিতে ই-পাসপোর্ট নবায়ন ফি কত">জরুরি পাসপোর্ট ফি</button>
-          <button class="prompt-pill" data-query="ই-নামজারি করতে সরকারি ফি মোট কত টাকা">নামজারি ১,১৭০ টাকা</button>
-          <button class="prompt-pill" data-query="তিতাস গ্যাস জরুরি কন্ট্রোল রুমের নাম্বার কত">তিতাস গ্যাস কন্ট্রোল রুম</button>
+      <p class="hero-subtitle">
+        Kaaz AI একটি জিরো-হ্যালুসিনেশন পাবলিক ইন্টেলিজেন্স প্ল্যাটফর্ম। জাতীয় পরিচয়পত্র, ই-পাসপোর্ট, জমি নামজারি কিংবা ড্রাইভিং লাইসেন্স—বাংলাদেশ সরকারের যেকোনো নাগরিক সেবার অফিশিয়াল সরকারি ফি, প্রয়োজনীয় নথিপত্র ও আবেদনের সঠিক নিয়ম জানুন শতভাগ নির্ভুলতায়।
+      </p>
+
+      <!-- Interactive Quick Search / Prompt Bar -->
+      <form class="hero-search-box" action="/chat" method="GET">
+        <input 
+          type="text" 
+          name="q" 
+          class="hero-search-input" 
+          placeholder="আপনার প্রয়োজনীয় সেবা সম্পর্কে প্রশ্ন লিখুন... (যেমন: পাসপোর্ট নবায়ন ফি কত?)"
+          autocomplete="off"
+          required
+        />
+        <button type="submit" class="btn-hero-search">
+          <span>তথ্য জানুন</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </button>
+      </form>
+
+      <!-- Quick Prompt Suggestion Pills -->
+      <div class="hero-pills-row">
+        <span class="hero-pill-label">জনপ্রিয় অনুসন্ধান:</span>
+        <a href="/chat?q=জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?" class="hero-quick-pill">এনআইডি সংশোধন ফি</a>
+        <a href="/chat?q=১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?" class="hero-quick-pill">ই-পাসপোর্ট নবায়ন নিয়ম</a>
+        <a href="/chat?q=জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?" class="hero-quick-pill">ই-নামজারি ১,১৭০ টাকা</a>
+        <a href="/chat?q=ড্রাইভিং লাইসেন্স নবায়ন করার সরকারি ফি ও নিয়ম কি?" class="hero-quick-pill">বিআরটিএ লাইসেন্স ফি</a>
+        <a href="/chat?q=জরুরি জাতীয় হটলাইন নম্বরসমূহ কি কি?" class="hero-quick-pill">জরুরি হটলাইন ৯৯৯ • ১০৬</a>
+      </div>
+
+      <!-- Dual CTA Buttons -->
+      <div class="hero-cta-group">
+        <a href="/chat" class="btn-primary-lg">
+          <span>সরাসরি এআই চ্যাট শুরু করুন</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+        <a href="#features" class="btn-secondary-lg">
+          <span>সকল ফিচার বিস্তারিত দেখুন</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <polyline points="19 12 12 19 5 12"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Authority Metrics Strip -->
+  <section class="metrics-strip">
+    <div class="landing-container">
+      <div class="metrics-grid">
+        <div class="metric-item">
+          <div class="metric-number">১০০%</div>
+          <div class="metric-label">প্রামাণ্য সরকারি গেজেট ডাটাবেজ</div>
+          <div class="metric-sub">মন্ত্রণালয় ও দপ্তর অনুমোদিত রেকর্ড</div>
         </div>
+        <div class="metric-item">
+          <div class="metric-number">০ ৳</div>
+          <div class="metric-label">অতিরিক্ত ফি বা দালাল খরচ</div>
+          <div class="metric-sub">সরাসরি সরকারি চালানের হিসাব</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-number">&lt; ১০ms</div>
+          <div class="metric-label">সাব-১০ms আল্ট্রা-ফাস্ট এজ গতি</div>
+          <div class="metric-sub">ক্লাউডফ্লেয়ার এজ ইনফ্রাস্ট্রাকচার</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-number">২৪/৭</div>
+          <div class="metric-label">সার্বক্ষণিক নাগরিক সহায়তা ও ডিরেক্টরি</div>
+          <div class="metric-sub">জরুরি কন্ট্রোল রুম ও হটলাইন</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Chat Input Form -->
-        <form id="chat-form">
-          <div class="input-capsule">
-            <input 
-              type="text" 
-              id="query-input" 
-              class="native-input"
-              placeholder="যেকোনো সরকারি সেবা বা সহায়তার বিষয়ে প্রশ্ন করুন..." 
-              autocomplete="off"
-              enterkeyhint="send"
-              required
-            />
-            <button type="submit" class="btn-send-native" aria-label="পাঠান" title="পাঠান">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="send-svg">
-                <line x1="12" y1="19" x2="12" y2="5"/>
-                <polyline points="5 12 12 5 19 12"/>
-              </svg>
-            </button>
-          </div>
-        </form>
-        
-        <!-- Quiet, Elegant Disclaimer Caption -->
-        <p class="disclaimer-caption">
-          Kaaz AI • সরকারি সিটিজেন চার্টার ও গেজেট যাচাইকৃত তথ্য
+  <!-- Comprehensive Platform Features Section -->
+  <section class="section-spacing" id="features">
+    <div class="landing-container">
+      
+      <div class="section-header">
+        <div class="section-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="section-tag-svg">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <span>প্ল্যাটফর্মের মূল ফিচারসমূহ</span>
+        </div>
+        <h2 class="section-title">নাগরিক সেবা সহজ ও দুর্নীতিমুক্ত করতে আমাদের সক্ষমতাসমূহ</h2>
+        <p class="section-desc">
+          প্রচলিত এআই চ্যাটবটের মতো কোনো অনুমান বা বিভ্রান্তিকর উত্তর নয়—Kaaz AI প্রতিটি নাগরিক সেবার প্রামাণ্য সরকারি রেকর্ড, আইন ও সরাসরি নিয়মাবলি সুসংগঠিতভাবে পরিবেশন করে।
         </p>
       </div>
-    </footer>
 
-  </div>
+      <div class="features-grid">
+        
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feature-icon-svg">
+              <rect width="20" height="14" x="2" y="5" rx="2"/>
+              <line x1="2" y1="10" x2="22" y2="10"/>
+              <line x1="12" y1="15" x2="17" y2="15"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">১. নির্ভুল সরকারি ফি ক্যালকুলেশন</h3>
+          <p class="feature-desc">
+            জাতীয় পরিচয়পত্র, ই-পাসপোর্ট, জমি নামজারি কিংবা বিআরটিএ সেবার সর্বশেষ সরকারি গেজেট ও এসআরও নির্দেশিকা অনুযায়ী ক্যাটাগরিভিত্তিক মূল ফি, ১৫% ভ্যাট এবং চালান কোডের নিখুঁত হিসাব প্রদান করে। মধ্যস্বত্বভোগীদের দাবি করা অতিরিক্ত কোনো অর্থ দেওয়ার প্রয়োজন নেই।
+          </p>
+          <div class="feature-footer-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>গেজেট ও সিটিজেন চার্টার ভেরিফাইড</span>
+          </div>
+        </div>
 
-  <script type="module" src="/app.js?v=6" defer></script>
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feature-icon-svg">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">২. দালাল ও প্রতারণা প্রতিরোধ গার্ডরেল</h3>
+          <p class="feature-desc">
+            সরকারি দপ্তরে সাধারণ নাগরিকদের সবচেয়ে বেশি যে ফাঁদে ফেলে অতিরিক্ত অর্থ আদায় করা হয়, সে বিষয়ে তাৎক্ষণিক সতর্কবার্তা প্রদান করে। সেবা প্রত্যাশীকে সরাসরি নিজস্ব আবেদনের আইনি সুরক্ষাবলয় দেয় এবং দুর্নীতি দমন কমিশন (দুদক ১০৬)-এ অভিযোগের সুনির্দিষ্ট প্রক্রিয়া জানায়।
+          </p>
+          <div class="feature-footer-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>জিরো-টলারেন্স দুর্নীতি প্রতিরোধ</span>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feature-icon-svg">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">৩. প্রয়োজনীয় নথিপত্রের স্মার্ট চেকলিস্ট</h3>
+          <p class="feature-desc">
+            অফিসে গিয়ে নথি ঘাটতির কারণে ফিরে আসার দিন শেষ। কোন সেবার জন্য মূল কপি আর কোনটির ডিজিটাল স্ক্যান লাগবে, ১৭ ডিজিটের অনলাইন জন্ম নিবন্ধন নাকি ওয়ারিশান সনদ প্রয়োজন—তার সুস্পষ্ট ও সুবিন্যস্ত ডিজিটাল চেকলিস্ট এক নজরে সরবরাহ করে।
+          </p>
+          <div class="feature-footer-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>বাধ্যতামূলক ও প্রযোজ্য নথির তালিকা</span>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feature-icon-svg">
+              <line x1="10" y1="6" x2="21" y2="6"/>
+              <line x1="10" y1="12" x2="21" y2="12"/>
+              <line x1="10" y1="18" x2="21" y2="18"/>
+              <path d="M4 6h1v4"/>
+              <path d="M4 10h2"/>
+              <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">৪. ধাপে ধাপে অফিশিয়াল আবেদন প্রক্রিয়া</h3>
+          <p class="feature-desc">
+            কম্পিউটার দোকানে বাড়তি টাকা খরচ না করে ঘরে বসে মোবাইল বা পিসিতে কীভাবে সরকারি পোর্টালে ফরম পূরণ করবেন, চালান বা ই-পেমেন্ট সম্পন্ন করবেন এবং বায়োমেট্রিক শিডিউল নেবেন—তার স্পষ্ট ধাপে ধাপে নির্দেশনা ও সরকারি ওয়েবসাইটের সরাসরি লিংক প্রদান করে।
+          </p>
+          <div class="feature-footer-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>ভেরিফায়েড অফিশিয়াল ডিরেক্ট পোর্টাল</span>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feature-icon-svg">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">৫. প্রসেসিং সময় ও সিটিজেন চার্টার এসএলএ</h3>
+          <p class="feature-desc">
+            সরকারি আইন ও সিটিজেন চার্টার অনুযায়ী কোন সেবা কত কর্মদিবসের মধ্যে নাগরিককে বুঝিয়ে দেওয়ার বাধ্যবাধকতা রয়েছে (যেমন: সাধারণ বনাম জরুরি ডেলিভারি সময়), তা স্পষ্টভাবে প্রকাশ করে। ফলে অহেতুক কালক্ষেপণ বা হয়রানির মুখে নাগরিক আইনি জবাবদিহিতা চাইতে পারেন।
+          </p>
+          <div class="feature-footer-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>আইনগত কার্যদিবস ও জবাবদিহিতা</span>
+          </div>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feature-icon-svg">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">৬. জাতীয় জরুরি ও কন্ট্রোল রুম ডিরেক্টরি</h3>
+          <p class="feature-desc">
+            জরুরি পুলিশ/অ্যাম্বুলেন্স ৯৯৯, জাতীয় কল সেন্টার ৩৩৩, দুর্নীতি দমন কমিশন ১০৬, ভূমি সেবা ১৬১২২, নির্বাচন কমিশন ১০৫ সহ বাংলাদেশের সকল থানা, বিদ্যুৎ বিতরণ কোম্পানি ও তিতাস গ্যাস জরুরি কন্ট্রোল রুমের তাৎক্ষণিক ভেরিফায়েড ফোন ডিরেক্টরি সরবরাহ করে।
+          </p>
+          <div class="feature-footer-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>সরাসরি কল ও ওয়ান-ট্যাপ ডায়াল</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Product Preview Section -->
+  <section class="section-spacing bg-subtle" id="preview">
+    <div class="landing-container">
+      
+      <div class="section-header">
+        <div class="section-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="section-tag-svg">
+            <rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 6 4-6 4Z"/>
+          </svg>
+          <span>লাইভ এআই আউটপুট প্রিভিউ</span>
+        </div>
+        <h2 class="section-title">চ্যাটজিপিটি বা ক্লড-এর সমকক্ষ অত্যন্ত পরিচ্ছন্ন ইন্টারফেস</h2>
+        <p class="section-desc">
+          কোনো বিভ্রান্তিকর বিজ্ঞাপন বা অযাচিত মেটাডাটা নয়—সরাসরি প্রামাণ্য তথ্য, অফিশিয়াল সরকারি ফি-এর বিভাজন ও নির্ভরযোগ্য সুরক্ষা দিকনির্দেশনা।
+        </p>
+      </div>
+
+      <!-- Realistic Mockup Container -->
+      <div class="preview-container">
+        <div class="mockup-header">
+          <div class="mockup-dots">
+            <div class="mockup-dot"></div>
+            <div class="mockup-dot"></div>
+            <div class="mockup-dot"></div>
+          </div>
+          <div class="mockup-title">kaazai.com • Verified Engine</div>
+          <div style="width: 30px;"></div>
+        </div>
+
+        <div class="mockup-body">
+          
+          <!-- Mockup User Message -->
+          <div class="mockup-user-bubble">
+            ১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন করতে সরকারি ফি কত লাগবে?
+          </div>
+
+          <!-- Mockup Bot Response -->
+          <div class="mockup-bot-response">
+            <div class="mockup-bot-avatar">
+              <img src="/assets/icon-black.svg?v=1" alt="Kaaz AI" />
+            </div>
+
+            <div class="mockup-bot-card">
+              <div class="mockup-service-name">ই-পাসপোর্ট সেবা ও নবায়ন (৪৮ পৃষ্ঠা, ১০ বছর)</div>
+              
+              <div style="font-size: 0.84rem; color: #52525b; margin-bottom: 8px;">
+                ইমিগ্রেশন ও পাসপোর্ট অধিদপ্তর • স্বরাষ্ট্র মন্ত্রণালয়
+              </div>
+
+              <!-- Fee Box -->
+              <div class="mockup-fee-box">
+                <div>
+                  <div class="mockup-fee-label">সরকারি নিয়মিত ফি (১৫% ভ্যাটসহ)</div>
+                  <div style="font-size: 0.8rem; color: #71717a;">প্রসেসিং সময়: ১৫ কার্যদিবস</div>
+                </div>
+                <div class="mockup-fee-val">৫,৭৫০ টাকা</div>
+              </div>
+
+              <div style="font-size: 0.88rem; color: #27272a; margin-top: 10px; line-height: 1.6;">
+                <strong>জরুরি ডেলিভারি (৭ কার্যদিবস):</strong> ৮,০৫০ টাকা<br>
+                <strong>অতি জরুরি ডেলিভারি (২ কার্যদিবস):</strong> ১০,৩৫০ টাকা
+              </div>
+
+              <!-- Alert Banner -->
+              <div style="margin-top: 12px; padding: 10px 12px; background: #fafafa; border: 1px solid #e4e4e7; border-left: 3px solid #09090b; border-radius: 8px; font-size: 0.84rem; color: #27272a;">
+                <strong>দালাল ও প্রতারণা প্রতিরোধ:</strong> পাসপোর্ট ফি এ-চালান বা অনুমোদিত ব্যাংকে জমা হয়। অফিসের বাইরে কোনো দালালকে বাড়তি অর্থ দেবেন না।
+              </div>
+
+              <!-- Action Bar Mockup -->
+              <div style="display: flex; gap: 8px; margin-top: 14px; padding-top: 10px; border-top: 1px solid #f4f4f5;">
+                <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: #09090b; color: #ffffff; border-radius: 14px; font-size: 0.78rem; font-weight: 600;">
+                  কপি করুন
+                </span>
+                <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: #ffffff; color: #09090b; border: 1px solid #d4d4d8; border-radius: 14px; font-size: 0.78rem; font-weight: 600;">
+                  অফিসিয়াল পোর্টাল: epassport.gov.bd
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- How It Works (3 Steps) -->
+  <section class="section-spacing" id="how-it-works">
+    <div class="landing-container">
+      
+      <div class="section-header">
+        <div class="section-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="section-tag-svg">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <span>ব্যবহারের কার্যপদ্ধতি</span>
+        </div>
+        <h2 class="section-title">মাত্র তিনটি সহজ ধাপে নিশ্চিত করুন সঠিক নাগরিক সেবা</h2>
+        <p class="section-desc">
+          কোনো দীর্ঘ ফরম পূরণ বা জটিল প্রক্রিয়া নেই। আপনার স্বাভাবিক মাতৃভাষায় প্রশ্ন করুন এবং তাৎক্ষণিক অফিশিয়াল দিকনির্দেশনা পান।
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        
+        <div class="step-card">
+          <div class="step-num-badge">১</div>
+          <h3 class="step-title">সহজ ভাষায় প্রশ্ন করুন</h3>
+          <p class="step-desc">
+            পাসপোর্ট, এনআইডি, নামজারি, ড্রাইভিং লাইসেন্স বা জরুরি থানা—যেকোনো বিষয়ে আপনার সুবিধামতো স্বাভাবিক বাংলায় প্রশ্ন লিখুন।
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num-badge">২</div>
+          <h3 class="step-title">প্রামাণ্য গেজেট রেকর্ড দেখুন</h3>
+          <p class="step-desc">
+            Kaaz AI অফিশিয়াল গেজেট ও রুল ইঞ্জিন মিলিয়ে সঠিক সরকারি ফি, ভ্যাট, প্রয়োজনীয় কাগজপত্র ও ডেলিভারি সময় তাৎক্ষণিক স্ক্রিনে সাজিয়ে দেয়।
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num-badge">৩</div>
+          <h3 class="step-title">সরাসরি নিজেই আবেদন করুন</h3>
+          <p class="step-desc">
+            দালাল বা মধ্যস্বত্বভোগীর দ্বারস্থ না হয়ে আমাদের দেওয়া অফিশিয়াল সরকারি পোর্টালে সরাসরি ক্লিক করে শতভাগ নিরাপদে কাজ শেষ করুন।
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Anti-Corruption Safeguards Section -->
+  <section class="section-spacing bg-subtle" id="anti-corruption">
+    <div class="landing-container">
+      
+      <div class="anti-corruption-box">
+        <div class="ac-content">
+          <div class="section-tag" style="margin-bottom: 12px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="section-tag-svg">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>দুর্নীতি ও দালাল প্রতিরোধ</span>
+          </div>
+          <h3>আপনার সরকারি সেবা আপনার সাংবিধানিক অধিকার, কারও অনুগ্রহ নয়</h3>
+          <p>
+            বাংলাদেশে সরকারি সেবা নিতে গিয়ে সাধারণ নাগরিকরা প্রায়শই সঠিক তথ্যের অভাবে দালালের খপ্পরে পড়েন এবং নির্ধারিত ফি-এর চেয়ে কয়েক গুণ বেশি অর্থ খরচ করতে বাধ্য হন। Kaaz AI প্রতিটি নাগরিককে সঠিক তথ্যের শক্তিতে বলীয়ান করে।
+          </p>
+          
+          <ul class="ac-checklist">
+            <li class="ac-check-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>সরকারি ফি সুনির্দিষ্ট ও রসিদযুক্ত; অতিরিক্ত ১ টাকাও কাউকে দেবেন না।</span>
+            </li>
+            <li class="ac-check-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>অনলাইনে চালান জমা দিয়ে সরাসরি সংশ্লিষ্ট সরকারি কাউন্টারে জমা দিন।</span>
+            </li>
+            <li class="ac-check-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>কেউ ঘুষ দাবি করলে অবিলম্বে দুদক হটলাইন ১০৬-এ ফোন করে জানান।</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="ac-helpline-card">
+          <div class="ac-helpline-title">জরুরি অভিযোগ ও আইনি সহায়তা কেন্দ্র</div>
+          
+          <a href="tel:106" class="ac-hotline-row">
+            <span>দুর্নীতি দমন কমিশন (দুদক)</span>
+            <strong>১০৬</strong>
+          </a>
+
+          <a href="tel:999" class="ac-hotline-row">
+            <span>জাতীয় জরুরি সেবা (পুলিশ, অ্যাম্বুলেন্স, ফায়ার)</span>
+            <strong>৯৯৯</strong>
+          </a>
+
+          <a href="tel:333" class="ac-hotline-row">
+            <span>জাতীয় তথ্য ও সেবা কল সেন্টার</span>
+            <strong>৩৩৩</strong>
+          </a>
+
+          <a href="tel:16122" class="ac-hotline-row">
+            <span>ভূমি সেবা হটলাইন (নামজারি ও খাজনা)</span>
+            <strong>১৬১২২</strong>
+          </a>
+
+          <a href="tel:105" class="ac-hotline-row">
+            <span>জাতীয় পরিচয়পত্র হেল্পডেস্ক (ইসি)</span>
+            <strong>১০৫</strong>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section-spacing" id="faq">
+    <div class="landing-container">
+      
+      <div class="section-header">
+        <div class="section-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="section-tag-svg">
+            <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <span>সচরাচর জিজ্ঞাসিত প্রশ্নাবলি</span>
+        </div>
+        <h2 class="section-title">Kaaz AI সম্পর্কে সাধারণ নাগরিক জিজ্ঞাসা</h2>
+        <p class="section-desc">
+          প্ল্যাটফর্মের তথ্যের উৎস, নিরাপত্তা ও ব্যবহার বিধি সম্পর্কে বিস্তারিত জেনে নিন।
+        </p>
+      </div>
+
+      <div class="faq-grid">
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>১. Kaaz AI কি কোনো সরকারি দপ্তর বা মন্ত্রণালয়ের সরাসরি ওয়েবসাইট?</span>
+          </div>
+          <div class="faq-answer">
+            না, Kaaz AI কোনো সরকারি দপ্তর নয়। এটি একটি স্বাধীন ও নিরপেক্ষ নাগরিক সহায়তা প্রযুক্তি প্ল্যাটফর্ম, যা বাংলাদেশ সরকারের প্রকাশিত অফিশিয়াল গেজেট, আইন, বিধিমালা ও সিটিজেন চার্টার বিশ্লেষণ করে সাধারণ নাগরিকদের নির্ভুল তথ্য প্রদান করে।
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>২. এখানে প্রদর্শিত তথ্যের নির্ভুলতা কীভাবে নিশ্চিত করা হয়?</span>
+          </div>
+          <div class="faq-answer">
+            Kaaz AI প্রচলিত ওপেন-এআই মডেলের মতো কোনো কাল্পনিক তথ্য বা হ্যালুসিনেশন তৈরি করে না। এটি একটি ডেটারমিনিস্টিক রুল ইঞ্জিন ও ক্লাউডফ্লেয়ার এজ ভেক্টর ডাটাবেজে চলে, যেখানে সংরক্ষিত প্রতিটি ফি, নথিপত্র ও ধাপ সংশ্লিষ্ট মন্ত্রণালয়ের গেজেট দ্বারা নিয়মিত যাচাই করা হয়।
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>৩. Kaaz AI ব্যবহার করতে কি কোনো ফি বা রেজিস্ট্রেশন প্রয়োজন?</span>
+          </div>
+          <div class="faq-answer">
+            সম্পূর্ণ বিনামূল্যে। Kaaz AI বাংলাদেশের প্রতিটি নাগরিকের জন্য উন্মুক্ত। কোনো রেজিস্ট্রেশন, ওটিপি বা ফি ছাড়াই যেকোনো ব্যক্তি যেকোনো প্রান্ত থেকে প্ল্যাটফর্মটি ব্যবহার করতে পারবেন।
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>৪. আমার ব্যক্তিগত তথ্যের নিরাপত্তা কীভাবে বজায় থাকে?</span>
+          </div>
+          <div class="faq-answer">
+            Kaaz AI কোনো ব্যবহারকারীর ব্যক্তিগত তথ্য, এনআইডি নম্বর বা পাসওয়ার্ড সংগ্রহ বা সংরক্ষণ করে না। এটি সম্পূর্ণ ক্লাউডফ্লেয়ার সিকিউর এজ আর্কিটেকচারে পরিচালিত হয় এবং ব্যবহারকারীর কোনো সংবেদনশীল ডেটা ট্র্যাকিং করা হয় না।
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>৫. সেবার আবেদন কি সরাসরি Kaaz AI-এর মাধ্যমে সাবমিট করা যাবে?</span>
+          </div>
+          <div class="faq-answer">
+            Kaaz AI আপনাকে প্রয়োজনীয় ফি, কাগজপত্র ও সম্পূর্ণ নির্দেশনাসহ বাংলাদেশ সরকারের অফিশিয়াল পোর্টালে (যেমন: epassport.gov.bd, nidw.gov.bd, mutation.land.gov.bd) সরাসরি রিডাইরেক্ট করে দেয়, যাতে আপনি নিজ হাতে নিরাপদে আবেদন জমা দিতে পারেন।
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Bottom CTA Banner -->
+  <section class="section-spacing-sm">
+    <div class="landing-container">
+      <div class="bottom-cta-banner">
+        <h2 class="bottom-cta-title">নাগরিক অধিকার জানুন, দালালমুক্ত সেবা নিন</h2>
+        <p class="bottom-cta-desc">
+          আর কোনো হয়রানি বা বাড়তি অর্থ খরচ নয়। আজই Kaaz AI দিয়ে আপনার কাঙ্ক্ষিত সরকারি সেবার সঠিক নিয়ম ও ফি জেনে নিন এক নিমিষে।
+        </p>
+        <a href="/chat" class="btn-cta-white">
+          <span>এখনই এআই চ্যাট শুরু করুন</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Corporate Footer -->
+  <footer class="landing-footer">
+    <div class="landing-container">
+      <div class="footer-top">
+        
+        <div class="footer-brand">
+          <img src="/assets/kaaz-logo-header.svg?v=4" alt="Kaaz AI" style="height: 28px; width: auto;" />
+          <p>
+            বাংলাদেশ সরকারের সকল নাগরিক সেবার প্রামাণ্য ডিজিটাল গাইড। দুর্নীতি ও মধ্যস্বত্বভোগীমুক্ত স্বচ্ছ বাংলাদেশ বিনির্মাণে নাগরিক অধিকার প্রতিষ্ঠায় নিবেদিত।
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">জনপ্রিয় সেবা</div>
+          <ul class="footer-links">
+            <li><a href="/chat?q=জাতীয় পরিচয়পত্র সংশোধন করতে সরকারি ফি কত লাগে?">এনআইডি সংশোধন ফি</a></li>
+            <li><a href="/chat?q=১০ বছর মেয়াদী ৪৮ পৃষ্ঠার পাসপোর্ট নবায়ন ফি কত?">ই-পাসপোর্ট নবায়ন চার্জ</a></li>
+            <li><a href="/chat?q=জমি নামজারি বা খারিজ করতে মোট সরকারি ফি কত?">ই-নামজারি ১,১৭০ টাকা</a></li>
+            <li><a href="/chat?q=ড্রাইভিং লাইসেন্স নবায়ন করার সরকারি ফি ও নিয়ম কি?">ড্রাইভিং লাইসেন্স নিয়ম</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">জরুরি হটলাইন</div>
+          <ul class="footer-links">
+            <li><a href="tel:999">জাতীয় জরুরি সেবা: ৯৯৯</a></li>
+            <li><a href="tel:333">জাতীয় কল সেন্টার: ৩৩৩</a></li>
+            <li><a href="tel:106">দুদক দুর্নীতি দমন: ১০৬</a></li>
+            <li><a href="tel:16122">ভূমি সেবা হেল্পডেস্ক: ১৬১২২</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">প্ল্যাটফর্ম</div>
+          <ul class="footer-links">
+            <li><a href="/chat">সরাসরি এআই চ্যাট</a></li>
+            <li><a href="#features">ফিচার ওভারভিউ</a></li>
+            <li><a href="#anti-corruption">দালাল প্রতিরোধ নির্দেশিকা</a></li>
+            <li><a href="#faq">প্রশ্নোত্তর ও সহায়তা</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Kaaz AI (কাজ এআই) • সর্বস্বত্ব সংরক্ষিত। প্রামাণ্য সরকারি গেজেট ও সিটিজেন চার্টার ভিত্তিক তথ্য সেবা।
+        </div>
+        <div>
+          পাওয়ার্ড বাই ক্লাউডফ্লেয়ার এজ ওয়ার্কার ও ভেক্টরাইজড লোকাল ডাটাবেজ
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>

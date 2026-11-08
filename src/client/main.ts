@@ -108,6 +108,17 @@ class KaazAIApp {
       }
     });
 
+    // 7. Auto-run initial query from URL search parameters (e.g. /chat?q=...)
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialQuery = urlParams.get('q');
+      if (initialQuery && initialQuery.trim()) {
+        setTimeout(() => {
+          this.sendQuery(initialQuery.trim());
+        }, 100);
+      }
+    } catch (_) {}
+
     // Initial scroll to bottom
     this.scrollToBottom();
   }

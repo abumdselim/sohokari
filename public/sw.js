@@ -1,7 +1,9 @@
-const CACHE_NAME = 'kaaz-ai-v6';
+const CACHE_NAME = 'kaaz-ai-v7';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/chat.html',
+  '/landing.css?v=6',
   '/app.css?v=6',
   '/app.js?v=6',
   '/manifest.json',

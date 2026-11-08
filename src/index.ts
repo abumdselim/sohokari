@@ -260,6 +260,20 @@ export default {
       }
     }
 
+    // Route /chat or /app directly to chat.html
+    if (url.pathname === '/chat' || url.pathname === '/app') {
+      if (env.ASSETS) {
+        return env.ASSETS.fetch(new Request(new URL('/chat.html', request.url), request));
+      }
+    }
+
+    // Route /landing directly to landing page (index.html)
+    if (url.pathname === '/landing') {
+      if (env.ASSETS) {
+        return env.ASSETS.fetch(new Request(new URL('/index.html', request.url), request));
+      }
+    }
+
     // Fall back to static assets (HTML/CSS/JS directory)
     if (env.ASSETS) {
       return env.ASSETS.fetch(request);
